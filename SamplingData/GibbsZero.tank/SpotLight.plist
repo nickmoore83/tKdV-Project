@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Comment</key>
+	<string>Variables to refresh when importing new data
+Parameters
+Extract the parameters
+Extract H2 and H3 data
+Compute upstream and downstream Hamiltonians
+Upstream H- with inverse temperatures using G-
+Downstream H+ with inverse temperatures using G+ case 1
+Downstream H+ with inverse temperatures using G+ case 2
+Statistics</string>
+	<key>String</key>
+	<string>incoming pdf, {\it G^-(H^-)}
+upstream Hamiltonian, {\it H^-}
+outgoing pdf, {\it G^+(H^+)}
+downstream Hamiltonian, {\it H^+}
+outgoing pdf, {\it G^+(H^+)}
+downstream Hamiltonian, {\it H^+}</string>
+</dict>
+</plist>

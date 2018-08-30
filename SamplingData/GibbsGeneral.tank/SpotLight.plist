@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Comment</key>
+	<string>Variables to refresh when importing new data
+Extract the parameters
+Extract H2 and H3 data
+Compute upstream and downstream Hamiltonians
+Compute the expected energy per mode
+Extract the displacement u
+Sample all the displacement data
+Extract a single instance of displacement to view
+Statistics
+To do
+Extract the transform uhat, including real and imaginary parts
+Compute the magnitude of uhat and sample</string>
+	<key>String</key>
+	<string>incoming pdf, {\it G^-(H^-)}
+upstream Hamiltonian, {\it H^-}
+outgoing pdf, {\it G^+(H^+)}
+downstream Hamiltonian, {\it H^+}
+pdf, {\it G(u)}
+displacement, {\it u}
+mean spectrum, &lt;{|\it\hat{u}_k}|&gt;
+wavenumber, {\it k}
+slope specturm, &lt; {|\it  k \hat{u}_k} | &gt;
+wavenumber, {\it k}
+displacement, {\it u(x)}
+position, {\it x}</string>
+</dict>
+</plist>
