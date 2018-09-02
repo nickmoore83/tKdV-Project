@@ -17,7 +17,8 @@
 
 \b0\fs28 \cf0 invtemp = -0.2 or -0.3 seem to be good values.\
 \
-\ul nsamples using zero inverse temperature\ulnone \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul \ulc0 nsamples using zero inverse temperature\ulnone \
 - n 10^5 takes about 10 seconds and is great for quick testing.\
 - 10^6 takes about 1.7 minutes and uses 38 MB.\
 - 10^7 takes 16 minutes and uses 380 MB, which is manageable for DataTank.\
@@ -51,10 +52,13 @@ D0 = 1.0 and 0.5\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
 \b0\fs28 \cf0 \
-0) nmodes = 10, nsamples = 1*10^6, invtemp = 0, E0 = 4, D0 = 1\
+\ul hamup0.txt\ulnone \
+nmodes = 10, nsamples = 1*10^6, invtemp = 0, E0 = 4, D0 = 1\
 Obviously, acceptance rate was 100%\
-1) nmodes = 10, nsamples = 2*10^7, invtemp = -0.3, E0 = 4, D0 = 1\
+\ul hamup3.txt\ulnone \
+nmodes = 10, nsamples = 2*10^7, invtemp = -0.3, E0 = 4, D0 = 1\
 Acceptance rate was 0.08%\
-2) nmodes = 10, nsamples = 2*10^7, invtemp = -0.3, E0 = 4, D0 = 0.5\
+\ul hamdn3.txt\ulnone \
+nmodes = 10, nsamples = 2*10^7, invtemp = -0.3, E0 = 4, D0 = 0.5\
 Acceptance rate was 0.07%\
 }
