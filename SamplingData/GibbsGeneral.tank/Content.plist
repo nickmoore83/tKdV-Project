@@ -597,7 +597,7 @@
 			<string>H- histograms</string>
 			<key>WindowPos</key>
 			<array>
-				<real>33</real>
+				<real>34</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -1371,7 +1371,7 @@
 			<string>Histograms upstream vs downstream</string>
 			<key>WindowPos</key>
 			<array>
-				<real>33</real>
+				<real>34</real>
 				<real>116</real>
 				<real>984</real>
 				<real>761</real>
@@ -2889,8 +2889,8 @@
 			<string>microstate information</string>
 			<key>WindowPos</key>
 			<array>
-				<real>83</real>
-				<real>116</real>
+				<real>66</real>
+				<real>63</real>
 				<real>984</real>
 				<real>761</real>
 			</array>
@@ -4239,11 +4239,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>MonitorVariables</key>
-	<array>
-		<string>Hamiltonian data</string>
-		<string>u and uhat data</string>
-	</array>
 	<key>Time</key>
 	<dict>
 		<key>CurrentTime</key>
@@ -4314,7 +4309,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>hamup0.txt</string>
+						<string>hamdataup.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4495,8 +4490,6 @@
 			</dict>
 			<key>Selection</key>
 			<string>Histogram</string>
-			<key>ToggleOpen</key>
-			<string>YES</string>
 			<key>VariableName</key>
 			<string>u Histogram</string>
 			<key>VariableType</key>
@@ -4532,7 +4525,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Open</string>
+			<string>Closed</string>
 			<key>Title</key>
 			<string>Extract the Hamiltonian data</string>
 			<key>VariableName</key>
@@ -4561,7 +4554,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>1,2,3,4,5</string>
+						<string>1,2,3,4,5,6,7,8</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4600,7 +4593,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>number of samples</string>
+			<string>number of modes</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -4630,7 +4623,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>number of modes</string>
+			<string>a priori number of samples</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -4725,6 +4718,96 @@
 			<string>Real Number</string>
 		</dict>
 		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>Parameters</string>
+				</dict>
+				<key>Location</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>6</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeEqualsCurrent</key>
+				<string>On</string>
+				<key>StartAt0</key>
+				<string>Off</string>
+			</dict>
+			<key>Selection</key>
+			<string>Value From List</string>
+			<key>VariableName</key>
+			<string>number of accepted samples</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>Parameters</string>
+				</dict>
+				<key>Location</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>7</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeEqualsCurrent</key>
+				<string>On</string>
+				<key>StartAt0</key>
+				<string>Off</string>
+			</dict>
+			<key>Selection</key>
+			<string>Value From List</string>
+			<key>VariableName</key>
+			<string>acceptance rate (%)</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>Parameters</string>
+				</dict>
+				<key>Location</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>8</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeEqualsCurrent</key>
+				<string>On</string>
+				<key>StartAt0</key>
+				<string>Off</string>
+			</dict>
+			<key>Selection</key>
+			<string>Value From List</string>
+			<key>VariableName</key>
+			<string>cpu time (minutes)</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
 			<key>Comment</key>
 			<string>Extract H2 and H3 data</string>
 			<key>VariableName</key>
@@ -4736,7 +4819,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>6,1,2*nsamp+5</string>
+				<string>9, 1, 2*nsamp+8</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -4756,7 +4839,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>number of samples</string>
+							<string>number of accepted samples</string>
 						</dict>
 					</dict>
 				</array>
@@ -4798,7 +4881,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>1,1,nsamp</string>
+				<string>1, 1, nsamp</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -4818,7 +4901,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>number of samples</string>
+							<string>number of accepted samples</string>
 						</dict>
 					</dict>
 				</array>
@@ -4834,7 +4917,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>nsamp+1,1,2*nsamp</string>
+				<string>nsamp+1, 1, 2*nsamp</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -4854,7 +4937,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>number of samples</string>
+							<string>number of accepted samples</string>
 						</dict>
 					</dict>
 				</array>
@@ -5112,7 +5195,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Open</string>
+			<string>Closed</string>
 			<key>Title</key>
 			<string>Extract the uhat avg data</string>
 			<key>VariableName</key>
@@ -5124,7 +5207,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>2*nsamp+6,1,2*nsamp+5+nmodes</string>
+				<string>2*nsamp+9, 1, 2*nsamp+8+nmodes</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -5144,7 +5227,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>number of samples</string>
+							<string>number of accepted samples</string>
 						</dict>
 					</dict>
 					<dict>
@@ -5428,13 +5511,15 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>number of samples</string>
+							<string>number of accepted samples</string>
 						</dict>
 					</dict>
 				</array>
 			</dict>
 			<key>Selection</key>
 			<string>Stride</string>
+			<key>ToggleOpen</key>
+			<string>YES</string>
 			<key>VariableName</key>
 			<string>u displacement index range</string>
 			<key>VariableType</key>
@@ -5903,7 +5988,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>number of samples</string>
+							<string>number of accepted samples</string>
 						</dict>
 					</dict>
 				</array>
@@ -6178,7 +6263,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>737</real>
+		<real>142</real>
 		<real>67</real>
 		<real>941</real>
 		<real>810</real>

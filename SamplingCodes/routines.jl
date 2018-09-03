@@ -22,7 +22,7 @@ Note: uu has length npoints = 2*nmodes. =#
 #= Basic realfft to go from uu to uhat. =#
 function realfft(uu::Vector{Float64})
 	uhat = rfft(uu)/endof(uu)
-	assert(abs(uhat[1])/maxabs(uhat) < 1e-6) 
+	assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6) 
 	return uhat[2:end]
 end
 #= Basic irealfft to go from uhat to uu (no upsampling). =#
@@ -155,7 +155,7 @@ function getuhavg(uhacc::Array{Complex128})
 	nmodes = size(uhacc)[1]
 	uhavg = zeros(Float64,nmodes)
 	for kk=1:nmodes
-		uhavg[kk] = mean(abs(uhacc[kk,:]))
+		uhavg[kk] = mean(abs.(uhacc[kk,:]))
 	end
 	return uhavg
 end
