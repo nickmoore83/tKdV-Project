@@ -8,10 +8,6 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \ul \ulc0 To Do\ulnone \
 \
-\
-\
-- Rerun 3 cases with new format.\
-\
 \'95 Code to match incoming and outgoing Gibbs measures\
 - This code will also produce the histograms I want.\
 1) Sample uhat from G0 and compile a list of H- and H+ (maybe even save H2 and H3 separately)\
@@ -20,19 +16,26 @@ sum ( exp(-thm H-) * H+) / sum(exp(-thmin H-)\
 3) Given a guess of thp, compute the mean of H+ under G+ via a similar formula, and iterate over thp until the means match.\
 4) Make histograms of H+ under G- and G+ by making uniform bins, sampling, then simply weighting the samples by exp(-theta H) (plus or minus, whichever is appropriate). Normalization should be trivial.\
 \
+- Eventually make plots of theta- vs theta+ as computed by above algorithm.\
 \
-\'95 Histograms of H- and H+ under G- and G+\
-- Currently, I am using Julia and DataTank to make histograms of H- and H+ under the Gibbs measures G- and G+. To map the Hamiltonian under its on Gibbs measure (i.e. H- with G-) is trivial, but to calculate for example H+ using G- is more difficult than I expected because I have to correspond H- to H+ on a case-by-case basis. I need to do this in Julia I believe.\
-\'95 I believe this point is obsolete now that I wrote the code to sample from a Gibbs distribution with non-zero inverse temperature.  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Rerun 3 cases with new format.\
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Later\ulnone \
 \
 - Confirm the scaling result for energy of u_x.\
 \
 - Parallelize the for loops that compute H3 and H2.\
 \
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 - I should rewrite gibbs to handle the upstream and downstream acceptance/rejection both at once. This should be straightforward, just tedious. But it will double the efficiency.\
+\cf0 - (Likely obsolete now) I should rewrite gibbs to handle the upstream and downstream acceptance/rejection both at once. This should be straightforward, just tedious. But it will double the efficiency.\
 Note: Perhaps I should not do this actually for a few reasons. First I will probably want to use different inverse temperatures in each. Second, the above idea might lead to weird correlations in the data. So, for now, I am going back to my original implementation. After I implement the code to match the incoming/outgoing distributions, I will reconsider.\
+\
+\
+\
 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural

@@ -4313,7 +4313,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>hamup.txt</string>
+						<string>hamup0.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4346,7 +4346,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>uup.txt</string>
+						<string>uup0.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6267,7 +6267,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>619</real>
+		<real>628</real>
 		<real>67</real>
 		<real>941</real>
 		<real>810</real>

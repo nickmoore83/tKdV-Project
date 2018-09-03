@@ -76,6 +76,25 @@ function getuhat(rvar::Array{Float64}, nn::Int)
 	return uhat/sqrt(energy(uhat))
 end
 
+#= Sample from a microcanonical distribution (Gibbs with zero inverse temp) =#
+function microcan(nmodes::Int, nsamples::Int)
+	# Get all the random samples at once.
+	rvar = randn(nmodes,2,nsamples)
+	# Allocate space.
+	H3vec,H2vec = [zeros(Float64,nsamples) for nn=1:2]
+	# Compute H3 and H2 for each to estimate the acceptance rate.
+	# TO DO: parallelize this for loop!!! It is the bottleneck!
+	for nn=1:nsamples
+		uhat = getuhat(rvar,nn)
+		H3vec[nn] = ham3(uhat)
+		H2vec[nn] = ham2(uhat)
+		if mod(nn, 10^4) == 0
+			println("Initial sampling is ", signif(100*nn/nsamples,3), "% completed.")
+		end
+	end
+end
+
+
 #= Sample from a Gibbs distribution with arbitrary inverse temperature. =#
 function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0., 
 		E0::Float64=1., D0::Float64=1., savemicro::Bool=false)
