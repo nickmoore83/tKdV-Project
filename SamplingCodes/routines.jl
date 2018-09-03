@@ -13,7 +13,13 @@ function writedata(data::Array, filename::AbstractString)
 	iostream = open(filename, "w")
 	writedlm(iostream, data)
 	close(iostream)
-	return
+end
+function datafolder()
+	return "../SamplingData/run/"
+end
+function newfolder(foldername::AbstractString)
+	isdir(foldername)? rm(foldername; recursive=true) : 0
+	mkdir(foldername)
 end
 #---------------------------------#
 
@@ -118,7 +124,7 @@ end
 #---------------------------------------#
 
 #---------- Main Sampling Routines ----------#
-#= =#
+#=
 function gibbs_sample(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
 		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool)
 	# Set the maximum number of u samples.
@@ -161,3 +167,6 @@ function gibbs_sample(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 
 	# Write to data files
 end
+=#
+
+

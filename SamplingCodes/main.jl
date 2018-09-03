@@ -1,5 +1,18 @@
 include("routines.jl")
 
+#= Write the basic data to a file. =#
+function writebasicdata(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64,
+		cputime::Float64, thup_vec::Vector{Float64}, thdn_vec::Vector{Float64})
+	foldername = datafolder()
+	###newfolder(foldername)
+	file = string(foldername,"basic.txt")
+	label1 = "# Basic parameters: nmodes, nsamptot, E0, D0, CPU time (mins)"
+	label2 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
+	data = [label1; nmodes; nsamptot; E0; D0; cputime; 
+		label2; endof(thup_vec); thup_vec; thdn_vec]
+	writedata(data,file)
+end
+
 #= Compute the expected value of the downstream Hamiltonian under
 either the upstream or downstream Gibbs measure with given theta. =#
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
@@ -22,10 +35,11 @@ end
 function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
 	savemicro = true
 	# Set the upstream inverse temperatures to use.
-	thup_vec = -.4:0.05:0.1
+	thup_vec = collect(-.4:0.05:0.1)
 	thdn_vec = zeros(Float64,0)
 	# Sample H3 and H2 from a microcanonical distribution.
-	H3vec, H2vec, rvar = microcan(nmodes,nsamptot)
+	cputime = @elapsed (H3vec, H2vec, rvar) = microcan(nmodes,nsamptot)
+	cputime = signif(cputime/60,2)
 	# Define a function for the downstream mean of the downstream Hamiltonian.
 	meanham_dn(theta_dn::Float64) = meanham(H3vec,H2vec,E0,D0,theta_dn,false)
 	# For each theta_up, find the corresponding theta_dn by matching the mean.
@@ -37,12 +51,12 @@ function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
 		theta_dn = find_zero(meandiff, theta_up, Order1())
 		push!(thdn_vec,theta_dn)
 		# Sample from the upstream and downstream Gibbs measures
-		gibbs_sample(H3vec, H2vec, E0, 1., theta_up, savemicro)
-		gibbs_sample(H3vec, H2vec, E0, D0, theta_dn, savemicro)
+		#gibbs_sample(H3vec, H2vec, E0, 1., theta_up, savemicro)
+		#gibbs_sample(H3vec, H2vec, E0, D0, theta_dn, savemicro)
 	end
-	# Make plot of theta_dn versus theta_up.
-	plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn")
-	display(plt)
+	# Write data to a file.
+	writebasicdata(nmodes,nsamptot,E0,D0,cputime,thup_vec,thdn_vec)
+	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)
 	return 
 end
 
