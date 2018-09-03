@@ -26,20 +26,19 @@ sum ( exp(-thm H-) * H+) / sum(exp(-thmin H-)\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \ul Later\ulnone \
 \
-- Confirm the scaling result for energy of u_x.\
-\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Note: Now that I coded microcan separately, I could run several different cases of parameters (invtemp, E0, D0) all effectively simultaneously using the same big ensemble from microcan. Don\'92t do this yet though. There are probably more important things to do with the matching condition.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 - Parallelize the for loops that compute H3 and H2.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 - (Likely obsolete now) I should rewrite gibbs to handle the upstream and downstream acceptance/rejection both at once. This should be straightforward, just tedious. But it will double the efficiency.\
-Note: Perhaps I should not do this actually for a few reasons. First I will probably want to use different inverse temperatures in each. Second, the above idea might lead to weird correlations in the data. So, for now, I am going back to my original implementation. After I implement the code to match the incoming/outgoing distributions, I will reconsider.\
-\
-\
-\
-\
-\
+\cf0 - Confirm the scaling result for energy of u_x.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \ul Aug 28, 2018\
+\cf0 \
+\
+\
+\ul Aug 28, 2018\
 \ulnone - I finished the routine gibbs to sample from a Gibbs distribution with 
 \i non-zero
 \i0  inverse temperature. I tested it with invtemp=0 and it works! It produces histograms of H similar to those produced by gibbs0. I tested it with non-zero invtemp and it works in those cases too. For negative invtemp, it can give skewed distributions as we hoped!\

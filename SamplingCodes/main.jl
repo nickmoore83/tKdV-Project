@@ -2,7 +2,7 @@ include("routines.jl")
 
 #= Compute the two Hamiltonians (upstream and downstream)
 as sampled from the Gibbs0 distribution. =# 
-function main(nmodes::Int, nsamples::Int, invtemp::Float64, 
+function sample_gibbs(nmodes::Int, nsamples::Int, invtemp::Float64, 
 		E0::Float64, D0::Float64, suffix::AbstractString)
 	savemicro = true
 	println("\n\n")
@@ -31,8 +31,15 @@ function main(nmodes::Int, nsamples::Int, invtemp::Float64,
 	return
 end
 
-main(10, 1*10^5, -0.05, 4., 1.0, "up")
+# Testing case:
+#sample_gibbs(10, 1*10^5, -0.05, 4., 1.0, "up")
+# Three main runs:
+#sample_gibbs(10, 1*10^6, -0.0, 4., 1.0, "up")
+#sample_gibbs(10, 2*10^7, -0.3, 4., 1.0, "up")
+#sample_gibbs(10, 2*10^7, -0.3, 4., 0.5, "dn")
 
-#main(10, 1*10^6, -0.0, 4., 1.0, "up")
-#main(10, 2*10^7, -0.3, 4., 1.0, "up")
-#main(10, 2*10^7, -0.3, 4., 0.5, "dn")
+function aaa()
+	microcan(nmodes,nsamples)
+
+
+

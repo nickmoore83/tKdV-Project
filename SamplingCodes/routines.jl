@@ -104,7 +104,7 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 	maxaccept = 0.
 	for nn=1:nsamples
 		# Compute the Hamiltonian (for upstream D0=1)
-		ham = D0^(-13/4)*sqrt(E0)*H3vec[nn] - D0^(3/2)*H2vec[nn]
+		ham = D0^(-13/4)*sqrt(E0)*H3all[nn] - D0^(3/2)*H2all[nn]
 		# Compute the unnormalized acceptance rate and find the maximum.
 		aratevec[nn] = exp(-invtemp * ham)
 		maxaccept = max(maxaccept, aratevec[nn])

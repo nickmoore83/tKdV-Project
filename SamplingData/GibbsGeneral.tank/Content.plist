@@ -4313,7 +4313,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>hamup0.txt</string>
+						<string>hamup.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4346,7 +4346,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>uup0.txt</string>
+						<string>uup.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
