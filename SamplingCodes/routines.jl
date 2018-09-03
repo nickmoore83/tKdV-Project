@@ -1,4 +1,3 @@
-using Winston
 using Distributions
 
 #---------- IO Routines ----------#
@@ -161,5 +160,4 @@ function getuhavg(uhacc::Array{Complex128})
 	return uhavg
 end
 #---------------------------------------#
-
 

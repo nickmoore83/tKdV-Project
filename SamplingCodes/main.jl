@@ -30,5 +30,5 @@ function main(nmodes::Int, nsamples::Int, invtemp::Float64,
 end
 
 main(10, 1*10^6, -0.0, 4., 1.0, "up")
-#main(10, 2*10^7, -0.3, 4., 1.0, "up")	#0.078%
-#main(10, 2*10^7, -0.3, 4., 0.5, "dn") 	#0.074%
+#main(10, 2*10^7, -0.3, 4., 1.0, "up")
+#main(10, 2*10^7, -0.3, 4., 0.5, "dn")
