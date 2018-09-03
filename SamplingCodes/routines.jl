@@ -82,10 +82,9 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 	# Get all the random samples at once.
 	rvar = randn(nmodes,2,nsamples)
 	# Allocate space.
-	H3all = zeros(Float64,nsamples)
-	H2all = zeros(Float64,nsamples)
-	aratevec = zeros(Float64,nsamples)
-	maxaccept = 0.
+	H3all, H2all = [zeros(Float64,nsamples) for nn=1:2]
+	aupvec, adnvec = [zeros(Float64,nsamples) for nn=1:2]
+	maxup, maxdn = 0.,0.
 	# Compute H3 and H2 for each to estimate the acceptance rate.
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
 	for nn=1:nsamples
@@ -93,30 +92,35 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 		H3 = ham3(uhat)
 		H2 = ham2(uhat)
 		# Compute the Hamiltonian (for upstream D0=1)
-		ham = D0^(-13/4)*sqrt(E0)*H3 - D0^(3/2)*H2
+		hamup = sqrt(E0)*H3 - H2
+		hamdn = D0^(-13/4)*sqrt(E0)*H3 - D0^(3/2)*H2
 		# Compute the unnormalized acceptance rate and maximize it.
-		acceptrate = exp(-invtemp * ham)
-		maxaccept = max(maxaccept, acceptrate)
+		accept_up = exp(-invtemp * hamup)
+		accept_dn = exp(-invtemp * hamdn)
+		maxup = max(maxup, accept_up)
+		maxdn = max(maxdn, accept_dn)
 		# Save H3 and H2 so as to not recompute.
 		H3all[nn] = H3
 		H2all[nn] = H2
-		aratevec[nn] = acceptrate
+		aupvec[nn] = accept_up
+		adnvec[nn] = accept_dn
 		# Print progress.
 		if mod(nn, 10^4) == 0
 			println("Initial sampling is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
 	# Now that the normalization is known, accept or reject each.
-	H3acc = zeros(Float64,0)
-	H2acc = zeros(Float64,0)
-	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0
-	count = 0
-	for nn=1:nsamples
-		# The normalized acceptance rate.
-		acceptrate = aratevec[nn]/maxaccept
-		# Accept or reject based on a uniform random variable.
+	H3accup, H2accup, H3accdn, H2accdn = [zeros(Float64,0) for nn=1:4]
+	if savemicro
+		uhaccup,uhaccdn = [zeros(Complex128,nmodes,nsamples) for nn=1:2]
+	end
+	countup = [0]
+	countdn = [0]
+	# Little function to accept or reject each sample.
+	function accept!(accept_rate::Float64, nn::Int, count::Array{Int}, 
+			H3acc::Vector{Float64}, H2acc::Vector{Float64}, uhacc::Array{Complex128})
 		univar = rand()
-		if univar <= acceptrate
+		if univar <= accept_rate
 			count += 1
 			# Save H3 and H2
 			push!(H3acc, H3all[nn])
@@ -127,16 +131,34 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 				uhacc[:,count] = uhat[:]
 			end
 		end
+	end
+	# Loop through the samples and accept or reject each.
+	for nn=1:nsamples
+		# The normalized acceptance rates.
+		accept_up = aupvec[nn]/maxup
+		accept_dn = adnvec[nn]/maxdn
+		# Accept or reject each sample.
+		accept!(accept_up, nn, countup, H3accup, H2accup, uhaccup)
+		accept!(accept_dn, nn, countdn, H3accdn, H2accdn, uhaccdn)
+		# Accept or reject based on a uniform random variable.
+		univarup = rand()
+		univardn = rand()
 		# Print progress.
 		if mod(nn, 10^4) == 0
 			println("Acceptance/rejection loop is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
 	# Remove unused entries of uhacc.
-	savemicro? uhacc = uhacc[:,1:count] : uhacc = []
-	# State the overall acceptance rate.
+	if savemicro
+		uhaccup = uhaccup[:,1:countup]
+		uhaccdn = uhaccdn[:,1:countdn]
+	else
+		uhaccup = []
+		uhaccdn = []
+	end
+	# Print the overall acceptance rate.
 	println("The overall acceptance rate was ", signif(100*count/nsamples,2), "%.")
-	return H3acc, H2acc, uhacc
+	return H3accup, H2accup, uhaccup, H3accdn, H2accdn, uhaccdn
 end
 
 #= Convert each accepted uhat to physical space for analysis. =#

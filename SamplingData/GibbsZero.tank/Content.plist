@@ -3325,7 +3325,7 @@
 			<string>Histograms upstream vs downstream</string>
 			<key>WindowPos</key>
 			<array>
-				<real>34</real>
+				<real>51</real>
 				<real>116</real>
 				<real>984</real>
 				<real>761</real>
@@ -3502,8 +3502,8 @@
 			<string>Histograms downstream 1 vs 2</string>
 			<key>WindowPos</key>
 			<array>
-				<real>70</real>
-				<real>116</real>
+				<real>127</real>
+				<real>80</real>
 				<real>984</real>
 				<real>761</real>
 			</array>
@@ -3579,7 +3579,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>hamdataup.txt</string>
+						<string>hamup0.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5377,7 +5377,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>650</real>
+		<real>720</real>
 		<real>70</real>
 		<real>941</real>
 		<real>807</real>

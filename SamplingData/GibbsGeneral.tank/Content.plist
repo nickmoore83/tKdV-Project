@@ -4309,7 +4309,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>hamdataup.txt</string>
+						<string>hamup0.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6263,7 +6263,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>142</real>
+		<real>837</real>
 		<real>67</real>
 		<real>941</real>
 		<real>810</real>

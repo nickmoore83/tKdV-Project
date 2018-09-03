@@ -10,8 +10,7 @@
 \
 - Priority: I should rewrite gibbs to handle the upstream and downstream acceptance/rejection both at once. This should be straightforward, just tedious. But it will double the efficiency.\
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 - Output same extra diagnostic data: CPU time, acceptance rate\
+- Rerun 3 cases with new format.\
 \
 \'95 Code to match incoming and outgoing Gibbs measures\
 - This code will also produce the histograms I want.\
@@ -32,9 +31,7 @@ sum ( exp(-thm H-) * H+) / sum(exp(-thmin H-)\
 \
 \
 \
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \ul Aug 28, 2018\
+\ul Aug 28, 2018\
 \ulnone - I finished the routine gibbs to sample from a Gibbs distribution with 
 \i non-zero
 \i0  inverse temperature. I tested it with invtemp=0 and it works! It produces histograms of H similar to those produced by gibbs0. I tested it with non-zero invtemp and it works in those cases too. For negative invtemp, it can give skewed distributions as we hoped!\
