@@ -75,13 +75,12 @@ function getuhat(rvar::Array{Float64}, nn::Int)
 	uhat = rvar[:,1,nn]+im*rvar[:,2,nn]
 	return uhat/sqrt(energy(uhat))
 end
-
-#= Sample from a microcanonical distribution (Gibbs with zero inverse temp) =#
+#= Sample from a microcanonical distribution (Gibbs with zero inverse temperature). =#
 function microcan(nmodes::Int, nsamples::Int)
 	# Get all the random samples at once.
 	rvar = randn(nmodes,2,nsamples)
 	# Allocate space.
-	H3vec,H2vec = [zeros(Float64,nsamples) for nn=1:2]
+	H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
 	# Compute H3 and H2 for each to estimate the acceptance rate.
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
 	for nn=1:nsamples
@@ -92,45 +91,31 @@ function microcan(nmodes::Int, nsamples::Int)
 			println("Initial sampling is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
+	return H3vec, H2vec, rvar
 end
-
 
 #= Sample from a Gibbs distribution with arbitrary inverse temperature. =#
 function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0., 
 		E0::Float64=1., D0::Float64=1., savemicro::Bool=false)
-	# Get all the random samples at once.
-	rvar = randn(nmodes,2,nsamples)
-	# Allocate space.
-	H3all,H2all,aratevec = [zeros(Float64,nsamples) for nn=1:3]
+	# Sample H3 and H2 from the microcanonical distribution.
+	H3all,H2all,rvar = microcan(nmodes,nsamples)
+	# Determine the accpetance rate based on the Hamiltonian.
+	aratevec = zeros(Float64,nsamples)
 	maxaccept = 0.
-	# Compute H3 and H2 for each to estimate the acceptance rate.
-	# TO DO: parallelize this for loop!!! It is the bottleneck!
 	for nn=1:nsamples
-		uhat = getuhat(rvar,nn)
-		H3 = ham3(uhat)
-		H2 = ham2(uhat)
 		# Compute the Hamiltonian (for upstream D0=1)
-		ham = D0^(-13/4)*sqrt(E0)*H3 - D0^(3/2)*H2
-		# Compute the unnormalized acceptance rate and maximize it.
-		acceptrate = exp(-invtemp * ham)
-		maxaccept = max(maxaccept, acceptrate)
-		# Save H3 and H2 so as to not recompute.
-		H3all[nn] = H3
-		H2all[nn] = H2
-		aratevec[nn] = acceptrate
-		# Print progress.
-		if mod(nn, 10^4) == 0
-			println("Initial sampling is ", signif(100*nn/nsamples,3), "% completed.")
-		end
+		ham = D0^(-13/4)*sqrt(E0)*H3vec[nn] - D0^(3/2)*H2vec[nn]
+		# Compute the unnormalized acceptance rate and find the maximum.
+		aratevec[nn] = exp(-invtemp * ham)
+		maxaccept = max(maxaccept, aratevec[nn])
 	end
 	# Now that the normalization is known, accept or reject each.
 	H3acc,H2acc = [zeros(Float64,0) for nn=1:2]
 	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0
 	count = 0
 	for nn=1:nsamples
-		# The normalized acceptance rate.
-		acceptrate = aratevec[nn]/maxaccept
 		# Accept or reject based on a uniform random variable.
+		acceptrate = aratevec[nn]/maxaccept
 		univar = rand()
 		if univar <= acceptrate
 			count += 1
