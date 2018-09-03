@@ -1,4 +1,3 @@
-using Winston
 using Distributions
 
 #---------- IO Routines ----------#
