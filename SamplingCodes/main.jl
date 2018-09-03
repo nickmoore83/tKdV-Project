@@ -54,19 +54,19 @@ function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 	return hamdnmean/normconst
 end
 
-function main(nmodes::Int, nsamples::Int, thup::Float64, E0::Float64, D0::Float64)
+function matchmean(nmodes::Int, nsamples::Int, thup::Float64, E0::Float64, D0::Float64)
 	# Sample H3 and H2 from a microcanonical distribution.
 	H3vec, H2vec, rvar = microcan(nmodes,nsamples)
 	# Compute the upstream mean of the downstream Hamiltonian.
 	meanup = meanham(H3vec,H2vec,thup,E0,D0,true)
-	# Define a function for the dowstream mean of the downstream Hamiltonian.
-	function meandn(thdn::Float64)
-		return meanham(H3vec,H2vec,thdn,E0,D0,false)
-	end
-
+	# Define a function for the difference in the up/downstream means.
+	function diffmean(thdn::Float64) = meanham(H3vec,H2vec,thdn,E0,D0,false) - meanup
+	# Find thdn via a root of diffmean
+	thdn = find_zero(diffmean, thup, Roots.Newton())
+	return thdn
 end
 
-
+matchmean(10, 1*10^5, -0.1, 4., 1.)
 
 
 
