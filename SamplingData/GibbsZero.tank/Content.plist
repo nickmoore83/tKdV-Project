@@ -787,7 +787,7 @@
 			<string>H- histograms under G-</string>
 			<key>WindowPos</key>
 			<array>
-				<real>72</real>
+				<real>68</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -1571,10 +1571,797 @@
 			<key>Visible</key>
 			<string>NO</string>
 			<key>WindowName</key>
-			<string>H+ histograms G+ case 1</string>
+			<string>H+ histograms G+ case 1 scale of G-</string>
 			<key>WindowPos</key>
 			<array>
 				<real>320</real>
+				<real>151</real>
+				<real>578</real>
+				<real>726</real>
+			</array>
+		</dict>
+		<dict>
+			<key>Antialiasing</key>
+			<string>YES</string>
+			<key>Axis</key>
+			<dict>
+				<key>Background</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>Alpha</key>
+							<real>0.0</real>
+							<key>Space</key>
+							<string>NSCalibratedWhiteColorSpace</string>
+							<key>White</key>
+							<real>1</real>
+						</dict>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>BackgroundScale</key>
+				<integer>1</integer>
+				<key>BottomLabels</key>
+				<integer>0</integer>
+				<key>DrawBox</key>
+				<string>On</string>
+				<key>DrawGrid</key>
+				<string>Off</string>
+				<key>DrawInside</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>Alpha</key>
+							<real>0.0</real>
+							<key>Space</key>
+							<string>NSCalibratedWhiteColorSpace</string>
+							<key>White</key>
+							<real>1</real>
+						</dict>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>Font</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>Blue</key>
+								<real>0.0</real>
+								<key>Green</key>
+								<real>0.0</real>
+								<key>Red</key>
+								<real>0.0</real>
+								<key>Space</key>
+								<string>NSCalibratedRGBColorSpace</string>
+							</dict>
+						</dict>
+						<key>Name</key>
+						<string>Times</string>
+						<key>Size</key>
+						<string>24</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>GridLineStyle</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>Blue</key>
+								<real>0.0</real>
+								<key>Green</key>
+								<real>0.0</real>
+								<key>Red</key>
+								<real>0.0</real>
+								<key>Space</key>
+								<string>NSCalibratedRGBColorSpace</string>
+							</dict>
+						</dict>
+						<key>LineType</key>
+						<integer>1</integer>
+						<key>LineWidth</key>
+						<string>0.5</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>InsideScale</key>
+				<integer>1</integer>
+				<key>LeftLabels</key>
+				<integer>0</integer>
+				<key>LineStyle</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>Blue</key>
+								<real>0.0</real>
+								<key>Green</key>
+								<real>0.0</real>
+								<key>Red</key>
+								<real>0.0</real>
+								<key>Space</key>
+								<string>NSCalibratedRGBColorSpace</string>
+							</dict>
+						</dict>
+						<key>LineWidth</key>
+						<string>1.6</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>MinorTicks</key>
+				<string>On</string>
+				<key>OverwriteXTicks</key>
+				<string>Off</string>
+				<key>OverwriteYTicks</key>
+				<string>Off</string>
+				<key>RightLabels</key>
+				<integer>2</integer>
+				<key>TickLengthMenu</key>
+				<integer>2</integer>
+				<key>TickLengthSpecified</key>
+				<string>8</string>
+				<key>TicksInside</key>
+				<string>On</string>
+				<key>Title</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>String</key>
+						<string></string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>TitleFont</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Color</key>
+						<dict>
+							<key>Color</key>
+							<dict>
+								<key>Blue</key>
+								<real>0.0</real>
+								<key>Green</key>
+								<real>0.0</real>
+								<key>Red</key>
+								<real>0.0</real>
+								<key>Space</key>
+								<string>NSCalibratedRGBColorSpace</string>
+							</dict>
+						</dict>
+						<key>Name</key>
+						<string>Times</string>
+						<key>Size</key>
+						<string>28</string>
+						<key>Type</key>
+						<integer>0</integer>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>XLabel</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>String</key>
+						<string>downstream Hamiltonian, {\it H^+}</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>XLinOrLog</key>
+				<integer>0</integer>
+				<key>XTicks</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>1</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>YLabel</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>String</key>
+						<string>outgoing pdf, {\it G^+(H^+)}</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>YLinOrLog</key>
+				<integer>0</integer>
+				<key>YTicks</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>1</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>CommandContents</key>
+			<array>
+				<dict>
+					<key>CommandName</key>
+					<string>{\it \theta^{+}} = 0</string>
+					<key>CommandType</key>
+					<string>Plot</string>
+					<key>Computation</key>
+					<dict>
+						<key>CropDomainSwitch</key>
+						<string>Off</string>
+						<key>CropRange</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Range</key>
+								<string>-∞,∞</string>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>CropValue</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Range</key>
+								<string>-∞,∞</string>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>CropValuesSwitch</key>
+						<string>Off</string>
+						<key>FillFrom</key>
+						<string>0</string>
+						<key>FillStyle</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Blue</key>
+									<real>0.032063801000000003</real>
+									<key>Green</key>
+									<real>1</real>
+									<key>Red</key>
+									<real>0.020642599000000001</real>
+									<key>Space</key>
+									<string>NSCalibratedRGBColorSpace</string>
+								</dict>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>FillSwitch</key>
+						<string>Off</string>
+						<key>IncludeInLegend</key>
+						<string>On</string>
+						<key>LineStyle</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>Blue</key>
+										<real>0.0</real>
+										<key>Green</key>
+										<real>0.0</real>
+										<key>Red</key>
+										<real>0.0</real>
+										<key>Space</key>
+										<string>NSCalibratedRGBColorSpace</string>
+									</dict>
+								</dict>
+								<key>LineType</key>
+								<integer>0</integer>
+								<key>LineWidth</key>
+								<string>1.5</string>
+							</dict>
+							<key>Selected</key>
+							<string>zero inverse temperature style</string>
+						</dict>
+						<key>Plot</key>
+						<dict>
+							<key>Selected</key>
+							<string>Downstream H+ histogram case 1</string>
+						</dict>
+						<key>XorY</key>
+						<integer>0</integer>
+					</dict>
+					<key>Drawn</key>
+					<string>Include</string>
+					<key>Status</key>
+					<string>Visible</string>
+				</dict>
+				<dict>
+					<key>CommandName</key>
+					<string>{\it \theta^{+}} = -0.3</string>
+					<key>CommandType</key>
+					<string>Plot</string>
+					<key>Computation</key>
+					<dict>
+						<key>CropDomainSwitch</key>
+						<string>Off</string>
+						<key>CropRange</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Range</key>
+								<string>-∞,∞</string>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>CropValue</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Range</key>
+								<string>-∞,∞</string>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>CropValuesSwitch</key>
+						<string>Off</string>
+						<key>FillFrom</key>
+						<string>0</string>
+						<key>FillStyle</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Blue</key>
+									<real>0.032063801000000003</real>
+									<key>Green</key>
+									<real>1</real>
+									<key>Red</key>
+									<real>0.020642599000000001</real>
+									<key>Space</key>
+									<string>NSCalibratedRGBColorSpace</string>
+								</dict>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>FillSwitch</key>
+						<string>Off</string>
+						<key>IncludeInLegend</key>
+						<string>On</string>
+						<key>LineStyle</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>Blue</key>
+										<real>0.0</real>
+										<key>Green</key>
+										<real>0.0</real>
+										<key>Red</key>
+										<real>0.0</real>
+										<key>Space</key>
+										<string>NSCalibratedRGBColorSpace</string>
+									</dict>
+								</dict>
+								<key>LineType</key>
+								<integer>0</integer>
+								<key>LineWidth</key>
+								<string>0.5</string>
+							</dict>
+							<key>Selected</key>
+							<string>negative theta style</string>
+						</dict>
+						<key>Plot</key>
+						<dict>
+							<key>Selected</key>
+							<string>H+ histogram under G+ case 1</string>
+						</dict>
+						<key>XorY</key>
+						<integer>0</integer>
+					</dict>
+					<key>Drawn</key>
+					<string>Include</string>
+					<key>Status</key>
+					<string>Visible</string>
+				</dict>
+				<dict>
+					<key>CommandName</key>
+					<string>{\it \theta^{+}} = +0.3</string>
+					<key>CommandType</key>
+					<string>Plot</string>
+					<key>Computation</key>
+					<dict>
+						<key>CropDomainSwitch</key>
+						<string>Off</string>
+						<key>CropRange</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Range</key>
+								<string>-∞,∞</string>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>CropValue</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Range</key>
+								<string>-∞,∞</string>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>CropValuesSwitch</key>
+						<string>Off</string>
+						<key>FillFrom</key>
+						<string>0</string>
+						<key>FillStyle</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Blue</key>
+									<real>0.032063801000000003</real>
+									<key>Green</key>
+									<real>1</real>
+									<key>Red</key>
+									<real>0.020642599000000001</real>
+									<key>Space</key>
+									<string>NSCalibratedRGBColorSpace</string>
+								</dict>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>FillSwitch</key>
+						<string>Off</string>
+						<key>IncludeInLegend</key>
+						<string>On</string>
+						<key>LineStyle</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>Blue</key>
+										<real>0.0</real>
+										<key>Green</key>
+										<real>0.0</real>
+										<key>Red</key>
+										<real>0.0</real>
+										<key>Space</key>
+										<string>NSCalibratedRGBColorSpace</string>
+									</dict>
+								</dict>
+								<key>LineType</key>
+								<integer>0</integer>
+								<key>LineWidth</key>
+								<string>0.5</string>
+							</dict>
+							<key>Selected</key>
+							<string>positive theta style</string>
+						</dict>
+						<key>Plot</key>
+						<dict>
+							<key>Selected</key>
+							<string>H+ histogram under G+ flip sign case 1</string>
+						</dict>
+						<key>XorY</key>
+						<integer>0</integer>
+					</dict>
+					<key>Drawn</key>
+					<string>Include</string>
+					<key>Status</key>
+					<string>Visible</string>
+				</dict>
+				<dict>
+					<key>CommandName</key>
+					<string>Legend</string>
+					<key>CommandType</key>
+					<string>Legend</string>
+					<key>Computation</key>
+					<dict>
+						<key>DrawBack</key>
+						<string>On</string>
+						<key>DrawBorder</key>
+						<string>On</string>
+						<key>Fill</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Alpha</key>
+									<real>0.80000001190000003</real>
+									<key>Blue</key>
+									<real>1</real>
+									<key>Green</key>
+									<real>1</real>
+									<key>Red</key>
+									<real>1</real>
+									<key>Space</key>
+									<string>NSCalibratedRGBColorSpace</string>
+								</dict>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>Format</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>Blue</key>
+										<real>0.0</real>
+										<key>Green</key>
+										<real>0.0</real>
+										<key>Red</key>
+										<real>0.0</real>
+										<key>Space</key>
+										<string>NSCalibratedRGBColorSpace</string>
+									</dict>
+								</dict>
+								<key>Name</key>
+								<string>Times</string>
+								<key>Size</key>
+								<string>26</string>
+								<key>Type</key>
+								<integer>0</integer>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>Line</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Color</key>
+								<dict>
+									<key>Color</key>
+									<dict>
+										<key>Blue</key>
+										<real>0.0</real>
+										<key>Green</key>
+										<real>0.0</real>
+										<key>Red</key>
+										<real>0.0</real>
+										<key>Space</key>
+										<string>NSCalibratedRGBColorSpace</string>
+									</dict>
+								</dict>
+								<key>LineType</key>
+								<integer>0</integer>
+								<key>LineWidth</key>
+								<string>1.4</string>
+							</dict>
+							<key>SelectedNumber</key>
+							<integer>0</integer>
+						</dict>
+						<key>Offset</key>
+						<string>10,10</string>
+						<key>Position</key>
+						<integer>1</integer>
+						<key>Size</key>
+						<string>26, 28</string>
+						<key>Width</key>
+						<string>160</string>
+					</dict>
+					<key>Drawn</key>
+					<string>Include</string>
+					<key>Status</key>
+					<string>Visible</string>
+					<key>ToggleOpen</key>
+					<string>YES</string>
+				</dict>
+			</array>
+			<key>DomainRange</key>
+			<dict>
+				<key>Include</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>0</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>IncludeSwitch</key>
+				<string>Off</string>
+				<key>Range</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Max</key>
+						<string>10</string>
+						<key>Min</key>
+						<string>-40</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeType</key>
+				<integer>3</integer>
+				<key>RestrictState</key>
+				<dict>
+					<key>Position</key>
+					<integer>0</integer>
+					<key>Stack</key>
+					<array>
+						<string>-∞,∞</string>
+					</array>
+					<key>String</key>
+					<string>-∞,∞</string>
+				</dict>
+				<key>RestrictSwitch</key>
+				<string>On</string>
+				<key>RestrictVariable</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Range</key>
+						<string>-∞,∞</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>DrawingHeight</key>
+			<real>363</real>
+			<key>DrawingWindow</key>
+			<dict>
+				<key>ClickMenu</key>
+				<dict>
+					<key>EntryName</key>
+					<string>Automatic</string>
+					<key>EntryNumber</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>DrawingWindowType</key>
+			<string>1DGraph</string>
+			<key>FigureName</key>
+			<string>Untitled</string>
+			<key>Last Drawing View Size</key>
+			<string>{580, 363}</string>
+			<key>MaxHeight</key>
+			<string></string>
+			<key>MaxWidth</key>
+			<string></string>
+			<key>OutputHeight</key>
+			<string></string>
+			<key>OutputWidth</key>
+			<string></string>
+			<key>QT</key>
+			<dict>
+				<key>Format</key>
+				<string>Animation</string>
+				<key>Quality</key>
+				<dict>
+					<key>EntryName</key>
+					<string>Lossless</string>
+					<key>EntryNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>Range</key>
+				<string>0,∞</string>
+				<key>ShowInFinder</key>
+				<string>On</string>
+				<key>TimeStep</key>
+				<string>1.0</string>
+			</dict>
+			<key>SeparateWindowPos</key>
+			<array>
+				<real>0.0</real>
+				<real>0.0</real>
+				<real>0.0</real>
+				<real>0.0</real>
+			</array>
+			<key>ValueRange</key>
+			<dict>
+				<key>Include</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>0</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>IncludeSwitch</key>
+				<string>Off</string>
+				<key>Range</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Max</key>
+						<string>1.4e-1</string>
+						<key>Min</key>
+						<string>0</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeType</key>
+				<integer>3</integer>
+				<key>RestrictState</key>
+				<dict>
+					<key>Position</key>
+					<integer>0</integer>
+					<key>Stack</key>
+					<array>
+						<string>-∞,∞</string>
+					</array>
+					<key>String</key>
+					<string>-∞,∞</string>
+				</dict>
+				<key>RestrictSwitch</key>
+				<string>On</string>
+				<key>RestrictVariable</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Range</key>
+						<string>-∞,∞</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>ViewSizeJoined</key>
+			<string>580,363</string>
+			<key>ViewSizeSeparated</key>
+			<string></string>
+			<key>Visible</key>
+			<string>NO</string>
+			<key>WindowName</key>
+			<string>H+ histograms G+ case 1 better scale</string>
+			<key>WindowPos</key>
+			<array>
+				<real>84</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -2217,7 +3004,7 @@
 						<key>Max</key>
 						<string>10</string>
 						<key>Min</key>
-						<string>-90</string>
+						<string>-40</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -2358,10 +3145,10 @@
 			<key>Visible</key>
 			<string>NO</string>
 			<key>WindowName</key>
-			<string>H+ histograms G+ case 2</string>
+			<string>H+ histograms G+ case 2 better scale</string>
 			<key>WindowPos</key>
 			<array>
-				<real>170</real>
+				<real>399</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -2426,7 +3213,7 @@
 				</dict>
 				<dict>
 					<key>CommandName</key>
-					<string>H+ histograms G+ case 1</string>
+					<string>H+ histograms G+ case 1 scale of G-</string>
 					<key>CommandType</key>
 					<string>Figure</string>
 					<key>Computation</key>
@@ -2538,7 +3325,7 @@
 			<string>Histograms upstream vs downstream</string>
 			<key>WindowPos</key>
 			<array>
-				<real>33</real>
+				<real>34</real>
 				<real>116</real>
 				<real>984</real>
 				<real>761</real>
@@ -2551,7 +3338,7 @@
 			<array>
 				<dict>
 					<key>CommandName</key>
-					<string>H+ histograms G+ case 1</string>
+					<string>H+ histograms G+ case 1 better scale</string>
 					<key>CommandType</key>
 					<string>Figure</string>
 					<key>Computation</key>
@@ -2559,7 +3346,7 @@
 						<key>Figure</key>
 						<dict>
 							<key>Selected</key>
-							<integer>1</integer>
+							<integer>2</integer>
 						</dict>
 						<key>Point</key>
 						<dict>
@@ -2603,7 +3390,7 @@
 				</dict>
 				<dict>
 					<key>CommandName</key>
-					<string>H+ histograms G+ case 1</string>
+					<string>H+ histograms G+ case 2 better scale</string>
 					<key>CommandType</key>
 					<string>Figure</string>
 					<key>Computation</key>
@@ -2611,7 +3398,7 @@
 						<key>Figure</key>
 						<dict>
 							<key>Selected</key>
-							<integer>2</integer>
+							<integer>3</integer>
 						</dict>
 						<key>Point</key>
 						<dict>
@@ -2715,7 +3502,7 @@
 			<string>Histograms downstream 1 vs 2</string>
 			<key>WindowPos</key>
 			<array>
-				<real>75</real>
+				<real>70</real>
 				<real>116</real>
 				<real>984</real>
 				<real>761</real>
@@ -2792,7 +3579,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>hamdata.txt</string>
+						<string>hamup0-2e7.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -2844,7 +3631,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.61</string>
+						<string>0.85</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -2852,8 +3639,6 @@
 			</dict>
 			<key>Selection</key>
 			<string>Histogram</string>
-			<key>ToggleOpen</key>
-			<string>YES</string>
 			<key>VariableName</key>
 			<string>Upstream H- histogram case 1</string>
 			<key>VariableType</key>
@@ -2888,7 +3673,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.28</string>
+						<string>0.42</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -2896,8 +3681,6 @@
 			</dict>
 			<key>Selection</key>
 			<string>Histogram</string>
-			<key>ToggleOpen</key>
-			<string>YES</string>
 			<key>VariableName</key>
 			<string>Downstream H+ histogram case 1</string>
 			<key>VariableType</key>
@@ -2932,7 +3715,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.35</string>
+						<string>0.5</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -2940,8 +3723,6 @@
 			</dict>
 			<key>Selection</key>
 			<string>Histogram</string>
-			<key>ToggleOpen</key>
-			<string>YES</string>
 			<key>VariableName</key>
 			<string>Downstream H+ histogram case 2</string>
 			<key>VariableType</key>
@@ -2989,7 +3770,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>1</string>
+				<string>4</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -3004,7 +3785,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>0.4</string>
+				<string>0.6</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -3032,7 +3813,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Extract the data</string>
 			<key>VariableName</key>
@@ -3790,7 +4571,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Map histograms using inverse temperatures</string>
 			<key>VariableName</key>
@@ -4257,7 +5038,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Aesthetics</string>
 			<key>VariableName</key>
@@ -4504,7 +5285,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>575</real>
+		<real>833</real>
 		<real>70</real>
 		<real>941</real>
 		<real>807</real>
