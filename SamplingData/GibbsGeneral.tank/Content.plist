@@ -2884,7 +2884,7 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>NO</string>
+			<string>YES</string>
 			<key>WindowName</key>
 			<string>microstate information</string>
 			<key>WindowPos</key>
@@ -4239,6 +4239,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>MonitorVariables</key>
+	<array>
+		<string>u and uhat data</string>
+	</array>
 	<key>Time</key>
 	<dict>
 		<key>CurrentTime</key>
@@ -4309,7 +4313,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>hamup0.txt</string>
+						<string>hamup.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4342,7 +4346,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>uup0.txt</string>
+						<string>uup.txt</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6263,7 +6267,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>837</real>
+		<real>570</real>
 		<real>67</real>
 		<real>941</real>
 		<real>810</real>

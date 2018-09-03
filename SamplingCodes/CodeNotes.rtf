@@ -8,7 +8,7 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \ul \ulc0 To Do\ulnone \
 \
-- Priority: I should rewrite gibbs to handle the upstream and downstream acceptance/rejection both at once. This should be straightforward, just tedious. But it will double the efficiency.\
+\
 \
 - Rerun 3 cases with new format.\
 \
@@ -30,8 +30,13 @@ sum ( exp(-thm H-) * H+) / sum(exp(-thmin H-)\
 - Parallelize the for loops that compute H3 and H2.\
 \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - I should rewrite gibbs to handle the upstream and downstream acceptance/rejection both at once. This should be straightforward, just tedious. But it will double the efficiency.\
+Note: Perhaps I should not do this actually for a few reasons. First I will probably want to use different inverse temperatures in each. Second, the above idea might lead to weird correlations in the data. So, for now, I am going back to my original implementation. After I implement the code to match the incoming/outgoing distributions, I will reconsider.\
 \
-\ul Aug 28, 2018\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Aug 28, 2018\
 \ulnone - I finished the routine gibbs to sample from a Gibbs distribution with 
 \i non-zero
 \i0  inverse temperature. I tested it with invtemp=0 and it works! It produces histograms of H similar to those produced by gibbs0. I tested it with non-zero invtemp and it works in those cases too. For negative invtemp, it can give skewed distributions as we hoped!\

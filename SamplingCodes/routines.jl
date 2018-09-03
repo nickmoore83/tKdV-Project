@@ -111,14 +111,15 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 	end
 	# Now that the normalization is known, accept or reject each.
 	H3accup, H2accup, H3accdn, H2accdn = [zeros(Float64,0) for nn=1:4]
-	if savemicro
-		uhaccup,uhaccdn = [zeros(Complex128,nmodes,nsamples) for nn=1:2]
-	end
+
+	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0 # CHECK
+
 	countup = [0]
 	countdn = [0]
+
 	# Little function to accept or reject each sample.
 	function accept!(accept_rate::Float64, nn::Int, count::Array{Int}, 
-			H3acc::Vector{Float64}, H2acc::Vector{Float64}, uhacc::Array{Complex128})
+			H3acc::Vector{Float64}, H2acc::Vector{Float64}, uhacc::Vector{Float64})
 		univar = rand()
 		if univar <= accept_rate
 			count += 1
@@ -130,9 +131,8 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 				uhat = getuhat(rvar,nn)
 				uhacc[:,count] = uhat[:]
 			end
-		end
-	end
-	# Loop through the samples and accept or reject each.
+		end	
+
 	for nn=1:nsamples
 		# The normalized acceptance rates.
 		accept_up = aupvec[nn]/maxup
@@ -140,25 +140,32 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 		# Accept or reject each sample.
 		accept!(accept_up, nn, countup, H3accup, H2accup, uhaccup)
 		accept!(accept_dn, nn, countdn, H3accdn, H2accdn, uhaccdn)
+
 		# Accept or reject based on a uniform random variable.
 		univarup = rand()
 		univardn = rand()
+
+		if univar <= accept_up
+			countup += 1
+			# Save H3 and H2
+			push!(H3accup, H3all[nn])
+			push!(H2accup, H2all[nn])
+			# Also save the microstate if requested.
+			if savemicro
+				uhat = getuhat(rvar,nn)
+				uhacc[:,count] = uhat[:]
+			end
+		end
 		# Print progress.
 		if mod(nn, 10^4) == 0
 			println("Acceptance/rejection loop is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
 	# Remove unused entries of uhacc.
-	if savemicro
-		uhaccup = uhaccup[:,1:countup]
-		uhaccdn = uhaccdn[:,1:countdn]
-	else
-		uhaccup = []
-		uhaccdn = []
-	end
-	# Print the overall acceptance rate.
+	savemicro? uhacc = uhacc[:,1:count] : uhacc = []
+	# State the overall acceptance rate.
 	println("The overall acceptance rate was ", signif(100*count/nsamples,2), "%.")
-	return H3accup, H2accup, uhaccup, H3accdn, H2accdn, uhaccdn
+	return H3acc, H2acc, uhacc
 end
 
 #= Convert each accepted uhat to physical space for analysis. =#
