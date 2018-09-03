@@ -8,23 +8,19 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \ul \ulc0 To Do\ulnone \
 \
-\'95 Code to match incoming and outgoing Gibbs measures\
-- This code will also produce the histograms I want.\
-1) Sample uhat from G0 and compile a list of H- and H+ (maybe even save H2 and H3 separately)\
-2) Given thm (theta minus), compute the mean of H+ under G- by the formula\
-sum ( exp(-thm H-) * H+) / sum(exp(-thmin H-)\
-3) Given a guess of thp, compute the mean of H+ under G+ via a similar formula, and iterate over thp until the means match.\
-4) Make histograms of H+ under G- and G+ by making uniform bins, sampling, then simply weighting the samples by exp(-theta H) (plus or minus, whichever is appropriate). Normalization should be trivial.\
+- I coded the method to satisfy the statistical matching condition. It seems to work and it is not nearly as expensive as I originally imagined. \
+- Next I should input a range of theta- values and plot theta+ to get an idea for the relationship there.\
 \
-- Eventually make plots of theta- vs theta+ as computed by above algorithm.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 - Rerun 3 cases with new format.\
 \
 \
-\
+(Old) Make histograms of H+ under G- and G+ by making uniform bins, sampling, then simply weighting the samples by exp(-theta H) (plus or minus, whichever is appropriate). Normalization should be trivial.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \ul Later\ulnone \
+\cf0 \
+\
+\ul Later\ulnone \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 - Note: Now that I coded microcan separately, I could run several different cases of parameters (invtemp, E0, D0) all effectively simultaneously using the same big ensemble from microcan. Don\'92t do this yet though. There are probably more important things to do with the matching condition.\
