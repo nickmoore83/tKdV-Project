@@ -1,3 +1,4 @@
+using Winston
 using Distributions
 
 #---------- IO Routines ----------#
@@ -22,7 +23,7 @@ Note: uu has length npoints = 2*nmodes. =#
 #= Basic realfft to go from uu to uhat. =#
 function realfft(uu::Vector{Float64})
 	uhat = rfft(uu)/endof(uu)
-	assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6) 
+	assert(abs(uhat[1])/max.(abs,uhat) < 1e-6) 
 	return uhat[2:end]
 end
 #= Basic irealfft to go from uhat to uu (no upsampling). =#
@@ -82,9 +83,10 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 	# Get all the random samples at once.
 	rvar = randn(nmodes,2,nsamples)
 	# Allocate space.
-	H3all, H2all = [zeros(Float64,nsamples) for nn=1:2]
-	aupvec, adnvec = [zeros(Float64,nsamples) for nn=1:2]
-	maxup, maxdn = 0.,0.
+	H3all = zeros(Float64,nsamples)
+	H2all = zeros(Float64,nsamples)
+	aratevec = zeros(Float64,nsamples)
+	maxaccept = 0.
 	# Compute H3 and H2 for each to estimate the acceptance rate.
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
 	for nn=1:nsamples
@@ -92,64 +94,34 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 		H3 = ham3(uhat)
 		H2 = ham2(uhat)
 		# Compute the Hamiltonian (for upstream D0=1)
-		hamup = sqrt(E0)*H3 - H2
-		hamdn = D0^(-13/4)*sqrt(E0)*H3 - D0^(3/2)*H2
+		ham = D0^(-13/4)*sqrt(E0)*H3 - D0^(3/2)*H2
 		# Compute the unnormalized acceptance rate and maximize it.
-		accept_up = exp(-invtemp * hamup)
-		accept_dn = exp(-invtemp * hamdn)
-		maxup = max(maxup, accept_up)
-		maxdn = max(maxdn, accept_dn)
+		acceptrate = exp(-invtemp * ham)
+		maxaccept = max(maxaccept, acceptrate)
 		# Save H3 and H2 so as to not recompute.
 		H3all[nn] = H3
 		H2all[nn] = H2
-		aupvec[nn] = accept_up
-		adnvec[nn] = accept_dn
+		aratevec[nn] = acceptrate
 		# Print progress.
 		if mod(nn, 10^4) == 0
 			println("Initial sampling is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
 	# Now that the normalization is known, accept or reject each.
-	H3accup, H2accup, H3accdn, H2accdn = [zeros(Float64,0) for nn=1:4]
-
-	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0 # CHECK
-
-	countup = [0]
-	countdn = [0]
-
-	# Little function to accept or reject each sample.
-	function accept!(accept_rate::Float64, nn::Int, count::Array{Int}, 
-			H3acc::Vector{Float64}, H2acc::Vector{Float64}, uhacc::Vector{Float64})
+	H3acc = zeros(Float64,0)
+	H2acc = zeros(Float64,0)
+	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0
+	count = 0
+	for nn=1:nsamples
+		# The normalized acceptance rate.
+		acceptrate = aratevec[nn]/maxaccept
+		# Accept or reject based on a uniform random variable.
 		univar = rand()
-		if univar <= accept_rate
+		if univar <= acceptrate
 			count += 1
 			# Save H3 and H2
 			push!(H3acc, H3all[nn])
 			push!(H2acc, H2all[nn])
-			# Also save the microstate if requested.
-			if savemicro
-				uhat = getuhat(rvar,nn)
-				uhacc[:,count] = uhat[:]
-			end
-		end	
-
-	for nn=1:nsamples
-		# The normalized acceptance rates.
-		accept_up = aupvec[nn]/maxup
-		accept_dn = adnvec[nn]/maxdn
-		# Accept or reject each sample.
-		accept!(accept_up, nn, countup, H3accup, H2accup, uhaccup)
-		accept!(accept_dn, nn, countdn, H3accdn, H2accdn, uhaccdn)
-
-		# Accept or reject based on a uniform random variable.
-		univarup = rand()
-		univardn = rand()
-
-		if univar <= accept_up
-			countup += 1
-			# Save H3 and H2
-			push!(H3accup, H3all[nn])
-			push!(H2accup, H2all[nn])
 			# Also save the microstate if requested.
 			if savemicro
 				uhat = getuhat(rvar,nn)
@@ -163,7 +135,7 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 	end
 	# Remove unused entries of uhacc.
 	savemicro? uhacc = uhacc[:,1:count] : uhacc = []
-	# State the overall acceptance rate.
+	# Print the overall acceptance rate.
 	println("The overall acceptance rate was ", signif(100*count/nsamples,2), "%.")
 	return H3acc, H2acc, uhacc
 end

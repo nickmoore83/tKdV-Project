@@ -5,33 +5,28 @@ as sampled from the Gibbs0 distribution. =#
 function main(nmodes::Int, nsamples::Int, invtemp::Float64, 
 		E0::Float64, D0::Float64, suffix::AbstractString)
 	savemicro = true
-	### cput0 = time()
 	println("\n\n")
 	# Sample from a Gibbs distribution.
-	cputime = @elapsed( (H3vec,H2vec,uhacc) = gibbs(nmodes,nsamples,invtemp,E0,D0,savemicro) )
-	naccept = endof(H3vec)
-	acceptrate = signif(100*naccept/nsamples,2)
-	cputime = signif(cputime/60,2)
+	cputime = @elapsed (H3vec,H2vec,uhacc) = gibbs(nmodes,nsamples,invtemp,E0,D0,savemicro)
+	cputime = signif(cputime/60,2)	
+	naccsamples = endof(H3vec)
 	# Convert each accepted uhat to physical space for analysis.
 	uacc = getuacc(uhacc)
 	uhavg = getuhavg(uhacc)
-	### cputime = time()-cput0
 	# Write Hamiltonian data to a file.
 	println("\nWriting data to output file.")
+	hamfile = string("../SamplingData/ham",suffix,".txt")
 	label1 = "# Input parameters: nmodes, nsamples, invtemp, E0, D0"
 	label2 = "# Calculated parameters: number of accepted samples, acceptance rate (%), CPU time (minutes)"
-	label3 = "# Computed data: H3, H2, uhavg"
+	label3 = "# Computed data: H3, H2, uhavg"	hamdata = [hamlabel; naccsamples; nmodes; invtemp; E0; D0; H3vec; H2vec; uhavg]
 	hamdata = [label1; nmodes; nsamples; invtemp; E0; D0;
-			label2; naccept; acceptrate; cputime;
-			label3; H3vec; H2vec; uhavg]
-	hamfile = string("../SamplingData/hamdata",suffix,".txt")
+				label2; naccept; acceptrate; cputime; label3; H3; H2; uhavg]	
 	writedata(hamdata, hamfile)
 	# Write uacc data to a file.
-	#udata = [uacc [real(uhacc); imag(uhacc)] ]
-	ufile = string("../SamplingData/udata",suffix,".txt")
+	ufile = string("../SamplingData/u",suffix,".txt")
 	writedata(uacc, ufile)
 	# Print the final CPU time.
-	println("The CPU time is ", signif(cputime,2), " minutes.")
+	println("The CPU time is ", signif(cputime/60,2), " minutes.")
 	return
 end
 
