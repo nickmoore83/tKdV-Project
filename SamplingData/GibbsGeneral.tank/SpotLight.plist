@@ -4,7 +4,16 @@
 <dict>
 	<key>Comment</key>
 	<string>Variables to refresh when importing new data
+basic data
+upstream macrostate data
+downstream macrostate data
+usptream microstate data
+downstream microstate data
 Extract the parameters
+Extract the theta values
+Make theta plot
+HERE IN EDITING
+HERE
 Extract H2 and H3 data
 Compute upstream and downstream Hamiltonians
 Compute the expected energy per mode
@@ -15,7 +24,12 @@ To do
 Extract the transform uhat, including real and imaginary parts
 Compute the magnitude of uhat and sample</string>
 	<key>String</key>
-	<string>incoming pdf, {\it G^-(H^-)}
+	<string>text
+text
+text
+text
+text
+incoming pdf, {\it G^-(H^-)}
 upstream Hamiltonian, {\it H^-}
 outgoing pdf, {\it G^+(H^+)}
 downstream Hamiltonian, {\it H^+}

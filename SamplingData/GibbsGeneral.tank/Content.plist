@@ -4241,7 +4241,7 @@
 	</array>
 	<key>MonitorVariables</key>
 	<array>
-		<string>u data</string>
+		<string>theta downstream vs upstream plot</string>
 	</array>
 	<key>Time</key>
 	<dict>
@@ -4308,232 +4308,589 @@
 		<dict>
 			<key>Content</key>
 			<dict>
-				<key>File</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Text</key>
-						<string>hamup.txt</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>Header</key>
-				<string>0</string>
-				<key>RunConversion</key>
-				<string>Off</string>
-				<key>Script</key>
-				<string>Conversion-1</string>
-				<key>ViewSize</key>
-				<integer>0</integer>
+				<key>Text</key>
+				<string>run</string>
 			</dict>
 			<key>Selection</key>
-			<string>From File</string>
-			<key>ToggleOpen</key>
-			<string>YES</string>
+			<string>Specify</string>
 			<key>VariableName</key>
-			<string>Hamiltonian data</string>
+			<string>data folder</string>
 			<key>VariableType</key>
-			<string>NumberList</string>
-			<key>ViewHeight</key>
-			<real>216</real>
+			<string>String</string>
 		</dict>
 		<dict>
 			<key>Content</key>
 			<dict>
-				<key>File</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Text</key>
-						<string>uup.txt</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>Header</key>
-				<string>0</string>
-				<key>RunConversion</key>
-				<string>Off</string>
-				<key>Script</key>
-				<string>Conversion-2</string>
-				<key>Tail</key>
-				<string>0</string>
-				<key>ViewSize</key>
-				<integer>0</integer>
+				<key>Formula</key>
+				<string>5</string>
+				<key>Variables</key>
+				<array/>
 			</dict>
 			<key>Selection</key>
-			<string>From File</string>
-			<key>ToggleOpen</key>
-			<string>YES</string>
+			<string>Expression</string>
 			<key>VariableName</key>
-			<string>u data</string>
+			<string>data file to view</string>
 			<key>VariableType</key>
-			<string>Array</string>
-			<key>ViewHeight</key>
-			<real>216</real>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>Divide</key>
-				<string>On</string>
-				<key>DivideNumber</key>
-				<string>On</string>
-				<key>Inside</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Range</key>
-						<string>-∞,∞</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>Number</key>
-				<dict>
-					<key>Selected</key>
-					<string>Upstream Hamiltonian H-</string>
-				</dict>
-				<key>Type</key>
-				<integer>0</integer>
-				<key>Width</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>0.42</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-			</dict>
-			<key>Selection</key>
-			<string>Histogram</string>
-			<key>VariableName</key>
-			<string>H- histogram</string>
-			<key>VariableType</key>
-			<string>Plot1D</string>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>Divide</key>
-				<string>On</string>
-				<key>DivideNumber</key>
-				<string>On</string>
-				<key>Inside</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Range</key>
-						<string>-∞,∞</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>Number</key>
-				<dict>
-					<key>Selected</key>
-					<string>Downstream Hamiltonian H+</string>
-				</dict>
-				<key>Type</key>
-				<integer>0</integer>
-				<key>Width</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>0.42</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-			</dict>
-			<key>Selection</key>
-			<string>Histogram</string>
-			<key>VariableName</key>
-			<string>H+ histogram</string>
-			<key>VariableType</key>
-			<string>Plot1D</string>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>Divide</key>
-				<string>On</string>
-				<key>DivideNumber</key>
-				<string>On</string>
-				<key>Inside</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Range</key>
-						<string>-∞,∞</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>Number</key>
-				<dict>
-					<key>Selected</key>
-					<string>Displacement data flattened</string>
-				</dict>
-				<key>Type</key>
-				<integer>0</integer>
-				<key>Width</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>0.1</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-			</dict>
-			<key>Selection</key>
-			<string>Histogram</string>
-			<key>VariableName</key>
-			<string>u Histogram</string>
-			<key>VariableType</key>
-			<string>Plot1D</string>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>Array</key>
-				<dict>
-					<key>Selected</key>
-					<string>u data</string>
-				</dict>
-				<key>Number</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>3</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>Type</key>
-				<integer>0</integer>
-			</dict>
-			<key>Selection</key>
-			<string>From Array</string>
-			<key>VariableName</key>
-			<string>Single displacement number to view</string>
-			<key>VariableType</key>
-			<string>NumberList</string>
+			<string>Real Number</string>
 		</dict>
 		<dict>
 			<key>State</key>
 			<string>Closed</string>
 			<key>Title</key>
-			<string>Extract the Hamiltonian data</string>
+			<string>Extract the data files</string>
 			<key>VariableName</key>
-			<string>DACollapser - 1</string>
+			<string>DACollapser - 7</string>
+			<key>VariableType</key>
+			<string>CollapserOpen</string>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>basic data</string>
+			<key>VariableName</key>
+			<string>DAComment - 17</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Digits</key>
+				<string>6</string>
+				<key>Expression</key>
+				<string>%@/basic.txt</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>folder</string>
+						<key>Type</key>
+						<string>String</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>String</key>
+								<string>text</string>
+							</dict>
+							<key>Selected</key>
+							<string>data folder</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Combine</string>
+			<key>VariableName</key>
+			<string>basic string</string>
+			<key>VariableType</key>
+			<string>String</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>String</key>
+				<dict>
+					<key>Selected</key>
+					<string>basic string</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>From String</string>
+			<key>VariableName</key>
+			<string>basic file</string>
+			<key>VariableType</key>
+			<string>FileName</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>File</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string></string>
+					</dict>
+					<key>Selected</key>
+					<string>basic file</string>
+				</dict>
+				<key>Header</key>
+				<string>0</string>
+				<key>RunConversion</key>
+				<string>Off</string>
+				<key>Script</key>
+				<string>Conversion-3</string>
+				<key>ViewSize</key>
+				<integer>0</integer>
+			</dict>
+			<key>Selection</key>
+			<string>From File</string>
+			<key>VariableName</key>
+			<string>basic data</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+			<key>ViewHeight</key>
+			<real>216</real>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>upstream macrostate data</string>
+			<key>VariableName</key>
+			<string>DAComment - 9</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Digits</key>
+				<string>6</string>
+				<key>Expression</key>
+				<string>%@/hamup%@.txt</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>folder</string>
+						<key>Type</key>
+						<string>String</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>String</key>
+								<string>text</string>
+							</dict>
+							<key>Selected</key>
+							<string>data folder</string>
+						</dict>
+					</dict>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>number</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>data file to view</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Combine</string>
+			<key>VariableName</key>
+			<string>upstream macro string</string>
+			<key>VariableType</key>
+			<string>String</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>String</key>
+				<dict>
+					<key>Selected</key>
+					<string>upstream macro string</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>From String</string>
+			<key>VariableName</key>
+			<string>upstream macro file</string>
+			<key>VariableType</key>
+			<string>FileName</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>File</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string></string>
+					</dict>
+					<key>Selected</key>
+					<string>upstream macro file</string>
+				</dict>
+				<key>Header</key>
+				<string>0</string>
+				<key>RunConversion</key>
+				<string>Off</string>
+				<key>Script</key>
+				<string>Conversion-3</string>
+				<key>ViewSize</key>
+				<integer>0</integer>
+			</dict>
+			<key>Selection</key>
+			<string>From File</string>
+			<key>VariableName</key>
+			<string>upstream macro data</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+			<key>ViewHeight</key>
+			<real>216</real>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>downstream macrostate data</string>
+			<key>VariableName</key>
+			<string>DAComment - 13</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Digits</key>
+				<string>6</string>
+				<key>Expression</key>
+				<string>%@/hamdn%@.txt</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>folder</string>
+						<key>Type</key>
+						<string>String</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>String</key>
+								<string>text</string>
+							</dict>
+							<key>Selected</key>
+							<string>data folder</string>
+						</dict>
+					</dict>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>number</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>data file to view</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Combine</string>
+			<key>VariableName</key>
+			<string>downstream macrostate string</string>
+			<key>VariableType</key>
+			<string>String</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>String</key>
+				<dict>
+					<key>Selected</key>
+					<string>downstream macrostate string</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>From String</string>
+			<key>VariableName</key>
+			<string>downstream macrostate file</string>
+			<key>VariableType</key>
+			<string>FileName</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>File</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string></string>
+					</dict>
+					<key>Selected</key>
+					<string>downstream macrostate file</string>
+				</dict>
+				<key>Header</key>
+				<string>0</string>
+				<key>RunConversion</key>
+				<string>Off</string>
+				<key>Script</key>
+				<string>Conversion-3</string>
+				<key>ViewSize</key>
+				<integer>0</integer>
+			</dict>
+			<key>Selection</key>
+			<string>From File</string>
+			<key>VariableName</key>
+			<string>downstream macrostate data</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+			<key>ViewHeight</key>
+			<real>216</real>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>usptream microstate data</string>
+			<key>VariableName</key>
+			<string>DAComment - 14</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Digits</key>
+				<string>6</string>
+				<key>Expression</key>
+				<string>%@/udatup%@.txt</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>folder</string>
+						<key>Type</key>
+						<string>String</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>String</key>
+								<string>text</string>
+							</dict>
+							<key>Selected</key>
+							<string>data folder</string>
+						</dict>
+					</dict>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>number</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>data file to view</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Combine</string>
+			<key>VariableName</key>
+			<string>upstream micro string</string>
+			<key>VariableType</key>
+			<string>String</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>String</key>
+				<dict>
+					<key>Selected</key>
+					<string>upstream micro string</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>From String</string>
+			<key>VariableName</key>
+			<string>upstream micro file</string>
+			<key>VariableType</key>
+			<string>FileName</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>File</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string></string>
+					</dict>
+					<key>Selected</key>
+					<string>upstream micro file</string>
+				</dict>
+				<key>Header</key>
+				<string>0</string>
+				<key>RunConversion</key>
+				<string>Off</string>
+				<key>Script</key>
+				<string>Conversion-3</string>
+				<key>ViewSize</key>
+				<integer>0</integer>
+			</dict>
+			<key>Selection</key>
+			<string>From File</string>
+			<key>VariableName</key>
+			<string>upstream micro data</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+			<key>ViewHeight</key>
+			<real>216</real>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>downstream microstate data</string>
+			<key>VariableName</key>
+			<string>DAComment - 15</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Digits</key>
+				<string>6</string>
+				<key>Expression</key>
+				<string>%@/udatdn%@.txt</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>folder</string>
+						<key>Type</key>
+						<string>String</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>String</key>
+								<string>text</string>
+							</dict>
+							<key>Selected</key>
+							<string>data folder</string>
+						</dict>
+					</dict>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>number</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>data file to view</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Combine</string>
+			<key>VariableName</key>
+			<string>downstream micro string</string>
+			<key>VariableType</key>
+			<string>String</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>String</key>
+				<dict>
+					<key>Selected</key>
+					<string>downstream micro string</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>From String</string>
+			<key>VariableName</key>
+			<string>downstream micro file</string>
+			<key>VariableType</key>
+			<string>FileName</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>File</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string></string>
+					</dict>
+					<key>Selected</key>
+					<string>downstream micro file</string>
+				</dict>
+				<key>Header</key>
+				<string>0</string>
+				<key>RunConversion</key>
+				<string>Off</string>
+				<key>Script</key>
+				<string>Conversion-3</string>
+				<key>ViewSize</key>
+				<integer>0</integer>
+			</dict>
+			<key>Selection</key>
+			<string>From File</string>
+			<key>VariableName</key>
+			<string>downstream micro data</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+			<key>ViewHeight</key>
+			<real>216</real>
+		</dict>
+		<dict>
+			<key>VariableName</key>
+			<string>DACollapser - 7 - Closed</string>
+			<key>VariableType</key>
+			<string>CollapserClose</string>
+		</dict>
+		<dict>
+			<key>State</key>
+			<string>Open</string>
+			<key>Title</key>
+			<string>Extract the parameters and basic data</string>
+			<key>VariableName</key>
+			<string>DACollapser - 8</string>
 			<key>VariableType</key>
 			<string>CollapserOpen</string>
 		</dict>
@@ -4551,14 +4908,14 @@
 				<key>List</key>
 				<dict>
 					<key>Selected</key>
-					<string>Hamiltonian data</string>
+					<string>basic data</string>
 				</dict>
 				<key>Subscript</key>
 				<dict>
 					<key>Inline</key>
 					<dict>
 						<key>Text</key>
-						<string>1,2,3,4,5,6,7,8</string>
+						<string>1,2,3,4,5,6</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4657,7 +5014,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>inverse temperature</string>
+			<string>E0</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -4687,7 +5044,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>E0</string>
+			<string>D0</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -4717,9 +5074,244 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>D0</string>
+			<string>cpu time (minutes)</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>Parameters</string>
+				</dict>
+				<key>Location</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>6</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeEqualsCurrent</key>
+				<string>On</string>
+				<key>StartAt0</key>
+				<string>Off</string>
+			</dict>
+			<key>Selection</key>
+			<string>Value From List</string>
+			<key>VariableName</key>
+			<string>number of thetas</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>Extract the theta values</string>
+			<key>VariableName</key>
+			<string>DAComment - 19</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>7, 1, nth+6</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>nth</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>number of thetas</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Stride</string>
+			<key>VariableName</key>
+			<string>upstream theta index list</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>basic data</string>
+				</dict>
+				<key>Subscript</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>1,2,3,4,5,6</string>
+					</dict>
+					<key>Selected</key>
+					<string>upstream theta index list</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>Extract Entries</string>
+			<key>VariableName</key>
+			<string>upstream theta values</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>nth+7, 1, 2*nth+6</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>nth</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>number of thetas</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Stride</string>
+			<key>VariableName</key>
+			<string>downstream theta index list</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>basic data</string>
+				</dict>
+				<key>Subscript</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>1,2,3,4,5,6</string>
+					</dict>
+					<key>Selected</key>
+					<string>downstream theta index list</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>Extract Entries</string>
+			<key>VariableName</key>
+			<string>downstream theta values</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>Make theta plot</string>
+			<key>VariableName</key>
+			<string>DAComment - 20</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Type</key>
+				<integer>0</integer>
+				<key>X</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>0,1,2</string>
+					</dict>
+					<key>Selected</key>
+					<string>upstream theta values</string>
+				</dict>
+				<key>Y</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>0,1,2</string>
+					</dict>
+					<key>Selected</key>
+					<string>downstream theta values</string>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>From Two Lists</string>
+			<key>VariableName</key>
+			<string>theta downstream vs upstream plot</string>
+			<key>VariableType</key>
+			<string>Plot1D</string>
+		</dict>
+		<dict>
+			<key>VariableName</key>
+			<string>DACollapser - 8 - Closed</string>
+			<key>VariableType</key>
+			<string>CollapserClose</string>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>HERE IN EDITING</string>
+			<key>VariableName</key>
+			<string>DAComment - 16</string>
+			<key>VariableType</key>
+			<string>Comment</string>
+		</dict>
+		<dict>
+			<key>State</key>
+			<string>Closed</string>
+			<key>Title</key>
+			<string>Extract Hamiltonian stuff</string>
+			<key>VariableName</key>
+			<string>DACollapser - 1</string>
+			<key>VariableType</key>
+			<string>CollapserOpen</string>
+		</dict>
+		<dict>
+			<key>Comment</key>
+			<string>HERE</string>
+			<key>VariableName</key>
+			<string>DAComment - 18</string>
+			<key>VariableType</key>
+			<string>Comment</string>
 		</dict>
 		<dict>
 			<key>Content</key>
@@ -4794,7 +5386,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>8</string>
+						<string>3</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4807,7 +5399,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>cpu time (minutes)</string>
+			<string>inverse temperature</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -4861,7 +5453,7 @@
 				<key>List</key>
 				<dict>
 					<key>Selected</key>
-					<string>Hamiltonian data</string>
+					<string>upstream macro data</string>
 				</dict>
 				<key>Subscript</key>
 				<dict>
@@ -5198,6 +5790,195 @@
 			<string>CollapserClose</string>
 		</dict>
 		<dict>
+			<key>Content</key>
+			<dict>
+				<key>File</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Text</key>
+						<string>uup.txt</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>Header</key>
+				<string>0</string>
+				<key>RunConversion</key>
+				<string>Off</string>
+				<key>Script</key>
+				<string>Conversion-2</string>
+				<key>Tail</key>
+				<string>0</string>
+				<key>ViewSize</key>
+				<integer>0</integer>
+			</dict>
+			<key>Selection</key>
+			<string>From File</string>
+			<key>ToggleOpen</key>
+			<string>YES</string>
+			<key>VariableName</key>
+			<string>u data</string>
+			<key>VariableType</key>
+			<string>Array</string>
+			<key>ViewHeight</key>
+			<real>216</real>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Divide</key>
+				<string>On</string>
+				<key>DivideNumber</key>
+				<string>On</string>
+				<key>Inside</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Range</key>
+						<string>-∞,∞</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>Number</key>
+				<dict>
+					<key>Selected</key>
+					<string>Upstream Hamiltonian H-</string>
+				</dict>
+				<key>Type</key>
+				<integer>0</integer>
+				<key>Width</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>0.42</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>Histogram</string>
+			<key>VariableName</key>
+			<string>H- histogram</string>
+			<key>VariableType</key>
+			<string>Plot1D</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Divide</key>
+				<string>On</string>
+				<key>DivideNumber</key>
+				<string>On</string>
+				<key>Inside</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Range</key>
+						<string>-∞,∞</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>Number</key>
+				<dict>
+					<key>Selected</key>
+					<string>Downstream Hamiltonian H+</string>
+				</dict>
+				<key>Type</key>
+				<integer>0</integer>
+				<key>Width</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>0.42</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>Histogram</string>
+			<key>VariableName</key>
+			<string>H+ histogram</string>
+			<key>VariableType</key>
+			<string>Plot1D</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Divide</key>
+				<string>On</string>
+				<key>DivideNumber</key>
+				<string>On</string>
+				<key>Inside</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Range</key>
+						<string>-∞,∞</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>Number</key>
+				<dict>
+					<key>Selected</key>
+					<string>Displacement data flattened</string>
+				</dict>
+				<key>Type</key>
+				<integer>0</integer>
+				<key>Width</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>0.1</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>Selection</key>
+			<string>Histogram</string>
+			<key>VariableName</key>
+			<string>u Histogram</string>
+			<key>VariableType</key>
+			<string>Plot1D</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Array</key>
+				<dict>
+					<key>Selected</key>
+					<string>u data</string>
+				</dict>
+				<key>Number</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>3</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>Type</key>
+				<integer>0</integer>
+			</dict>
+			<key>Selection</key>
+			<string>From Array</string>
+			<key>VariableName</key>
+			<string>Single displacement number to view</string>
+			<key>VariableType</key>
+			<string>NumberList</string>
+		</dict>
+		<dict>
 			<key>State</key>
 			<string>Closed</string>
 			<key>Title</key>
@@ -5269,7 +6050,7 @@
 				<key>List</key>
 				<dict>
 					<key>Selected</key>
-					<string>Hamiltonian data</string>
+					<string>upstream macro data</string>
 				</dict>
 				<key>Subscript</key>
 				<dict>
@@ -6197,10 +6978,10 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>712</real>
-		<real>200</real>
-		<real>900</real>
-		<real>646</real>
+		<real>441</real>
+		<real>225</real>
+		<real>941</real>
+		<real>652</real>
 	</array>
 </dict>
 </plist>

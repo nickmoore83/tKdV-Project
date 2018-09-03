@@ -164,7 +164,7 @@ function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vecto
 				hamlabel2; H3acc; H2acc; uhavg]
 	writedata(hamdata, hamfile)
 	# Transform to physical space to save u if requested.
-	# Note: this is the most expensive step.
+	# Note: this is often the most expensive step.
 	if savemicro
 		println("Transforming to physical space to save microstates.")
 		uhacc = uhacc[:, 1:min(maxusamples,counter)]
