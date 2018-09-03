@@ -38,9 +38,16 @@ end
 #sample_gibbs(10, 2*10^7, -0.3, 4., 1.0, "up")
 #sample_gibbs(10, 2*10^7, -0.3, 4., 0.5, "dn")
 
+
+
+
+
+
+#= Compute the expected value of the downstream Hamiltonian under
+either the upstream or downstream Gibbs measure with given theta. =#
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
 		theta::Float64, E0::Float64, D0::Float64, gibbsup::Bool)
-	hamdnmean, normconst = 0.,0.
+	ham_dn_mean, norm_const = 0.,0.
 	for nn=1:endof(H3vec)
 		# Compute the upstream and downstream Hamiltonians.
 		hamup = sqrt(E0)*H3vec[nn] - H2vec[nn]
@@ -48,25 +55,35 @@ function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 		# Decide whether to use Gup or Gdn
 		gibbsup? ham = hamup : ham = hamdn
 		# Compute the mean of Hdn under Gup.
-		hamdnmean += exp(-theta*ham) * hamdn
-		normconst += exp(-theta*ham)
+		ham_dn_mean += exp(-theta*ham) * hamdn
+		norm_const += exp(-theta*ham)
 	end
-	return hamdnmean/normconst
+	return ham_dn_mean/norm_const
 end
 
-function matchmean(nmodes::Int, nsamples::Int, thup::Float64, E0::Float64, D0::Float64)
+#= Enforce the statistical matching condition. =#
+function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
+	# Set the upstream inverse temperatures to use.
+	thup_vec = -.4:0.05:0.1
+	thdn_vec = zeros(Float64,0)
 	# Sample H3 and H2 from a microcanonical distribution.
-	H3vec, H2vec, rvar = microcan(nmodes,nsamples)
-	# Compute the upstream mean of the downstream Hamiltonian.
-	meanup = meanham(H3vec,H2vec,thup,E0,D0,true)
-	# Define a function for the difference in the up/downstream means.
-	diffmean(thdn::Float64) = meanham(H3vec,H2vec,thdn,E0,D0,false) - meanup
-	# Find thdn via a root of diffmean
-	thdn = find_zero(diffmean, thup, Order1())
-	return thdn
+	H3vec, H2vec, rvar = microcan(nmodes,nsamptot)
+	# Define a function for the downstream mean of the downstream Hamiltonian.
+	meanham_dn(theta_dn::Float64) = meanham(H3vec,H2vec,theta_dn,E0,D0,false)
+	# For each theta_up, find the corresponding theta_dn by matching the mean.
+	for theta_up in thup_vec
+		# Compute the upstream mean of the downstream Hamiltonian.
+		mean_up = meanham(H3vec,H2vec,theta_up,E0,D0,true)
+		# Find the theta_dn via a root find.
+		meandiff(theta_dn::Float64) = meanham_dn(theta_dn) - mean_up
+		theta_dn = find_zero(meandiff, theta_up, Order1())
+		push!(thdn_vec,theta_dn)
+	end
+	plot(theta_up,theta_dn,"-.",xlabel="theta_up",ylabel="theta_dn")
+	return 
 end
 
-matchmean(10, 1*10^5, -0.1, 4., 0.5)
+matchmean(10, 1*10^5, 4., 0.5)
 
 
 
