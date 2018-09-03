@@ -27,7 +27,7 @@ function main(nmodes::Int, nsamples::Int, invtemp::Float64,
 	ufile = string("../SamplingData/u",suffix,".txt")
 	writedata(uacc, ufile)
 	# Print the final CPU time.
-	println("The CPU time is ", signif(cputime/60,2), " minutes.")
+	println("The CPU time is ", signif(cputime,2), " minutes.")
 	return
 end
 
