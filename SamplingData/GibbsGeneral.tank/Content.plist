@@ -2884,7 +2884,7 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>microstate information</string>
 			<key>WindowPos</key>
@@ -6267,7 +6267,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>570</real>
+		<real>619</real>
 		<real>67</real>
 		<real>941</real>
 		<real>810</real>

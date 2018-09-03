@@ -82,9 +82,7 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 	# Get all the random samples at once.
 	rvar = randn(nmodes,2,nsamples)
 	# Allocate space.
-	H3all = zeros(Float64,nsamples)
-	H2all = zeros(Float64,nsamples)
-	aratevec = zeros(Float64,nsamples)
+	H3all,H2all,aratevec = [zeros(Float64,nsamples) for nn=1:3]
 	maxaccept = 0.
 	# Compute H3 and H2 for each to estimate the acceptance rate.
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
@@ -107,8 +105,7 @@ function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0.,
 		end
 	end
 	# Now that the normalization is known, accept or reject each.
-	H3acc = zeros(Float64,0)
-	H2acc = zeros(Float64,0)
+	H3acc,H2acc = [zeros(Float64,0) for nn=1:2]
 	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0
 	count = 0
 	for nn=1:nsamples
