@@ -138,47 +138,40 @@ function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vecto
 	hamvec = D0^(-13/4)*sqrt(E0)*H3all - D0^(3/2)*H2all
 	accept_vec = exp.(-theta * hamvec)
 	accept_vec *= 1/(maximum(accept_vec))
-	# Given the normalized acceptance rate, accept or reject each.
+	# With the normalized acceptance rate, decide to accept/reject each.
 	univar = rand(nsamptot)
 	H3acc, H2acc = [zeros(Float64,0) for nn=1:2]
-	savemicro? uhacc = zeros(Complex128,nmodes,maxusamples) : 0
+	uhacc = zeros(Complex128,nmodes,nsamptot)
 	counter = 0
 	for nn=1:nsamptot
-		# Decide to accept or not based on univar and accept_vec
 		if univar[nn] <= accept_vec[nn]
 			counter += 1
 			push!(H3acc, H3all[nn]); push!(H2acc, H2all[nn])
-			if savemicro && counter <= maxusamples
-				uhacc[:,counter] = getuhat(rvar,nn)
-			end
+			uhacc[:,counter] = getuhat(rvar,nn)
 		end
 	end
 	accept_rate = signif(100*counter/nsamptot,2)
-	# Calculations regarding the microstates.
+	uhacc = uhacc[:,1:counter]
+	uhavg = getuhavg(uhacc)
+	# Write the Hamiltonian data to an output file.
+	println("Writing output files.")
+	foldername = datafolder()
+	hamfile = string(foldername,"ham",suffix,".txt")
+	hamlabel0 = "# Hamiltonian data"
+	hamlabel1 = "# Basic data: E0, D0, theta, number of accepted samples, acceptance rate (%)"
+	hamlabel2 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
+	hamdata = [hamlabel0; hamlabel1; E0; D0; theta; counter; accept_rate; 
+				hamlabel2; H3acc; H2acc; uhavg]
+	writedata(hamdata, hamfile)
+	# Transform to physical space to save u if requested.
+	# Note: this is by far the most expensive step.
 	if savemicro
-		uhacc[:,1:min(counter,maxusamples)]
+		println("Transforming to physical space to save u.")
+		uhacc = uhacc[:, 1:min(maxusamples,counter)]
 		uacc = getuacc(uhacc)
-		uhavg = getuhavg(uhacc)
-	else
-		uhacc,uacc,uhavg = [[] for nn=1:3]
+		ufile = string(foldername,"udat",suffix,".txt")
+		writedata(uacc, ufile)
 	end
-	if false
-		# Write the Hamiltonian data to an output file.
-		println("Writing Hamiltonian output files.")
-		foldername = datafolder()
-		hamfile = string(foldername,"ham",suffix,".txt")
-		hamlabel0 = "# Hamiltonian data"
-		hamlabel1 = "# Basic data: E0, D0, theta, number of accepted samples, acceptance rate (%)"
-		hamlabel2 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
-		hamdata = [hamlabel0; hamlabel1; E0; D0; theta; counter; accept_rate; 
-					hamlabel2; H3acc; H2acc; uhavg]
-		writedata(hamdata, hamfile)
-		# Write the microstate data to an output file.
-		if savemicro
-			println("Writing microstate output files.")
-			ufile = string(foldername,"udat",suffix,".txt")
-			writedata(uacc, ufile)
-		end
-	end
+
 end
 
