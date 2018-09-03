@@ -39,14 +39,14 @@ end
 #sample_gibbs(10, 2*10^7, -0.3, 4., 0.5, "dn")
 
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
-		theta::Float64, E0::Float64, D0::Float64, Gup::Bool)
+		theta::Float64, E0::Float64, D0::Float64, gibbsup::Bool)
 	hamdnmean, normconst = 0.,0.
 	for nn=1:endof(H3vec)
 		# Compute the upstream and downstream Hamiltonians.
 		hamup = sqrt(E0)*H3vec[nn] - H2vec[nn]
 		hamdn = D0^(-13/4)*sqrt(E0)*H3vec[nn] - D0^(3/2)*H2vec[nn]
 		# Decide whether to use Gup or Gdn
-		Gup? ham = hamup : ham = hamdn
+		gibbsup? ham = hamup : ham = hamdn
 		# Compute the mean of Hdn under Gup.
 		hamdnmean += exp(-theta*ham) * hamdn
 		normconst += exp(-theta*ham)
@@ -60,13 +60,13 @@ function matchmean(nmodes::Int, nsamples::Int, thup::Float64, E0::Float64, D0::F
 	# Compute the upstream mean of the downstream Hamiltonian.
 	meanup = meanham(H3vec,H2vec,thup,E0,D0,true)
 	# Define a function for the difference in the up/downstream means.
-	function diffmean(thdn::Float64) = meanham(H3vec,H2vec,thdn,E0,D0,false) - meanup
+	diffmean(thdn::Float64) = meanham(H3vec,H2vec,thdn,E0,D0,false) - meanup
 	# Find thdn via a root of diffmean
-	thdn = find_zero(diffmean, thup, Roots.Newton())
+	thdn = find_zero(diffmean, thup, Order1())
 	return thdn
 end
 
-matchmean(10, 1*10^5, -0.1, 4., 1.)
+matchmean(10, 1*10^5, -0.1, 4., 0.5)
 
 
 

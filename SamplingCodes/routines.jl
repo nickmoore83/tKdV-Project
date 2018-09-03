@@ -1,4 +1,5 @@
 using Distributions
+using Roots
 
 #---------- IO Routines ----------#
 function readvec(file::AbstractString)
