@@ -96,51 +96,7 @@ function microcan(nmodes::Int, nsamples::Int)
 	return H3vec, H2vec, rvar
 end
 
-#= Sample from a Gibbs distribution with arbitrary inverse temperature. =#
-function gibbs(nmodes::Int, nsamples::Int, invtemp::Float64=0., 
-		E0::Float64=1., D0::Float64=1., savemicro::Bool=false)
-	# Sample H3 and H2 from the microcanonical distribution.
-	H3all,H2all,rvar = microcan(nmodes,nsamples)
-	# Determine the accpetance rate based on the Hamiltonian.
-	aratevec = zeros(Float64,nsamples)
-	maxaccept = 0.
-	for nn=1:nsamples
-		# Compute the Hamiltonian (for upstream D0=1)
-		ham = D0^(-13/4)*sqrt(E0)*H3all[nn] - D0^(3/2)*H2all[nn]
-		# Compute the unnormalized acceptance rate and find the maximum.
-		aratevec[nn] = exp(-invtemp * ham)
-		maxaccept = max(maxaccept, aratevec[nn])
-	end
-	# Now that the normalization is known, accept or reject each.
-	H3acc,H2acc = [zeros(Float64,0) for nn=1:2]
-	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0
-	count = 0
-	for nn=1:nsamples
-		# Accept or reject based on a uniform random variable.
-		acceptrate = aratevec[nn]/maxaccept
-		univar = rand()
-		if univar <= acceptrate
-			count += 1
-			# Save H3 and H2
-			push!(H3acc, H3all[nn])
-			push!(H2acc, H2all[nn])
-			# Also save the microstate if requested.
-			if savemicro
-				uhat = getuhat(rvar,nn)
-				uhacc[:,count] = uhat[:]
-			end
-		end
-		# Print progress.
-		if mod(nn, 10^4) == 0
-			println("Acceptance/rejection loop is ", signif(100*nn/nsamples,3), "% completed.")
-		end
-	end
-	# Remove unused entries of uhacc.
-	savemicro? uhacc = uhacc[:,1:count] : uhacc = []
-	# Print the overall acceptance rate.
-	println("The overall acceptance rate was ", signif(100*count/nsamples,2), "%.")
-	return H3acc, H2acc, uhacc
-end
+
 
 #= Convert each accepted uhat to physical space for analysis. =#
 function getuacc(uhacc::Array{Complex128})
