@@ -89,6 +89,7 @@ function microcan(nmodes::Int, nsamples::Int)
 	rvar = randn(nmodes,2,nsamples)
 	# Allocate space.
 	H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
+	println("\nSampling from microcanonical distribution.")
 	# Compute H3 and H2 for each to estimate the acceptance rate.
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
 	for nn=1:nsamples
@@ -96,7 +97,7 @@ function microcan(nmodes::Int, nsamples::Int)
 		H3vec[nn] = ham3(uhat)
 		H2vec[nn] = ham2(uhat)
 		if mod(nn, 10^4) == 0
-			println("Initial sampling is ", signif(100*nn/nsamples,3), "% completed.")
+			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
 	return H3vec, H2vec, rvar
@@ -124,14 +125,15 @@ end
 #---------------------------------------#
 
 #---------- Main Sampling Routines ----------#
-#= =#
+#= Sample from a Gibbs distribution with non-zero theta, 
+given that H3 and H2 have already been sampled from microcanonical distribution. =#
 function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vector{Float64},
-		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool)
-	# Set some parameters.
+		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool, suffix::AbstractString)
+	# Preliminaries
 	maxusamples = 2*10^5
 	nmodes = size(rvar)[1]
 	nsamptot = size(rvar)[3]
-	println("\nSampling with D0 = ", signif(D0,2), " and theta = ", signif(theta,2))
+	println("\nSampling from Gibbs distribution with D0 = ", signif(D0,2), " and theta = ", signif(theta,2))
 	# Determine the acceptance rate based on the Hamiltonian.
 	hamvec = D0^(-13/4)*sqrt(E0)*H3all - D0^(3/2)*H2all
 	accept_vec = exp.(-theta * hamvec)
@@ -140,25 +142,43 @@ function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vecto
 	univar = rand(nsamptot)
 	H3acc, H2acc = [zeros(Float64,0) for nn=1:2]
 	savemicro? uhacc = zeros(Complex128,nmodes,maxusamples) : 0
-	count = 0
+	counter = 0
 	for nn=1:nsamptot
 		# Decide to accept or not based on univar and accept_vec
 		if univar[nn] <= accept_vec[nn]
-			count += 1
+			counter += 1
 			push!(H3acc, H3all[nn]); push!(H2acc, H2all[nn])
-			if savemicro && count <= maxusamples
-				uhacc[:,count] = getuhat(rvar,nn)
+			if savemicro && counter <= maxusamples
+				uhacc[:,counter] = getuhat(rvar,nn)
 			end
 		end
-		# Print progress.
-		if mod(nn, 10^4) == 0
-			println("Acceptance/rejection loop is ", signif(100*nn/nsamptot,3), "% completed.")
+	end
+	accept_rate = signif(100*counter/nsamptot,2)
+	# Calculations regarding the microstates.
+	if savemicro
+		uhacc[:,1:min(counter,maxusamples)]
+		uacc = getuacc(uhacc)
+		uhavg = getuhavg(uhacc)
+	else
+		uhacc,uacc,uhavg = [[] for nn=1:3]
+	end
+	if false
+		# Write the Hamiltonian data to an output file.
+		println("Writing Hamiltonian output files.")
+		foldername = datafolder()
+		hamfile = string(foldername,"ham",suffix,".txt")
+		hamlabel0 = "# Hamiltonian data"
+		hamlabel1 = "# Basic data: E0, D0, theta, number of accepted samples, acceptance rate (%)"
+		hamlabel2 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
+		hamdata = [hamlabel0; hamlabel1; E0; D0; theta; counter; accept_rate; 
+					hamlabel2; H3acc; H2acc; uhavg]
+		writedata(hamdata, hamfile)
+		# Write the microstate data to an output file.
+		if savemicro
+			println("Writing microstate output files.")
+			ufile = string(foldername,"udat",suffix,".txt")
+			writedata(uacc, ufile)
 		end
 	end
-	# Remove unused entries of uhacc.
-	savemicro? uhacc = uhacc[:,1:min(count,maxusamples)] : uhacc = []
-
-	# Write to data files
 end
-
 

@@ -4,7 +4,6 @@ include("routines.jl")
 function writebasicdata(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64,
 		cputime::Float64, thup_vec::Vector{Float64}, thdn_vec::Vector{Float64})
 	foldername = datafolder()
-	###newfolder(foldername)
 	file = string(foldername,"basic.txt")
 	label1 = "# Basic parameters: nmodes, nsamptot, E0, D0, CPU time (mins)"
 	label2 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
@@ -33,28 +32,29 @@ end
 
 #= Enforce the statistical matching condition. =#
 function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
-	savemicro = true
-	# Set the upstream inverse temperatures to use.
+	# Preliminaries
 	thup_vec = collect(-.4:0.05:0.1)
-	thdn_vec = zeros(Float64,0)
+	savemicro = true
+	newfolder(datafolder())
+	nthetas = endof(thup_vec)
+	thdn_vec = zeros(Float64,nthetas)
 	# Sample H3 and H2 from a microcanonical distribution.
 	cputime = @elapsed (H3vec, H2vec, rvar) = microcan(nmodes,nsamptot)
 	cputime = signif(cputime/60,2)
-	# Define a function for the downstream mean of the downstream Hamiltonian.
-	meanham_dn(theta_dn::Float64) = meanham(H3vec,H2vec,E0,D0,theta_dn,false)
+	println("CPU time for microcanonical sample is ", cputime, " minutes.")
 	# For each theta_up, find the corresponding theta_dn by matching the mean.
-	for theta_up in thup_vec
-		# Compute the upstream mean of the downstream Hamiltonian.
-		mean_up = meanham(H3vec,H2vec,E0,D0,theta_up,true)
-		# Find the theta_dn via a root find.
+	meanham_dn(theta_dn::Float64) = meanham(H3vec,H2vec,E0,D0,theta_dn,false)
+	for nn = 1:nthetas
+		# Determine theta_dn through root finding.
+		mean_up = meanham(H3vec,H2vec,E0,D0,thup_vec[nn],true)
 		meandiff(theta_dn::Float64) = meanham_dn(theta_dn) - mean_up
-		theta_dn = find_zero(meandiff, theta_up, Order1())
-		push!(thdn_vec,theta_dn)
+		thdn_vec[nn] = find_zero(meandiff, thup_vec[nn], Order1())
 		# Sample from the upstream and downstream Gibbs measures
-		gibbs_sample(rvar,H3vec,H2vec, E0, 1., theta_up, savemicro)
-		#gibbs_sample(rvar,H3vec,H2vec, E0, D0, theta_dn, savemicro)
+		upsuffix = string("up",nn)
+		dnsuffix = string("dn",nn)
+		gibbs_sample(rvar,H3vec,H2vec, E0,1.,thup_vec[nn], savemicro,upsuffix)
+		gibbs_sample(rvar,H3vec,H2vec, E0,D0,thdn_vec[nn], savemicro,dnsuffix)
 	end
-	# Write data to a file.
 	writebasicdata(nmodes,nsamptot,E0,D0,cputime,thup_vec,thdn_vec)
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)
 	return 

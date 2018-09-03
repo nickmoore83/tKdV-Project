@@ -193,3 +193,8 @@ function isexceptional(H3::Float64,H2::Float64,nmodes::Int)
 end
 #------------------------------------------------------------------#
 
+#----- MISC ----#
+		# Print progress.
+		if mod(nn, 10^4) == 0
+			println("Acceptance/rejection loop is ", signif(100*nn/nsamptot,3), "% completed.")
+		end
