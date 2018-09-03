@@ -38,23 +38,33 @@ end
 #sample_gibbs(10, 2*10^7, -0.3, 4., 1.0, "up")
 #sample_gibbs(10, 2*10^7, -0.3, 4., 0.5, "dn")
 
-function HdnGup(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
-		thup::Float64, E0::Float64, D0::Float64)
-	Hdn_mean, normconst = 0.,0.
+function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
+		theta::Float64, E0::Float64, D0::Float64, Gup::Bool)
+	hamdnmean, normconst = 0.,0.
 	for nn=1:endof(H3vec)
 		# Compute the upstream and downstream Hamiltonians.
-		Hup = sqrt(E0)*H3vec[nn] - H2vec[nn]
-		Hdn = D0^(-13/4)*sqrt(E0)*H3vec[nn] - D0^(3/2)*H2vec[nn]
+		hamup = sqrt(E0)*H3vec[nn] - H2vec[nn]
+		hamdn = D0^(-13/4)*sqrt(E0)*H3vec[nn] - D0^(3/2)*H2vec[nn]
+		# Decide whether to use Gup or Gdn
+		Gup? ham = hamup : ham = hamdn
 		# Compute the mean of Hdn under Gup.
-		Hdn_mean += exp(-thup*Hup) * Hdn
-		normconst += exp(-thup*Hup)
+		hamdnmean += exp(-theta*ham) * hamdn
+		normconst += exp(-theta*ham)
 	end
-	return Hdn_mean/normconst
+	return hamdnmean/normconst
 end
 
-function main()
+function main(nmodes::Int, nsamples::Int, thup::Float64, E0::Float64, D0::Float64)
+	# Sample H3 and H2 from a microcanonical distribution.
 	H3vec, H2vec, rvar = microcan(nmodes,nsamples)
-	HdnGup()
+	# Compute the upstream mean of the downstream Hamiltonian.
+	meanup = meanham(H3vec,H2vec,thup,E0,D0,true)
+	# Define a function for the dowstream mean of the downstream Hamiltonian.
+	function meandn(thdn::Float64)
+		return meanham(H3vec,H2vec,thdn,E0,D0,false)
+	end
+
+end
 
 
 
