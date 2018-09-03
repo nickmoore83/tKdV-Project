@@ -124,49 +124,41 @@ end
 #---------------------------------------#
 
 #---------- Main Sampling Routines ----------#
-#=
-function gibbs_sample(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
+#= =#
+function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vector{Float64},
 		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool)
-	# Set the maximum number of u samples.
+	# Set some parameters.
 	maxusamples = 2*10^5
+	nmodes = size(rvar)[1]
+	nsamptot = size(rvar)[3]
+	println("\nSampling with D0 = ", signif(D0,2), " and theta = ", signif(theta,2))
 	# Determine the acceptance rate based on the Hamiltonian.
-	nsamptot = endof(H3vec)
-	aratevec = zeros(Float64,nsamptot)
-	maxaccept = 0.
-	for nn=1:nsamples
-		ham = D0^(-13/4)*sqrt(E0)*H3all[nn] - D0^(3/2)*H2all[nn]
-		aratevec[nn] = exp(-invtemp * ham)
-		maxaccept = max(maxaccept, aratevec[nn])
-	end
-	# Now that the normalization is known, accept or reject each.
-	H3acc,H2acc = [zeros(Float64,0) for nn=1:2]
-	savemicro? uhacc = zeros(Complex128,nmodes,nsamples):0
+	hamvec = D0^(-13/4)*sqrt(E0)*H3all - D0^(3/2)*H2all
+	accept_vec = exp.(-theta * hamvec)
+	accept_vec *= 1/(maximum(accept_vec))
+	# Given the normalized acceptance rate, accept or reject each.
+	univar = rand(nsamptot)
+	H3acc, H2acc = [zeros(Float64,0) for nn=1:2]
+	savemicro? uhacc = zeros(Complex128,nmodes,maxusamples) : 0
 	count = 0
-	for nn=1:nsamples
-		# Accept or reject based on a uniform random variable.
-		acceptrate = aratevec[nn]/maxaccept
-		univar = rand()
-		if univar <= acceptrate
+	for nn=1:nsamptot
+		# Decide to accept or not based on univar and accept_vec
+		if univar[nn] <= accept_vec[nn]
 			count += 1
-			# Save H3 and H2
-			push!(H3acc, H3all[nn])
-			push!(H2acc, H2all[nn])
-			# Also save the microstate if requested.
-			if savemicro
-				uhat = getuhat(rvar,nn)
-				uhacc[:,count] = uhat[:]
+			push!(H3acc, H3all[nn]); push!(H2acc, H2all[nn])
+			if savemicro && count <= maxusamples
+				uhacc[:,count] = getuhat(rvar,nn)
 			end
 		end
 		# Print progress.
 		if mod(nn, 10^4) == 0
-			println("Acceptance/rejection loop is ", signif(100*nn/nsamples,3), "% completed.")
+			println("Acceptance/rejection loop is ", signif(100*nn/nsamptot,3), "% completed.")
 		end
 	end
 	# Remove unused entries of uhacc.
-	savemicro? uhacc = uhacc[:,1:count] : uhacc = []
+	savemicro? uhacc = uhacc[:,1:min(count,maxusamples)] : uhacc = []
 
 	# Write to data files
 end
-=#
 
 

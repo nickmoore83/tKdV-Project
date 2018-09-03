@@ -51,8 +51,8 @@ function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
 		theta_dn = find_zero(meandiff, theta_up, Order1())
 		push!(thdn_vec,theta_dn)
 		# Sample from the upstream and downstream Gibbs measures
-		#gibbs_sample(H3vec, H2vec, E0, 1., theta_up, savemicro)
-		#gibbs_sample(H3vec, H2vec, E0, D0, theta_dn, savemicro)
+		gibbs_sample(rvar,H3vec,H2vec, E0, 1., theta_up, savemicro)
+		#gibbs_sample(rvar,H3vec,H2vec, E0, D0, theta_dn, savemicro)
 	end
 	# Write data to a file.
 	writebasicdata(nmodes,nsamptot,E0,D0,cputime,thup_vec,thdn_vec)
