@@ -153,26 +153,27 @@ function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vecto
 		end
 	end
 	accept_rate = signif(100*counter/nn,2)
+	println("Completed acceptance/rejection phase, acceptane rate was ", accept_rate, "%.")
 	uhacc = uhacc[:,1:counter]
 	uhavg = getuhavg(uhacc)
 	# Write the Hamiltonian data to an output file.
-	println("Writing output files.")
+	println("Macrostates: writing output files.")
 	foldername = datafolder()
-	hamfile = string(foldername,"ham",suffix,".txt")
-	hamlabel0 = "# Hamiltonian data"
-	hamlabel1 = "# Basic data: E0, D0, theta, number of accepted samples, acceptance rate (%)"
-	hamlabel2 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
-	hamdata = [hamlabel0; hamlabel1; E0; D0; theta; counter; accept_rate; 
-				hamlabel2; H3acc; H2acc; uhavg]
-	writedata(hamdata, hamfile)
+	macfile = string(foldername,"mac",suffix,".txt")
+	maclabel0 = "# Macrostate data"
+	maclabel1 = "# Basic information: E0, D0, theta, number of accepted samples, acceptance rate (%)"
+	maclabel2 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
+	macdata = [maclabel0; maclabel1; E0; D0; theta; counter; accept_rate; 
+				maclabel2; H3acc; H2acc; uhavg]
+	writedata(macdata, macfile)
 	# Transform to physical space to save u if requested.
 	# Note: this is often the most expensive step.
 	if savemicro
-		println("Transforming to physical space to save microstates.")
+		println("Microstates: transforming to physical space and writing output files.")
 		uhacc = uhacc[:, 1:min(micro_max_samples,counter)]
 		uacc = getuacc(uhacc)
-		ufile = string(foldername,"udat",suffix,".txt")
-		writedata(uacc, ufile)
+		micfile = string(foldername,"mic",suffix,".txt")
+		writedata(uacc, micfile)
 	end
 
 end
