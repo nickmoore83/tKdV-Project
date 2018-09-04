@@ -1,67 +1,62 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
 {\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww18180\viewh11500\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\margl1440\margr1440\vieww19400\viewh11020\viewkind0
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural
 
 \f0\b\fs40 \cf0 Choosing parameters\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\b0\fs28 \cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \ul \ulc0 CPU times\ulnone \
+\b0\fs28 \
+\ul \ulc0 CPU times\ulnone \
 Below are CPU times for performing the microcanonical sample. \
 Also, shown is the acceptance rate for theta = -0.1, E_0 = 4, D_0 = 0.5; first the upstream then the downstream acceptance rates are shown.\
-\ul nsamptot\ulnone 	\ul nmodes = 10\ulnone 		\ul nmodes = 20\ulnone 		\ul nmodes = 40\ulnone \
-		\ul CPU time\ulnone 	\ul Accept %\ulnone 	\ul CPU time\ulnone 	\ul Accept %\ulnone 	\ul CPU time\ulnone 	\ul Accept %\ulnone \
-10^5		10 seconds	7, 7		13 secs	0.13, 0.14	13 secs	0.001, 0.001\
-10^6		1.6 mins	6, 5		2.1 mins	0.1, 0.04	2.1 mins	5e-4, 3e-4\
-1*10^7	16 mins	6, 4\
+\ul nsamptot\ulnone 	\ul nmodes = 10\ulnone 		\ul nmodes = 16\ulnone 		\ul nmodes = 20\ulnone 		\ul nmodes = 40\ulnone \
+		\ul CPU time\ulnone 	\ul Accept %\ulnone 	\ul CPU time\ulnone 	\ul Accept %\ulnone 	\ul CPU time\ulnone 	\ul Accept %\ulnone 	\ul CPU time\ulnone 	\ul Accept %\ulnone \
+10^5		10 secs	7, 7		5 secs		0.9, 0.5	13 secs	0.13, 0.14	13 secs	0.001, 0.001\
+10^6		1.6 mins	6, 5		39 secs	0.3, 0.4	2.1 mins	0.1, 0.04	2.1 mins	5e-4, 3e-4\
+1*10^7	16 mins	6, 4		6.5 mins	0.4, 0.2	21 mins	0.04, 0.05\
+4*10^7	83 mins\
 Note: Although these CPU times are not that sensitive to the value of nmodes, it is necessary to run more samples if nmodes is higher because the acceptance-rate is much lower.\
 Note: The accept/reject Gibbs sampling for various theta-values is typically much faster than the large microcanonical sample, which is why I only list the CPU times for the microcanonical sampling here. However, for larger values of nmodes, I believe the accept/reject step does take a bit longer.\
-\
+Note: Using nmodes = 16 is measurably faster than nmodes = 10.\
 \
 \ul Default parameter values\ulnone \
-E_0 = 4\
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural
+\cf0 nmodes = 16\
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural
+\cf0 E_0 = 4\
 D_0 = 0.5\
 theta = -0.4: 0.05: 0.1\
-nmodes = 10 or 20 (run some tests to decide)\
 \
 \ul Notes\ulnone \
 - Higher energy values favor H3 and thus make the u-distributions more skewed.\
 - Larger values of nmodes makes u-samples more noisy, probably because of lower acceptance rate; e.g. nmodes = 20 gives noticeable noisier samples than nmodes = 10.\
 \
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\b\fs40 \cf0 Planned runs\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\b\fs40 Planned runs\
 
-\b0\fs28 \cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 Next run\
-nmodes = 8, 10, 16, or 20; nsamptot = 1 or 4 *10^7\
+\b0\fs28 \
+Running on work computer\
+nmodes = 16, nsamptot = 10^8\
 E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\
 
-\b\fs40 \cf0 Completed runs\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\b\fs40 Completed runs\
 
-\b0\fs28 \cf0 \
+\b0\fs28 \
 run4\
 nmodes = 10, nsamptot = 1*10^7\
 E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 cputime = 16 minutes\
+cputime = 16 minutes\
 \
 run5\
 nmodes = 20; nsamptot = 1*10^7\
 E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = \
-}
+cputime = 21 minutes\
+\
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural
+\cf0 run6\
+nmodes = 16; nsamptot = 1*10^7\
+E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
+cputime = 6.5 minutes}

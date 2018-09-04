@@ -64,7 +64,4 @@ end
 # Quick testing
 #matchmean(10, 1*10^5, 4., 0.5)
 
-matchmean(20, 1*10^7, 4., 0.5)
-
-#matchmean(20, 4*10^7, 4., 0.5)
-
+matchmean(16, 1*10^7, 4., 0.5)
