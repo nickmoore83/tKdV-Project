@@ -227,6 +227,7 @@ We will be using the truncated KdV equations (TKDV) with variable depth, in part
 Here we describe the statistical numerical methods. The deterministic simulations of TKDV are described elsewhere. Below the microstate refers to the spectrum of displacement $\{ \uhat_k \}_{k=1}^{\Lambda}$.
 
 \subsection{Sampling from microcanonical energy distribution}
+\label{sec_microcan}
 
 We first consider sampling microstates from a microcanonical energy distribution with $E=E_0$ fixed and $M=0$ as always,
 \begin{equation}
@@ -246,6 +247,7 @@ This algorithm was proven to converge to the measure $d\nu$ in \cite{abramov2003
 \end{equation}
 
 \subsection{Acceptance/rejection algorithm to sample from a mixed microcanonical/canonical distribution.}
+\label{sec_accrej}
 
 Now consider the problem of sampling from a distribution that is microcanonical in energy and canonical in the Hamiltonian
 \begin{equation}
@@ -262,14 +264,44 @@ Here, the Hamiltonian can be either the upstream or downstream, $H = H^-$ or $H^
 \item Decide to accept or reject each microstate by picking a uniform variable $v \in [0,1]$ and testing if $e^{- \theta H}/m < v$.
 \item Store the microstates, as well as the values of $H_3$ and $H_2$, that have been accepted.
 \end{enumerate}
-The above is a conceptual description of the algorithm. In practice, it is implemented in a way to be computational efficient.
+The above is a conceptual description of the algorithm. In practice, it is implemented in a way to be computational efficient. In particular, the most expensive step is computing $H_3$ and $H_2$ for a large number of microstates sampled from the microcanonical distribution. We therefore perform this step as precomputation, and save the values of $H_3$ and $H_2$. Afterwards, we can use this master list to perform the acceptance/rejection steps for a number of inverse temperatures, $\theta$, as well as values of $E_0$ and $D_0$.
+
+\subsection{Enforcing the statistical matching condition across ADC}
+\label{sec_match}
+
+Importantly, we must enforce the statistical matching condition at the abrupt depth change
+\begin{equation}
+\label{statmatch}
+\mean{H^+}_{\Gibbs^-} = \mean{H^+}_{\Gibbs^+}
+\end{equation}
+We regard the upstream inverse temperature $\theta^-$ as given, and the downstream value $\theta^+$ as the main unknown to be solved for.
+First, note that the ensemble average is given by the formula
+\begin{equation}
+\label{meanformula}
+\mean{H^+}_{\Gibbs^{\pm}} = \frac{ \sum H^+ \exp(- \theta^{\pm} H^{\pm}) } {\sum \exp(-\theta^{\pm} H^{\pm}) }
+\end{equation}
+where the sum is taken over the ensemble. We therefore enforcing matching condition \eqref{statmatch} as follows
+
+\begin{enumerate}
+\item Sample from a large number of microstates (e.g.~$10^8$) from the microcanonical distribution as described above. Compute and save the values of $H_3$ and $H_2$ for each microstate.
+\item For prescribed values of $\theta^-$, $E_0$, and $D_0$, compute the value $\mean{H^+}_{\Gibbs^-}$ using \eqref{meanformula}.
+\item Define a function to compute the difference $F(\theta^+) = \mean{H^+}_{\Gibbs^-} - \mean{H^+}_{\Gibbs^+}$ for a given $\theta^+$.
+\item Find a root of $F$ (e.g.~using the secant method) to determine the value of $\theta^+$ that satisfies \eqref{statmatch}.
+\end{enumerate}
+Once the value of $\theta^+$ is determined, we sample from the mixed canonical/microcanonical distributions using the algorithm described in the previous section. Note that in practice, we perform step 1 of generating a large number of microsamples only once, and then performing the rest of the algorithm for several different $\theta^-$ values, all using the same list of $H_3$ and $H_2$ values.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Results
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary results}
-We show some preliminary results below. 
+
+We show some preliminary results below. First, Figs.~\ref{Hist1}--\ref{Hist3} are histograms of the upstream and downstream Hamiltonians, $H^-$ and $H^+$, respectively, for various values of inverse temperature $\theta^{\pm}$, energy $E_0$, and depth ratio $D_0$. These histograms are made in a very simply way, namely by sampling from the microcanonical distribution (as described in Section \ref{sec_microcan}) and then multiplying by the appropriate factor $\exp(-\theta^{\pm} H^{\pm})$ (and normalizing). There is nothing complex at all in generating these histograms (not even an acceptance/rejection algorithm) and they are only made to give us some initial idea of what is going on.
+
+In these tests, I chose the default values $\Lambda = 10$, $E_0 = 1$, and $D_0 = 0.6$ ($\lambda$ is set to unity throughout). Fig.~\ref{Hist1} shows the upstream and downstream histograms generated with these default values for the inverse temperatures $\theta^{\pm} = 0, \pm 0.3$. First, notice that $\theta$ can shift the mean of $H$ significantly, with negative $\theta$ shifting the mean closer to zero. Second, notice that the downstream histogram has a mean much closer to zero, and this histogram is more concentrated.
+
+In figure \ref{Hist2} we vary the depth ratio. The left shows $D_0 = 0.6$ as before, and the right shows $D_0 = 0.4$. Notice a slight change in the depth ratio can alter the histograms significantly. In figure \ref{Hist3} we vary the energy $E_0$ from the default value of 1 (left) to the value 4. Notice that a significant change in $E_0$ only causes slight changes in the histograms.
+
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}[p]%[htbp]
 \begin{center}
@@ -306,6 +338,14 @@ Left: Downstream histogram with $E_0 = 1$ (same as in Fig.~\ref{Hist1}). Right: 
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  %Notice that the energy changes substantially, but the histograms change only slightly. While the upstream histogram ostensible depends on $E_0$, the changes are nearly imperceptible and therefore not shown.
  
+ Next, in Figs.~\ref{microup0}--\ref{microdn3}, we examine various aspects of the microstates under given Gibbs distributions with possibly non-zero inverse temperatures. For this task, we need to use the acceptance/rejection algorithm described in Section \ref{sec_accrej}. In these tests, we again fix $\Lambda = 10$.
+ 
+ First, Fig.~\ref{microup0} shows features of the microstate with zero inverse temperature (i.e.~the microcanonical distribution). The left panel shows a histogram of the displacement $u$ (in physical space). Notice the histogram is symmetric and resembles a Gaussian distribution. The right panel shows the $\mean{\abs{\uhat_k}}$ versus wavenumber $k$, which illustrates how the energy is distributed amongst the modes. Notice that the energy is evenly distributed amongst modes in this case, i.e.~a equidistribution of energy.
+ 
+ In Fig.~\ref{microup3} we show the same plots but with $\theta^- = -0.3$. The histogram of $u$ is shown on the left. While this histogram still appears nearly symmetric, close examination reveals a slight positive skewness. The right shows $\mean{\abs{\uhat_k}}$. Notice that, in this case of negative inverse temperature, the spectrum is decidedly tilted, with less energy present in the higher modes.
+ 
+ Figure \ref{microdn3} shows the same plots for the {\em downstream} distributions with $\theta^+ = -0.3$. Here, we have not enforced the statistical matching condition \eqref{statmatch}; we simply chose a value of $\theta^+$. First, notice that the histogram of $u$ shows a definite positive skewness. This observation is consistent with the main finding in the experiments! Second, the spectrum is tilted as before, but the tilt is not as strong as it is upstream. Both of these observations are consistent with the weights of $H_3$ and $H_2$. Downstream, the weights strongly favor $H_3$. Therefore, to have a better chance of being selected from the distribution $\Gibbs^{+}$, it is more advantageous to have large skewness of $u$ than it is to have small variance of $u_x$.
+  
   %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}[p]%[htbp]
 \begin{center}
@@ -330,8 +370,44 @@ Left: Downstream histogram with $E_0 = 1$ (same as in Fig.~\ref{Hist1}). Right: 
 \begin{figure}[p]%[htbp]
 \begin{center}
 \includegraphics[width = 0.8 \textwidth]{microdn3}
-\caption{Examination of the downstream microstates with $\theta^+ = -0.3$ and $D_0 = 0.5$ ($E_0 = 4$ as before). Notice the skewness of $u$!!! The spectrum is tilted, though not as much as it is upstream.}
+\caption{Examination of the downstream microstates with $\theta^+ = -0.3$ and $D_0 = 0.5$ ($E_0 = 4$ as before). Notice the skewness of $u$! The spectrum is tilted, though not as much as it is upstream.}
 \label{microdn3}
+\end{center}
+\end{figure}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+Now, figures \ref{thetaplot}--\ref{match_micro} show results obtained by satisfying the matching condition \eqref{statmatch} using the algorithm described in \ref{sec_match}. In these tests, I use $\Lambda = 8$ and the provisional number of samples is $10^8$ (the number of accepted samples will be much lower). First, Fig.~\ref{thetaplot} shows, for given values of $\theta^-$, the corresponding values of $\theta^+$ as determined by the matching condition. For one, $\theta^- = 0$ corresponds to $\theta^+ = 0$ which is a good sanity check. Second, notice that the signs of $\theta^-$ and $\theta^+$ always agree, which is a good thing. The relationship is not a simply linear one, as the curvature is significant.
+ 
+ Next, Fig.~\ref{matchH} shows upstream and downstream histograms of $H$ with the matching condition enforced. The black curve is the histogram of $\Gibbs^-(H^-)$, while the colored curves are histograms of $H+$. The red curve corresponds to $\Gibbs^-(H^+)$ and the blue to $\Gibbs^+(H^+)$. The matching condition says that the means of these two histograms should be the same, which can be verified visually. Notice, the main difference is that the downstream histogram $\Gibbs^+(H^+)$ is more spread out.
+ 
+Figure \ref{match_micro} shows features of the underlying microstates. On the left, we show histograms of the displacement $u$, as we did in Figs.~\ref{microup0}--\ref{microdn3}, but this time {\em we have enforced the matching condition} \eqref{statmatch}. Notice the upstream $u$-histogram is nearly symmetric, while the downstream histogram is noticeable skewed in the positive direction! The right panel shows the ensemble-averaged spectrum $\mean{\abs{\uhat_k}}$. Both show a tilt in the spectrum, with the upstream tilt being more significant than downstream.
+
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{figure}%[htbp]
+\begin{center}
+\includegraphics[width = 0.55 \textwidth]{thetaplot}
+\caption{For given values of $\theta^-$, we compute $\theta^+$ to satisfy the matching condition.}
+\label{thetaplot}
+\end{center}
+\end{figure}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{figure}%[htbp]
+\begin{center}
+\includegraphics[width = 0.75 \textwidth]{matchH}
+\caption{Histograms of $H^\pm$ under the two Gibbs measures $\Gibbs^{\pm}$ with the matching condition enforced.}
+\label{matchH}
+\end{center}
+\end{figure}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+   %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{figure}%[htbp]
+\begin{center}
+\includegraphics[width = 0.95 \textwidth]{match_micro}
+\caption{Microstate features with the matching condition enforced. Left: the histogram of displacement $u$ upstream (red) and downstream (blue). Notice the downstream histogram has a definite positive skewness. Right: the ensemble-averaged spectra. Both spectra are tilted, with the upstream tilt being more significant.}
+\label{match_micro}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

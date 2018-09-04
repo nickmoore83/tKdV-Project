@@ -24,6 +24,8 @@ Upstream spectrum
 Downstream spectrum
 Expected energy per mode (STILL ISSUES TO SORT OUT)
 Miscellaneous below
+Upstream vs downstream style.
+Old stuff for various inverse temperatures
 Extract a single instance of displacement to view
 Statistics</string>
 	<key>String</key>
@@ -36,13 +38,17 @@ downstream, {\it \theta^+}
 upstream, {\it \theta^-}
 {\it G^-(H^-)}
 {\it H^-}
-{\it G^-(H^+)}
+Text
+Text
+PDFs of {\it H^+}
 {\it H^+}
 mean spectrum, &lt;{|\it\hat{u}_k}|&gt;
 wavenumber, {\it k}
-mean spectrum, &lt;{|\it\hat{u}_k}|&gt;
-wavenumber, {\it k}
-pdf, {\it G(u)}
+Text
+Text
+PDF of {\it u}
+displacement, {\it u}
+PDF of {\it u}
 displacement, {\it u}</string>
 </dict>
 </plist>
