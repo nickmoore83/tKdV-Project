@@ -16,7 +16,7 @@ Also, shown is the acceptance rate for theta = -0.1, E_0 = 4, D_0 = 0.5; first t
 		\ul CPU time\ulnone 	\ul Accept %\ulnone 	\ul CPU time\ulnone 	\ul Accept %\ulnone 	\ul CPU time\ulnone 	\ul Accept %\ulnone \
 10^5		10 seconds	7, 7		13 secs	0.13, 0.14	13 secs	0.001, 0.001\
 10^6		1.6 mins	6, 5		2.1 mins	0.1, 0.04	2.1 mins	5e-4, 3e-4\
-4*10^7\
+1*10^7	16 mins	6, 4\
 Note: Although these CPU times are not that sensitive to the value of nmodes, it is necessary to run more samples if nmodes is higher because the acceptance-rate is much lower.\
 Note: The accept/reject Gibbs sampling for various theta-values is typically much faster than the large microcanonical sample, which is why I only list the CPU times for the microcanonical sampling here. However, for larger values of nmodes, I believe the accept/reject step does take a bit longer.\
 \
@@ -25,7 +25,7 @@ Note: The accept/reject Gibbs sampling for various theta-values is typically muc
 E_0 = 4\
 D_0 = 0.5\
 theta = -0.4: 0.05: 0.1\
-nmodes = 10 or 20\
+nmodes = 10 or 20 (run some tests to decide)\
 \
 \ul Notes\ulnone \
 - Higher energy values favor H3 and thus make the u-distributions more skewed.\
@@ -39,17 +39,29 @@ nmodes = 10 or 20\
 
 \b0\fs28 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 Next run\
+nmodes = 8, 10, 16, or 20; nsamptot = 1 or 4 *10^7\
+E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
 \b\fs40 \cf0 Completed runs\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
 \b0\fs28 \cf0 \
-run3 (old file naming scheme)\
+run4\
 nmodes = 10, nsamptot = 1*10^7\
 E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = 16 minutes\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 cputime = 16 minutes\
 \
-run4\
-nmodes = ?, nsamptot = ?*10^7\
+run5\
+nmodes = 20; nsamptot = 1*10^7\
 E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
+cputime = \
 }

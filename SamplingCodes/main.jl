@@ -33,8 +33,8 @@ end
 #= Enforce the statistical matching condition. =#
 function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
 	# Preliminaries
-	#thup_vec = collect(-.4:0.05:0.1)
-	thup_vec = [-0.1]
+	thup_vec = collect(-.4:0.05:0.1)
+	#thup_vec = [-0.1]
 	savemicro = true
 	newfolder(datafolder())
 	nthetas = endof(thup_vec)
@@ -64,7 +64,7 @@ end
 # Quick testing
 #matchmean(10, 1*10^5, 4., 0.5)
 
-matchmean(10, 1*10^7, 4., 0.5)
+matchmean(20, 1*10^7, 4., 0.5)
 
 #matchmean(20, 4*10^7, 4., 0.5)
 

@@ -1835,7 +1835,7 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>NO</string>
+			<string>YES</string>
 			<key>WindowName</key>
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
@@ -4553,7 +4553,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run3</string>
+				<string>run4</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -4805,7 +4805,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Extract the data files</string>
 			<key>VariableName</key>
@@ -4918,7 +4918,7 @@
 				<key>Digits</key>
 				<string>6</string>
 				<key>Expression</key>
-				<string>%@/hamup%@.txt</string>
+				<string>%@/macup%@.txt</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -5029,7 +5029,7 @@
 				<key>Digits</key>
 				<string>6</string>
 				<key>Expression</key>
-				<string>%@/hamdn%@.txt</string>
+				<string>%@/macdn%@.txt</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -5140,7 +5140,7 @@
 				<key>Digits</key>
 				<string>6</string>
 				<key>Expression</key>
-				<string>%@/udatup%@.txt</string>
+				<string>%@/micup%@.txt</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -5269,7 +5269,7 @@
 				<key>Digits</key>
 				<string>6</string>
 				<key>Expression</key>
-				<string>%@/udatdn%@.txt</string>
+				<string>%@/micdn%@.txt</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -7719,7 +7719,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>800</real>
+		<real>797</real>
 		<real>65</real>
 		<real>979</real>
 		<real>812</real>
