@@ -1835,12 +1835,12 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
 			<array>
-				<real>197</real>
+				<real>67</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -4303,7 +4303,7 @@
 			<string>Histograms upstream vs downstream</string>
 			<key>WindowPos</key>
 			<array>
-				<real>58</real>
+				<real>64</real>
 				<real>116</real>
 				<real>984</real>
 				<real>761</real>
@@ -4480,8 +4480,8 @@
 			<string>microstate information</string>
 			<key>WindowPos</key>
 			<array>
-				<real>84</real>
-				<real>33</real>
+				<real>136</real>
+				<real>116</real>
 				<real>984</real>
 				<real>761</real>
 			</array>
@@ -4553,7 +4553,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run4</string>
+				<string>run6</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -4566,7 +4566,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>6</string>
+				<string>7</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -7719,9 +7719,9 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>797</real>
+		<real>883</real>
 		<real>65</real>
-		<real>979</real>
+		<real>941</real>
 		<real>812</real>
 	</array>
 </dict>
