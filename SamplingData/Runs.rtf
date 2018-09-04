@@ -44,8 +44,22 @@ Note: All results are for zero inverse temperature. With non-zero inverse temper
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
 \b0\fs28 \cf0 \
-run1\
-nmodes = 20, nsamptot = 4*10^7, E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = \
-Note: I had an upper limit for the number of u samples, but not for the Hamiltonian samples. Thus, the hamdata files corresponding to theta=0 (acceptance rate 100%) were too big (1.6 GB).\
+run1 (Will delete)\
+nmodes = 20, nsamptot = 4*10^7\
+E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
+cputime = 83 minutes\
+Note: I had an upper limit for the number of u samples, but not for the Hamiltonian samples. Thus, the hamdata9 files corresponding to theta=0 (acceptance rate 100%) were too big (1.6 GB) and I deleted them.\
+\
+run2 (Will delete)\
+nmodes = 10, nsamptot = 1*10^7\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
+cputime = 16 minutes\
+Note: Had issue with setting accept_rate to string and DataTank not being able to read the file. Rerunning.\
+\
+run3\
+nmodes = 10, nsamptot = 1*10^7\
+E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
+cputime = 16 minutes\
+Note: Fixed issue with accept_rate.\
 }

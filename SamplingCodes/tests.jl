@@ -194,9 +194,21 @@ function sampletest()
 	println("CPU time to sample one at a time is ", signif(cputimeone,3))
 end
 
+function testbreak()
+	ii = 0
+	for ii=1:10
+		println("In loop, ii is ", ii)
+		if ii >=5
+			break
+		end
+	end
+	println("Out of loop, ii is ", ii)
+end
+testbreak()
+
+
 # TO DO 
 # Also test scaling prediciton for energy of u_x.
-
 
 #gibbs0test()
 #H3test()
@@ -204,4 +216,4 @@ end
 #ffttest()
 
 #H3maxtest()
-sampletest()
+#sampletest()

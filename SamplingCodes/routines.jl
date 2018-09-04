@@ -130,7 +130,8 @@ given that H3 and H2 have already been sampled from microcanonical distribution.
 function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vector{Float64},
 		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool, suffix::AbstractString)
 	# Preliminaries
-	maxusamples = 2*10^5
+	micro_max_samples = 2*10^5
+	macro_max_samples = 5*10^6
 	nmodes = size(rvar)[1]
 	nsamptot = size(rvar)[3]
 	println("\nSampling from Gibbs distribution with D0 = ", signif(D0,2), " and theta = ", signif(theta,2))
@@ -141,16 +142,17 @@ function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vecto
 	# With the normalized acceptance rate, decide to accept/reject each.
 	univar = rand(nsamptot)
 	H3acc, H2acc = [zeros(Float64,0) for nn=1:2]
-	uhacc = zeros(Complex128,nmodes,nsamptot)
-	counter = 0
+	uhacc = zeros(Complex128,nmodes,macro_max_samples)
+	nn, counter = 0, 0
 	for nn=1:nsamptot
+		counter >= macro_max_samples? break : 0
 		if univar[nn] <= accept_vec[nn]
 			counter += 1
 			push!(H3acc, H3all[nn]); push!(H2acc, H2all[nn])
 			uhacc[:,counter] = getuhat(rvar,nn)
 		end
 	end
-	accept_rate = signif(100*counter/nsamptot,2)
+	accept_rate = signif(100*counter/nn,2)
 	uhacc = uhacc[:,1:counter]
 	uhavg = getuhavg(uhacc)
 	# Write the Hamiltonian data to an output file.
@@ -167,7 +169,7 @@ function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vecto
 	# Note: this is often the most expensive step.
 	if savemicro
 		println("Transforming to physical space to save microstates.")
-		uhacc = uhacc[:, 1:min(maxusamples,counter)]
+		uhacc = uhacc[:, 1:min(micro_max_samples,counter)]
 		uacc = getuacc(uhacc)
 		ufile = string(foldername,"udat",suffix,".txt")
 		writedata(uacc, ufile)

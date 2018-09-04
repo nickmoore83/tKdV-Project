@@ -3,43 +3,46 @@
 <plist version="1.0">
 <dict>
 	<key>Comment</key>
-	<string>Variables to refresh when importing new data
-basic data
-upstream macrostate data
-downstream macrostate data
-usptream microstate data
-downstream microstate data
+	<string>Choose the run and file numbers
+Histograms
+Extract the data
+Basic data
+Upstream macrostate data
+Downstream macrostate data
+Upstream microstate data
+Downstream microstate data
 Extract the parameters
 Extract the theta values
 Make theta plot
+Basic macrostate parameters
+Extract H3 and H2 data
+Sample H- and H+
+Basic macrostate parameters
+Extract H3 and H2 data
+Sample H+
+Upstream spectrum
+Downstream spectrum
+Expected energy per mode (STILL ISSUES TO SORT OUT)
 HERE IN EDITING
-HERE
-Extract H2 and H3 data
-Compute upstream and downstream Hamiltonians
-Compute the expected energy per mode
-Sample all the displacement data
 Extract a single instance of displacement to view
-Statistics
-To do
-Extract the transform uhat, including real and imaginary parts
-Compute the magnitude of uhat and sample</string>
+Statistics</string>
 	<key>String</key>
 	<string>text
 text
 text
 text
 text
-incoming pdf, {\it G^-(H^-)}
-upstream Hamiltonian, {\it H^-}
-outgoing pdf, {\it G^+(H^+)}
-downstream Hamiltonian, {\it H^+}
-pdf, {\it G(u)}
-displacement, {\it u}
+downstream, {\it \theta^+}
+upstream, {\it \theta^-}
+{\it G^-(H^-)}
+{\it H^-}
+{\it G^-(H^+)}
+{\it H^+}
 mean spectrum, &lt;{|\it\hat{u}_k}|&gt;
 wavenumber, {\it k}
-slope specturm, &lt; {|\it  k \hat{u}_k} | &gt;
+mean spectrum, &lt;{|\it\hat{u}_k}|&gt;
 wavenumber, {\it k}
-displacement, {\it u(x)}
-position, {\it x}</string>
+pdf, {\it G(u)}
+displacement, {\it u}</string>
 </dict>
 </plist>

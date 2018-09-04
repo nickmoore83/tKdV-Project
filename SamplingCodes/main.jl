@@ -60,5 +60,9 @@ function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
 	return 
 end
 
-matchmean(20, 4*10^7, 4., 0.5)
+#matchmean(10, 1*10^5, 4., 0.5)
+matchmean(10, 1*10^7, 4., 0.5)
+
+
+#matchmean(20, 4*10^7, 4., 0.5)
 
