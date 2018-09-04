@@ -4121,12 +4121,12 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>microstate u histograms</string>
 			<key>WindowPos</key>
 			<array>
-				<real>92</real>
+				<real>115</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -4480,8 +4480,8 @@
 			<string>microstate information</string>
 			<key>WindowPos</key>
 			<array>
-				<real>66</real>
-				<real>63</real>
+				<real>84</real>
+				<real>33</real>
 				<real>984</real>
 				<real>761</real>
 			</array>
@@ -4566,7 +4566,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>5</string>
+				<string>6</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -7719,7 +7719,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>734</real>
+		<real>800</real>
 		<real>65</real>
 		<real>979</real>
 		<real>812</real>

@@ -8,32 +8,29 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \ul \ulc0 To Do\ulnone \
 \
-- I coded the method to satisfy the statistical matching condition. It seems to work and it is not nearly as expensive as I originally imagined. \
-- Next I should input a range of theta- values and plot theta+ to get an idea for the relationship there.\
+\'95 Add to writeup:\
+- Explain algorithm for matching condition. Emphasis how it is efficient by sampling microstates over microcanonical, computing all H3 and H2 (bottleneck), saving these values, then for a multitude of thetas (also E and D) simply deciding to accept/reject from the big ensemble (very efficient).\
+- Add new figures.\
 \
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Maybe change name ham to macro, u to micro\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 - Make parameters file so I do not have to keep modifying the actual codes.\
-\
-- Put limit on size of Hamiltonian files even. For theta=0, these files are too big.\
-With nsamptot = 4e7, hamup9 (theta=0) is 1.6 GB. So put macrolimit = 5e6 to get 200 MB.\
-udataup9 is 156 MB which is good\
-\
-- Maybe change name ham to macro, u to micro\
-\
-- Rerun 3 cases with new format.\
-\
-\
-(Old) Make histograms of H+ under G- and G+ by making uniform bins, sampling, then simply weighting the samples by exp(-theta H) (plus or minus, whichever is appropriate). Normalization should be trivial.\
 \
 \
 \ul Later\ulnone \
-\
-- Note: Now that I coded microcan separately, I could run several different cases of parameters (invtemp, E0, D0) all effectively simultaneously using the same big ensemble from microcan. Don\'92t do this yet though. There are probably more important things to do with the matching condition.\
 \
 - Parallelize the for loops that compute H3 and H2.\
 \
 - Confirm the scaling result for energy of u_x.\
 \
 \
+\
+\ul Sep 4, 2018\
+\ulnone - I finished the code to enforce the statistical matching condition G-(H+) = G+(H+). It gives great looking results! My implementation is very efficient. It first samples a large number of microstates (say 10^8) from the microcanonical distribution. Then, I compute the values of H3 and H2 and save them all, which is by far the most expensive step. Once this is done, one can choose a theta, E_0, D_0,  sample from the large ensemble, and decide to accept/reject. This step is quite cheap. One can do this step for a multitude of values of theta, E_0, D_0, all using the same large microcanonical ensemble. Thus, the algorithm is very efficient.\
 \
 \ul Aug 28, 2018\
 \ulnone - I finished the routine gibbs to sample from a Gibbs distribution with 
