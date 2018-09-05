@@ -544,7 +544,7 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>theta plot</string>
 			<key>WindowPos</key>
@@ -2090,7 +2090,7 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
@@ -3880,7 +3880,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1125, 292}</string>
+			<string>{986, 299}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -4096,7 +4096,7 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>microstate information</string>
 			<key>WindowPos</key>
@@ -4868,7 +4868,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run8partial</string>
+				<string>run8</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -8276,9 +8276,9 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>881</real>
+		<real>647</real>
 		<real>60</real>
-		<real>565</real>
+		<real>941</real>
 		<real>817</real>
 	</array>
 </dict>
