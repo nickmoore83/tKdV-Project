@@ -374,9 +374,9 @@ Left: Downstream histogram with $E_0 = 1$ (same as in Fig.~\ref{Hist1}). Right: 
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  
-Now, figures \ref{thetaplot}--\ref{match_micro} show results obtained by satisfying the matching condition \eqref{statmatch} using the algorithm described in \ref{sec_match}. In these tests, we use $\Lambda = 8$ and the provisional number of samples is $10^8$ (the number of accepted samples will be much lower). We also fix $E_0 = 4$ and $D_0 = 0.5$.
+Now, figures \ref{match_theta}--\ref{match_micro} show results obtained by satisfying the matching condition \eqref{statmatch} using the algorithm described in \ref{sec_match}. In these tests, we use $\Lambda = 8$ and the provisional number of samples is $10^8$ (the number of accepted samples will be much lower). We also fix $E_0 = 4$ and $D_0 = 0.5$.
 
-First, Fig.~\ref{thetaplot} shows, for given values of $\theta^-$, the corresponding values of $\theta^+$ as determined by the matching condition. For one, $\theta^- = 0$ corresponds to $\theta^+ = 0$ which is a good sanity check. Second, notice that the signs of $\theta^-$ and $\theta^+$ always agree, which is a good thing. The relationship is not a simply linear one, as the curvature is significant.
+First, Fig.~\ref{match_theta} shows, for given values of $\theta^-$, the corresponding values of $\theta^+$ as determined by the matching condition. For one, $\theta^- = 0$ corresponds to $\theta^+ = 0$ which is a good sanity check. Second, notice that the signs of $\theta^-$ and $\theta^+$ always agree, which is a good thing. The relationship is not a simply linear one, as the curvature is significant.
  
  Next, Fig.~\ref{matchH} shows upstream and downstream histograms of $H$ with the matching condition enforced. The black curve is the histogram of $\Gibbs^-(H^-)$, while the colored curves are histograms of $H+$. The red curve corresponds to $\Gibbs^-(H^+)$ and the blue to $\Gibbs^+(H^+)$. The matching condition says that the means of these two histograms should be the same, which can be verified visually. Notice, the main difference is that the downstream histogram $\Gibbs^+(H^+)$ is more spread out.
  
@@ -384,12 +384,14 @@ Figure \ref{match_micro} shows features of the underlying microstates. On the le
 
 We remark that simulations have been performed with larger values of $\Lambda$, for example $\Lambda = 16$ and 20. For the provisional number of samples fixed, increasing $\Lambda$ does not drastically increase the computational time. However, the main downside to increasing $\Lambda$ is that the acceptance rate for the Gibbs distributions is substantially smaller, and therefore the statistics are less resolved.
 
+Little remark for the very careful reader: the plot in Fig. \ref{match_theta} is out of date (used $\Lambda=16$) and is not consistent with Figs.~\ref{matchH} and \ref{match_micro} (which used $\Lambda = 8$).
+
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[htbp]
 \begin{center}
-\includegraphics[width = 0.55 \textwidth]{thetaplot}
+\includegraphics[width = 0.55 \textwidth]{match_theta}
 \caption{For given values of $\theta^-$, we compute $\theta^+$ to satisfy the matching condition.}
-\label{thetaplot}
+\label{match_theta}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

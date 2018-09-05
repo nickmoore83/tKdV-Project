@@ -544,12 +544,12 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>NO</string>
+			<string>YES</string>
 			<key>WindowName</key>
 			<string>theta plot</string>
 			<key>WindowPos</key>
 			<array>
-				<real>123</real>
+				<real>145</real>
 				<real>153</real>
 				<real>632</real>
 				<real>724</real>
@@ -2090,12 +2090,12 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>NO</string>
+			<string>YES</string>
 			<key>WindowName</key>
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
 			<array>
-				<real>124</real>
+				<real>60</real>
 				<real>149</real>
 				<real>779</real>
 				<real>728</real>
@@ -3924,7 +3924,7 @@
 			<string>Histograms upstream vs downstream</string>
 			<key>WindowPos</key>
 			<array>
-				<real>103</real>
+				<real>123</real>
 				<real>116</real>
 				<real>984</real>
 				<real>761</real>
@@ -4096,13 +4096,13 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>NO</string>
+			<string>YES</string>
 			<key>WindowName</key>
 			<string>microstate information</string>
 			<key>WindowPos</key>
 			<array>
-				<real>87</real>
-				<real>116</real>
+				<real>135</real>
+				<real>60</real>
 				<real>1000</real>
 				<real>761</real>
 			</array>
@@ -4791,7 +4791,7 @@
 			<string>microstate u log histograms</string>
 			<key>WindowPos</key>
 			<array>
-				<real>119</real>
+				<real>422</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -4800,8 +4800,7 @@
 	</array>
 	<key>MonitorVariables</key>
 	<array>
-		<string>upstream theta</string>
-		<string>upstream theta string</string>
+		<string>parameters</string>
 	</array>
 	<key>Time</key>
 	<dict>
@@ -4869,7 +4868,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run4</string>
+				<string>run8partial</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -4882,7 +4881,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>3</string>
+				<string>2</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -4940,7 +4939,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.65</string>
+						<string>0.41</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4984,7 +4983,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.45</string>
+						<string>0.42</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5028,7 +5027,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.52</string>
+						<string>0.42</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5734,7 +5733,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Extract the basic parameters and theta values</string>
 			<key>VariableName</key>
@@ -8277,7 +8276,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>989</real>
+		<real>881</real>
 		<real>60</real>
 		<real>565</real>
 		<real>817</real>
