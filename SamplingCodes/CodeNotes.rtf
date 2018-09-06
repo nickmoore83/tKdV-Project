@@ -8,22 +8,26 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \ul \ulc0 To Do\ulnone \
 \
-- Add to writeup:\
-\'95 Explain algorithm for matching condition. Emphasis how it is efficient by sampling microstates over microcanonical, computing all H3 and H2 (bottleneck), saving these values, then for a multitude of thetas (also E and D) simply deciding to accept/reject from the big ensemble (very efficient).\
-\'95 Add new figures.\
+- Next fix memory issue in sampling code. Each pass should use about 10^7 nominal samples and run through several of these passes so that too much memory is not being used at any one time.\
 \
-\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Make parameters file so I do not have to keep modifying the actual codes\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Confirm the scaling result for energy of u_x.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 \
 \ul Later\ulnone \
 \
-- Parallelize the for loops that compute H3 and H2.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Parallelize the for loops that compute H3 and H2.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 \
-- Confirm the scaling result for energy of u_x.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
-- Make parameters file so I do not have to keep modifying the actual codes; Actually not sure if I want to do this, it is pretty easy to run at the moment.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
+\
+\
 \
 \
 \ul Sep 4, 2018\
