@@ -1,0 +1,11 @@
+# Parameters file: nmodes, nsamptot, E0, D0, thmin, thmax, dth
+16
+1e5
+4.
+0.5
+-0.4
+0.1
+0.05
+
+# Quick testing: 8, 10^5
+# Big runs: 8 or 16, 10^7 or 10^8
