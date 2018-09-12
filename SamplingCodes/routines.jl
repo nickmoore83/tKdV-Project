@@ -175,6 +175,5 @@ function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vecto
 		micfile = string(foldername,"mic",suffix,".txt")
 		writedata(uacc, micfile)
 	end
-
 end
 

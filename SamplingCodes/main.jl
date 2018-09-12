@@ -30,11 +30,14 @@ function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 	return ham_dn_mean/norm_const
 end
 
-#= Enforce the statistical matching condition. =#
-function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
+#= Main routine to enforce the statistical matching condition. =#
+function main(paramsfile::AbstractString="params.txt")
+	# Read the parameters from a file.
+	params = readvec(paramsfile)
+	nmodes, nsamptot = Int(params[1]), Int(params[2])
+	E0, D0, thmin, thmax, dth = params[3:7]
+	thup_vec = collect(thmin:dth:thmax)
 	# Preliminaries
-	thup_vec = collect(-.4:0.05:0.1)
-	#thup_vec = [-0.1]
 	savemicro = true
 	newfolder(datafolder())
 	nthetas = endof(thup_vec)
@@ -58,10 +61,4 @@ function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
 	end
 	writebasicdata(nmodes,nsamptot,E0,D0,cputime,thup_vec,thdn_vec)
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)
-	return 
 end
-
-# Quick testing
-#matchmean(10, 1*10^5, 4., 0.5)
-
-matchmean(16, 1*10^7, 4., 0.5)
