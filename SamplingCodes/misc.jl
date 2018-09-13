@@ -198,3 +198,6 @@ end
 		if mod(nn, 10^4) == 0
 			println("Acceptance/rejection loop is ", signif(100*nn/nsamptot,3), "% completed.")
 		end
+
+function matchmean(nmodes::Int, nsamptot::Int, E0::Float64, D0::Float64)
+

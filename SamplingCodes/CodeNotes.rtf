@@ -27,7 +27,10 @@ Good idea: We could probably approximate theta+ as function of theta- using a Ta
 \
 \
 \
+\ul Sep 13, 2018\
+\ulnone - My goal is to break down the code into a number of passes, each taking about 10^7 samples, because this is a manageable number for the memory (a lot of storage is required for rvar). However, it will not work as I originally planned, because I have to determine the downstream theta by matching (using all of the samples, or at least a large number of samples), and only then can I sample from the Gibbs distributions.\
 \
+So a plan to address this problem is as follows.\
 \
 \ul Sep 4, 2018\
 \ulnone - I finished the code to enforce the statistical matching condition G-(H+) = G+(H+). It gives great looking results! My implementation is very efficient. It first samples a large number of microstates (say 10^8) from the microcanonical distribution. Then, I compute the values of H3 and H2 and save them all, which is by far the most expensive step. Once this is done, one can choose a theta, E_0, D_0,  sample from the large ensemble, and decide to accept/reject. This step is quite cheap. One can do this step for a multitude of values of theta, E_0, D_0, all using the same large microcanonical ensemble. Thus, the algorithm is very efficient.\
