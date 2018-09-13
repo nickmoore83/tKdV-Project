@@ -30,7 +30,7 @@ Good idea: We could probably approximate theta+ as function of theta- using a Ta
 \ul Sep 13, 2018\
 \ulnone - My goal is to break down the code into a number of passes, each taking about 10^7 samples, because this is a manageable number for the memory (a lot of storage is required for rvar). However, it will not work as I originally planned, because I have to determine the downstream theta+ by matching (using all of the samples, or at least a large number of samples), and only then can I sample from the Gibbs distributions.\
 \
-So a plan to address this problem is as follows. First, run a pretty large number of samples (say 10^7) to determine theta+ for each case of theta-, and save these values. Then, for each instance of theta- and theta+, sample from the Gibbs distributions using a VERY large sample size (say 10^8 or 10^9), where this time, you can take several passes with a manageable number of samples (i.e. each pass, precompute H3 and H2 lists, then compute H+ and H- and sample with the accept/reject algorithm). This algorithm keeps the matching condition separate from the Gibbs sampling.\
+So a plan to address this problem is as follows. First, run a pretty large number of samples (say 10^7) to determine theta+ for each case of theta-, and save these values. Then, for each instance of theta- and theta+, sample from the Gibbs distributions using a VERY large sample size (say 10^8 or 10^9), where this time, you can take several passes with a manageable number of samples (i.e. each pass, precompute H3 and H2 lists, then compute H+ and H- and sample with the accept/reject algorithm). This algorithm separates the matching condition from the Gibbs sampling.\
  \
 \
 \ul Sep 4, 2018\
