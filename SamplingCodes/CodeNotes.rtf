@@ -7,11 +7,12 @@
 \f0\fs28 \cf0 \ul \ulc0 \
 To Do\ulnone \
 \
-- Tie up loose ends on new code: compute uhavg and write the microstates to files.\
-\
 - Calculate D0 powers and share answer with Di and Andy.\
 \
-\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Parallelize the for loops that compute H3 and H2.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
 \
 Good idea: We could probably approximate theta+ as function of theta- using a Taylor series for theta- going to zero.\
 \
@@ -20,14 +21,10 @@ Good idea: We could probably approximate theta+ as function of theta- using a Ta
 - Confirm the scaling result for energy of u_x.\
 \
 \
-\ul Later\ulnone \
-\
-- Parallelize the for loops that compute H3 and H2.\
 \
 \
 \ul Sep 14, 2018\
-\ulnone - I finished modifying my codes to handle the memory better by taking several sweeps through the sampling process with a manageable number of samples in each sweep (say 10^7). The code seems to work for the most part. There are a few small loose ends to tie up: compute uhavg and write the microstates to files.\
-\
+\ulnone - I finished modifying my codes to handle the memory better by taking several sweeps through the sampling process with a manageable number of samples in each sweep (say 10^7). The code seems to work for the most part. There are a few small loose ends to tie up: compute uhavg and write the microstates to files. I completed tying up these loose ends and things look great. I am running some big runs on my mac mini. The runs include nmodes = 8 and 16, with nsamp = 1e7 and nsweeps = 200 or 100.\
 \
 \
 \ul Sep 13, 2018\
