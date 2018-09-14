@@ -151,7 +151,7 @@ end
 #= Sample from a Gibbs distribution with non-zero theta, 
 given that H3 and H2 have already been sampled from microcanonical distribution. =#
 function gibbs_sample!(rset::RandSet, accstate::AcceptedState, 
-		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool)
+		E0::Float64, D0::Float64, theta::Float64)
 	# If macmax is already exceeded, then return immediately.	
 	micmax, macmax = maxparams()
 	if accstate.naccepted >= macmax; return; end

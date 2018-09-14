@@ -1,5 +1,6 @@
 include("routines.jl")
 
+#---------- Reading and writing routines ----------#
 # Extract the parameters
 function extractparams(params::Vector)
 	nmodes, nsamp, npasses = Int(params[1]), Int(params[2]), Int(params[3])
@@ -13,14 +14,31 @@ function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::Abstrac
 	foldername = datafolder()
 	macfile = string(foldername,"mac",suffix,".txt")
 	nacc = accstate.naccepted
+	# Deal with the microstates.
+	micmax, macmax = maxparams()
+	uhat = accstate.uhat[1:min(nacc,micmax)]
+	uhavg = getuhavg(uhat)
+
+	uacc = getuacc(uhat)
+	micfile = string(foldername,"mic",suffix,".txt")
+	writedata(uacc, micfile)
+	
+	# Write the data
 	label1 = "# Macrostate data"
 	label2 = "# Basic information: theta, number of accepted samples"
 	label3 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
 	macdata = [label1; label2; theta; nacc;
-				label3; accstate.H3[1:nacc]; accstate.H2[1:nacc]; ]
-	# PUT IN uhavg later
+				label3; accstate.H3[1:nacc]; accstate.H2[1:nacc]; uhavg]
 	writedata(macdata, macfile)
 end
+
+#=	# Transform to physical space to save u if requested.
+	# Note: this is often the most expensive step.
+	if savemicro
+		println("Microstates: transforming to physical space and writing output files.")
+	end
+=#
+
 # Write all the data, including basic, microstate, and mincrostate.
 function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 		accstate::Array{AcceptedState}, cputimes::Vector{Float64})
@@ -40,23 +58,9 @@ function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 		write_mac_data(accstate[nn,2], thdn_vec[nn], string("dn",nn))
 	end
 end
+#---------------------------------------#
 
-#=
-	uhacc = uhacc[:,1:counter]
-	uhavg = getuhavg(uhacc)
-
-	# Transform to physical space to save u if requested.
-	# Note: this is often the most expensive step.
-	if savemicro
-		println("Microstates: transforming to physical space and writing output files.")
-		uhacc = uhacc[:, 1:min(micro_max_samples,counter)]
-		uacc = getuacc(uhacc)
-		micfile = string(foldername,"mic",suffix,".txt")
-		writedata(uacc, micfile)
-	end
-=#
-
-
+#---------- Routines to enforce matching condition ----------#
 #= Compute the expected value of the downstream Hamiltonian under
 either the upstream or downstream Gibbs measure with given theta. =#
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
@@ -91,6 +95,8 @@ function matchmean(nmodes::Int, nsamp::Int, E0::Float64, D0::Float64, thup_vec::
 	end
 	return thdn_vec, rset
 end
+#---------------------------------------#
+
 
 #= Main routine to enforce the statistical matching condition. =#
 function main(paramsfile::AbstractString="params.txt")
