@@ -61,8 +61,7 @@ function main(paramsfile::AbstractString="params.txt")
 	thup_vec = collect(thmin:dth:thmax)
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
-	cput_match = @elapsed 
-		(thdn_vec, H3vec, H2vec, rvar = matchmean(nmodes,nsamp,E0,D0,thup_vec))
+	cput_match = @elapsed (thdn_vec, H3vec, H2vec, rvar) = matchmean(nmodes,nsamp,E0,D0,thup_vec)
 	cput_match = signif(cput_match/60,2)
 	println("CPU time for enforcing matching condition is ", cputime, " minutes.")
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)

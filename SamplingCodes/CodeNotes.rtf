@@ -10,6 +10,12 @@
 \
 I believe I have main and matchmean coded correctly. The only thing I need to do now is modify how the writing to the data files works in gibbs_sample.\
 \
+In the mac output file, I write H3acc, H2acc, and uhavg. So I can either:\
+1) Modify my format for the output files so that I can append each time I run through gibbs_sample.\
+2) Not write to the output files in gibbs_sample, but instead return H3acc, H2acc, save them in a big vector and write at the end. The disadvantage is that I would have to save a lot of H3acc and H2acc vectors because I have several theta values upstream and downstream to run through. This could work though.\
+\
+Note: The main reason I save H3acc and H2acc separately, as opposed to just saving ham, is that for theta- I want to be able to compute both the upstream and downstream Hamiltonians.\
+\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \ul \ulc0 \
