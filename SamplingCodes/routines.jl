@@ -28,7 +28,7 @@ end
 function new_acc_state(nmodes::Int)
 	micmax, macmax = maxparams()
 	return AcceptedState(zeros(Float64,macmax), zeros(Float64,macmax), 
-		zeros(Complex128,nmodes,macmax), 0)
+		zeros(Complex128,nmodes,micmax), 0)
 end
 #---------------------------------#
 
