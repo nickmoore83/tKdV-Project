@@ -2090,7 +2090,7 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
@@ -8306,7 +8306,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>819</real>
+		<real>825</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
