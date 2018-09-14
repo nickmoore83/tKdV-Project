@@ -127,7 +127,7 @@ end
 #---------- Main Sampling Routines ----------#
 #= Sample from a Gibbs distribution with non-zero theta, 
 given that H3 and H2 have already been sampled from microcanonical distribution. =#
-function gibbs_sample(rvar::Array{Float64}, H3all::Vector{Float64}, H2all::Vector{Float64},
+function gibbs_sample(H3all::Vector{Float64}, H2all::Vector{Float64}, rvar::Array{Float64},
 		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool, suffix::AbstractString)
 	# Preliminaries
 	micro_max_samples = 2*10^5

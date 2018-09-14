@@ -1,14 +1,15 @@
 include("routines.jl")
 
 #= Write the basic data to a file. =#
-function writebasicdata(params::Vector, nsamptot::Int, cputime::Float64, 
+function writebasicdata(params::Vector, nsamptot::Int, 
+		cput_match::Float64, cput_sample::Float64, 
 		thup_vec::Vector{Float64}, thdn_vec::Vector{Float64})
 	foldername = datafolder()
 	file = string(foldername,"basic.txt")
 	label1 = "# Input parameters: "
-	label2 = "# Calculated parameters: nsamptot, CPU time (mins)"
+	label2 = "# Calculated parameters: nsamptot, CPU time for matching mean and for sampling (mins)"
 	label3 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
-	data = [label1; params; label2; nsamptot; cputime; 
+	data = [label1; params; label2; nsamptot; cput_match; cput_sample;
 		label3; endof(thup_vec); thup_vec; thdn_vec]
 	writedata(data,file)
 end
@@ -37,7 +38,7 @@ function matchmean(nmodes::Int, nsamp::Int, E0::Float64, D0::Float64, thup_vec::
 	nthetas = endof(thup_vec)
 	thdn_vec = zeros(Float64,nthetas)
 	# Sample H3 and H2 from a microcanonical distribution.
-	H3vec, H2vec = microcan(nmodes,nsamp)[1:2]
+	H3vec, H2vec, rvar = microcan(nmodes,nsamp)
 	# For each thup, find the corresponding thdn by matching the mean.
 	meanham_dn(theta_dn::Float64) = meanham(H3vec,H2vec,E0,D0,theta_dn,false)
 	for nn = 1:nthetas
@@ -46,47 +47,47 @@ function matchmean(nmodes::Int, nsamp::Int, E0::Float64, D0::Float64, thup_vec::
 		meandiff(theta_dn::Float64) = meanham_dn(theta_dn) - mean_up
 		thdn_vec[nn] = find_zero(meandiff, thup_vec[nn], Order1())
 	end
-	return thdn_vec
+	return thdn_vec, H3vec, H2vec, rvar
 end
-
 
 #= Main routine to enforce the statistical matching condition. =#
 function main(paramsfile::AbstractString="params.txt")
-	# Read the parameters from a file.
+	# Preliminaries.
+	savemicro = true
 	newfolder(datafolder())
 	params = readvec(paramsfile)
 	nmodes, nsamp, npasses = Int(params[1]), Int(params[2]), Int(params[3])
 	E0, D0, thmin, thmax, dth = params[4:8]
 	thup_vec = collect(thmin:dth:thmax)
 	# Determine thdn to match the means.
-	pritln("Enforcing the statistical matching condition.")
-	cputime = @elapsed 
-		(thdn_vec = matchmean(nmodes,nsamp,E0,D0,thup_vec))
-	cputime = signif(cputime/60,2)
-	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)
+	println("Enforcing the statistical matching condition.")
+	cput_match = @elapsed 
+		(thdn_vec, H3vec, H2vec, rvar = matchmean(nmodes,nsamp,E0,D0,thup_vec))
+	cput_match = signif(cput_match/60,2)
 	println("CPU time for enforcing matching condition is ", cputime, " minutes.")
+	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)
 
-
-
-	# Given the values of thup and thdn, sample from the various Gibbs distributions.
-	for pass = 1:npasses
-		gibbs_sample(nmodes,nsamp,E0,D0,thup_vec,thdn_vec)
-
-
-	# Take a number of passes, each time with a manageable number of samples. 
+	#= Define a function to sample from the Gibbs distributions
+	for all values of upstream and downstream values of theta. =#
+	function gibbs_sample_updn(H3vec::Vector{Float64}, H2vec::Vector{Float64}, rvar::Array{Float64})
+		for nn = 1:nthetas
+			upsuffix = string("up",nn)
+			dnsuffix = string("dn",nn)
+			gibbs_sample(H3vec,H2vec,rvar, E0,1.,thup_vec[nn], savemicro,upsuffix)
+			gibbs_sample(H3vec,H2vec,rvar, E0,D0,thdn_vec[nn], savemicro,dnsuffix)
+		end
+	end
 	tm0 = time()
-	cputime = signif((time()-tm0)/60, 2)
+	# Sample using rvar, H3, and H2 from the matchmean computation.
+	gibbs_sample_updn(H3vec, H2vec, rvar)
+	# Take several additional passes sampling from the Gibbs distributions.
+	for pass = 2:npasses
+		H3vec, H2vec, rvar = microcan(nmodes,nsamp)
+		gibbs_sample_updn(H3vec, H2vec, rvar)
+	end
+	cput_sample = signif((time()-tm0)/60, 2)
 	nsamptot = sampper*npasses
 	println("The total CPU time is ", cputime, " minutes.")
-	writebasicdata(params,nsamptot,cputime,thup_vec,thdn_vec)
+	writebasicdata(params,nsamptot,cput_match,cput_sample,thup_vec,thdn_vec)
 end
-
-
-
-#= Sample from the upstream and downstream Gibbs measures
-	upsuffix = string("up",nn)
-	dnsuffix = string("dn",nn)
-	gibbs_sample(rvar,H3vec,H2vec, E0,1.,thup_vec[nn], savemicro,upsuffix)
-	gibbs_sample(rvar,H3vec,H2vec, E0,D0,thdn_vec[nn], savemicro,dnsuffix)
-	=#
 
