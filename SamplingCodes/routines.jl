@@ -177,7 +177,7 @@ function gibbs_sample!(rset::RandSet, accstate::AcceptedState,
 			mm = accstate.naccepted
 			accstate.H3[mm] = H3all[nn]
 			accstate.H2[mm] = H2all[nn]
-			if (savemicro() & mm <= micmax)
+			if savemicro() & (mm <= micmax)
 				accstate.uhat[:,mm] = getuhat(rvar,nn)
 			end
 		end
