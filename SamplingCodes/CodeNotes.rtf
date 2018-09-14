@@ -1,27 +1,13 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
 {\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww11480\viewh12540\viewkind0
+\margl1440\margr1440\vieww11420\viewh12540\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0\fs28 \cf0 \
-\ul Working on this:\ulnone \
-- Next fix memory issue in sampling code. Each pass should use about 10^7 nominal samples and run through several of these passes so that too much memory is not being used at any one time.\
-\
-I believe I have main and matchmean coded correctly. The only thing I need to do now is modify how the writing to the data files works in gibbs_sample.\
-\
-In the mac output file, I write H3acc, H2acc, and uhavg. So I can either:\
-1) Modify my format for the output files so that I can append each time I run through gibbs_sample.\
-2) Not write to the output files in gibbs_sample, but instead return H3acc, H2acc, save them in a big vector and write at the end. The disadvantage is that I would have to save a lot of H3acc and H2acc vectors because I have several theta values upstream and downstream to run through. This could work though.\
-\
-{\field{\*\fldinst{HYPERLINK "https://discourse.julialang.org/t/adding-to-existing-txt-file-created-by-writedlm/6907"}}{\fldrslt https://discourse.julialang.org/t/adding-to-existing-txt-file-created-by-writedlm/6907}}\
-\
-Note: The main reason I save H3acc and H2acc separately, as opposed to just saving ham, is that for theta- I want to be able to compute both the upstream and downstream Hamiltonians.\
-\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \ul \ulc0 \
+\f0\fs28 \cf0 \ul \ulc0 \
 To Do\ulnone \
+\
+- Tie up loose ends on new code: compute uhavg and write the microstates to files.\
 \
 - Calculate D0 powers and share answer with Di and Andy.\
 \
@@ -38,6 +24,9 @@ Good idea: We could probably approximate theta+ as function of theta- using a Ta
 \
 - Parallelize the for loops that compute H3 and H2.\
 \
+\
+\ul Sep 14, 2018\
+\ulnone - I finished modifying my codes to handle the memory better by taking several sweeps through the sampling process with a manageable number of samples in each sweep (say 10^7). The code seems to work for the most part. There are a few small loose ends to tie up: compute uhavg and write the microstates to files.\
 \
 \
 \

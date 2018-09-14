@@ -1,5 +1,6 @@
 include("routines.jl")
 
+# Extract the parameters
 function extractparams(params::Vector)
 	nmodes, nsamp, npasses = Int(params[1]), Int(params[2]), Int(params[3])
 	E0, D0, thmin, thmax, dth = params[4:8]
@@ -7,7 +8,7 @@ function extractparams(params::Vector)
 	nthetas = endof(thup_vec)
 	return nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas
 end
-
+# Write the macrostate data.
 function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::AbstractString)
 	foldername = datafolder()
 	macfile = string(foldername,"mac",suffix,".txt")
@@ -20,7 +21,7 @@ function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::Abstrac
 	# PUT IN uhavg later
 	writedata(macdata, macfile)
 end
-
+# Write all the data, including basic, microstate, and mincrostate.
 function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 		accstate::Array{AcceptedState}, cputimes::Vector{Float64})
 	foldername = datafolder()
@@ -73,7 +74,6 @@ function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 	end
 	return ham_dn_mean/norm_const
 end
-
 #= Determine the downstream thetas that satisfy the statistical matching condition. =#
 function matchmean(nmodes::Int, nsamp::Int, E0::Float64, D0::Float64, thup_vec::Vector{Float64})
 	# Preliminaries
