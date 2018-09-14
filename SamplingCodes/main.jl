@@ -17,10 +17,10 @@ function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::Abstrac
 	nacc = accstate.naccepted
 	# Get coarse information from microstates.
 	micmax, macmax = maxparams()
-	uhat = accstate.uhat[1:min(nacc,micmax)]
+	uhat = accstate.uhat[:,1:min(nacc,micmax)]
 	uhavg = getuhavg(uhat)
 	# Save the macrostates.
-	println("Saving the macrostates.")
+	println("Saving the macrostates ", suffix)
 	label1 = "# Macrostate data"
 	label2 = "# Basic information: theta, number of accepted samples"
 	label3 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
@@ -30,7 +30,7 @@ function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::Abstrac
 	# Save the microstates if desired.
 	# Note: this step is expensive because it requires transforming to physical space.
 	if savemicro()
-		println("Saving the microstates.")
+		println("Saving the microstates ", suffix)
 		uacc = getuacc(uhat)
 		micfile = string(foldername,"mic",suffix,".txt")
 		writedata(uacc, micfile)

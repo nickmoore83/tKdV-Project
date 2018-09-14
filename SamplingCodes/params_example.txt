@@ -1,11 +1,19 @@
-# Parameters file: nmodes, nsamptot, E0, D0, thmin, thmax, dth
-16
+# Parameters file: nmodes, nsamp, nsweeps, E0, D0, thmin, thmax, dth
+8
 1e5
+2
 4.
 0.5
 -0.4
 0.1
-0.05
+0.1
 
-# Quick testing: 8, 1e5
-# Big runs: 8 or 16, 1e7 or 1e8
+# Default values
+# nmodes = 8 or 16
+# nsamp = 1e7 or 1e5 for quick tests
+# nsweeps = 2-100
+# E0 = 4 or 1
+# D0 = 0.5 or
+# thmin = -0.4
+# thmax = 0.1
+# dth = 0.1
