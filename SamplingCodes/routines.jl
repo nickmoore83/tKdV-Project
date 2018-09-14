@@ -152,13 +152,15 @@ end
 given that H3 and H2 have already been sampled from microcanonical distribution. =#
 function gibbs_sample!(rset::RandSet, accstate::AcceptedState, 
 		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool)
-	# Preliminaries
+	# If macmax is already exceeded, then return immediately.	
+	micmax, macmax = maxparams()
+	if accstate.naccepted >= macmax; return; end
+	# Preliminaries	
 	H3all = rset.H3[:]
 	H2all = rset.H2[:]
 	rvar = rset.rvar[:,:,:]
 	nmodes = size(rvar)[1]
 	nsamp = size(rvar)[3]
-	micmax, macmax = maxparams()
 	# Determine the acceptance rate based on the Hamiltonian.
 	println("\nSampling from Gibbs distribution with D0 = ", 
 		signif(D0,2), " and theta = ", signif(theta,2))
@@ -180,5 +182,5 @@ function gibbs_sample!(rset::RandSet, accstate::AcceptedState,
 		end
 	end
 	println("Completed acceptance/rejection phase.")
-	return 
+	return
 end

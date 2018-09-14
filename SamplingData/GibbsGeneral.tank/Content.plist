@@ -2095,7 +2095,7 @@
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
 			<array>
-				<real>26</real>
+				<real>25</real>
 				<real>149</real>
 				<real>779</real>
 				<real>728</real>
@@ -8306,7 +8306,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>788</real>
+		<real>819</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>

@@ -133,5 +133,3 @@ function main(paramsfile::AbstractString="params.txt")
 	write_all_data(params,thdn_vec,accstate,cputimes)
 end
 
-
-
