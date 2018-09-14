@@ -2090,12 +2090,12 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>NO</string>
+			<string>YES</string>
 			<key>WindowName</key>
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
 			<array>
-				<real>190</real>
+				<real>26</real>
 				<real>149</real>
 				<real>779</real>
 				<real>728</real>
@@ -4904,7 +4904,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Histograms</string>
 			<key>VariableName</key>
@@ -4941,7 +4941,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.02</string>
+						<string>0.27</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4985,7 +4985,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.37</string>
+						<string>0.31</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5029,7 +5029,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.42</string>
+						<string>0.31</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -8306,7 +8306,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>705</real>
+		<real>788</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>

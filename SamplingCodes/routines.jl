@@ -153,9 +153,9 @@ given that H3 and H2 have already been sampled from microcanonical distribution.
 function gibbs_sample!(rset::RandSet, accstate::AcceptedState, 
 		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool)
 	# Preliminaries
-	H3all = rset.H3
-	H2all = rset.H2
-	rvar = rset.rvar
+	H3all = rset.H3[:]
+	H2all = rset.H2[:]
+	rvar = rset.rvar[:,:,:]
 	nmodes = size(rvar)[1]
 	nsamp = size(rvar)[3]
 	micmax, macmax = maxparams()

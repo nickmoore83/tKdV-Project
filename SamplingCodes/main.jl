@@ -104,24 +104,24 @@ function main(paramsfile::AbstractString="params.txt")
 	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,E0,D0,thup_vec)
 	cput_match = signif(cput_match/60,2)
 	println("CPU time for enforcing matching condition is ", cput_match, " minutes.")
-	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)
-	# Initiate the accepted set of states.
-	accstate = Array{AcceptedState}(nmodes,2)
-	accstate[:,:] = new_acc_state(nmodes)
+	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)	
+	# Initialize the accepted set of states.
+	accstate = Array{AcceptedState}(nthetas,2)
+	for nn=1:nthetas
+		accstate[nn,1] = new_acc_state(nmodes)
+		accstate[nn,2] = new_acc_state(nmodes)
+	end
 	#= Define a function to sample from the Gibbs distributions
 	for all values of upstream and downstream values of theta. =#
-	function gibbs_sample_updn(rset1::RandSet, accstate1::Array{AcceptedState})
+	function gibbs_sample_updn(rset::RandSet, accstate::Array{AcceptedState})
 		for nn = 1:nthetas
-			gibbs_sample!(rset1, accstate1[nn,1], E0,1.,thup_vec[nn], savemicro)
-			gibbs_sample!(rset1, accstate1[nn,2], E0,D0,thdn_vec[nn], savemicro)
+			gibbs_sample!(rset, accstate[nn,1], E0,1.,thup_vec[nn], savemicro)
+			gibbs_sample!(rset, accstate[nn,2], E0,D0,thdn_vec[nn], savemicro)
 		end
 	end
 	tm0 = time()
 	# Sample using rvar, H3, and H2 from the matchmean computation.
 	gibbs_sample_updn(rset,accstate)
-
-	display(accstate)
-
 	# Take several additional passes sampling from the Gibbs distributions.
 	for pass = 2:npasses
 		rset = microcan(nmodes,nsamp)
