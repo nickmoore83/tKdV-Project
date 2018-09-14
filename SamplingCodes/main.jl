@@ -1,18 +1,61 @@
 include("routines.jl")
 
-#= Write the basic data to a file. =#
-function writebasicdata(params::Vector, nsamptot::Int, 
-		cput_match::Float64, cput_sample::Float64, 
-		thup_vec::Vector{Float64}, thdn_vec::Vector{Float64})
-	foldername = datafolder()
-	file = string(foldername,"basic.txt")
-	label1 = "# Input parameters: "
-	label2 = "# Calculated parameters: nsamptot, CPU time for matching mean and for sampling (mins)"
-	label3 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
-	data = [label1; params; label2; nsamptot; cput_match; cput_sample;
-		label3; endof(thup_vec); thup_vec; thdn_vec]
-	writedata(data,file)
+function extractparams(params::Vector)
+	nmodes, nsamp, npasses = Int(params[1]), Int(params[2]), Int(params[3])
+	E0, D0, thmin, thmax, dth = params[4:8]
+	thup_vec = collect(thmin:dth:thmax)
+	nthetas = endof(thup_vec)
+	return nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas
 end
+
+function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::AbstractString)
+	foldername = datafolder()
+	macfile = string(foldername,"mac",suffix,".txt")
+	nacc = accstate.naccepted
+	label1 = "# Macrostate data"
+	label2 = "# Basic information: theta, number of accepted samples"
+	label3 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
+	macdata = [label1; label2; theta; nacc;
+				label3; accstate.H3[1:nacc]; accstate.H2[1:nacc]; ]
+	# PUT IN uhavg later
+	writedata(macdata, macfile)
+end
+
+function write_all_data(params::Vector, thdn_vec::Vector{Float64},
+		accstate::Array{AcceptedState}, cputimes::Vector{Float64})
+	foldername = datafolder()
+	# Write the basic data.
+	basicfile = string(foldername,"basic.txt")
+	nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas = extractparams(params)
+	nsamptot = nsamp*npasses
+	label1 = "# Input parameters: "
+	label2 = "# Calculated parameters: nsamptot, CPU times for matching mean and for sampling (mins)"
+	label3 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
+	basicdata = [label1; params; label2; nsamptot; cputimes;
+		label3; nthetas; thup_vec; thdn_vec]
+	writedata(basicdata,basicfile)
+	# Write the macro data.
+	for nn=1:nthetas
+		write_mac_data(accstate[nn,1], thup_vec[nn], string("up",nn))
+		write_mac_data(accstate[nn,2], thdn_vec[nn], string("dn",nn))
+	end
+end
+
+#=
+	uhacc = uhacc[:,1:counter]
+	uhavg = getuhavg(uhacc)
+
+	# Transform to physical space to save u if requested.
+	# Note: this is often the most expensive step.
+	if savemicro
+		println("Microstates: transforming to physical space and writing output files.")
+		uhacc = uhacc[:, 1:min(micro_max_samples,counter)]
+		uacc = getuacc(uhacc)
+		micfile = string(foldername,"mic",suffix,".txt")
+		writedata(uacc, micfile)
+	end
+=#
+
 
 #= Compute the expected value of the downstream Hamiltonian under
 either the upstream or downstream Gibbs measure with given theta. =#
@@ -38,16 +81,16 @@ function matchmean(nmodes::Int, nsamp::Int, E0::Float64, D0::Float64, thup_vec::
 	nthetas = endof(thup_vec)
 	thdn_vec = zeros(Float64,nthetas)
 	# Sample H3 and H2 from a microcanonical distribution.
-	H3vec, H2vec, rvar = microcan(nmodes,nsamp)
+	rset = microcan(nmodes,nsamp)
 	# For each thup, find the corresponding thdn by matching the mean.
-	meanham_dn(theta_dn::Float64) = meanham(H3vec,H2vec,E0,D0,theta_dn,false)
+	meanham_dn(theta_dn::Float64) = meanham(rset.H3,rset.H2,E0,D0,theta_dn,false)
 	for nn = 1:nthetas
 		# Determine thdn by finding a root of the difference of means.
-		mean_up = meanham(H3vec,H2vec,E0,D0,thup_vec[nn],true)
+		mean_up = meanham(rset.H3,rset.H2,E0,D0,thup_vec[nn],true)
 		meandiff(theta_dn::Float64) = meanham_dn(theta_dn) - mean_up
 		thdn_vec[nn] = find_zero(meandiff, thup_vec[nn], Order1())
 	end
-	return thdn_vec, H3vec, H2vec, rvar
+	return thdn_vec, rset
 end
 
 #= Main routine to enforce the statistical matching condition. =#
@@ -56,37 +99,37 @@ function main(paramsfile::AbstractString="params.txt")
 	savemicro = true
 	newfolder(datafolder())
 	params = readvec(paramsfile)
-	nmodes, nsamp, npasses = Int(params[1]), Int(params[2]), Int(params[3])
-	E0, D0, thmin, thmax, dth = params[4:8]
-	thup_vec = collect(thmin:dth:thmax)
+	nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas = extractparams(params)
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
-	cput_match = @elapsed (thdn_vec, H3vec, H2vec, rvar) = matchmean(nmodes,nsamp,E0,D0,thup_vec)
+	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,E0,D0,thup_vec)
 	cput_match = signif(cput_match/60,2)
-	println("CPU time for enforcing matching condition is ", cputime, " minutes.")
+	println("CPU time for enforcing matching condition is ", cput_match, " minutes.")
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)
-
+	# Initiate the accepted set of states.
+	accstate = Array{AcceptedState}(nmodes,2)
+	accstate[:,:] = new_acc_state(nmodes)
 	#= Define a function to sample from the Gibbs distributions
 	for all values of upstream and downstream values of theta. =#
-	function gibbs_sample_updn(H3vec::Vector{Float64}, H2vec::Vector{Float64}, rvar::Array{Float64})
+	function gibbs_sample_updn(rset::RandSet, accstate::Array{AcceptedState})
 		for nn = 1:nthetas
-			upsuffix = string("up",nn)
-			dnsuffix = string("dn",nn)
-			gibbs_sample(H3vec,H2vec,rvar, E0,1.,thup_vec[nn], savemicro,upsuffix)
-			gibbs_sample(H3vec,H2vec,rvar, E0,D0,thdn_vec[nn], savemicro,dnsuffix)
+			gibbs_sample!(rset, accstate[nn,1], E0,1.,thup_vec[nn], savemicro)
+			gibbs_sample!(rset, accstate[nn,2], E0,D0,thdn_vec[nn], savemicro)
 		end
 	end
 	tm0 = time()
 	# Sample using rvar, H3, and H2 from the matchmean computation.
-	gibbs_sample_updn(H3vec, H2vec, rvar)
+	gibbs_sample_updn(rset,accstate)
 	# Take several additional passes sampling from the Gibbs distributions.
 	for pass = 2:npasses
-		H3vec, H2vec, rvar = microcan(nmodes,nsamp)
-		gibbs_sample_updn(H3vec, H2vec, rvar)
+		rset = microcan(nmodes,nsamp)
+		gibbs_sample_updn(rset,accstate)
 	end
 	cput_sample = signif((time()-tm0)/60, 2)
-	nsamptot = sampper*npasses
-	println("The total CPU time is ", cputime, " minutes.")
-	writebasicdata(params,nsamptot,cput_match,cput_sample,thup_vec,thdn_vec)
+	println("The CPU time for sampling is ", cput_sample, " minutes.")
+	cputimes = [cput_match, cput_sample]
+	write_all_data(params,thdn_vec,accstate,cputimes)
 end
+
+
 

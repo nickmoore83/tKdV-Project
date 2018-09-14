@@ -2,6 +2,29 @@ using Distributions
 using Roots
 using Plots
 
+#---------- Data Types ----------#
+# Fix some parameters.
+function maxparams()
+	micmax = 2*10^5
+	macmax = 5*10^6
+	return micmax, macmax
+end
+# Sampled state
+type RandSet
+	H3::Vector{Float64}; H2::Vector{Float64}; rvar::Array{Float64}
+end
+# Accepted state
+type AcceptedState
+	H3::Vector{Float64}; H2::Vector{Float64}; uhat::Array{Complex128}; naccepted::Int
+end
+# Initiate a new StateAccepted
+function new_acc_state(nmodes::Int)
+	micmax, macmax = maxparams()
+	return AcceptedState(zeros(Float64,macmax), zeros(Float64,macmax), 
+		zeros(Complex128,nmodes,macmax), 0)
+end
+#---------------------------------#
+
 #---------- IO Routines ----------#
 function readvec(file::AbstractString)
 	iostream = open(file, "r")
@@ -100,7 +123,7 @@ function microcan(nmodes::Int, nsamples::Int)
 			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
-	return H3vec, H2vec, rvar
+	return RandSet(H3vec,H3vec,rvar)
 end
 #= Convert each accepted uhat to physical space for analysis. =#
 function getuacc(uhacc::Array{Complex128})
@@ -127,53 +150,35 @@ end
 #---------- Main Sampling Routines ----------#
 #= Sample from a Gibbs distribution with non-zero theta, 
 given that H3 and H2 have already been sampled from microcanonical distribution. =#
-function gibbs_sample(H3all::Vector{Float64}, H2all::Vector{Float64}, rvar::Array{Float64},
-		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool, suffix::AbstractString)
+function gibbs_sample!(rset::RandSet, accstate::AcceptedState, 
+		E0::Float64, D0::Float64, theta::Float64, savemicro::Bool)
 	# Preliminaries
-	micro_max_samples = 2*10^5
-	macro_max_samples = 5*10^6
+	H3all = rset.H3
+	H2all = rset.H2
+	rvar = rset.rvar
 	nmodes = size(rvar)[1]
-	nsamptot = size(rvar)[3]
-	println("\nSampling from Gibbs distribution with D0 = ", signif(D0,2), " and theta = ", signif(theta,2))
+	nsamp = size(rvar)[3]
+	micmax, macmax = maxparams()
 	# Determine the acceptance rate based on the Hamiltonian.
+	println("\nSampling from Gibbs distribution with D0 = ", 
+		signif(D0,2), " and theta = ", signif(theta,2))
 	hamvec = D0^(-13/4)*sqrt(E0)*H3all - D0^(3/2)*H2all
 	accept_vec = exp.(-theta * hamvec)
 	accept_vec *= 1/(maximum(accept_vec))
 	# With the normalized acceptance rate, decide to accept/reject each.
-	univar = rand(nsamptot)
-	H3acc, H2acc = [zeros(Float64,0) for nn=1:2]
-	uhacc = zeros(Complex128,nmodes,macro_max_samples)
-	nn, counter = 0, 0
-	for nn=1:nsamptot
-		counter >= macro_max_samples? break : 0
+	univar = rand(nsamp)
+	for nn=1:nsamp
+		accstate.naccepted >= macmax? break : 0
 		if univar[nn] <= accept_vec[nn]
-			counter += 1
-			push!(H3acc, H3all[nn]); push!(H2acc, H2all[nn])
-			uhacc[:,counter] = getuhat(rvar,nn)
+			accstate.naccepted += 1
+			mm = accstate.naccepted
+			accstate.H3[mm] = H3all[nn]
+			accstate.H2[mm] = H2all[nn]
+			if mm <= micmax
+				accstate.uhat[:,mm] = getuhat(rvar,nn)
+			end
 		end
 	end
-	accept_rate = signif(100*counter/nn,2)
-	println("Completed acceptance/rejection phase, acceptane rate was ", accept_rate, "%.")
-	uhacc = uhacc[:,1:counter]
-	uhavg = getuhavg(uhacc)
-	# Write the Hamiltonian data to an output file.
-	println("Macrostates: writing output files.")
-	foldername = datafolder()
-	macfile = string(foldername,"mac",suffix,".txt")
-	maclabel0 = "# Macrostate data"
-	maclabel1 = "# Basic information: E0, D0, theta, number of accepted samples, acceptance rate (%)"
-	maclabel2 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
-	macdata = [maclabel0; maclabel1; E0; D0; theta; counter; accept_rate; 
-				maclabel2; H3acc; H2acc; uhavg]
-	writedata(macdata, macfile)
-	# Transform to physical space to save u if requested.
-	# Note: this is often the most expensive step.
-	if savemicro
-		println("Microstates: transforming to physical space and writing output files.")
-		uhacc = uhacc[:, 1:min(micro_max_samples,counter)]
-		uacc = getuacc(uhacc)
-		micfile = string(foldername,"mic",suffix,".txt")
-		writedata(uacc, micfile)
-	end
+	println("Completed acceptance/rejection phase.")
+	return 
 end
-
