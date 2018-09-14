@@ -14,6 +14,8 @@ In the mac output file, I write H3acc, H2acc, and uhavg. So I can either:\
 1) Modify my format for the output files so that I can append each time I run through gibbs_sample.\
 2) Not write to the output files in gibbs_sample, but instead return H3acc, H2acc, save them in a big vector and write at the end. The disadvantage is that I would have to save a lot of H3acc and H2acc vectors because I have several theta values upstream and downstream to run through. This could work though.\
 \
+{\field{\*\fldinst{HYPERLINK "https://discourse.julialang.org/t/adding-to-existing-txt-file-created-by-writedlm/6907"}}{\fldrslt https://discourse.julialang.org/t/adding-to-existing-txt-file-created-by-writedlm/6907}}\
+\
 Note: The main reason I save H3acc and H2acc separately, as opposed to just saving ham, is that for theta- I want to be able to compute both the upstream and downstream Hamiltonians.\
 \
 \
