@@ -27,11 +27,10 @@ function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 	# Write the basic data.
 	basicfile = string(foldername,"basic.txt")
 	nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas = extractparams(params)
-	nsamptot = nsamp*npasses
 	label1 = "# Input parameters: "
-	label2 = "# Calculated parameters: nsamptot, CPU times for matching mean and for sampling (mins)"
+	label2 = "# CPU times for matching mean and for sampling (mins)"
 	label3 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
-	basicdata = [label1; params; label2; nsamptot; cputimes;
+	basicdata = [label1; params; label2; cputimes;
 		label3; nthetas; thup_vec; thdn_vec]
 	writedata(basicdata,basicfile)
 	# Write the macro data.
@@ -111,15 +110,18 @@ function main(paramsfile::AbstractString="params.txt")
 	accstate[:,:] = new_acc_state(nmodes)
 	#= Define a function to sample from the Gibbs distributions
 	for all values of upstream and downstream values of theta. =#
-	function gibbs_sample_updn(rset::RandSet, accstate::Array{AcceptedState})
+	function gibbs_sample_updn(rset1::RandSet, accstate1::Array{AcceptedState})
 		for nn = 1:nthetas
-			gibbs_sample!(rset, accstate[nn,1], E0,1.,thup_vec[nn], savemicro)
-			gibbs_sample!(rset, accstate[nn,2], E0,D0,thdn_vec[nn], savemicro)
+			gibbs_sample!(rset1, accstate1[nn,1], E0,1.,thup_vec[nn], savemicro)
+			gibbs_sample!(rset1, accstate1[nn,2], E0,D0,thdn_vec[nn], savemicro)
 		end
 	end
 	tm0 = time()
 	# Sample using rvar, H3, and H2 from the matchmean computation.
 	gibbs_sample_updn(rset,accstate)
+
+	display(accstate)
+
 	# Take several additional passes sampling from the Gibbs distributions.
 	for pass = 2:npasses
 		rset = microcan(nmodes,nsamp)

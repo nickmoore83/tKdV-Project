@@ -123,7 +123,7 @@ function microcan(nmodes::Int, nsamples::Int)
 			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
-	return RandSet(H3vec,H3vec,rvar)
+	return RandSet(H3vec,H2vec,rvar)
 end
 #= Convert each accepted uhat to physical space for analysis. =#
 function getuacc(uhacc::Array{Complex128})

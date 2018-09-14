@@ -379,7 +379,7 @@
 						<string>20K</string>
 					</dict>
 					<key>Drawn</key>
-					<string>Exclude</string>
+					<string>Include</string>
 					<key>Status</key>
 					<string>Visible</string>
 				</dict>
@@ -549,7 +549,7 @@
 			<string>theta plot</string>
 			<key>WindowPos</key>
 			<array>
-				<real>145</real>
+				<real>60</real>
 				<real>153</real>
 				<real>632</real>
 				<real>724</real>
@@ -1146,7 +1146,7 @@
 			<string>upstream H- histogram</string>
 			<key>WindowPos</key>
 			<array>
-				<real>125</real>
+				<real>174</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -2095,7 +2095,7 @@
 			<string>downstream H+ histograms with G- and G+</string>
 			<key>WindowPos</key>
 			<array>
-				<real>60</real>
+				<real>190</real>
 				<real>149</real>
 				<real>779</real>
 				<real>728</real>
@@ -4800,7 +4800,7 @@
 	</array>
 	<key>MonitorVariables</key>
 	<array>
-		<string>parameters</string>
+		<string>samples of H+ under G+</string>
 	</array>
 	<key>Time</key>
 	<dict>
@@ -4868,10 +4868,12 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run8</string>
+				<string>run</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
+			<key>ToggleOpen</key>
+			<string>YES</string>
 			<key>VariableName</key>
 			<string>data folder</string>
 			<key>VariableType</key>
@@ -4881,7 +4883,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>2</string>
+				<string>4</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -4939,7 +4941,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.41</string>
+						<string>0.02</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4983,7 +4985,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.42</string>
+						<string>0.37</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5733,7 +5735,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Open</string>
+			<string>Closed</string>
 			<key>Title</key>
 			<string>Extract the basic parameters and theta values</string>
 			<key>VariableName</key>
@@ -5753,7 +5755,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>6</string>
+				<string>11</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -5882,7 +5884,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>a priori number of samples</string>
+			<string>number of samples per sweep</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -5912,7 +5914,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>E0</string>
+			<string>number of sweeps</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -5942,7 +5944,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>D0</string>
+			<string>E0</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -5972,7 +5974,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>cpu time (minutes)</string>
+			<string>D0</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -5989,7 +5991,67 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>6</string>
+						<string>9</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeEqualsCurrent</key>
+				<string>On</string>
+				<key>StartAt0</key>
+				<string>Off</string>
+			</dict>
+			<key>Selection</key>
+			<string>Value From List</string>
+			<key>VariableName</key>
+			<string>cpu time for matching (minutes)</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>parameters</string>
+				</dict>
+				<key>Location</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>10</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeEqualsCurrent</key>
+				<string>On</string>
+				<key>StartAt0</key>
+				<string>Off</string>
+			</dict>
+			<key>Selection</key>
+			<string>Value From List</string>
+			<key>VariableName</key>
+			<string>cpu time for sampling (minutes)</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>parameters</string>
+				</dict>
+				<key>Location</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>11</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6003,6 +6065,62 @@
 			<string>Value From List</string>
 			<key>VariableName</key>
 			<string>number of thetas</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>nsamp*nsweep</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>nsamp</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>number of samples per sweep</string>
+						</dict>
+					</dict>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>nsweep</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>number of sweeps</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Expression</string>
+			<key>VariableName</key>
+			<string>number of total samples</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -6227,7 +6345,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Extract the upstream macrostate data</string>
 			<key>VariableName</key>
@@ -6247,7 +6365,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>5</string>
+				<string>2</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -6271,7 +6389,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>3</string>
+						<string>1</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6301,7 +6419,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>4</string>
+						<string>2</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6315,36 +6433,6 @@
 			<string>Value From List</string>
 			<key>VariableName</key>
 			<string>upstream accepted samples</string>
-			<key>VariableType</key>
-			<string>Real Number</string>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>List</key>
-				<dict>
-					<key>Selected</key>
-					<string>upstream macro data</string>
-				</dict>
-				<key>Location</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>5</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>RangeEqualsCurrent</key>
-				<string>On</string>
-				<key>StartAt0</key>
-				<string>Off</string>
-			</dict>
-			<key>Selection</key>
-			<string>Value From List</string>
-			<key>VariableName</key>
-			<string>upstream acceptance rate (%)</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -6756,7 +6844,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Extract the downstream macrostate data</string>
 			<key>VariableName</key>
@@ -6785,7 +6873,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>3</string>
+						<string>1</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6815,7 +6903,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>4</string>
+						<string>2</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6829,36 +6917,6 @@
 			<string>Value From List</string>
 			<key>VariableName</key>
 			<string>downstream accepted samples</string>
-			<key>VariableType</key>
-			<string>Real Number</string>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>List</key>
-				<dict>
-					<key>Selected</key>
-					<string>downstream macrostate data</string>
-				</dict>
-				<key>Location</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>5</string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>RangeEqualsCurrent</key>
-				<string>On</string>
-				<key>StartAt0</key>
-				<string>Off</string>
-			</dict>
-			<key>Selection</key>
-			<string>Value From List</string>
-			<key>VariableName</key>
-			<string>downstream acceptance rate (%)</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -8245,38 +8303,10 @@
 			<key>VariableType</key>
 			<string>CollapserClose</string>
 		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>Extension</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>String</key>
-						<string></string>
-					</dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-				<key>String</key>
-				<dict>
-					<key>SelectedNumber</key>
-					<integer>0</integer>
-				</dict>
-			</dict>
-			<key>Selection</key>
-			<string>Add Extension</string>
-			<key>ToggleOpen</key>
-			<string>YES</string>
-			<key>VariableName</key>
-			<string>String</string>
-			<key>VariableType</key>
-			<string>String</string>
-		</dict>
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>647</real>
+		<real>705</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
