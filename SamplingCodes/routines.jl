@@ -1,14 +1,21 @@
+
+#---------- Basic Stuff ----------#
 using Distributions
 using Roots
 using Plots
-
-#---------- Data Types ----------#
-# Fix some parameters.
+# Fix some parameters for the maximum number of accepted micro and macro states.
 function maxparams()
 	micmax = 2*10^5
 	macmax = 5*10^6
 	return micmax, macmax
 end
+# Fix the data folder.
+datafolder() = "../SamplingData/run/"
+# Decide whether to save the micro state or not.
+savemicro() = true
+#---------------------------------#
+
+#---------- Data Types ----------#
 # Sampled state
 type RandSet
 	H3::Vector{Float64}; H2::Vector{Float64}; rvar::Array{Float64}
@@ -36,9 +43,6 @@ function writedata(data::Array, filename::AbstractString)
 	iostream = open(filename, "w")
 	writedlm(iostream, data)
 	close(iostream)
-end
-function datafolder()
-	return "../SamplingData/run/"
 end
 function newfolder(foldername::AbstractString)
 	isdir(foldername)? rm(foldername; recursive=true) : 0
@@ -100,7 +104,7 @@ function ham3(uhat::Vector{Complex128})
 end
 #---------------------------------------#
 
-#---------- Short Sampling Routines ----------#
+#---------- Sampling Routines ----------#
 #= Get uhat from the array of random values. =#
 function getuhat(rvar::Array{Float64}, nn::Int)
 	uhat = rvar[:,1,nn]+im*rvar[:,2,nn]
@@ -145,9 +149,6 @@ function getuhavg(uhacc::Array{Complex128})
 	end
 	return uhavg
 end
-#---------------------------------------#
-
-#---------- Main Sampling Routines ----------#
 #= Sample from a Gibbs distribution with non-zero theta, 
 given that H3 and H2 have already been sampled from microcanonical distribution. =#
 function gibbs_sample!(rset::RandSet, accstate::AcceptedState, 
@@ -176,7 +177,7 @@ function gibbs_sample!(rset::RandSet, accstate::AcceptedState,
 			mm = accstate.naccepted
 			accstate.H3[mm] = H3all[nn]
 			accstate.H2[mm] = H2all[nn]
-			if mm <= micmax
+			if (savemicro() & mm <= micmax)
 				accstate.uhat[:,mm] = getuhat(rvar,nn)
 			end
 		end
@@ -184,3 +185,5 @@ function gibbs_sample!(rset::RandSet, accstate::AcceptedState,
 	println("Completed acceptance/rejection phase.")
 	return
 end
+#---------------------------------------#
+

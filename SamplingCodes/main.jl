@@ -11,34 +11,31 @@ function extractparams(params::Vector)
 end
 # Write the macrostate data.
 function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::AbstractString)
+	# Preliminaries.
 	foldername = datafolder()
 	macfile = string(foldername,"mac",suffix,".txt")
 	nacc = accstate.naccepted
-	# Deal with the microstates.
+	# Get coarse information from microstates.
 	micmax, macmax = maxparams()
 	uhat = accstate.uhat[1:min(nacc,micmax)]
 	uhavg = getuhavg(uhat)
-
-	uacc = getuacc(uhat)
-	micfile = string(foldername,"mic",suffix,".txt")
-	writedata(uacc, micfile)
-	
-	# Write the data
+	# Save the macrostates.
+	println("Saving the macrostates.")
 	label1 = "# Macrostate data"
 	label2 = "# Basic information: theta, number of accepted samples"
 	label3 = "# Computed data: vectors of accepted H3 and H2, vector of mean uhat per mode"
 	macdata = [label1; label2; theta; nacc;
 				label3; accstate.H3[1:nacc]; accstate.H2[1:nacc]; uhavg]
 	writedata(macdata, macfile)
-end
-
-#=	# Transform to physical space to save u if requested.
-	# Note: this is often the most expensive step.
-	if savemicro
-		println("Microstates: transforming to physical space and writing output files.")
+	# Save the microstates if desired.
+	# Note: this step is expensive because it requires transforming to physical space.
+	if savemicro()
+		println("Saving the microstates.")
+		uacc = getuacc(uhat)
+		micfile = string(foldername,"mic",suffix,".txt")
+		writedata(uacc, micfile)
 	end
-=#
-
+end
 # Write all the data, including basic, microstate, and mincrostate.
 function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 		accstate::Array{AcceptedState}, cputimes::Vector{Float64})
@@ -97,11 +94,9 @@ function matchmean(nmodes::Int, nsamp::Int, E0::Float64, D0::Float64, thup_vec::
 end
 #---------------------------------------#
 
-
 #= Main routine to enforce the statistical matching condition. =#
 function main(paramsfile::AbstractString="params.txt")
 	# Preliminaries.
-	savemicro = true
 	newfolder(datafolder())
 	params = readvec(paramsfile)
 	nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas = extractparams(params)
@@ -121,8 +116,8 @@ function main(paramsfile::AbstractString="params.txt")
 	for all values of upstream and downstream values of theta. =#
 	function gibbs_sample_updn(rset::RandSet, accstate::Array{AcceptedState})
 		for nn = 1:nthetas
-			gibbs_sample!(rset, accstate[nn,1], E0,1.,thup_vec[nn], savemicro)
-			gibbs_sample!(rset, accstate[nn,2], E0,D0,thdn_vec[nn], savemicro)
+			gibbs_sample!(rset, accstate[nn,1], E0,1.,thup_vec[nn])
+			gibbs_sample!(rset, accstate[nn,2], E0,D0,thdn_vec[nn])
 		end
 	end
 	tm0 = time()
