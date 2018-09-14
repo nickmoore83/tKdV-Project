@@ -36,8 +36,6 @@ text
 text
 downstream, {\it \theta^+}
 upstream, {\it \theta^-}
-{\it G^-(H^-)}
-{\it H^-}
 Text
 Text
 PDFs of {\it H^+}
@@ -49,6 +47,8 @@ Text
 PDF of {\it u}
 displacement, {\it u}
 PDF of {\it u}
-displacement, {\it u}</string>
+displacement, {\it u}
+{\it G^-(H^-)}
+{\it H^-}</string>
 </dict>
 </plist>

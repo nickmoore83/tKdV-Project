@@ -3,11 +3,11 @@ include("routines.jl")
 #---------- Reading and writing routines ----------#
 # Extract the parameters
 function extractparams(params::Vector)
-	nmodes, nsamp, npasses = Int(params[1]), Int(params[2]), Int(params[3])
+	nmodes, nsamp, nsweeps = Int(params[1]), Int(params[2]), Int(params[3])
 	E0, D0, thmin, thmax, dth = params[4:8]
 	thup_vec = collect(thmin:dth:thmax)
 	nthetas = endof(thup_vec)
-	return nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas
+	return nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas
 end
 # Write the macrostate data.
 function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::AbstractString)
@@ -42,7 +42,7 @@ function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 	foldername = datafolder()
 	# Write the basic data.
 	basicfile = string(foldername,"basic.txt")
-	nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas = extractparams(params)
+	nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas = extractparams(params)
 	label1 = "# Input parameters: "
 	label2 = "# CPU times for matching mean and for sampling (mins)"
 	label3 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
@@ -99,7 +99,7 @@ function main(paramsfile::AbstractString="params.txt")
 	# Preliminaries.
 	newfolder(datafolder())
 	params = readvec(paramsfile)
-	nmodes, nsamp, npasses, E0, D0, thup_vec, nthetas = extractparams(params)
+	nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas = extractparams(params)
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
 	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,E0,D0,thup_vec)
@@ -124,7 +124,7 @@ function main(paramsfile::AbstractString="params.txt")
 	# Sample using rvar, H3, and H2 from the matchmean computation.
 	gibbs_sample_updn(rset,accstate)
 	# Take several additional passes sampling from the Gibbs distributions.
-	for pass = 2:npasses
+	for pass = 2:nsweeps
 		rset = microcan(nmodes,nsamp)
 		gibbs_sample_updn(rset,accstate)
 	end
