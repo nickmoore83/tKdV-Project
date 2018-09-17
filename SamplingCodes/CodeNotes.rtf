@@ -7,12 +7,12 @@
 \f0\fs28 \cf0 \ul \ulc0 \
 To Do\ulnone \
 \
-- Fix codes to write to output file with a suffix so that I can run multiple runs at once.\
-\
-- I am running the new algorithm (with memory managed by multiple sweeps) on my mac mini. Fixing the bug in macmax/micmax significantly reduced the memory usage. The memory usage is highest during the Gibbs sampling phase, and now it is around 7-9 GB per run. So if I just plan to run one simulation at a time (I can parallelize parts of code), my values for macmax and micmax are fine. If I want to continue to run 3-4 simulations at one time as I am doing now, I should reduce these values somewhat.\
-\
-\
 - Calculate D0 powers and share answer with Di and Andy.\
+\
+\
+- Idea to get higher acceptance rates: We need higher acceptance rates for Lambda = 16 and theta = -0.4. To get this, we can predispose the initial samples to have a decaying spectrum by making the variance of the Gaussian random variables decay with k. This will alter the base measure, dmu, to something else and we need to figure out what that something else is. Once we figure it out, we can correct for it in the acceptance probability.\
+\
+- Fix codes to write to output file with a suffix so that I can run multiple runs at once. Probably just input an integer that corresponds to the parameters file to be read as well as the output file.\
 \
 - Parallelize the for loops that compute H3 and H2.\
 \
@@ -25,25 +25,36 @@ Good idea: We could probably approximate theta+ as function of theta- using a Ta
 \
 \
 \
+\ul Sep 15, 2018\ulnone \
+- I am running the new algorithm (with memory managed by multiple sweeps) on my mac mini. Fixing the bug in macmax/micmax significantly reduced the memory usage. The memory usage is highest during the Gibbs sampling phase, and now it is around 7-9 GB per run. So if I just plan to run one simulation at a time (I can parallelize parts of code), my values for macmax and micmax are fine. If I want to continue to run 3-4 simulations at one time as I am doing now, I should reduce these values somewhat.\
 \
 \ul Sep 14, 2018\
-\ulnone - I finished modifying my codes to handle the memory better by taking several sweeps through the sampling process with a manageable number of samples in each sweep (say 10^7). The code seems to work for the most part. There are a few small loose ends to tie up: compute uhavg and write the microstates to files. I completed tying up these loose ends and things look great. I am running some big runs on my mac mini. The runs include nmodes = 8 and 16, with nsamp = 1e7 and nsweeps = 200 or 100.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ulnone - I finished modifying my codes to handle the memory better by taking several sweeps through the sampling process with a manageable number of samples in each sweep (say 10^7). The code seems to work for the most part. There are a few small loose ends to tie up: compute uhavg and write the microstates to files. I completed tying up these loose ends and things look great. I am running some big runs on my mac mini. The runs include nmodes = 8 and 16, with nsamp = 1e7 and nsweeps = 200 or 100.\
 \
-\ul Sep 13, 2018\
-\ulnone - My goal is to break down the code into a number of passes, each taking about 10^7 samples, because this is a manageable number for the memory (a lot of storage is required for rvar). However, it will not work as I originally planned, because I have to determine the downstream theta+ by matching (using all of the samples, or at least a large number of samples), and only then can I sample from the Gibbs distributions.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Sep 13, 2018\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ulnone - My goal is to break down the code into a number of passes, each taking about 10^7 samples, because this is a manageable number for the memory (a lot of storage is required for rvar). However, it will not work as I originally planned, because I have to determine the downstream theta+ by matching (using all of the samples, or at least a large number of samples), and only then can I sample from the Gibbs distributions.\
 \
 So a plan to address this problem is as follows. First, run a pretty large number of samples (say 10^7) to determine theta+ for each case of theta-, and save these values. Then, for each instance of theta- and theta+, sample from the Gibbs distributions using a VERY large sample size (say 10^8 or 10^9), where this time, you can take several passes with a manageable number of samples (i.e. each pass, precompute H3 and H2 lists, then compute H+ and H- and sample with the accept/reject algorithm). This algorithm separates the matching condition from the Gibbs sampling.\
  \
-\ul Sep 4, 2018\
-\ulnone - I finished the code to enforce the statistical matching condition G-(H+) = G+(H+). It gives great looking results! My implementation is very efficient. It first samples a large number of microstates (say 10^8) from the microcanonical distribution. Then, I compute the values of H3 and H2 and save them all, which is by far the most expensive step. Once this is done, one can choose a theta, E_0, D_0,  sample from the large ensemble, and decide to accept/reject. This step is quite cheap. One can do this step for a multitude of values of theta, E_0, D_0, all using the same large microcanonical ensemble. Thus, the algorithm is very efficient.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Sep 4, 2018\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ulnone - I finished the code to enforce the statistical matching condition G-(H+) = G+(H+). It gives great looking results! My implementation is very efficient. It first samples a large number of microstates (say 10^8) from the microcanonical distribution. Then, I compute the values of H3 and H2 and save them all, which is by far the most expensive step. Once this is done, one can choose a theta, E_0, D_0,  sample from the large ensemble, and decide to accept/reject. This step is quite cheap. One can do this step for a multitude of values of theta, E_0, D_0, all using the same large microcanonical ensemble. Thus, the algorithm is very efficient.\
 \
-\ul Aug 28, 2018\
-\ulnone - I finished the routine gibbs to sample from a Gibbs distribution with 
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Aug 28, 2018\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ulnone - I finished the routine gibbs to sample from a Gibbs distribution with 
 \i non-zero
 \i0  inverse temperature. I tested it with invtemp=0 and it works! It produces histograms of H similar to those produced by gibbs0. I tested it with non-zero invtemp and it works in those cases too. For negative invtemp, it can give skewed distributions as we hoped!\
 \
-\ul Aug 27, 2018\
-\ulnone - I am running large simulations to sample the Gibbs distributions with nsamples up to 2*10^8. For nsamples = 2*10^8, the CPU time is about 5.3 hours and the output data files are about 7.6 GB, which as unmanageably large for DataTank to handle! Therefore, I need to keep nsamples around 10^7 or maybe 2 or 4 times that. \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Aug 27, 2018\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ulnone - I am running large simulations to sample the Gibbs distributions with nsamples up to 2*10^8. For nsamples = 2*10^8, the CPU time is about 5.3 hours and the output data files are about 7.6 GB, which as unmanageably large for DataTank to handle! Therefore, I need to keep nsamples around 10^7 or maybe 2 or 4 times that. \
 - I am comparing sampling uhat one at a time (as initially coded) versus all at once (which might be more efficient, lets find out). \
 1) Sampling all at once gives a slight 2-5% speedup over one at a time (not much at all)\
 2) The bottleneck is definitely computing H3 and H2 rather than sampling uhat.\
@@ -52,12 +63,15 @@ So a plan to address this problem is as follows. First, run a pretty large numbe
 - For these tests, I used nmodes = 10, nsamples = 2e5\
 - I wonder if the quality of sampling all at once is better (i.e. less correlations)?\
 \
-\ul Aug 25, 2018\
-\ulnone - I am working towards writing a rejection-based algorithm to sample from a Gibbs measure with non-zero inverse temperature. For this, I would like to calculate the maximum of H3 on the sphere of fixed energy, E=E_0. I made a guess that the max is attained by the Dirichlet kernel and derived a formula for the maximum value of H3.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Aug 25, 2018\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ulnone - I am working towards writing a rejection-based algorithm to sample from a Gibbs measure with non-zero inverse temperature. For this, I would like to calculate the maximum of H3 on the sphere of fixed energy, E=E_0. I made a guess that the max is attained by the Dirichlet kernel and derived a formula for the maximum value of H3.\
 - I am testing my guess numerically. The numerics seem to almost always support my guess, with the actually encountered maximum being significantly less than the theoretical maximum (I tested Lambda = 6, 8, 10, 20). Also, I confirmed that H3 of the Dirichlet kernel agrees with my formula (so I did not simply make a mistake). However, for Lambda=4, the max encountered numerically exceeds my theoretical estimate.\
 - Also, I tested H2 and it seems to work great.\
 \
-\ul Aug 24, 2018\ulnone \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \ul Aug 24, 2018\ulnone \
 - I wrote ham3fft to compute H3 by transforming to physical space. This code is MUCH SHORTER and should be more efficient. In a simple test (H3test) both ham3fft and ham3direct give an accurate solution, with ham3fft slightly more accurate (relative error of 2e-16 compared to 1e-15). So based on this test, there is no need to up-sample (de-alias) the transforms.\
 - BUT I put a test in \'91main.jl\'92, which samples uhat randomly from the Gibbs0 distribution. The test compared H3direct vs H3fft and it shows significant differences (relative errors of order 1). When I artifically kill the second half of the spectrum, the two methods agree again. This result suggests I do need upsampling.\
 - I implemented upsampling in ifftup and reran the test in main. Now the two methods agree remarkably well. Using 10^4 samples, the maximum relative difference is order 1e-12 and the median difference is order 1e-15. \
