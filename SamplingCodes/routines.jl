@@ -10,7 +10,7 @@ function maxparams()
 	return micmax, macmax
 end
 # Fix the data folder.
-datafolder() = "../SamplingData/run/"
+datafolder(suffix::AbstractString=string() = "../SamplingData/run", suffix,"/"
 # Decide whether to save the micro state or not.
 savemicro() = true
 #---------------------------------#
