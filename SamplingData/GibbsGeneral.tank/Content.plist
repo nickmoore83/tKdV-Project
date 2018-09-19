@@ -6621,106 +6621,6 @@
 			<string>CollapserClose</string>
 		</dict>
 		<dict>
-			<key>Content</key>
-			<dict>
-				<key>Formula</key>
-				<string>100 * v/tot</string>
-				<key>Number</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>0</string>
-					</dict>
-					<key>Selected</key>
-					<string>upstream accepted samples</string>
-				</dict>
-				<key>Variables</key>
-				<array>
-					<dict>
-						<key>Include</key>
-						<string>On</string>
-						<key>Name</key>
-						<string>tot</string>
-						<key>Number Type</key>
-						<integer>0</integer>
-						<key>Type</key>
-						<string>Real Number</string>
-						<key>Var</key>
-						<dict>
-							<key>Inline</key>
-							<dict>
-								<key>Number</key>
-								<string>0</string>
-							</dict>
-							<key>Selected</key>
-							<string>number of total samples</string>
-						</dict>
-					</dict>
-				</array>
-			</dict>
-			<key>Monitor</key>
-			<dict/>
-			<key>Monitor Visible</key>
-			<string>YES</string>
-			<key>Selection</key>
-			<string>Map Value</string>
-			<key>VariableName</key>
-			<string>upstream acceptance rate</string>
-			<key>VariableType</key>
-			<string>Real Number</string>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>Formula</key>
-				<string>100 * v/tot</string>
-				<key>Number</key>
-				<dict>
-					<key>Inline</key>
-					<dict>
-						<key>Number</key>
-						<string>0</string>
-					</dict>
-					<key>Selected</key>
-					<string>downstream accepted samples</string>
-				</dict>
-				<key>Variables</key>
-				<array>
-					<dict>
-						<key>Include</key>
-						<string>On</string>
-						<key>Name</key>
-						<string>tot</string>
-						<key>Number Type</key>
-						<integer>0</integer>
-						<key>Type</key>
-						<string>Real Number</string>
-						<key>Var</key>
-						<dict>
-							<key>Inline</key>
-							<dict>
-								<key>Number</key>
-								<string>0</string>
-							</dict>
-							<key>Selected</key>
-							<string>number of total samples</string>
-						</dict>
-					</dict>
-				</array>
-			</dict>
-			<key>Monitor</key>
-			<dict/>
-			<key>Monitor Visible</key>
-			<string>YES</string>
-			<key>Selection</key>
-			<string>Map Value</string>
-			<key>VariableName</key>
-			<string>downstream acceptance rate</string>
-			<key>VariableType</key>
-			<string>Real Number</string>
-		</dict>
-		<dict>
 			<key>State</key>
 			<string>Closed</string>
 			<key>Title</key>
@@ -8669,10 +8569,110 @@
 			<key>VariableType</key>
 			<string>CollapserClose</string>
 		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>100 * v/tot</string>
+				<key>Number</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>0</string>
+					</dict>
+					<key>Selected</key>
+					<string>upstream accepted samples</string>
+				</dict>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>tot</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>number of total samples</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Monitor</key>
+			<dict/>
+			<key>Monitor Visible</key>
+			<string>YES</string>
+			<key>Selection</key>
+			<string>Map Value</string>
+			<key>VariableName</key>
+			<string>upstream acceptance rate</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>100 * v/tot</string>
+				<key>Number</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>0</string>
+					</dict>
+					<key>Selected</key>
+					<string>downstream accepted samples</string>
+				</dict>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>tot</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>number of total samples</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Monitor</key>
+			<dict/>
+			<key>Monitor Visible</key>
+			<string>YES</string>
+			<key>Selection</key>
+			<string>Map Value</string>
+			<key>VariableName</key>
+			<string>downstream acceptance rate</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>527</real>
+		<real>551</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
