@@ -5079,6 +5079,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>MonitorVariables</key>
+	<array>
+		<string>upstream accepted samples</string>
+	</array>
 	<key>Time</key>
 	<dict>
 		<key>CurrentTime</key>
@@ -5160,7 +5164,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>3</string>
+				<string>4</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -6622,7 +6626,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Extract the upstream macrostate data</string>
 			<key>VariableName</key>
