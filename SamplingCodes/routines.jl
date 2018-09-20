@@ -117,8 +117,8 @@ function microcan(nmodes::Int, nsamples::Int)
 	rvar = randn(nmodes,2,nsamples)
 	#rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
 	# Allocate space.
-	H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
-	#H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
+	#H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
+	H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
 
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
 	# Compute H3 and H2 for each.

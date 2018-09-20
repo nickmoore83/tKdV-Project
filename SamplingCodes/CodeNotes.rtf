@@ -22,6 +22,10 @@ Good idea: We could probably approximate theta+ as function of theta- using a Ta
 - Confirm the scaling result for energy of u_x.\
 \
 \
+\ul Sep 20, 2018\
+\ulnone I modified the code to allow reading from a numbered params file and writing to a similarly numbered output file. This way I can perform multiple runs simultaneously. It appears to work!\
+\
+Parallelizing code: I attempted to make the for loop in microcanonical sample parallel, since this is generally the bottle neck. My first attempt was not successful, but it looks like I am close. One problem is that I need to make rvar, H3vec, H2vec shared arrays, which I did, but I need to modify subroutines to accept this data type. I should either use the paradigm of @ parallel for the for loop (which seemed to be the easiest) or perhaps pmap().\
 \
 \ul Sep 15, 2018\ulnone \
 - I am running the new algorithm (with memory managed by multiple sweeps) on my mac mini. Fixing the bug in macmax/micmax significantly reduced the memory usage. The memory usage is highest during the Gibbs sampling phase, and now it is around 7-9 GB per run. So if I just plan to run one simulation at a time (I can parallelize parts of code), my values for macmax and micmax are fine. If I want to continue to run 3-4 simulations at one time as I am doing now, I should reduce these values somewhat.\
