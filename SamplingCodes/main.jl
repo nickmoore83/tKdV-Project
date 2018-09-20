@@ -124,13 +124,16 @@ function main(run_number::Int=0)
 	end
 	tm0 = time()
 	# Sample using rvar, H3, and H2 from the matchmean computation.
+		println("\n\n\nBeginning sweep 1 of sampling.")
 	gibbs_sample_updn(rset,accstate)
-	# Take several additional passes sampling from the Gibbs distributions.
-	for pass = 2:nsweeps
+	# Take several additional sweeps sampling from the Gibbs distributions.
+	for sweep = 2:nsweeps
+		println("\n\n\nBeginning sweep ", sweep, " of sampling.")
 		rset = microcan(nmodes,nsamp)
 		gibbs_sample_updn(rset,accstate)
 	end
 	cput_sample = signif((time()-tm0)/60, 2)
+	println("\n\nCompleted the Gibbs sampling phase.")
 	println("The CPU time for sampling is ", cput_sample, " minutes.")
 	cputimes = [cput_match, cput_sample]
 	write_all_data(params,thdn_vec,accstate,cputimes,run_number)

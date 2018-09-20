@@ -276,12 +276,12 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>NO</string>
+			<string>YES</string>
 			<key>WindowName</key>
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>59</real>
+				<real>36</real>
 				<real>0.0</real>
 				<real>1055</real>
 				<real>877</real>
@@ -414,7 +414,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1022, 291}</string>
+			<string>{1002, 299}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -8612,10 +8612,6 @@
 					</dict>
 				</array>
 			</dict>
-			<key>Monitor</key>
-			<dict/>
-			<key>Monitor Visible</key>
-			<string>YES</string>
 			<key>Selection</key>
 			<string>Map Value</string>
 			<key>VariableName</key>
@@ -8662,10 +8658,6 @@
 					</dict>
 				</array>
 			</dict>
-			<key>Monitor</key>
-			<dict/>
-			<key>Monitor Visible</key>
-			<string>YES</string>
 			<key>Selection</key>
 			<string>Map Value</string>
 			<key>VariableName</key>
@@ -8676,7 +8668,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>551</real>
+		<real>956</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
