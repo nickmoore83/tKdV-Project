@@ -10,9 +10,10 @@ function extractparams(params::Vector)
 	return nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas
 end
 # Write the macrostate data.
-function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::AbstractString)
+function write_mac_data(accstate::AcceptedState, theta::Float64, 
+		suffix::AbstractString, run_number::Int)
 	# Preliminaries.
-	foldername = datafolder()
+	foldername = datafolder(run_number)
 	macfile = string(foldername,"mac",suffix,".txt")
 	nacc = accstate.naccepted
 	# Get coarse information from microstates.
@@ -38,8 +39,8 @@ function write_mac_data(accstate::AcceptedState, theta::Float64, suffix::Abstrac
 end
 # Write all the data, including basic, microstate, and mincrostate.
 function write_all_data(params::Vector, thdn_vec::Vector{Float64},
-		accstate::Array{AcceptedState}, cputimes::Vector{Float64})
-	foldername = datafolder()
+		accstate::Array{AcceptedState}, cputimes::Vector{Float64}, run_number::Int)
+	foldername = datafolder(run_number)
 	# Write the basic data.
 	basicfile = string(foldername,"basic.txt")
 	nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas = extractparams(params)
@@ -51,8 +52,8 @@ function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 	writedata(basicdata,basicfile)
 	# Write the macro data.
 	for nn=1:nthetas
-		write_mac_data(accstate[nn,1], thup_vec[nn], string("up",nn))
-		write_mac_data(accstate[nn,2], thdn_vec[nn], string("dn",nn))
+		write_mac_data(accstate[nn,1], thup_vec[nn], string("up",nn), run_number)
+		write_mac_data(accstate[nn,2], thdn_vec[nn], string("dn",nn), run_number)
 	end
 end
 #---------------------------------------#
@@ -95,16 +96,17 @@ end
 #---------------------------------------#
 
 #= Main routine to enforce the statistical matching condition. =#
-function main(paramsfile::AbstractString="params.txt")
+function main(run_number::Int=0)
 	# Preliminaries.
-	newfolder(datafolder())
+	newfolder(datafolder(run_number))
+	paramsfile = string("params",run_number,".txt")
 	params = readvec(paramsfile)
 	nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas = extractparams(params)
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
 	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,E0,D0,thup_vec)
 	cput_match = signif(cput_match/60,2)
-	println("CPU time for enforcing matching condition is ", cput_match, " minutes.")
+	println("The CPU time for enforcing matching condition is ", cput_match, " minutes.")
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)	
 	# Initialize the accepted set of states.
 	accstate = Array{AcceptedState}(nthetas,2)
@@ -131,6 +133,6 @@ function main(paramsfile::AbstractString="params.txt")
 	cput_sample = signif((time()-tm0)/60, 2)
 	println("The CPU time for sampling is ", cput_sample, " minutes.")
 	cputimes = [cput_match, cput_sample]
-	write_all_data(params,thdn_vec,accstate,cputimes)
+	write_all_data(params,thdn_vec,accstate,cputimes,run_number)
 end
 
