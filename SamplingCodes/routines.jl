@@ -112,14 +112,18 @@ function getuhat(rvar::Array{Float64}, nn::Int)
 end
 #= Sample from a microcanonical distribution (Gibbs with zero inverse temperature). =#
 function microcan(nmodes::Int, nsamples::Int)
+	println("\nSampling from microcanonical distribution.")
 	# Get all the random samples at once.
 	rvar = randn(nmodes,2,nsamples)
+	#rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
 	# Allocate space.
 	H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
-	println("\nSampling from microcanonical distribution.")
-	# Compute H3 and H2 for each to estimate the acceptance rate.
+	#H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
+
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
+	# Compute H3 and H2 for each.
 	for nn=1:nsamples
+	#@parallel for nn=1:nsamples
 		uhat = getuhat(rvar,nn)
 		H3vec[nn] = ham3(uhat)
 		H2vec[nn] = ham2(uhat)
@@ -127,6 +131,7 @@ function microcan(nmodes::Int, nsamples::Int)
 			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
 		end
 	end
+	println("Microcanonical sampling completed.")
 	return RandSet(H3vec,H2vec,rvar)
 end
 #= Convert each accepted uhat to physical space for analysis. =#
