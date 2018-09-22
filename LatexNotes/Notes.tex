@@ -211,6 +211,57 @@ So the impasse here as follows: It is straightforward to maximize the approximat
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The truncated KdV equations}
 
+\subsection{Nondimensionalization of the Euler system leading to KdV}
+
+I find Johnson's derivation of KdV difficult to follow (he keeps changing his mind about what scales to use) so I am doing it myself. We start with the incompressible Euler equations in dimensional form
+\begin{align}
+\frac{Du}{Dt} = -\frac{1}{\rho} \pd{P}{x} \, , \qquad
+\frac{Dw}{Dt} = -\frac{1}{\rho} \pd{P}{z} - g \, , \qquad
+u_x + w_z = 0
+\end{align}
+which are supplemented with free-surface conditions
+\begin{align}
+&w = h_t + u h_x	\quad \text{on } z = h \\
+&\phi_t + \frac{1}{2} (u^2 + w^2) + g(h-h_0) = 0  	\quad \text{on } z = h
+\end{align}
+and bottom conditions
+\begin{equation}
+w = b_t + u b_x		\quad \text{on } z = b
+\end{equation}
+Henceforth, we will assume the bottom topography is fixed so that the above reduces to $w = u b_x$.
+
+We non-dimensionalize the above system by choosing a length scale of $h_0$ (the upstream depth) and a timescale of $\sqrt{h_0/g}$, which gives a velocity scale of $\sqrt{gh_0}$. 
+Note: Johnson uses separate scales for horizontal versus vertical lengths and velocities, but then we rescales everything to undo this anyway. Instead, I am directly scaling all lengths and velocities on the same scales.
+We write the free surface as 
+\begin{equation}
+h = h_0 + a \eta
+\end{equation}
+where $a$ is a characteristic amplitude. Thus, $\eta$ is dimensionless. We write the pressure as
+\begin{equation}
+P = P_a + \rho g (h_0 - z) + \rho g h_0 p
+\end{equation}
+so that $p$ is dimensionless. Using these scales, the dimensionless Euler equations are
+\begin{align}
+\frac{Du}{Dt} = -p_x \, , \qquad
+\frac{Dw}{Dt} = -p_z \, , \qquad
+u_x + w_z = 0
+\end{align}
+The free-surface conditions are
+\begin{align}
+&w = \eps (\eta_t + u \eta_x) \quad \text{on } z = 1 + \eps \eta \\
+&\phi_t + \frac{1}{2} (u^2 + w^2) + \eps \eta = 0 \quad \text{on } z = 1 + \eps \eta
+\end{align}
+The bottom condition is
+\begin{equation}
+w = u b_x \quad \text{on } z = b
+\end{equation}
+Here, $\eps = a / h_0$ is a small parameter that measures the ratio of wave amplitude to depth.
+
+
+
+
+
+\subsection{Hamiltonian structure}
 We will be using the truncated KdV equations (TKDV) with variable depth, in particular an abrupt depth change (ADC). The upstream depth is normalized to $1$ and the downstream (dimensionless) depth is $D_0$. Accordingly, the upstream and downstream Hamiltonians are given by
 \begin{align}
 \label{Hamiltonian}
