@@ -211,51 +211,26 @@ So the impasse here as follows: It is straightforward to maximize the approximat
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The truncated KdV equations}
 
-\subsection{Nondimensionalization of the Euler system leading to KdV}
+\subsection{The KdV equation}
 
-I find Johnson's derivation of KdV difficult to follow (he keeps changing his mind about what scales to use) so I am doing it myself. We start with the incompressible Euler equations in dimensional form
-\begin{align}
-\frac{Du}{Dt} = -\frac{1}{\rho} \pd{P}{x} \, , \qquad
-\frac{Dw}{Dt} = -\frac{1}{\rho} \pd{P}{z} - g \, , \qquad
-u_x + w_z = 0
-\end{align}
-which are supplemented with free-surface conditions
-\begin{align}
-&w = h_t + u h_x	\quad \text{on } z = h \\
-&\phi_t + \frac{1}{2} (u^2 + w^2) + g(h-h_0) = 0  	\quad \text{on } z = h
-\end{align}
-and bottom conditions
+Following Johnson's derivation the dimensionless KdV equation is (on page 208)
 \begin{equation}
-w = b_t + u b_x		\quad \text{on } z = b
+2 \eta_{\tau} + 3 \eta \eta_{\xi} + \frac{1}{3} \eta_{\xi \xi \xi} = 0
 \end{equation}
-Henceforth, we will assume the bottom topography is fixed so that the above reduces to $w = u b_x$.
-
-We non-dimensionalize the above system by choosing a length scale of $h_0$ (the upstream depth) and a timescale of $\sqrt{h_0/g}$, which gives a velocity scale of $\sqrt{gh_0}$. 
-Note: Johnson uses separate scales for horizontal versus vertical lengths and velocities, but then we rescales everything to undo this anyway. Instead, I am directly scaling all lengths and velocities on the same scales.
-We write the free surface as 
-\begin{equation}
-h = h_0 + a \eta
-\end{equation}
-where $a$ is a characteristic amplitude. Thus, $\eta$ is dimensionless. We write the pressure as
-\begin{equation}
-P = P_a + \rho g (h_0 - z) + \rho g h_0 p
-\end{equation}
-so that $p$ is dimensionless. Using these scales, the dimensionless Euler equations are
+I had to work backwards quite a bit to figure out how this was non-dimensionalized (Johnson keeps rescaling things over and over again). Ultimately, the characteristic scales are
 \begin{align}
-\frac{Du}{Dt} = -p_x \, , \qquad
-\frac{Dw}{Dt} = -p_z \, , \qquad
-u_x + w_z = 0
+& Z^* = h_0 , \quad X^* = \eps^{-1/2} h_0 , \quad T^* = \eps^{-1/2} \sqrt{h_0/g} , \\
+& W^* = \eps^{3/2} \sqrt{g h_0} , \quad U^* = \eps \sqrt{g h_0} , \quad P^* = \eps \rho g h_0
 \end{align}
-The free-surface conditions are
-\begin{align}
-&w = \eps (\eta_t + u \eta_x) \quad \text{on } z = 1 + \eps \eta \\
-&\phi_t + \frac{1}{2} (u^2 + w^2) + \eps \eta = 0 \quad \text{on } z = 1 + \eps \eta
-\end{align}
-The bottom condition is
+where $\eps$ is the ratio of characteristic amplitude to depth
 \begin{equation}
-w = u b_x \quad \text{on } z = b
+\eps = a / h_0
 \end{equation}
-Here, $\eps = a / h_0$ is a small parameter that measures the ratio of wave amplitude to depth.
+The variables $\tau$ and $\xi$ are
+\begin{align}
+\tau = \eps t , \quad \xi = x-t
+\end{align}
+Remember, the privileged KdV scaling is $\delta^2 \sim \eps$ where $\delta = h_0 / \lambda$. If this scaling is inserted into above, then $X^* \sim \lambda$, $T^* \sim \lambda/\sqrt{g h_0}$ which all makes sense.
 
 
 
