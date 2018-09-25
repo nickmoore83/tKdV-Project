@@ -208,6 +208,7 @@ So while \eqref{H3Dir} and \eqref{H3physest} take very similar forms, they diffe
 So the impasse here as follows: It is straightforward to maximize the approximate form of $H_3$ in physical space (the right-hand-side of \eqref{H3phys}), and justifying this maximization can be made completely rigorous in my mind. However, the approximation made by failing to di-alias is apparently not that small. On the other hand, we can calculate $H_3$ exactly in spectral space, but it is not clear how to maximize $H_3$ subject to the constraints --- I can only make a guess at the maximizer. To overcome this issue, one might naturally want to use the de-aliased form of $H_3$ in physical space (by taking $N = 4 \Lambda$ for example), but the problem here is that all discretized functions are not permissible. Only functions that correspond to a Fourier series truncated at wavenumber $\Lambda$ are permissible.
 
 
+\np
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TKDV
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -241,7 +242,7 @@ If we convert KdV back into dimensional form, we get
 \end{equation}
 Here, $\eta$ has units of length, $t$ time, $c = \sqrt{g h_0}$ is the wave speed, and $\xi = x - ct$.
 
-\subsubsection{My own reformulation}
+\subsubsection{My reformulation}
 
 We now seek to non-dimensionalize the KdV equation, but not exactly the same way that Johnson did. Some things we would like to accomplish are:
 \begin{enumerate}
@@ -265,7 +266,7 @@ where we have the dimensionless variables
 \eps = a/h_0 , \quad \delta = h_0/\lambda_p
 \end{align}
 In these dimensionless variables, we have that $\eta$ is periodic for $x \in [0, 2\pi)$ and we have $\mean{\eta^2} = 1$, just as intended.
-Note, in the experiments, $\delta = 0.33$ and $\eps$ lies in the range $2.4 \times 10^{-3}$ to $2.4 \times 10^{-2}$. 
+Note, in the experiments, $\delta = 0.33$ and $\eps$ lies in the range $2.4 \times 10^{-3}$--$2.4 \times 10^{-2}$. 
 
 We will eventually want to rescale $t$, to look at long-time scales as is typically done in KdV analysis. Accordingly, we will define
 \begin{equation}
@@ -290,9 +291,12 @@ u_{std} = const \times L_0^{-1/2} E_0^{1/2}
 \end{equation}
 where I really don't care what the constant is. The main thing I wanted to see was why $L_0^{-1/2}$ appears, and the above shows this.
 
-The main difficulty I have with this formulation is that there is no reason to expect the spatial period of $u$ to have anything to do with the tank width $L_0$. More logically, the spatial period of $u$ should correspond to a characteristic wavelength in the problem, either the peak or maximum wavelength. The latter is more likely to be true in a literal sense, but I believe the peak wavelength provides a more reasonable scale for non-dimensionalization.
+The main difficulty I have with this formulation is that there is no reason to expect the spatial period of $u$ to be related to the tank width $L_0$. More logically, the spatial period of $u$ should correspond to a characteristic wavelength in the problem, either the peak or maximum wavelength. The latter is more likely to be true in a literal sense, but I believe the peak wavelength provides a more reasonable scale for non-dimensionalization.
+
+Otherwise, the two formulations are completely equivalent. Notice that $\mu \lambda^{-3}$ in Andy's notation plays the role of $\delta^2$ in my notation, and $E_0^{1/2} \lambda^{-3/2}$ in Andy's notation plays the role of $\eps$ in my notation.
 
 
+\np
 \subsection{Hamiltonian structure}
 We will be using the truncated KdV equations (TKDV) with variable depth, in particular an abrupt depth change (ADC). The upstream depth is normalized to $1$ and the downstream (dimensionless) depth is $D_0$. Accordingly, the upstream and downstream Hamiltonians are given by
 \begin{align}
