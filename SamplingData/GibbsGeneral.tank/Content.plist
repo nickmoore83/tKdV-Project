@@ -276,12 +276,12 @@
 			<key>ViewSizeSeparated</key>
 			<string></string>
 			<key>Visible</key>
-			<string>YES</string>
+			<string>NO</string>
 			<key>WindowName</key>
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>36</real>
+				<real>114</real>
 				<real>0.0</real>
 				<real>1055</real>
 				<real>877</real>
@@ -4257,7 +4257,7 @@
 						<key>Max</key>
 						<string>1</string>
 						<key>Min</key>
-						<string>1e-2</string>
+						<string>5e-3</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -4298,7 +4298,7 @@
 			<string>microstate u log histograms</string>
 			<key>WindowPos</key>
 			<array>
-				<real>422</real>
+				<real>814</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -5028,7 +5028,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{986, 299}</string>
+			<string>{1125, 292}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -5149,7 +5149,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run0</string>
+				<string>BigRun1</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -5164,7 +5164,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>3</string>
+				<string>2</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -8668,7 +8668,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>848</real>
+		<real>1091</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
