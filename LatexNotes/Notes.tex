@@ -288,7 +288,7 @@ Peak wavelength			& $\lambda_p^{\pm}$	& 38 cm		& 25 cm \\
 
 We start with the variable-depth KdV equation given by Johnson in Eq.(3.149) on page 272 in dimensionless form 
 \begin{equation}
-\label{vardKdVJohnson}
+\label{varKdVJohnson}
 2 H_X + \frac{3}{D^{7/4}} H H_\xi + \frac{1}{3} D^{1/2} H_{\xi \xi \xi} = 0
 \end{equation}
 All variables above are dimensionless, and by working backwards we can figure out how they relate to the original, dimensional variables. Below, the dimensional quantities are indicated with an overbar wherever there is the possibility of ambiguity
@@ -311,16 +311,42 @@ To achieve 3, we can use the characteristic wavelength from shallow water theory
 \end{equation}
 where $f_c$ is a characteristic forcing frequency and $c = \sqrt{g d}$ is the local wavespeed (in shallow-water theory). It is tempting to simply set $f_c$ to the peak forcing frequency $f_p$, which would result in the characteristic wavelength $\lambda_c$ being the peak wavelength $\lambda_p$. Perhaps a better choice, though, is to let $\lambda_c$ be an integer multiple of $\lambda_p$ to allow scales larger than the peak wavelength (which are certainly present in the experiments). We therefore choose
 \begin{equation}
-\lambda_c = M \sqrt{gd} / f_p
+\lambda_c = M \lambda_p = M \sqrt{gd} / f_p
 \end{equation}
 where $M$ is an integer (on the order of 10 or so). Notice that Johnson's formulation already incorporates the correct scaling of $\sqrt{d}$ to define $\xi$, which will make things convenient. Thus, the main change we need to make is to introduce the dimensionless variable
 \begin{equation}
 \zeta = \frac{2\pi}{\lambda_c} (\bar{x} - c \bar{t}) 
-= \frac{2\pi f_p}{M \sqrt{gd}} (\bar{x} - c \bar{t}) 
-= \frac{2\pi f_p}{M \eps^{1/2}}  \sqrt{\frac{h_0}{g}} \, \xi
+= \frac{2 \pi \delta}{M \eps^{1/2}} \, \xi
 \end{equation}
-Then Eq.~\eqref{vardKdVJohnson} becomes
+where
+\begin{equation}
+\delta = h_0 / \lambda_0 = f_p \sqrt{h_0/g}
+\end{equation}
+To clean things up a little, lets also introduce a slightly different long-space coordinate that uses the upstream wavelength $\lambda_0$ as a characteristic scale instead of $h_0$,
+\begin{equation}
+s = \frac{2 \pi \beta}{\lambda_0} \bar{x} = 2 \pi \beta \delta \eps^{-3/2} X
+\end{equation}
+where $\beta$ is a small parameter that can be taken to be, for example, $\eps$ or $\delta^2$ or something else.
 
+Then Eq.~\eqref{varKdVJohnson} becomes
+\begin{equation}
+\label{varKdVugly}
+2 \beta H_s + \frac{3 \eps}{M} D^{-7/4} H H_\zeta
++ \frac{4 \pi^2 \delta^2}{3 M^3} D^{1/2} H_{\zeta \zeta \zeta} = 0
+\end{equation}
+
+\subsubsection{Final formulation}
+Equation \eqref{varKdVugly} is essentially in the form we want to use, except that the notation is bad. In particular, we will want to reserve the symbol $H$ for the Hamiltonian. So making superficial changes to the notation gives
+\begin{align}
+2 \beta u_s + \frac{3 \eps}{M} D^{-7/4} \, u u_x
++ \frac{4 \pi^2 \delta^2}{3 M^3} D^{1/2} \, u_{xxx} = 0
+\end{align}
+The definition of each of these dimensionless variables in terms of the original, physical ones are
+\begin{align}
+& u = D^{1/4} \, \bar{\eta}/a \\
+& x = 2\pi \lambda_c^{-1} (\bar{x} - c \bar{t})  \\
+& s = 2 \pi \beta \lambda_0^{-1} \bar{x}
+\end{align}
 
 
 
