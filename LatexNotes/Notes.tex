@@ -324,28 +324,41 @@ where
 \end{equation}
 To clean things up a little, lets also introduce a slightly different long-space coordinate that uses the upstream wavelength $\lambda_0$ as a characteristic scale instead of $h_0$,
 \begin{equation}
-s = \frac{2 \pi \beta}{\lambda_0} \bar{x} = 2 \pi \beta \delta \eps^{-3/2} X
+s = \frac{2 \pi \beta}{M \lambda_0} \bar{x} = 2 \pi \beta M^{-1} \delta \eps^{-3/2} X
 \end{equation}
 where $\beta$ is a small parameter that can be taken to be, for example, $\eps$ or $\delta^2$ or something else.
 
 Then Eq.~\eqref{varKdVJohnson} becomes
 \begin{equation}
 \label{varKdVugly}
-2 \beta H_s + \frac{3 \eps}{M} D^{-7/4} H H_\zeta
-+ \frac{4 \pi^2 \delta^2}{3 M^3} D^{1/2} H_{\zeta \zeta \zeta} = 0
+2 \beta H_s + 3 \eps D^{-7/4} H H_\zeta
++ \frac{4 \pi^2 \delta^2}{3 M^2} D^{1/2} H_{\zeta \zeta \zeta} = 0
 \end{equation}
 
 \subsubsection{Final formulation}
 Equation \eqref{varKdVugly} is essentially in the form we want to use, except that the notation is bad. In particular, we will want to reserve the symbol $H$ for the Hamiltonian. So making superficial changes to the notation gives
 \begin{align}
-2 \beta u_s + \frac{3 \eps}{M} D^{-7/4} \, u u_x
-+ \frac{4 \pi^2 \delta^2}{3 M^3} D^{1/2} \, u_{xxx} = 0
+2 \beta u_s + 3 \eps D^{-7/4} \, u u_x
++ \frac{4 \pi^2 \delta^2}{3 M^2} D^{1/2} \, u_{xxx} = 0
 \end{align}
-The definition of each of these dimensionless variables in terms of the original, physical ones are
+Importantly, $u(x,s)$ is $2\pi$-periodic in $x$ and has normalized energy $\mean{u^2} = 1$.
+The definitions of each of the dimensionless variables in terms of the original, physical ones (denoted with a bar) are
 \begin{align}
 & u = D^{1/4} \, \bar{\eta}/a \\
 & x = 2\pi \lambda_c^{-1} (\bar{x} - c \bar{t})  \\
-& s = 2 \pi \beta \lambda_0^{-1} \bar{x}
+& s = 2 \pi \beta M^{-1} \lambda_0^{-1} \bar{x}
+\end{align}
+A list of the fixed parameters is
+\begin{align}
+& \lambda_0 = \sqrt{g h_0}/f_p \quad \text{(upstream wavelength)} \\
+& \eps = a / h_0 \quad \text{(dimensionless ratio of wave amplitude to depth)} \\
+& \delta = h_0 / \lambda_0 \quad \text{(dimensionless ratio of depth to upstream wavelength)} \\
+& \beta	\quad \text{(an unspecified small parameter, usually $\eps$ or $\delta^2$)}
+\end{align}
+Here is a list of the parameters that vary in space due to the fact that depth $d$ varies in space
+\begin{align}
+&\lambda_c = M \lambda_p = M \sqrt{gd}/f_p \quad \text{(characteristic wavelength as it varies in space)} \\
+&D = d/h_0 \quad \text{(dimensionless depth ratio as it varies in space)} \\	
 \end{align}
 
 
