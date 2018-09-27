@@ -73,6 +73,32 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Experimental Preliminaries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experimental parameters}
+
+Some relevant parameters from the experiment are given in the table.
+
+% Table
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{table}%[htbp]
+\begin{center}
+\caption{Basic experimental parameters and scales.}
+\label{paramtable}
+\begin{tabular}{l l l}
+\hline Parameter & Upstream  value \,\, & Downstream value \\
+\hline
+peak forcing frequency			& 2 Hz			& N/A \\
+depth, $h$						& 12.5 cm			& 3 cm \\
+peak wavelength, $\lambda_p$		& 38 cm			& 25 cm \\
+peak wavenumber, $k_p$			& 0.17 rad/cm		& 0.25 rad/cm \\
+dimensionless depth, $k_p h$\,\,\,		& 2.1			& 0.76 \\
+\end{tabular}
+\end{center}
+\end{table}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Mathematical Preliminaries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mathematical preliminaries}
@@ -215,6 +241,15 @@ So the impasse here as follows: It is straightforward to maximize the approximat
 \section{The truncated KdV equations}
 
 \subsection{The KdV equation}
+
+\subsubsection{Non-dimensionalization}
+
+The KdV equation in dimensional form is
+\begin{equation}
+2 \eta_t + \frac{3 c}{h_0} \eta \eta_{\xi} + \frac{c h_0^2}{3} \eta_{\xi \xi \xi} = 0
+\end{equation}
+Here, $\eta$ has units of length, $t$ time, $c = \sqrt{g h_0}$ is the wave speed, and $\xi = x - ct$. I obtained this equation by starting from Johnson's dimensionless equation ()
+
 
 \subsubsection{Johnson's formulation}
 Following Johnson's derivation, the dimensionless KdV equation is (on page 208)
@@ -536,54 +571,6 @@ Figure \ref{Lambda16Run} shows a run with $\Lambda = 16$, with $10^7$ samples pe
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  
-\newpage
-\newpage
-\section{Experimental parameters}
-
-Some relevant parameters from the experiment are given in the table.
-
-% Table
-%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-\begin{table}%[htbp]
-\begin{center}
-\caption{Some relevant experimental parameters} 
-\vspace{0.3 pc}
-\begin{tabular}{c l l}
-\hline
-\hspace{0.5pc} Symbol
-\hspace{0.5pc} & Meaning 
-\hspace{0.5pc} & Value \\
-\hline
-N/A		& Length of the experimental tank (in wave direction)	& 6 m	\\
-$L_0$	& Width of the experimental tank	 (transverse)		& $L_0 = $ 20 cm	\\
-$f_0$	& Dominant forcing frequency in experiments	& $f_0 = $ 2 Hz	\\
-$\hm$	& Depth on deep side						& $\hm = 12.5$ cm \\
-$\hp$	& Depth on shallow side					& $\hp = 3$ cm \\
-$\lamm$	& Wavelength induced by 2 Hz forcing on deep side	& $\lamm = 38$ cm	\\
-$\lamp$	& Wavelength induced by 2 Hz forcing on shallow side	& $\lamp = 25$ cm	\\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
- %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
- 
-
-
-\begin{comment}
-% Majda's notes typed up
-\section{Deterministic model for waves over abrupt depth change}
-
-The surface-displacement is denoted $u(x,t)$.
-
-Modeling assumptions
-\begin{enumerate}
-\item Waves in a narrow channel (width $L_0$) are nearly unidirectional and $2 \pi L_0$ periodic (purely a mathematical idealization, not realistic I believe). Where $L_0 < \lambda$, with $\lambda$ a characteristic wavelength. As seen in the table, this later assumption is reasonable since $L_0 / \lamm \approx 0.5$
-\item The role of the paddle forcing is to generate a state with `zero momentum', $M = \intt u \, dx = 0$ (this assumption is strongly supported by experimental measurements pointwise!) and with some given energy $E_0 = \frac{1}{2} \intt u^2 \, dx$ (not an assumption, just a statement). Here, $E_0$ is a function of the strength of the paddle forcing.
-\item Assume a Galerkin truncation of $u(x,t) \approx u_{\Lambda}(x,t)$, where $\Lambda$ (fixed) will probably be 20 or 30.
-\item The `time' coordinate $t$  corresponds physically to a downstream spatial coordinate (i.e.~$X \approx \eps x$ in Johnson's notation). The abrupt depth change (ADC) corresponds to $t = t_0$ or $T_{ADC}$.
-\end{enumerate}
-\end{comment}
-
 
 \bibliographystyle{plain}
 \bibliography{Notesbib}
