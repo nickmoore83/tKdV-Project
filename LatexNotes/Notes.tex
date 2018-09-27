@@ -298,17 +298,17 @@ All variables above are dimensionless, and by working backwards we can figure ou
 \end{align}
 Here $d$ is the variable depth (which is dimensional) $c = \sqrt{g d}$ is the local wave speed, and $D = d/h_0$ is the depth ratio.
 
-There are a few important things to remember when we reformulate this equation
+There are a few important things to remember when we reformulate this equation:
 \begin{enumerate}
 \item We must retain Johnson's choice to keep the combination $D^{1/4} \eta$ together because that quantity matches across the abrupt depth change (the raw surface displacement does not match).
 \item We want to normalize the standard deviation (or energy) of $\eta$ and therefore want to keep Johnson's choice to scale surface displacement on $a = \eps h_0$.
-\item We have to scale the spatial variable (called $x$ or $\xi$) on a characteristic wavelength, which will be a different value on either side of the abrupt depth change. We have to do this so that the assumption of spatial periodicity will be reasonably satisfied.
+\item We have to scale the spatial variable (called $x$ or $\xi$) on a characteristic wavelength, which will be a different value on either side of the abrupt depth change. We have to do this so that the assumption of spatial periodicity will be reasonably satisfied on both sides.
 \end{enumerate}
-To achieve 3, we can be guided by the characteristic wavelength from shallow water theory
+To achieve 3, we can use the characteristic wavelength from shallow water theory as a guide,
 \begin{equation}
 \lambda_c = {c}/{f_c} = \sqrt{g d}/f_c
 \end{equation}
-where $f_c$ is a characteristic forcing frequency and $c = \sqrt{g d}$ is the local wavespeed (in shallow-water theory). It is tempting to simply set $f_c$ to the peak forcing frequency $f_p$, which would result in the characteristic wavelength $\lambda_c$ being the peak wavelength $\lambda_p$. Perhaps a better choice, though, is to let $\lambda_c$ be an integer multiple of $\lambda_p$ to allow scales larger than the peak wavelength (which are certainly present in the experiments). Therefore, let us choose
+where $f_c$ is a characteristic forcing frequency and $c = \sqrt{g d}$ is the local wavespeed (in shallow-water theory). It is tempting to simply set $f_c$ to the peak forcing frequency $f_p$, which would result in the characteristic wavelength $\lambda_c$ being the peak wavelength $\lambda_p$. Perhaps a better choice, though, is to let $\lambda_c$ be an integer multiple of $\lambda_p$ to allow scales larger than the peak wavelength (which are certainly present in the experiments). We therefore choose
 \begin{equation}
 \lambda_c = M \sqrt{gd} / f_p
 \end{equation}
