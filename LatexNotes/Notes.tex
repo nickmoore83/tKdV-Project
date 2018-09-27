@@ -301,13 +301,14 @@ Here $d$ is the variable depth (which is dimensional) $c = \sqrt{g d}$ is the lo
 There are a few important things to remember when we reformulate this equation
 \begin{enumerate}
 \item We must retain Johnson's choice to keep the combination $D^{1/4} \eta$ together because that quantity matches across the abrupt depth change (the raw surface displacement does not match).
-\item We have to scale the spatial variable (called $x$ or $\xi$) on a characteristic wavelength, which will be a different value on either side of the abrupt depth change. We have to do this so that the assumption of spatial periodicity will be reasonably satisfies.
+\item We want to normalize the standard deviation (or energy) of $\eta$ and therefore want to keep Johnson's choice to scale surface displacement on $a = \eps h_0$.
+\item We have to scale the spatial variable (called $x$ or $\xi$) on a characteristic wavelength, which will be a different value on either side of the abrupt depth change. We have to do this so that the assumption of spatial periodicity will be reasonably satisfied.
 \end{enumerate}
-To achieve 2, we can be guided by the characteristic wavelength from shallow water theory
+To achieve 3, we can be guided by the characteristic wavelength from shallow water theory
 \begin{equation}
 \lambda_c = {c}/{f_c} = \sqrt{g d}/f_c
 \end{equation}
-where $f_c$ is a characteristic forcing frequency and $c = \sqrt{g d}$ is the local wavespeed (in shallow-water theory). It is tempting to simply use the peak forcing frequency $f_p$ for $f_c$, which would result in the characteristic wavelength $\lambda_c$ being the peak wavelength $\lambda_p$. Perhaps a better choice, though, is to let $\lambda_c$ be an integer multiple of $\lambda_p$ to allow scales larger than the peak wavelength (which are certainly present in the experiments). Therefore, let us choose
+where $f_c$ is a characteristic forcing frequency and $c = \sqrt{g d}$ is the local wavespeed (in shallow-water theory). It is tempting to simply set $f_c$ to the peak forcing frequency $f_p$, which would result in the characteristic wavelength $\lambda_c$ being the peak wavelength $\lambda_p$. Perhaps a better choice, though, is to let $\lambda_c$ be an integer multiple of $\lambda_p$ to allow scales larger than the peak wavelength (which are certainly present in the experiments). Therefore, let us choose
 \begin{equation}
 \lambda_c = M \sqrt{gd} / f_p
 \end{equation}
@@ -318,47 +319,22 @@ where $M$ is an integer (on the order of 10 or so). Notice that Johnson's formul
 
 
 \vsp{10}
-\subsubsection{Johnson's formulation}
-Following Johnson's derivation, the dimensionless KdV equation is (on page 208)
-\begin{equation}
-2 \eta_{\tau} + 3 \eta \eta_{\xi} + \frac{1}{3} \eta_{\xi \xi \xi} = 0
-\end{equation}
-I had to work backwards quite a bit to figure out how this was non-dimensionalized (Johnson keeps rescaling things over and over again). Ultimately, the characteristic scales are
-\begin{align}
-& X^* = \eps^{-1/2} h_0 ,\quad T^* = \eps^{-1/2} \sqrt{h_0/g} , \quad \eta^* = \eps h_0, \\
-& Z^* = h_0 , \quad U^* = \eps \sqrt{g h_0} , \quad W^* = \eps^{3/2} \sqrt{g h_0} , \quad P^* = \eps \rho g h_0
-\end{align}
-where $\eps$ is the ratio of characteristic amplitude to depth
-\begin{equation}
-\eps = a / h_0
-\end{equation}
-The variables $\tau$ and $\xi$ are
-\begin{align}
-\tau = \eps t , \quad \xi = x-t
-\end{align}
-Remember, the privileged KdV scaling is $\delta^2 \sim \eps$ where $\delta = h_0 / \lambda$. If this scaling is inserted into above, then $X^* \sim \lambda$, $T^* \sim \lambda/\sqrt{g h_0}$ which all makes sense.
 
-If we convert KdV back into dimensional form, we get
-\begin{equation}
-2 \eta_t + \frac{3 c}{h_0} \eta \eta_{\xi} + \frac{c h_0^2}{3} \eta_{\xi \xi \xi} = 0
-\end{equation}
-Here, $\eta$ has units of length, $t$ time, $c = \sqrt{g h_0}$ is the wave speed, and $\xi = x - ct$.
+\subsubsection{Miscellaneous }
+
+
+
+
 
 \subsubsection{My reformulation}
 
-We now seek to non-dimensionalize the KdV equation, but not exactly the same way that Johnson did. Some things we would like to accomplish are:
-\begin{enumerate}
-\item When recast in dimensionless variables, $\eta$ should be periodic on the interval $[0, 2\pi)$ in order to make the Fourier notation simple.
-\item We want to rescale $\eta$ to have unit energy in order to make the Hamiltonian sampling simple.
-\end{enumerate}
-First, we observe there are a few lengthscales in the experiment that may be relevant: the upstream depth $h^- = 12.5$ cm, the tank width $L_0 = 20$ cm, the peak wavelength $\lambda_p^- = 38$ cm (induced by the peak forcing frequency as calculated by the dispersion relation), and possibly the maximum wavelength present $\lambda_{max}^{-} = ?$. First, since we want $\eta$ to be periodic on $[0,2 \pi)$ in dimensionless variables, the most logical choice for scaling $x$ is a wavelength, either the peak or max. Lets choose the peak. Next, since we want dimensionless $\eta$ to have unit energy, we {\em must} scale $\eta$ by the characteristic amplitude $a = \etastd = \mean{\eta^2}^{1/2}$, where the mean is taken over a sufficiently long time or distance. We therefore introduce dimensionless variables, denoted by a tilde
+We therefore introduce dimensionless variables, denoted by a tilde
 \begin{align}
 & x = \frac{\lambda_p}{2\pi} \tilde{x} , \quad 
 t = \frac{\lambda_p}{2\pi c} \tilde{t} , \quad
 \eta = a \tilde{\eta} \\
 & \xi = x-ct = \frac{\lambda_p}{2\pi} (\tilde{x} - \tilde{t}) = \frac{\lambda_p}{2\pi} \tilde{\xi}
 \end{align}
-
 Then in dimensionless variables (after dropping the tildes), the system is given by
 \begin{equation}
 \eta_t + \frac{3}{2}\eps \eta \eta_{\xi} + \frac{2 \pi^2}{3} \delta^2 \eta_{\xi \xi \xi} = 0
@@ -376,40 +352,7 @@ We will eventually want to rescale $t$, to look at long-time scales as is typica
 \end{equation}
 where $\beta$ is usually either $\eps$ or $\delta^2$ (or we can choose it to be something more appropriate for the experiments). Of course, the effect of this rescaling would be to introduce a factor of $\beta$ in front of the first term $\eta_{\tau}$.
 
-Finally, since we want to study variable-depth KdV, we will ultimately want to interchange the roles of space and time as Johnson does on p. 269. So we will have to modify some of this non-dimensionalization. I had to wrap my mind around the classical case first though.
 
-
-\subsubsection{Comparison to variables in Andy's original notes}
-In Andy's original notes (as well as in Di Qi's latex notes), the width of the tank $L_0$ was used for non-dimensionalizing $x$ (as well as $\xi$). In comparing our two formulations, the main subtlety is the energy, defined as
-\begin{equation}
-E_0 = \frac{1}{2} \int_{0}^{2 \pi L_0} u^2 dx
-\end{equation}
-where $u$ is displacement and has units of length. Thus, $E_0$ has units of length cubed (it took me a while to realize this is the main subtlety in reconciling the two formulations). The standard deviation of displacement is
-\begin{equation}
-u_{std} = \frac{1}{\sqrt{2 \pi L_0}} \left( \int_{0}^{2\pi L_0} u^2 dx \right)^{1/2}
-\end{equation}
-or in Andy's / Di Qi's notation
-\begin{equation}
-u_{std} = const \times L_0^{-1/2} E_0^{1/2}
-\end{equation}
-where I really don't care what the constant is. The main thing I wanted to see was why $L_0^{-1/2}$ appears, and the above shows this.
-
-The main difficulty I have with this formulation is that there is no reason to expect the spatial period of $u$ to be related to the tank width $L_0$. More logically, the spatial period of $u$ should correspond to a characteristic wavelength in the problem, either the peak or maximum wavelength. The latter is more likely to be true in a literal sense, but I believe the peak wavelength provides a more reasonable scale for non-dimensionalization.
-
-Otherwise, the two formulations are completely equivalent. Notice that $\mu \lambda^{-3}$ in Andy's notation plays the role of $\delta^2$ in my notation, and $E_0^{1/2} \lambda^{-3/2}$ in Andy's notation plays the role of $\eps$ in my notation.
-
-
-\subsubsection{Reformulating variable-depth KdV}
-
-We now seek to formulate the variable-depth KdV in a similar fashion. We start with Johnson's Eq. (3.148), which is written in dimensionless variables
-\begin{equation}
-2 \sqrt{D} \eta_X + \frac{1}{2} \frac{D'(X)}{\sqrt{D}} \eta + \frac{3}{D} \eta \eta_\xi + \frac{1}{3} D \eta_{\xi \xi \xi} = 0
-\end{equation}
-The first task is to convert this to dimensional form. For this, we now denote dimensionless variables with a tilde and use the relationships
-\begin{align}
-\eta = \eps h_0 \tilde{\eta} , \quad x = \eps^{-1/2} h_0 \tilde{x} = \eps^{-3/2} h_0 \tilde{X}
-\end{align}
-The trickiest part relates to $\xi$.
 
 
 \np
