@@ -248,7 +248,21 @@ The KdV equation in dimensional form is
 \begin{equation}
 2 \eta_t + \frac{3 c}{h_0} \eta \eta_{\xi} + \frac{c h_0^2}{3} \eta_{\xi \xi \xi} = 0
 \end{equation}
-Here, $\eta$ has units of length, $t$ time, $c = \sqrt{g h_0}$ is the wave speed, and $\xi = x - ct$. I obtained this equation by starting from Johnson's dimensionless equation (3.28) on page 208 and working backwards to untangle the scales that he had used to non-dimensionalize.
+Here, $\eta$ has units of length, $t$ time, $h_0$ is the depth, $c = \sqrt{g h_0}$ is the wave speed, and $\xi = x - ct$. I obtained this equation by starting from Johnson's dimensionless equation (3.28) on page 208 and working backwards to untangle the scales that he had used to non-dimensionalize.
+Alternatively, when the first term is expressed as a spatial derivative, the dimensional KdV equation is
+\begin{equation}
+2 \eta_x + \frac{3}{h_0} \eta \eta_{\xi} + \frac{h_0^2}{3} \eta_{\xi \xi \xi} = 0
+\end{equation}
+Notice the only difference is the absence of the wavespeed $c$ and the first term is now a spatial derivative.
+
+The important thing to remember is that Johnson uses these characteristic scales for non-dimensionalizing (characteristic scales denoted by a *)
+\begin{align}
+\eta^* = \eps h_0 , \quad
+x^* = \eps^{-1/2} h_0 , \quad
+t^* = \eps^{-1/2} h_0/c
+\end{align}
+where $h_0$ is a characteristic depth (say the upstream depth), $c = \sqrt{g h_0}$ the corresponding wave speed, and $\eps = a / h_0$ is the ratio of wave amplitude to depth. Roughly speaking, we want to alter Johnson's non-dimensionalization so that $x$ is scaled on some characteristic wavelength (and $t$ scaled accordingly). Importantly, we need to account for variable depth.
+
 
 Let's establish some basic scales and notation:
 % Table
