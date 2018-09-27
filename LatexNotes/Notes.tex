@@ -288,6 +288,7 @@ Peak wavelength			& $\lambda_p^{\pm}$	& 38 cm		& 25 cm \\
 
 We start with the variable-depth KdV equation given by Johnson in Eq.(3.149) on page 272 in dimensionless form 
 \begin{equation}
+\label{vardKdVJohnson}
 2 H_X + \frac{3}{D^{7/4}} H H_\xi + \frac{1}{3} D^{1/2} H_{\xi \xi \xi} = 0
 \end{equation}
 All variables above are dimensionless, and by working backwards we can figure out how they relate to the original, dimensional variables. Below, the dimensional quantities are indicated with an overbar wherever there is the possibility of ambiguity
@@ -312,7 +313,14 @@ where $f_c$ is a characteristic forcing frequency and $c = \sqrt{g d}$ is the lo
 \begin{equation}
 \lambda_c = M \sqrt{gd} / f_p
 \end{equation}
-where $M$ is an integer (on the order of 10 or so). Notice that Johnson's formulation already incorporates the correct scaling of $\sqrt{d}$ to define $\xi$, which will make things convenient.
+where $M$ is an integer (on the order of 10 or so). Notice that Johnson's formulation already incorporates the correct scaling of $\sqrt{d}$ to define $\xi$, which will make things convenient. Thus, the main change we need to make is to introduce the dimensionless variable
+\begin{equation}
+\zeta = \frac{2\pi}{\lambda_c} (\bar{x} - c \bar{t}) 
+= \frac{2\pi f_p}{M \sqrt{gd}} (\bar{x} - c \bar{t}) 
+= \frac{2\pi f_p}{M \eps^{1/2}}  \sqrt{\frac{h_0}{g}} \, \xi
+\end{equation}
+Then Eq.~\eqref{vardKdVJohnson} becomes
+
 
 
 
