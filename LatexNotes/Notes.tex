@@ -338,6 +338,7 @@ Then Eq.~\eqref{varKdVJohnson} becomes
 \subsubsection{Final formulation}
 Equation \eqref{varKdVugly} is essentially in the form we want to use, except that the notation is bad. In particular, we will want to reserve the symbol $H$ for the Hamiltonian. So making superficial changes to the notation gives
 \begin{align}
+\label{varKdV1}
 2 \beta u_s + 3 \eps D^{-7/4} \, u u_x
 + \frac{4 \pi^2 \delta^2}{3 M^2} D^{1/2} \, u_{xxx} = 0
 \end{align}
@@ -363,23 +364,26 @@ Here is a list of the parameters that vary in space due to the fact that depth $
 \end{align}
 Note, in the experiments, $\delta = 0.33$ and $\eps$ lies in the range $2.4 \times 10^{-3}$--$2.4 \times 10^{-2}$. 
 
+Let's make one more cosmetic change. Divide Eq.~\eqref{varKdV1} by $3 \delta^2$ and set $\beta = 3\delta^2/2$ to get
+\begin{align}
+\label{varKdV}
+u_s + \eps \delta^{-2} D^{-7/4} \, u u_x
++ \mu D^{1/2} \, u_{xxx} = 0
+\end{align}
+where
+\begin{equation}
+\mu = \frac{4 \pi^2}{9 M^2}
+\end{equation}
 
-
-
-
-\np
-
-\subsection{Hamiltonian structure}
-We will be using the truncated KdV equations (TKDV) with variable depth, in particular an abrupt depth change (ADC). The upstream depth is normalized to $1$ and the downstream (dimensionless) depth is $D_0$. Accordingly, the upstream and downstream Hamiltonians are given by
+Then the Hamiltonian structure is given by
 \begin{align}
 \label{Hamiltonian}
-& H^- = 3 \eps H_3 - \frac{4 \pi^2 \delta^2}{3 M^2} H_2 \\
-& H^+ = 3 \eps D_0^{-7/4} H_3 - \frac{4 \pi^2 \delta^2}{3 M^2} D_0^{1/2} H_2
-%& H^- = E_0^{1/2} H_3 - H_2 \\
-%& H^+ = D_0^{-13/4} E_0^{1/2} H_3 - D_0^{3/2} H_2 \\
+& H^- = \eps \delta^{-2} H_3 - \mu H_2 \\
+& H^+ = \eps \delta^{-2} D_0^{-7/4} H_3 - \mu D_0^{1/2} H_2
 \end{align}
 
 
+\np
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Numerical Methods
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
