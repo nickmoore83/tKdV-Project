@@ -45,7 +45,7 @@
 \newcommand{\sumn}{\sum_{n=1}^{N}}
 \newcommand{\uDir}{u_{\text{Dir}}}
 \newcommand{\Gibbs}{\mathcal{G}}
-
+\newcommand{\ampp}{\mathcal{A}}
 
 
 % Dashed integral
@@ -84,11 +84,11 @@ Some relevant parameters from the experiment are given in the table.
 \begin{table}%[htbp]
 \begin{center}
 \caption{Basic experimental parameters and scales.}
-\label{paramtable}
+\label{exptable}
 \begin{tabular}{l l l}
 \hline Parameter & Upstream  value \,\, & Downstream value \\
 \hline
-peak forcing frequency			& 2 Hz			& N/A \\
+peak forcing frequency, $f_p$\,\,		& 2 Hz			& N/A \\
 depth, $h$						& 12.5 cm			& 3 cm \\
 peak wavelength, $\lambda_p$		& 38 cm			& 25 cm \\
 peak wavenumber, $k_p$			& 0.17 rad/cm		& 0.25 rad/cm \\
@@ -122,28 +122,8 @@ The important thing to remember is that Johnson uses these characteristic scales
 x^* = \eps^{-1/2} h_0 , \quad
 t^* = \eps^{-1/2} h_0/c
 \end{align}
-where $h_0$ is a characteristic depth (say the upstream depth), $c = \sqrt{g h_0}$ the corresponding wave speed, and $\eps = a / h_0$ is the ratio of wave amplitude to depth. We want to alter Johnson's non-dimensionalization so that $x$ is scaled on some characteristic wavelength (and $t$ scaled accordingly). Importantly, we need to account for variable depth.
+where $h_0$ is a characteristic depth (say the upstream depth), $c = \sqrt{g h_0}$ the corresponding wave speed, and $\eps = a / h_0$ is the ratio of wave amplitude to depth. We want to alter Johnson's non-dimensionalization so that $x$ is instead scaled on a characteristic wavelength (and $t$ scaled accordingly). Importantly, we need to account for variable depth.
 
-Let's establish some basic scales and notation:
-% Table
-%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-\begin{table}[h]%[htbp]
-\begin{center}
-\caption{Table.}
-\label{scale_table}
-\begin{tabular}{l l l l}
-\hline Description & Notation & Upstream  value \,\, & Downstream value \\
-\hline
-Characteristic wave amplitude	& $a = \etastd = \mean{\eta^2}^{1/2}$	& varied	& varied \\
-Peak forcing frequency		& $f_p$				& 2 Hz		& N/A \\
-Depth					& $h^{\pm}$			& 12.5 cm		& 3 cm \\
-Peak wavelength			& $\lambda_p^{\pm}$	& 38 cm		& 25 cm \\
-%Peak wavenumber			& $k_p$				& 0.17 rad/cm	& 0.25 rad/cm \\
-%Dimensionless depth			& $k_p h$				& 2.1		& 0.76
-\end{tabular}
-\end{center}
-\end{table}
- %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 
 \subsection{The variable-depth KdV equation}
 
@@ -187,7 +167,7 @@ To clean things up a little, lets also introduce a slightly different long-space
 \begin{equation}
 s = \frac{2 \pi \beta}{M \lambda_0} \bar{x} = 2 \pi \beta M^{-1} \delta \eps^{-3/2} X
 \end{equation}
-where $\beta$ is a small parameter that can be taken to be, for example, $\eps$ or $\delta^2$ or something else.
+where $\beta$ is a small parameter that scale like $\eps$ or $\delta^2$ for example.
 
 Then Eq.~\eqref{varKdVJohnson} becomes
 \begin{equation}
@@ -196,54 +176,74 @@ Then Eq.~\eqref{varKdVJohnson} becomes
 + \frac{4 \pi^2 \delta^2}{3 M^2} D^{1/2} H_{\zeta \zeta \zeta} = 0
 \end{equation}
 
-\subsection{Final formulation}
-Equation \eqref{varKdVugly} is essentially in the form we want to use, except that the notation is bad. In particular, we will want to reserve the symbol $H$ for the Hamiltonian. So making superficial changes to the notation gives
-\begin{align}
-\label{varKdV1}
-2 \beta u_s + 3 \eps D^{-7/4} \, u u_x
-+ \frac{4 \pi^2 \delta^2}{3 M^2} D^{1/2} \, u_{xxx} = 0
-\end{align}
-Importantly, $u(x,s)$ is $2\pi$-periodic in $x$ and has normalized energy $\mean{u^2} = 1$.
-The definitions of each of the dimensionless variables in terms of the original, physical ones (denoted with a bar) are
+\subsection{Final formulation of variable-depth KdV}
+
+Equation \eqref{varKdVugly} is essentially in the form we want to use, except that the notation is bad. In particular, we will want to reserve the symbol $H$ for the Hamiltonian. So lets introduce some new variables
 \begin{align}
 & u = D^{1/4} \, \bar{\eta}/a \\
 & x = 2\pi \lambda_c^{-1} (\bar{x} - c \bar{t})  \\
 & s = 2 \pi \beta M^{-1} \lambda_0^{-1} \bar{x}
 \end{align}
-A list of the fixed parameters is
-\begin{align}
-& \lambda_0 = \sqrt{g h_0}/f_p \quad \text{(upstream wavelength)} \\
-& \eps = a / h_0 \quad \text{(dimensionless ratio of wave amplitude to depth)} \\
-& \delta = h_0 / \lambda_0 \quad \text{(dimensionless ratio of depth to upstream wavelength)} \\
-& \beta	\quad \text{(an unspecified small parameter, usually $\eps$ or $\delta^2$)}
-\end{align}
-Here is a list of the parameters that vary in space due to the fact that depth $d$ varies in space
-\begin{align}
-& c = \sqrt{gd} \quad \text{(the wavespeed as it varies in space)} \\
-&\lambda_c = M \lambda_p = M \sqrt{gd}/f_p \quad \text{(characteristic wavelength as it varies in space)} \\
-&D = d/h_0 \quad \text{(dimensionless depth ratio as it varies in space)} \\	
-\end{align}
-Note, in the experiments, $\delta = 0.33$ and $\eps$ lies in the range $2.4 \times 10^{-3}$--$2.4 \times 10^{-2}$. 
+Above, the original physical variables are denoted with a bar. Importantly, $u(x,s)$ is $2\pi$-periodic in $x$ and has normalized energy $\mean{u^2} = 1$.
 
-Let's make one more cosmetic change. Divide Eq.~\eqref{varKdV1} by $3 \delta^2$ and set $\beta = 3\delta^2/2$ to get
+% Table
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{table}[h]%[htbp]
+\begin{center}
+\caption{Table of parameters}
+\label{paramtable}
+\begin{tabular}{l l l l}
+\hline \multicolumn{4} { c }{Parameters that are constant throughout the domain} \\
+\hline Description & Notation and definition & Units & Value in experiments \\
+\hline
+Peak forcing frequency		& $f_p$						& frequency	& 2 Hz \\
+Characteristic wave amplitude	& $a = \mean{\eta^2}^{1/2}$		& length		& 0.03--0.3 cm \\
+Upstream wavelength			& $\lambda_0 = \sqrt{g h_0}/f_p$	& length		& 56 cm \\
+Amplitude-to-depth ratio		& $\eps = a / h_0$				& dimensionless	& 0.0024--0.024 \\
+Depth-to-wavelength ratio		& $\delta = h_0 / \lambda_0$		& dimensionless		& 0.22 \\
+Amplitude parameter			& $\ampp = \eps \delta^{-2} = ag h_0^{-2} f_p^{-2}$	
+& dimensionless		& 0.05--0.5\\
+Catch-all parameter		& $\mu = 4 \pi^2 / (9 M^2)$			& dimensionless		& 0.27 if $M=4$ \\
+\hline \multicolumn{4} { c }{Parameters that change value across ADC} \\
+\hline Description & Notation and definition & Value in experiments \\
+\hline
+Local depth			& $d$					& length \\
+Local wavespeed		& $c = \sqrt{gd}$			& speed \\
+Local peak wavelength	& $\lambda_p = \sqrt{gd}/f_p$	& length \\
+Characteristic wavelength	& $\lambda_c = M \lambda_p$	& length \\
+Depth ratio			& $D = d/h_0$				& dimensionless
+\end{tabular}
+\end{center}
+\end{table}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+
+
+In Table \ref{paramtable} we provide a list of all the relevant parameters needed to convert these dimensional variables to physical ones. Note that the wavelength $\lambda_0$ is predicted from shallow-water theory and so it differs somewhat from the value in Table \ref{exptable} obtained from the dispersion relation. In terms of the new variables,  Eq.~\eqref{varKdVugly} becomes
+\begin{align}
+\label{varKdV1}
+2 \beta u_s + 3 \eps D^{-7/4} \, u u_x
++ \frac{4 \pi^2 \delta^2}{3 M^2} D^{1/2} \, u_{xxx} = 0
+\end{align}
+
+Let's clean it up now a little bit. Let us set $\beta = 3 \delta^2/2$ and introduce the parameters
+\begin{align}
+\ampp = \eps \delta^{-2} = \frac{ag}{h_0^2 f_p^2} , \qquad
+\mu = \frac{4 \pi^2}{9 M^2}
+\end{align}
+The Eq.~\eqref{varKdV1} becomes
 \begin{align}
 \label{varKdV}
-u_s + \eps \delta^{-2} D^{-7/4} \, u u_x
+u_s + \ampp D^{-7/4} \, u u_x
 + \mu D^{1/2} \, u_{xxx} = 0
 \end{align}
-where
-\begin{equation}
-\mu = \frac{4 \pi^2}{9 M^2}
-\end{equation}
 
 Then the Hamiltonian structure is given by
 \begin{align}
 \label{Hamiltonian}
-& H^- = \eps \delta^{-2} H_3 - \mu H_2 \\
-& H^+ = \eps \delta^{-2} D_0^{-7/4} H_3 - \mu D_0^{1/2} H_2
+& H^- = \ampp H_3 - \mu H_2 \\
+& H^+ = \ampp D_0^{-7/4} H_3 - \mu D_0^{1/2} H_2
 \end{align}
 
-Note: $\eps \delta^{-2} = a f_p^2 / g$ which is an interesting parameter. It suggests an equivalence between driving amplitude and driving frequency.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
