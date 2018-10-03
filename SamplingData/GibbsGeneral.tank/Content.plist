@@ -281,8 +281,8 @@
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>62</real>
-				<real>-1</real>
+				<real>60</real>
+				<real>0.0</real>
 				<real>1055</real>
 				<real>877</real>
 			</array>
@@ -414,7 +414,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1002, 299}</string>
+			<string>{1022, 291}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -650,7 +650,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>String</key>
-						<string>upstream, {\it \theta^-}</string>
+						<string>upstream, {\it \theta^{\minus}}</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -1243,7 +1243,7 @@
 			<array>
 				<dict>
 					<key>CommandName</key>
-					<string>G^-(H^-)</string>
+					<string>G^\minus(H^\minus)</string>
 					<key>CommandType</key>
 					<string>Plot</string>
 					<key>Computation</key>
@@ -1338,7 +1338,7 @@
 				</dict>
 				<dict>
 					<key>CommandName</key>
-					<string>G^-(H^+)</string>
+					<string>G^\minus(H^+)</string>
 					<key>CommandType</key>
 					<string>Plot</string>
 					<key>Computation</key>
@@ -1696,10 +1696,10 @@
 							<key>Inline</key>
 							<dict>
 								<key>Number</key>
-								<string>0.076</string>
+								<string>0.17</string>
 							</dict>
-							<key>SelectedNumber</key>
-							<integer>0</integer>
+							<key>Selected</key>
+							<string>value of thetaup string</string>
 						</dict>
 					</dict>
 					<key>Drawn</key>
@@ -1777,10 +1777,10 @@
 							<key>Inline</key>
 							<dict>
 								<key>Number</key>
-								<string>0.065</string>
+								<string>0.15</string>
 							</dict>
-							<key>SelectedNumber</key>
-							<integer>0</integer>
+							<key>Selected</key>
+							<string>value of thetadn string</string>
 						</dict>
 					</dict>
 					<key>Drawn</key>
@@ -4298,7 +4298,7 @@
 			<string>microstate u log histograms</string>
 			<key>WindowPos</key>
 			<array>
-				<real>814</real>
+				<real>220</real>
 				<real>151</real>
 				<real>578</real>
 				<real>726</real>
@@ -4534,7 +4534,7 @@
 			<array>
 				<dict>
 					<key>CommandName</key>
-					<string>G^-(H^-)</string>
+					<string>G^\minus(H^\minus)</string>
 					<key>CommandType</key>
 					<string>Plot</string>
 					<key>Computation</key>
@@ -5028,7 +5028,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{986, 299}</string>
+			<string>{1125, 292}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -5088,6 +5088,7 @@
 		<string>cpu time for sampling (minutes)</string>
 		<string>number of thetas</string>
 		<string>number of total samples</string>
+		<string>mu</string>
 	</array>
 	<key>Time</key>
 	<dict>
@@ -5155,7 +5156,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>Run1</string>
+				<string>TestRun1</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -5170,7 +5171,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>2</string>
+				<string>3</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -5191,7 +5192,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Open</string>
+			<string>Closed</string>
 			<key>Title</key>
 			<string>Histograms</string>
 			<key>VariableName</key>
@@ -6442,6 +6443,42 @@
 			<string>Real Number</string>
 		</dict>
 		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>4*pi^2/(9*lamfac^2)</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>lamfac</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>lamfac</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Expression</string>
+			<key>VariableName</key>
+			<string>mu</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
 			<key>Comment</key>
 			<string>Extract the theta values</string>
 			<key>VariableName</key>
@@ -6979,7 +7016,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>sqrt(E0)*H3 - H2</string>
+				<string>amp*H3 - H2</string>
 				<key>Numbers</key>
 				<dict>
 					<key>Selected</key>
@@ -7027,7 +7064,7 @@
 						<key>Include</key>
 						<string>On</string>
 						<key>Name</key>
-						<string>E0</string>
+						<string>amp</string>
 						<key>Number Type</key>
 						<integer>0</integer>
 						<key>Type</key>
@@ -7049,6 +7086,8 @@
 			</dict>
 			<key>Selection</key>
 			<string>Map Values</string>
+			<key>ToggleOpen</key>
+			<string>YES</string>
 			<key>VariableName</key>
 			<string>samples of H- under G-</string>
 			<key>VariableType</key>
@@ -7058,7 +7097,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>sqrt(E0)*D0^(-13/4)*H3 - D0^(3/2)*H2</string>
+				<string>amp*D0^(-7/4)*H3 - D0^(1/2)*mu*H2</string>
 				<key>Numbers</key>
 				<dict>
 					<key>Selected</key>
@@ -7106,7 +7145,7 @@
 						<key>Include</key>
 						<string>On</string>
 						<key>Name</key>
-						<string>E0</string>
+						<string>amp</string>
 						<key>Number Type</key>
 						<integer>0</integer>
 						<key>Type</key>
@@ -7142,12 +7181,34 @@
 							<string>D0</string>
 						</dict>
 					</dict>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>mu</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>mu</string>
+						</dict>
+					</dict>
 				</array>
 				<key>Zero</key>
 				<string>Off</string>
 			</dict>
 			<key>Selection</key>
 			<string>Map Values</string>
+			<key>ToggleOpen</key>
+			<string>YES</string>
 			<key>VariableName</key>
 			<string>samples of H+ under G-</string>
 			<key>VariableType</key>
@@ -7463,7 +7524,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>sqrt(E0)*D0^(-13/4)*H3 - D0^(3/2)*H2</string>
+				<string>amp*D0^(-7/4)*H3 - D0^(1/2)*mu*H2</string>
 				<key>Numbers</key>
 				<dict>
 					<key>Selected</key>
@@ -7511,7 +7572,7 @@
 						<key>Include</key>
 						<string>On</string>
 						<key>Name</key>
-						<string>E0</string>
+						<string>amp</string>
 						<key>Number Type</key>
 						<integer>0</integer>
 						<key>Type</key>
@@ -7547,12 +7608,34 @@
 							<string>D0</string>
 						</dict>
 					</dict>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>mu</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>mu</string>
+						</dict>
+					</dict>
 				</array>
 				<key>Zero</key>
 				<string>Off</string>
 			</dict>
 			<key>Selection</key>
 			<string>Map Values</string>
+			<key>ToggleOpen</key>
+			<string>YES</string>
 			<key>VariableName</key>
 			<string>samples of H+ under G+</string>
 			<key>VariableType</key>
@@ -8126,7 +8209,7 @@
 				<key>Digits</key>
 				<string>2</string>
 				<key>Expression</key>
-				<string>{\it \theta^-} = %@</string>
+				<string>{\it \theta^{\minus}} = %@</string>
 				<key>Variables</key>
 				<array>
 					<dict>
@@ -8153,6 +8236,8 @@
 			</dict>
 			<key>Selection</key>
 			<string>Combine</string>
+			<key>ToggleOpen</key>
+			<string>YES</string>
 			<key>VariableName</key>
 			<string>upstream theta string</string>
 			<key>VariableType</key>
@@ -8200,7 +8285,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>-57</string>
+				<string>-58</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -8215,7 +8300,58 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>0, 0.1</string>
+				<string>0.213</string>
+				<key>Variables</key>
+				<array/>
+			</dict>
+			<key>Selection</key>
+			<string>Expression</string>
+			<key>VariableName</key>
+			<string>value of thetaup string</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>0.85 * thup</string>
+				<key>Variables</key>
+				<array>
+					<dict>
+						<key>Include</key>
+						<string>On</string>
+						<key>Name</key>
+						<string>thup</string>
+						<key>Number Type</key>
+						<integer>0</integer>
+						<key>Type</key>
+						<string>Real Number</string>
+						<key>Var</key>
+						<dict>
+							<key>Inline</key>
+							<dict>
+								<key>Number</key>
+								<string>0</string>
+							</dict>
+							<key>Selected</key>
+							<string>value of thetaup string</string>
+						</dict>
+					</dict>
+				</array>
+			</dict>
+			<key>Selection</key>
+			<string>Expression</string>
+			<key>VariableName</key>
+			<string>value of thetadn string</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>Formula</key>
+				<string>0, 0.25</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -8230,7 +8366,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>-100, 20</string>
+				<string>-80, 5</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -8704,7 +8840,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>968</real>
+		<real>884</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
