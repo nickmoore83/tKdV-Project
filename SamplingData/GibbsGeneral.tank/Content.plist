@@ -281,7 +281,7 @@
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>79</real>
+				<real>56</real>
 				<real>0.0</real>
 				<real>1055</real>
 				<real>877</real>
@@ -414,7 +414,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1002, 299}</string>
+			<string>{1022, 291}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -458,7 +458,7 @@
 			<string>microstate information</string>
 			<key>WindowPos</key>
 			<array>
-				<real>2</real>
+				<real>34</real>
 				<real>116</real>
 				<real>1000</real>
 				<real>761</real>
@@ -8704,7 +8704,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>889</real>
+		<real>895</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
