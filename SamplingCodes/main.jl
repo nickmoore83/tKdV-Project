@@ -4,10 +4,10 @@ include("routines.jl")
 # Extract the parameters
 function extractparams(params::Vector)
 	nmodes, nsamp, nsweeps = Int(params[1]), Int(params[2]), Int(params[3])
-	E0, D0, thmin, thmax, dth = params[4:8]
+	amp, D0, lamfac, thmin, thmax, dth = params[4:9]
 	thup_vec = collect(thmin:dth:thmax)
 	nthetas = endof(thup_vec)
-	return nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas
+	return nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas
 end
 # Write the macrostate data.
 function write_mac_data(accstate::AcceptedState, theta::Float64, 
@@ -43,7 +43,7 @@ function write_all_data(params::Vector, thdn_vec::Vector{Float64},
 	foldername = datafolder(run_number)
 	# Write the basic data.
 	basicfile = string(foldername,"basic.txt")
-	nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas = extractparams(params)
+	nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas = extractparams(params)
 	label1 = "# Input parameters: "
 	label2 = "# CPU times for matching mean and for sampling (mins)"
 	label3 = "# Inverse temperature data: number of thetas, theta_ups and theta_dns"
@@ -62,7 +62,7 @@ end
 #= Compute the expected value of the downstream Hamiltonian under
 either the upstream or downstream Gibbs measure with given theta. =#
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
-		E0::Float64, D0::Float64, theta::Float64, gibbsup::Bool)
+		amp::Float64, D0::Float64, lamfac::Int, theta::Float64, gibbsup::Bool)
 	ham_dn_mean, norm_const = 0.,0.
 	for nn=1:endof(H3vec)
 		# Compute the upstream and downstream Hamiltonians.
@@ -77,17 +77,18 @@ function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 	return ham_dn_mean/norm_const
 end
 #= Determine the downstream thetas that satisfy the statistical matching condition. =#
-function matchmean(nmodes::Int, nsamp::Int, E0::Float64, D0::Float64, thup_vec::Vector{Float64})
+function matchmean(nmodes::Int, nsamp::Int, 
+		amp::Float64, D0::Float64, lamfac::Int, thup_vec::Vector{Float64})
 	# Preliminaries
 	nthetas = endof(thup_vec)
 	thdn_vec = zeros(Float64,nthetas)
 	# Sample H3 and H2 from a microcanonical distribution.
 	rset = microcan(nmodes,nsamp)
 	# For each thup, find the corresponding thdn by matching the mean.
-	meanham_dn(theta_dn::Float64) = meanham(rset.H3,rset.H2,E0,D0,theta_dn,false)
+	meanham_dn(theta_dn::Float64) = meanham(rset.H3,rset.H2,amp,D0,lamfac,theta_dn,false)
 	for nn = 1:nthetas
 		# Determine thdn by finding a root of the difference of means.
-		mean_up = meanham(rset.H3,rset.H2,E0,D0,thup_vec[nn],true)
+		mean_up = meanham(rset.H3,rset.H2,amp,D0,lamfac,thup_vec[nn],true)
 		meandiff(theta_dn::Float64) = meanham_dn(theta_dn) - mean_up
 		thdn_vec[nn] = find_zero(meandiff, thup_vec[nn], Order1())
 	end
@@ -101,10 +102,10 @@ function main(run_number::Int=0)
 	newfolder(datafolder(run_number))
 	paramsfile = string("params",run_number,".txt")
 	params = readvec(paramsfile)
-	nmodes, nsamp, nsweeps, E0, D0, thup_vec, nthetas = extractparams(params)
+	nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas = extractparams(params)
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
-	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,E0,D0,thup_vec)
+	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,amp,D0,lamfac,thup_vec)
 	cput_match = signif(cput_match/60,2)
 	println("The CPU time for enforcing matching condition is ", cput_match, " minutes.")
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)	
@@ -118,8 +119,8 @@ function main(run_number::Int=0)
 	for all values of upstream and downstream values of theta. =#
 	function gibbs_sample_updn(rset::RandSet, accstate::Array{AcceptedState})
 		for nn = 1:nthetas
-			gibbs_sample!(rset, accstate[nn,1], E0,1.,thup_vec[nn])
-			gibbs_sample!(rset, accstate[nn,2], E0,D0,thdn_vec[nn])
+			gibbs_sample!(rset, accstate[nn,1], amp,1.,lamfac,thup_vec[nn])
+			gibbs_sample!(rset, accstate[nn,2], amp,D0,lamfac,thdn_vec[nn])
 		end
 	end
 	tm0 = time()

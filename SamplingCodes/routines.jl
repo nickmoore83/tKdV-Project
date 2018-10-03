@@ -161,13 +161,10 @@ function getham(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 	mu = 4*pi^2/(9*lamfac^2)
 	return amp*D0^(-7/4)*H3vec - mu*D0^(1/2)*H2vec
 end
-
-# TO DO: Need amp and lamfac input below; remove E0
-
 #= Sample from a Gibbs distribution with non-zero theta, 
 given that H3 and H2 have already been sampled from microcanonical distribution. =#
 function gibbs_sample!(rset::RandSet, accstate::AcceptedState, 
-		E0::Float64, D0::Float64, theta::Float64)
+		amp::Float64, D0::Float64, lamfac::Int, theta::Float64)
 	# If macmax is already exceeded, then return immediately.	
 	micmax, macmax = maxparams()
 	if accstate.naccepted >= macmax; return; end
