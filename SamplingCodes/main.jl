@@ -66,8 +66,8 @@ function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64},
 	ham_dn_mean, norm_const = 0.,0.
 	for nn=1:endof(H3vec)
 		# Compute the upstream and downstream Hamiltonians.
-		hamup = sqrt(E0)*H3vec[nn] - H2vec[nn]
-		hamdn = D0^(-13/4)*sqrt(E0)*H3vec[nn] - D0^(3/2)*H2vec[nn]
+		hamup = getham(H3vec,H2vec,amp,1.,lamfac)
+		hamdn = getham(H3vec,H2vec,amp,D0,lamfac)
 		# Decide whether to use Gup or Gdn
 		gibbsup? ham = hamup : ham = hamdn
 		# Compute the mean of Hdn under Gup.

@@ -154,6 +154,16 @@ function getuhavg(uhacc::Array{Complex128})
 	end
 	return uhavg
 end
+
+#= Compute the Hamiltonian. =#
+function getham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
+		amp::Float64, D0::Float64, lamfac::Int)
+	mu = 4*pi^2/(9*lamfac^2)
+	return amp*D0^(-7/4)*H3vec - mu*D0^(1/2)*H2vec
+end
+
+# TO DO: Need amp and lamfac input below; remove E0
+
 #= Sample from a Gibbs distribution with non-zero theta, 
 given that H3 and H2 have already been sampled from microcanonical distribution. =#
 function gibbs_sample!(rset::RandSet, accstate::AcceptedState, 
@@ -170,7 +180,7 @@ function gibbs_sample!(rset::RandSet, accstate::AcceptedState,
 	# Determine the acceptance rate based on the Hamiltonian.
 	println("\nSampling from Gibbs distribution with D0 = ", 
 		signif(D0,2), " and theta = ", signif(theta,2))
-	hamvec = D0^(-13/4)*sqrt(E0)*H3all - D0^(3/2)*H2all
+	hamvec = getham(H3all,H2all,amp,D0,lamfac)
 	accept_vec = exp.(-theta * hamvec)
 	accept_vec *= 1/(maximum(accept_vec))
 	# With the normalized acceptance rate, decide to accept/reject each.
