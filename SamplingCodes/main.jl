@@ -4,7 +4,9 @@ include("routines.jl")
 # Extract the parameters
 function extractparams(params::Vector)
 	nmodes, nsamp, nsweeps = Int(params[1]), Int(params[2]), Int(params[3])
-	amp, D0, lamfac, thmin, thmax, dth = params[4:9]
+	amp, D0 = params[4:5]
+	lamfac = Int(params[6]) 
+	thmin, thmax, dth = params[7:9]
 	thup_vec = collect(thmin:dth:thmax)
 	nthetas = endof(thup_vec)
 	return nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas
