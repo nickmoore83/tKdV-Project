@@ -23,13 +23,17 @@ Note: Using nmodes = 16 is measurably faster than nmodes = 10.\
 \
 \ul Default parameter values\ulnone \
 nmodes = 16 or 24\
-amp\
-D0\
-lamfac\
+nsamp = 1e7 or 1e5 for quick tests\
+nsweeps = 2-1000; 200 is a good value\
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural\partightenfactor0
+\cf0 amp = 0.5 (max in experiments)\
+D0 = 0.25 (value in experiments)\
+lamfac = 4 or so\
 thmin = -1.0\
 thmax = 0.0\
 dth = 0.2\
-\
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural\partightenfactor0
+\cf0 \
 \ul Notes\ulnone \
 - Higher amp values favor H3 and thus make the u-distributions more skewed.\
 - Larger values of nmodes makes u-samples more noisy, probably because of lower acceptance rate; e.g. nmodes = 20 gives noticeable noisier samples than nmodes = 10.\
@@ -41,6 +45,11 @@ dth = 0.2\
 \pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural\partightenfactor0
 
 \b0\fs28 \cf0 \
+Plan\
+- Do a medium run with nmodes=16, nsamp=1e6, nsweeps=2 to make everything looks okay.\
+- If it looks good, do the bigger runs with nsamp=1e7 and nsweeps = 200 or 400.\
+\
+\ul Values\ulnone \
 nmodes = 16 or 24\
 nsamp = 1e7\
 nsweeps = 200, 400, or 1000\
@@ -50,6 +59,18 @@ lamfac = 4 or so\
 thmin = -1.0\
 thmax = 0.0\
 dth = 0.2\
+\
+nsweeps = 200 takes about 33 hours or 1.5 days\
+\
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural\partightenfactor0
+\cf0 nsweeps = 2 should take about 3.3 hours\
+nsweeps = 1 should take about 1.6 hours\
+\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural\partightenfactor0
+\cf0 \
+nsweeps = 1000 should take about a week\
+nsweeps = 400 should take about 3 days\
+nsweeps = 500 should take about 4 days\
+\
 \
 \
 \pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural\partightenfactor0
