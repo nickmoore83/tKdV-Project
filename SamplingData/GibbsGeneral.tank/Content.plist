@@ -281,8 +281,8 @@
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>56</real>
-				<real>0.0</real>
+				<real>62</real>
+				<real>-1</real>
 				<real>1055</real>
 				<real>877</real>
 			</array>
@@ -414,7 +414,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1022, 291}</string>
+			<string>{1002, 299}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -596,9 +596,9 @@
 				<key>MinorTicks</key>
 				<string>On</string>
 				<key>OverwriteXTicks</key>
-				<string>On</string>
+				<string>Off</string>
 				<key>OverwriteYTicks</key>
-				<string>On</string>
+				<string>Off</string>
 				<key>RightLabels</key>
 				<integer>2</integer>
 				<key>TickLengthMenu</key>
@@ -5155,7 +5155,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run0</string>
+				<string>Run1</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -5170,7 +5170,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>1</string>
+				<string>2</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -5228,7 +5228,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.49</string>
+						<string>1.4</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5272,7 +5272,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>1.3</string>
+						<string>1.2</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5316,7 +5316,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>1.3</string>
+						<string>1</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5360,7 +5360,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.1</string>
+						<string>0.11</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5404,7 +5404,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.1</string>
+						<string>0.11</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -8020,7 +8020,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Closed</string>
+			<string>Open</string>
 			<key>Title</key>
 			<string>Aesthetics</string>
 			<key>VariableName</key>
@@ -8230,7 +8230,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>-75, 0</string>
+				<string>-100, 20</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -8704,7 +8704,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>895</real>
+		<real>968</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
