@@ -65,19 +65,25 @@ end
 either the upstream or downstream Gibbs measure with given theta. =#
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
 		amp::Float64, D0::Float64, lamfac::Int, theta::Float64, gibbsup::Bool)
+	
+	#=
 	ham_dn_mean, norm_const = 0.,0.
 	for nn=1:endof(H3vec)
 		# Compute the upstream and downstream Hamiltonians.
-		hamup = getham(H3vec,H2vec,amp,1.,lamfac)
-		hamdn = getham(H3vec,H2vec,amp,D0,lamfac)
+		hamup = getham(H3vec[nn],H2vec[nn],amp,1.,lamfac)
+		hamdn = getham(H3vec[nn],H2vec[nn],amp,D0,lamfac)
 		# Decide whether to use Gup or Gdn
 		gibbsup? ham = hamup : ham = hamdn
 		# Compute the mean of Hdn under Gup.
 		ham_dn_mean += exp(-theta*ham) * hamdn
 		norm_const += exp(-theta*ham)
 	end
-	return ham_dn_mean/norm_const
+	=#
+	hamdn = getham(H3vec,H2vec,amp,D0,lamfac)
+	gibbsup? ham=getham(H3vec,H2vec,amp,1.,lamfac) : ham = hamdn
+	return dot(exp.(-theta*ham), hamdn) / sum(exp.(-theta*ham))
 end
+
 #= Determine the downstream thetas that satisfy the statistical matching condition. =#
 function matchmean(nmodes::Int, nsamp::Int, 
 		amp::Float64, D0::Float64, lamfac::Int, thup_vec::Vector{Float64})

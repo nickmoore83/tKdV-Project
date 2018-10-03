@@ -281,7 +281,7 @@
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>114</real>
+				<real>79</real>
 				<real>0.0</real>
 				<real>1055</real>
 				<real>877</real>
@@ -5028,7 +5028,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1125, 292}</string>
+			<string>{986, 299}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -5081,7 +5081,13 @@
 	</array>
 	<key>MonitorVariables</key>
 	<array>
-		<string>upstream accepted samples</string>
+		<string>amp</string>
+		<string>D0</string>
+		<string>lamfac</string>
+		<string>cpu time for matching (minutes)</string>
+		<string>cpu time for sampling (minutes)</string>
+		<string>number of thetas</string>
+		<string>number of total samples</string>
 	</array>
 	<key>Time</key>
 	<dict>
@@ -5149,7 +5155,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>BigRun1</string>
+				<string>run0</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -5164,7 +5170,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>2</string>
+				<string>1</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -5222,7 +5228,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>1</string>
+						<string>0.49</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5266,7 +5272,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.49</string>
+						<string>1.3</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5310,7 +5316,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.6</string>
+						<string>1.3</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6036,7 +6042,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>11</string>
+				<string>12</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -6225,7 +6231,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>E0</string>
+			<string>amp</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -6272,7 +6278,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>9</string>
+						<string>6</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6285,7 +6291,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>cpu time for matching (minutes)</string>
+			<string>lamfac</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -6315,7 +6321,7 @@
 			<key>Selection</key>
 			<string>Value From List</string>
 			<key>VariableName</key>
-			<string>cpu time for sampling (minutes)</string>
+			<string>cpu time for matching (minutes)</string>
 			<key>VariableType</key>
 			<string>Real Number</string>
 		</dict>
@@ -6333,6 +6339,36 @@
 					<dict>
 						<key>Number</key>
 						<string>11</string>
+					</dict>
+					<key>SelectedNumber</key>
+					<integer>0</integer>
+				</dict>
+				<key>RangeEqualsCurrent</key>
+				<string>On</string>
+				<key>StartAt0</key>
+				<string>Off</string>
+			</dict>
+			<key>Selection</key>
+			<string>Value From List</string>
+			<key>VariableName</key>
+			<string>cpu time for sampling (minutes)</string>
+			<key>VariableType</key>
+			<string>Real Number</string>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>List</key>
+				<dict>
+					<key>Selected</key>
+					<string>parameters</string>
+				</dict>
+				<key>Location</key>
+				<dict>
+					<key>Inline</key>
+					<dict>
+						<key>Number</key>
+						<string>12</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -6626,7 +6662,7 @@
 		</dict>
 		<dict>
 			<key>State</key>
-			<string>Open</string>
+			<string>Closed</string>
 			<key>Title</key>
 			<string>Extract the upstream macrostate data</string>
 			<key>VariableName</key>
@@ -7004,7 +7040,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>E0</string>
+							<string>amp</string>
 						</dict>
 					</dict>
 				</array>
@@ -7083,7 +7119,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>E0</string>
+							<string>amp</string>
 						</dict>
 					</dict>
 					<dict>
@@ -7488,7 +7524,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>E0</string>
+							<string>amp</string>
 						</dict>
 					</dict>
 					<dict>
@@ -7936,7 +7972,7 @@
 								<string>0</string>
 							</dict>
 							<key>Selected</key>
-							<string>E0</string>
+							<string>amp</string>
 						</dict>
 					</dict>
 					<dict>
@@ -8668,7 +8704,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>1091</real>
+		<real>889</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>

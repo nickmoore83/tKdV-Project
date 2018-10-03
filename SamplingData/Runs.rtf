@@ -21,13 +21,14 @@ Note: The accept/reject Gibbs sampling for various theta-values is typically muc
 Note: Using nmodes = 16 is measurably faster than nmodes = 10.\
 \
 \ul Default parameter values\ulnone \
-nmodes = 16\
-E_0 = 4\
-D_0 = 0.5\
+nmodes = 16 or 24\
+amp\
+D0\
+lamfac\
 theta = -0.4: 0.05: 0.1\
 \
 \ul Notes\ulnone \
-- Higher energy values favor H3 and thus make the u-distributions more skewed.\
+- Higher amp values favor H3 and thus make the u-distributions more skewed.\
 - Larger values of nmodes makes u-samples more noisy, probably because of lower acceptance rate; e.g. nmodes = 20 gives noticeable noisier samples than nmodes = 10.\
 \
 \
@@ -50,39 +51,9 @@ BigRun1\
 nmodes = 16, nsamp = 1e7, nsweeps = 200\
 E0 = 4, D0 = 0.5, thetaup = -0.4: 0.1: 0.1\
 CPU times: matching mean = 8 mins; sampling = 33 hours\
-\
+This run uses the outdated E0 instead of amp and lamfac.\
 \
 \
 \pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural
 
-\b\fs40 \cf0 Deleted runs\
-\pard\tx720\tx1440\tx2166\tx2873\tx3605\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\tx9383\tx10088\tx10796\tx11523\tx12233\tx12964\pardirnatural
-
-\b0\fs28 \cf0 \
-run4\
-nmodes = 10, nsamptot = 1*10^7\
-E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = 16 minutes\
-\
-run5\
-nmodes = 20; nsamptot = 1*10^7\
-E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = 21 minutes\
-\
-run6\
-nmodes = 16; nsamptot = 1*10^7\
-E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = 6.5 minutes\
-\
-run7*\
-nmodes = 16, nsamptot = 10^8\
-E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = 75 minutes (mac mini)\
-Note: The code runs noticeably faster on the mac mini.\
-Note: 75 minutes refers to the time for microcanonical sampling as always. For very long runs, the time for writing output (and transforming to physical space) can be significant. In this run, I estimate this later step took about 75 minutes as well, for a total run time of about 2.5 hours.\
-\
-run8*\
-nmodes = 8, nsamptot = 10^8\
-E0 = 4, D0 = 0.5, thetaup = -0.4: 0.05: 0.1\
-cputime = 69 minutes (mac mini)\
-}
+\b\fs40 \cf0 Deleted runs}
