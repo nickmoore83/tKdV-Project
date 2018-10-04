@@ -194,6 +194,7 @@ function sampletest()
 	println("CPU time to sample one at a time is ", signif(cputimeone,3))
 end
 
+#= Test breaking out of a loop. =#
 function testbreak()
 	ii = 0
 	for ii=1:10
@@ -204,7 +205,29 @@ function testbreak()
 	end
 	println("Out of loop, ii is ", ii)
 end
-testbreak()
+
+#= Test parallel coding =#
+function parmain()
+	nmodes = 16
+	nsamples = 10^8
+	# Get all the random samples and allocate space.
+	#rvar = randn(nmodes,2,nsamples)
+	#H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
+	rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
+	H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
+	@parallel for nn=1:nsamples
+		uhat = getuhat(rvar,nn)
+		H3vec[nn] = ham3(uhat)
+		H2vec[nn] = ham2(uhat)
+		if mod(nn, 10^4) == 0
+			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
+		end
+	end
+	println("\nOut of for loop.")
+	return RandSet(H3vec,H2vec,rvar)
+end
+
+rset = parmain()
 
 
 # TO DO 
