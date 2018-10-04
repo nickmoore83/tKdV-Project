@@ -113,12 +113,11 @@ end
 #= Sample from a microcanonical distribution (Gibbs with zero inverse temperature). =#
 function microcan(nmodes::Int, nsamples::Int)
 	println("\nSampling from microcanonical distribution.")
-	# Get all the random samples at once.
+	# Get all the random samples and allocate space.
 	rvar = randn(nmodes,2,nsamples)
+	H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
 	#rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
-	# Allocate space.
-	#H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
-	H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
+	#H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
 
 	# TO DO: parallelize this for loop!!! It is the bottleneck!
 	# Compute H3 and H2 for each.
