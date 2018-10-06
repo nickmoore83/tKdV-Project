@@ -1,20 +1,20 @@
 # Parameters file: nmodes, nsamp, nsweeps, amp, D0, lamfac, thmin, thmax, dth
-16
+8
 1e7
 2
 0.5
 0.25
 4
--1.0
+-0.4
 0.0
-0.2
+0.1
 
 # Default values
-# nmodes = 8 or 16 or 24
+# nmodes = 8 or 16
 # nsamp = 1e7 or 1e5 for quick tests
 # nsweeps = 2-100
-# amp = 0.05-0.5
+# amp = 0.05 — 0.5
 # D0 = 0.25, 0.35, 0.45
-# thmin = -1.0
+# thmin = -0.4
 # thmax = 0.0
-# dth = 0.2
+# dth = 0.1

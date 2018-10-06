@@ -209,7 +209,7 @@ end
 #= Test parallel coding =#
 function parmain()
 	nmodes = 16
-	nsamples = 10^8
+	nsamples = 10^7
 	# Get all the random samples and allocate space.
 	#rvar = randn(nmodes,2,nsamples)
 	#H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
@@ -219,15 +219,10 @@ function parmain()
 		uhat = getuhat(rvar,nn)
 		H3vec[nn] = ham3(uhat)
 		H2vec[nn] = ham2(uhat)
-		if mod(nn, 10^4) == 0
-			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
-		end
 	end
 	println("\nOut of for loop.")
 	return RandSet(H3vec,H2vec,rvar)
 end
-
-rset = parmain()
 
 
 # TO DO 
@@ -240,7 +235,6 @@ rset = parmain()
 
 #H3maxtest()
 #sampletest()
-
-
+#rset = parmain()
 
 

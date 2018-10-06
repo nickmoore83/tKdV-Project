@@ -281,7 +281,7 @@
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>60</real>
+				<real>44</real>
 				<real>0.0</real>
 				<real>1055</real>
 				<real>877</real>
@@ -414,7 +414,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1022, 291}</string>
+			<string>{1002, 299}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -5028,7 +5028,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1125, 292}</string>
+			<string>{986, 299}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -5156,7 +5156,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>TestRun1</string>
+				<string>run0</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -5171,7 +5171,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Formula</key>
-				<string>3</string>
+				<string>1</string>
 				<key>Variables</key>
 				<array/>
 			</dict>
@@ -8840,7 +8840,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>884</real>
+		<real>943</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>

@@ -106,7 +106,8 @@ end
 
 #---------- Sampling Routines ----------#
 #= Get uhat from the array of random values. =#
-function getuhat(rvar::Array{Float64}, nn::Int)
+function getuhat(rvar, nn::Int)
+#rvar::Array{Float64}
 	uhat = rvar[:,1,nn]+im*rvar[:,2,nn]
 	return uhat/sqrt(energy(uhat))
 end
@@ -114,15 +115,15 @@ end
 function microcan(nmodes::Int, nsamples::Int)
 	println("\nSampling from microcanonical distribution.")
 	# Get all the random samples and allocate space.
-	rvar = randn(nmodes,2,nsamples)
-	H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
-	#rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
-	#H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
-
-	# TO DO: parallelize this for loop!!! It is the bottleneck!
-	# Compute H3 and H2 for each.
+	#rvar = randn(nmodes,2,nsamples)
+	#H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
+	# Parallel variables.
+	rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
+	H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
+	# Compute H3 and H2 for each sample in a parallel for loop.
+	println("Entering parallel for loop for microcanonical sampling.")
+	#@parallel
 	for nn=1:nsamples
-	#@parallel for nn=1:nsamples
 		uhat = getuhat(rvar,nn)
 		H3vec[nn] = ham3(uhat)
 		H2vec[nn] = ham2(uhat)
