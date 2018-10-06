@@ -7,11 +7,16 @@
 \f0\fs28 \cf0 \ul \ulc0 \
 To Do\ulnone \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 - Parallelize the for loops that compute H3 and H2\
+Note: I should implement parallelism using cmap because it seems to be the preferred way in Julia when there is a nontrivial amount of work inside the for loop.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\
 - Make code nicer by collapsing collection of paramter (amp, D0, lamfac) into a single vector or an object.\
 \
 - Idea to get higher acceptance rates: We need higher acceptance rates for Lambda = 16 and theta = -0.4. To get this, we can predispose the initial samples to have a decaying spectrum by making the variance of the Gaussian random variables decay with k. This will alter the base measure, dmu, to something else and we need to figure out what that something else is. Once we figure it out, we can correct for it in the acceptance probability.\
 \
-- Parallelize the for loops that compute H3 and H2.\
 \
 \
 Good idea: We could probably approximate theta+ as function of theta- using a Taylor series for theta- going to zero.\
