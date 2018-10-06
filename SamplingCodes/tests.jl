@@ -219,6 +219,9 @@ function parmain()
 		uhat = getuhat(rvar,nn)
 		H3vec[nn] = ham3(uhat)
 		H2vec[nn] = ham2(uhat)
+		if mod(nn, 10^4) == 0
+			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
+		end
 	end
 	println("\nOut of for loop.")
 	return RandSet(H3vec,H2vec,rvar)
