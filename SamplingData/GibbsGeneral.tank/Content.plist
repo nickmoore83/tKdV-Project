@@ -281,7 +281,7 @@
 			<string>main plot of macro and micro</string>
 			<key>WindowPos</key>
 			<array>
-				<real>44</real>
+				<real>60</real>
 				<real>0.0</real>
 				<real>1055</real>
 				<real>877</real>
@@ -414,7 +414,7 @@
 			<key>FigureName</key>
 			<string>Untitled</string>
 			<key>Last Drawing View Size</key>
-			<string>{1002, 299}</string>
+			<string>{1022, 291}</string>
 			<key>MaxHeight</key>
 			<string></string>
 			<key>MaxWidth</key>
@@ -458,7 +458,7 @@
 			<string>microstate information</string>
 			<key>WindowPos</key>
 			<array>
-				<real>34</real>
+				<real>228</real>
 				<real>116</real>
 				<real>1000</real>
 				<real>761</real>
@@ -5156,7 +5156,7 @@
 			<key>Content</key>
 			<dict>
 				<key>Text</key>
-				<string>run0</string>
+				<string>Run1</string>
 			</dict>
 			<key>Selection</key>
 			<string>Specify</string>
@@ -5229,7 +5229,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>1.4</string>
+						<string>1.2</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5273,7 +5273,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>1.2</string>
+						<string>0.2</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5317,7 +5317,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>1</string>
+						<string>0.22</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5361,7 +5361,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.11</string>
+						<string>0.12</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -5405,7 +5405,7 @@
 					<key>Inline</key>
 					<dict>
 						<key>Number</key>
-						<string>0.11</string>
+						<string>0.12</string>
 					</dict>
 					<key>SelectedNumber</key>
 					<integer>0</integer>
@@ -8840,7 +8840,7 @@
 	</array>
 	<key>WindowPosition</key>
 	<array>
-		<real>943</real>
+		<real>754</real>
 		<real>60</real>
 		<real>941</real>
 		<real>817</real>
