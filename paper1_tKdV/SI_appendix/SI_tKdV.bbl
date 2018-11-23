@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+
+\bibitem{johnson1997modern}
+Johnson RS (1997) {\em A modern introduction to the mathematical theory of
+  water waves}.
+\newblock (Cambridge university press) Vol.{}~19.
+
+\bibitem{abramov2003hamiltonian}
+Abramov RV, Kova{\v{c}}i{\v{c}} G, Majda AJ (2003) Hamiltonian structure and
+  statistically relevant conserved quantities for the truncated burgers-hopf
+  equation.
+\newblock {\em Communications on Pure and Applied Mathematics: A Journal Issued
+  by the Courant Institute of Mathematical Sciences} 56(1):1--46.
+
+\bibitem{majda2006nonlinear}
+Majda A, Wang X (2006) {\em Nonlinear dynamics and statistical theories for
+  basic geophysical flows}.
+\newblock (Cambridge University Press).
+
+\bibitem{bolles2018anomalous}
+Bolles CT, Speer K, Moore M (2018) Anomalous wave statistics induced by abrupt
+  depth change.
+\newblock {\em arXiv preprint arXiv:1808.07958}.
+
+\bibitem{bajars2013weakly}
+Bajars J, Frank J, Leimkuhler B (2013) Weakly coupled heat bath models for
+  gibbs-like invariant states in nonlinear wave equations.
+\newblock {\em Nonlinearity} 26(7):1945.
+
+\bibitem{mclachlan1993symplectic}
+McLachlan R (1993) Symplectic integration of hamiltonian wave equations.
+\newblock {\em Numerische Mathematik} 66(1):465--492.
+
+\end{thebibliography}

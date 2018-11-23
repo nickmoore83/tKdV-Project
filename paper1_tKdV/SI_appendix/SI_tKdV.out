@@ -1,0 +1,9 @@
+\BOOKMARK [1][-]{appendix.A}{Details about the TKdV model non-dimensionalization}{}% 1
+\BOOKMARK [2][-]{subsection.A.1}{Mathematical formulation of the truncated KdV equation as a Hamiltonian system}{appendix.A}% 2
+\BOOKMARK [2][-]{subsection.A.2}{The rescaled TKdV model with non-dimensionalized parameters}{appendix.A}% 3
+\BOOKMARK [1][-]{appendix.B}{Sampling strategy and statistical link for the invariant measures}{}% 4
+\BOOKMARK [2][-]{subsection.B.1}{Sampling algorithm for the incoming Gibbs measure}{appendix.B}% 5
+\BOOKMARK [2][-]{subsection.B.2}{Computing downstream parameter from the statistical matching}{appendix.B}% 6
+\BOOKMARK [1][-]{appendix.C}{Symplectic scheme for direct numerical simulations of the TKdV equation}{}% 7
+\BOOKMARK [2][-]{subsection.C.1}{Conservation of energy and Hamiltonian form the symplectic scheme}{appendix.C}% 8
+\BOOKMARK [2][-]{subsection.C.2}{Ergodicity and mixing properties in the TKdV solutions}{appendix.C}% 9

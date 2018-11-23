@@ -36,12 +36,12 @@ for ii = 1:N_iter
         uk_tilde = uk;
               
         if jj==1 || jj==Lambda/2+1
-        pert = sqrt(2*Lambda*E0)*randn(1);
+        pert = sqrt(.1*2*Lambda*E0)*randn(1);
         uk_tilde(jj) = uk(jj)+pert;
         E = .5*sum(abs(uk_tilde).^2)/Lambda^2;
         uk_tilde = sqrt(E0/E)*uk_tilde;
         else
-        pert = sqrt(2*Lambda*E0)*(randn(1)+1i*randn(1));
+        pert = sqrt(.1*2*Lambda*E0)*(randn(1)+1i*randn(1));
         uk_tilde(jj) = uk(jj)+pert;
         uk_tilde(end-jj+2) = conj(uk_tilde(jj));
         E = .5*sum(abs(uk_tilde).^2)/Lambda^2;
@@ -74,6 +74,6 @@ figure(1)
 plot(centers,counts/MC/(centers(2)-centers(1))); hold on;
 ylabel('PDF of Hamiltonian')
 title(['Lambda = ',num2str(Lambda),', E0 = ',num2str(E0),', D0 = ', num2str(D0), ', N = ',num2str(MC)]);
-figure
+figure(2)
 plot(kk(1:Lambda/2+1),enek(1:Lambda/2+1),'-o'); hold on;
 title('energy spectra <|u_k|^2>')
