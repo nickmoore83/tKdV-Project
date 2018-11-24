@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  24 NOV 2018 16:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  24 NOV 2018 16:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1465,7 +1465,7 @@ Package: subfig 2005/06/28 ver: 1.3 subfig package
 )
 \c@remark=\count354
 
-(./tKdV_theory.aux)
+No file tKdV_theory.aux.
 \openout1 = `tKdV_theory.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
@@ -1485,7 +1485,7 @@ LaTeX Font Info:    ... okay on input line 84.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 84.
 LaTeX Font Info:    ... okay on input line 84.
 LaTeX Font Info:    Try loading font information for T1+lmr on input line 84.
- (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/t1lmr.fd
+(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1704,6 +1704,91 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/9'.
 (microtype)             Ignoring protrusion settings for this character.
+
+
+Package natbib Warning: Citation `majda2012lessons' on page 1 undefined on inpu
+t line 99.
+
+
+Package natbib Warning: Citation `mohamad2018sequential' on page 1 undefined on
+ input line 99.
+
+
+Package natbib Warning: Citation `qi2016predicting' on page 1 undefined on inpu
+t line 99.
+
+
+Package natbib Warning: Citation `majda2015intermittency' on page 1 undefined o
+n input line 99.
+
+
+Package natbib Warning: Citation `majda2018model' on page 1 undefined on input 
+line 99.
+
+
+Package natbib Warning: Citation `majda2018simple' on page 1 undefined on input
+ line 99.
+
+
+Package natbib Warning: Citation `thual2016simple' on page 1 undefined on input
+ line 99.
+
+
+Package natbib Warning: Citation `chen2018efficient' on page 1 undefined on inp
+ut line 101.
+
+
+Package natbib Warning: Citation `chen2017beating' on page 1 undefined on input
+ line 101.
+
+
+Package natbib Warning: Citation `chen2018conditional' on page 1 undefined on i
+nput line 101.
+
+
+Package natbib Warning: Citation `mohamad2018sequential' on page 1 undefined on
+ input line 101.
+
+
+Package natbib Warning: Citation `qi2018predicting' on page 1 undefined on inpu
+t line 101.
+
+
+Package natbib Warning: Citation `adcock2014physics' on page 1 undefined on inp
+ut line 103.
+
+
+Package natbib Warning: Citation `cousins2015unsteady' on page 1 undefined on i
+nput line 103.
+
+
+Package natbib Warning: Citation `farazmand2017reduced' on page 1 undefined on 
+input line 103.
+
+
+Package natbib Warning: Citation `onorato2001freak' on page 1 undefined on inpu
+t line 103.
+
+
+Package natbib Warning: Citation `dematteis2018rogue' on page 1 undefined on in
+put line 103.
+
+
+Package natbib Warning: Citation `sergeeva2011nonlinear' on page 1 undefined on
+ input line 104.
+
+
+Package natbib Warning: Citation `trulsen2012laboratory' on page 1 undefined on
+ input line 104.
+
+
+Package natbib Warning: Citation `viotti2014extreme' on page 1 undefined on inp
+ut line 104.
+
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 1 undefined on i
+nput line 111.
+
 Package mdframed Info: mdframed works in twoside mode on input line 126.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 9.49997pt on input line 126.
@@ -1715,6 +1800,10 @@ Package mdframed Info: mdframed inside float
  mdframed uses option nobreak mdframed on input line 126.
 Package mdframed Info: mdframed inside a box 
  mdframed uses option nobreak mdframed on input line 126.
+
+LaTeX Warning: Reference `mdf@pagelabel-1' on page 1 undefined on input line 12
+6.
+
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 5.69998pt on input line 126.
 
@@ -1724,14 +1813,21 @@ i@cims.nyu.edu, jon-
  []
 
 
+Package natbib Warning: Citation `bolles2018anomalous' on page 1 undefined on i
+nput line 129.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <7> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 138.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.64998pt on input line 138.
-LaTeX Font Info:    Try loading font information for T1+bch on input line 138.
 
+
+LaTeX Warning: Reference `LastPage' on page 1 undefined on input line 138.
+
+LaTeX Font Info:    Try loading font information for T1+bch on input line 138.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/psnfss/t1bch.fd
 File: t1bch.fd 2004/10/18 font definitions for T1/bch.
 )
@@ -1748,59 +1844,247 @@ LaTeX Font Info:    Try loading font information for TS1+lmr on input line 143.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
+
+Package natbib Warning: Citation `johnson1997modern' on page 2 undefined on inp
+ut line 156.
+
+
+LaTeX Warning: Reference `eq:tKdV_nondim' on page 2 undefined on input line 179
+.
+
+
+LaTeX Warning: Reference `eq:tKdV_nondim' on page 2 undefined on input line 212
+.
+
+
+LaTeX Warning: Reference `eq:tKdV_nondim' on page 2 undefined on input line 220
+.
+
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 2 undefined on i
+nput line 229.
+
+
+LaTeX Warning: Reference `eq:tKdV_nondim' on page 2 undefined on input line 230
+.
+
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 2 undefined on i
+nput line 247.
+
+
+Package natbib Warning: Citation `abramov2003hamiltonian' on page 2 undefined o
+n input line 258.
+
+
+Package natbib Warning: Citation `majda2006nonlinear' on page 2 undefined on in
+put line 258.
+
+
+Package natbib Warning: Citation `bajars2013weakly' on page 2 undefined on inpu
+t line 258.
+
+
+Package natbib Warning: Citation `abramov2003hamiltonian' on page 2 undefined o
+n input line 264.
+
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 265.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 6.64998pt on input line 265.
- [2]
+[2]
+
+LaTeX Warning: Reference `eq:gibbs_mixed' on page 3 undefined on input line 274
+.
+
+
+Package natbib Warning: Citation `abramov2003hamiltonian' on page 3 undefined o
+n input line 281.
+
+
+Package natbib Warning: Citation `bajars2013weakly' on page 3 undefined on inpu
+t line 281.
+
+
+Package natbib Warning: Citation `abramov2003hamiltonian' on page 3 undefined o
+n input line 307.
+
+
+Package natbib Warning: Citation `majda2006nonlinear' on page 3 undefined on in
+put line 307.
+
+
+Package natbib Warning: Citation `bajars2013weakly' on page 3 undefined on inpu
+t line 327.
+
+
+LaTeX Warning: Reference `fig:matching' on page 3 undefined on input line 331.
+
+
+LaTeX Warning: Reference `fig:matching' on page 3 undefined on input line 337.
+
+
+LaTeX Warning: Reference `fig:matching' on page 3 undefined on input line 340.
+
+
+LaTeX Warning: Reference `eq:matching' on page 3 undefined on input line 346.
+
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 3 undefined on input line 
+351.
+
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 358.
 
-<./fig1.pdf, id=132, 212.03795pt x 322.6977pt>
+
+LaTeX Warning: Reference `eq:tKdV_nondim' on page 3 undefined on input line 362
+.
+
+
+Package natbib Warning: Citation `mclachlan1993symplectic' on page 3 undefined 
+on input line 373.
+
+<./fig1.pdf, id=87, 212.03795pt x 322.6977pt>
 File: ./fig1.pdf Graphic file (type pdf)
 <use ./fig1.pdf>
 Package pdftex.def Info: ./fig1.pdf  used on input line 379.
 (pdftex.def)             Requested size: 212.03741pt x 322.6969pt.
 
+LaTeX Warning: Reference `eq:skewness' on page 3 undefined on input line 389.
+
+
+LaTeX Warning: Reference `eq:skewness' on page 3 undefined on input line 389.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+
+LaTeX Warning: Reference `eq:matching' on page 3 undefined on input line 400.
+
+
+LaTeX Warning: Reference `fig:matching' on page 3 undefined on input line 405.
+
+
+LaTeX Warning: Reference `fig:matching' on page 3 undefined on input line 410.
+
 [3]
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 4 undefined on input line 
+422.
+
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 4 undefined on input line 
+431.
+
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 4 undefined on input line 
+434.
+
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 4 undefined on input line 
+439.
+
+
+LaTeX Warning: Reference `fig:Realization' on page 4 undefined on input line 44
+2.
+
+
 Underfull \vbox (badness 2547) has occurred while \output is active []
 
-<./fig2.pdf, id=156, 441.9127pt x 269.14894pt>
+
+
+LaTeX Warning: Reference `fig:matching' on page 4 undefined on input line 447.
+
+<./fig2.pdf, id=94, 441.9127pt x 269.14894pt>
 File: ./fig2.pdf Graphic file (type pdf)
 <use ./fig2.pdf>
 Package pdftex.def Info: ./fig2.pdf  used on input line 452.
 (pdftex.def)             Requested size: 397.71776pt x 242.2318pt.
- [4 <./fig1.pdf>]
-<./fig3_1.pdf, id=1703, 508.51164pt x 109.70114pt>
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 4 undefined on input line 
+502.
+
+[4 <./fig1.pdf>]
+
+LaTeX Warning: Reference `fig:matching' on page 5 undefined on input line 508.
+
+
+LaTeX Warning: Reference `eq:skewness' on page 5 undefined on input line 509.
+
+
+LaTeX Warning: Reference `eq:tKdV_nondim' on page 5 undefined on input line 518
+.
+
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 5 undefined on i
+nput line 519.
+
+
+LaTeX Warning: Reference `sec:Surface-wave-turbulence' on page 5 undefined on i
+nput line 520.
+
+<./fig3_1.pdf, id=1635, 508.51164pt x 109.70114pt>
 File: ./fig3_1.pdf Graphic file (type pdf)
 <use ./fig3_1.pdf>
 Package pdftex.def Info: ./fig3_1.pdf  used on input line 526.
 (pdftex.def)             Requested size: 483.08331pt x 104.21548pt.
-<./fig3_2.pdf, id=1704, 508.51164pt x 108.40068pt>
+<./fig3_2.pdf, id=1636, 508.51164pt x 108.40068pt>
 File: ./fig3_2.pdf Graphic file (type pdf)
 <use ./fig3_2.pdf>
 Package pdftex.def Info: ./fig3_2.pdf  used on input line 528.
 (pdftex.def)             Requested size: 483.08331pt x 102.98003pt.
 
-
 LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 5 undefined on i
+nput line 535.
+
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 5 undefined on input line 
+537.
+
+
+LaTeX Warning: Reference `fig:Realization' on page 5 undefined on input line 54
+1.
+
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 5 undefined on i
+nput line 543.
 
 
 Underfull \hbox (badness 1264) in paragraph at lines 533--549
 []\T1/lmr/m/n/9 (+20) The tran-si-tion from near-Gaussian to skewed non-
  []
 
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 5 undefined on i
+nput line 550.
+
+
+LaTeX Warning: Reference `fig:Changes-stats' on page 5 undefined on input line 
+560.
+
+
+Package natbib Warning: Citation `bolles2018anomalous' on page 5 undefined on i
+nput line 567.
+
 [5 <./fig2.pdf>]
-Extra height:0.0pt when 147.91206pt
-(2)Left:147.91206pt Right:146.19366pt Output:147.91206pt
+Extra height:10.0pt when 152.41206pt
+Extra height:10.0pt when 153.41206pt
+Extra height:10.0pt when 154.41206pt
+
+Underfull \vbox (badness 1199) has occurred while \output is active []
+
+Extra height:0.0pt when 155.41206pt
+(2)Left:155.41206pt Right:144.24367pt Output:155.41206pt
 - LAST -
-Left:147.91206pt
-Right:146.19366pt
-Output:147.91206pt
- (./tKdV_theory.bbl
+Left:155.41206pt
+Right:144.24367pt
+Output:155.41206pt
+
+(./tKdV_theory.bbl
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 7.59998pt on input line 1.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
@@ -1813,10 +2097,17 @@ Underfull \hbox (badness 1701) in paragraph at lines 73--76
 gue waves in two-
  []
 
-) 
+)
+
+Package natbib Warning: There were undefined citations.
+
+
+Package lastpage Warning: Rerun to get the references right on input line 610.
+
+
 AED: lastpage setting LastPage
 
-Overfull \vbox (228.01814pt too high) has occurred while \output is active []
+Overfull \vbox (232.51814pt too high) has occurred while \output is active []
 
 - LAST -
 Extra skip:0.06842pt
@@ -1829,21 +2120,33 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [6 <./fig3_1.pdf> <./fig3_2.pdf>]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 610.
 Package atveryend Info: Executing hook `AfterLastShipout' on input line 610.
- (./tKdV_theory.xwm) (./tKdV_theory.aux)
+ (./tKdV_theory.xwm) (./tKdV_theory.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 610.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 610.
 Package rerunfilecheck Info: File `tKdV_theory.out' has not changed.
 (rerunfilecheck)             Checksum: 583C753B4B763DE8221A5EE666FB6E90;1110.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 610.
  ) 
 Here is how much of TeX's memory you used:
- 37079 strings out of 492649
- 701155 string characters out of 6129622
- 866448 words of memory out of 5000000
- 40085 multiletter control sequences out of 15000+600000
- 639803 words of font info for 199 fonts, out of 8000000 for 9000
+ 37081 strings out of 492649
+ 701189 string characters out of 6129622
+ 863402 words of memory out of 5000000
+ 40089 multiletter control sequences out of 15000+600000
+ 645660 words of font info for 200 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,16n,73p,10401b,1034s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,16n,73p,10401b,1033s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
 texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018/t
 exmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2018/texmf-dist/
@@ -1855,36 +2158,38 @@ cal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/loc
 al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/loca
 l/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/
 texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
-exlive/2018/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/201
-8/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/texlive/2018/texmf-dis
-t/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2018/texmf-dist/fonts/typ
-e1/public/lm/lmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/l
-m/lmmi9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmr5.pfb>
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/
-texlive/2018/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2018
-/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2018/texmf-dist/
-fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/
-public/lm/lmri9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/l
-mssbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy5.pfb
-></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/loca
-l/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2
-018/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/2018/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2018/tex
-mf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/local/texlive/2018/texmf-dist/
-fonts/type1/public/cm-super/sfss0800.pfb></usr/local/texlive/2018/texmf-dist/fo
-nts/type1/public/cm-super/sfss0900.pfb></usr/local/texlive/2018/texmf-dist/font
-s/type1/public/cm-super/sfss1000.pfb></usr/local/texlive/2018/texmf-dist/fonts/
-type1/public/cm-super/sfsx1200.pfb></usr/local/texlive/2018/texmf-dist/fonts/ty
-pe1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw
-/helvetic/uhvr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/helvet
-ic/uhvro8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/symbol/usyr.
-pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/l
-ocal/texlive/2018/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texli
-ve/2018/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on tKdV_theory.pdf (6 pages, 5402621 bytes).
+exlive/2018/texmf-dist/fonts/type1/public/lm/lmbx7.pfb></usr/local/texlive/2018
+/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></usr/local/texlive/2018/texmf-dist
+/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/typ
+e1/public/lm/lmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/l
+m/lmmi6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi7.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi9.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/20
+18/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2018/texmf-dis
+t/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
+1/public/lm/lmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/
+lmr9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmri9.pfb></
+usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy5.pfb></usr/local/texlive/2
+018/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2018/texmf-d
+ist/fonts/type1/public/lm/lmsy7.pfb></usr/local/texlive/2018/texmf-dist/fonts/t
+ype1/public/lm/lmsy9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public
+/amsfonts/symbols/msam10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/pu
+blic/rsfs/rsfs10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-
+super/sfss0800.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-su
+per/sfss0900.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-supe
+r/sfss1000.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/cm-super/
+sfsx1200.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/helvetic/uhvb8
+a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><
+/usr/local/texlive/2018/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texliv
+e/2018/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2018/texm
+f-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2018/texmf-dist/fon
+ts/type1/urw/times/utmri8a.pfb>
+Output written on tKdV_theory.pdf (6 pages, 5440997 bytes).
 PDF statistics:
- 2060 PDF objects out of 2073 (max. 8388607)
- 1224 compressed objects within 13 object streams
+ 2008 PDF objects out of 2073 (max. 8388607)
+ 1172 compressed objects within 12 object streams
  51 named destinations out of 1000 (max. 500000)
- 45177 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 46201 words of extra memory for PDF output out of 51595 (max. 10000000)
 
