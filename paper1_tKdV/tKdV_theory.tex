@@ -127,9 +127,9 @@ MCMC algorithm, verified by direct numerical simulations, and successfully
 captures key features of the experiment. There is even an analytic
 formula for the anomalous outgoing skewness. The strategy here should
 be useful for predicting extreme anomalous statistical behavior in
-other dispersive media in different settings.
+other dispersive media in different settings  \cite{solli2007optical,hohmann2010freak}.
 
-\todo[inline]{If you like, we could cite papers on `Optical rogue waves' and/or rogue waves in microwave systems here.}
+\todo[inline]{If you like, we could cite papers on `Optical rogue waves' and/or rogue waves in microwave systems here. (references added)}
 
 \section{Experiments showing anomalous wave statistics induced by an abrupt depth change}
 
@@ -155,10 +155,9 @@ disturbances: incoming waves display near-Gaussian statistics,
 while outgoing waves skew strongly towards positive displacement.
 \item The degree of non-Gaussianity present in the outgoing wave field depends on the total energy of the system: 
 larger driving amplitudes $\Delta\theta$ generate stronger skewness in the surface displacement PDFs.
-\item The waves also show different characteristic peak wavelengths in incoming
-and outgoing flows.
+\item \textcolor{blue}{The waves also show different slopes in the power spectra at upstream and downstream locations}.
 
-\todo[inline]{I am not sure we need to include this last item. It is not really an experimental observation, simply a calculation that can be done using the dispersion relation and the values of the two depths. Could we simply take this last item out? Would you prefer to replace it with another observation? I could easily come up with one. Perhaps a comment on the decay rate of the power spectra.}
+\todo[inline]{I am not sure we need to include this last item. It is not really an experimental observation, simply a calculation that can be done using the dispersion relation and the values of the two depths. Could we simply take this last item out? Would you prefer to replace it with another observation? I could easily come up with one. Perhaps a comment on the decay rate of the power spectra. (I will confirm with Andy whether he would just delete this item or keep something else like the one above)}
 
 \end{itemize}
 
@@ -224,7 +223,7 @@ Equation [\ref{eq:tKdV_nondim}] is not designed to capture the short
 scale changes in rapid time. 
 Rather, since we are interested in modeling statistics before and after the depth change, we will examine the long-time dynamics of large-scale structures.
 
-\todo[inline]{I modified the last sentence above. Feel free to revert to your original sentence if you do not like mine.}
+\todo[inline]{I modified the last sentence above. Feel free to revert to your original sentence if you do not like mine. (the change looks good)}
 
 
 \subsection{Interpreting experimental parameters in the dynamical model}
@@ -244,12 +243,12 @@ linked directly with the measured non-dimensional quantities by
 \begin{equation}
 L_{0}=6^{\frac{1}{3}}\left(M\epsilon^{\frac{1}{2}}\delta^{-1}\right),\;E_{0}=\frac{27}{2}\gamma^{-2}\left(M\epsilon^{\frac{1}{2}}\delta^{-1}\right),\label{eq:params}
 \end{equation}
-where $M$ defines the computational domain size $L_{d}=M\lambda_{c}$
+where $M$ defines the computational domain size $M\lambda_{c}$
 as $M$-multiple of the characteristic wavelength $\lambda_{c}$,
 and $\gamma=\frac{U}{a}$ represents the factor to normalize the total
 energy in the state variable $u_{\Lambda}$ to one. 
 
-\todo[inline]{Is there a difference between $L_0$ and $L_d$? typo?}
+\todo[inline]{Is there a difference between $L_0$ and $L_d$? typo? (These two are actually different. $L_d$ is the `true' length scale defined in SI eqn. [10]. I guess here it's better to delete this notation to avoid confusion.)}
 
 Consider the spatial discretization $J=2\Lambda+1$ so that the smallest
 resolved scale is comparable with the characteristic wavelength
@@ -265,9 +264,9 @@ range $L_{0}\in\left[2,6\right]$ and $E_{0}\in\left[50,200\right]$.
 These are the values we will test in the direct numerical simulations.
 See details about the derivation from scale analysis in \textcolor{blue}{\emph{SI Appendix, A}}.
 
-\section{Equilibrium statistical mechanism for generating the stationary invariant measure}
+\section{Equilibrium statistical \textcolor{blue}{mechanics} for generating the stationary invariant measure}
 
-\todo[inline]{In this section title, did you mean `statistical mechanism' or `statistical mechanics'?}
+\todo[inline]{In this section title, did you mean `statistical mechanism' or `statistical mechanics'? (typos corrected)}
 
 Since the TKdV equation satisfies the Liouville property, the equilibrium
 invariant measure can be described by an equilibrium statistical formulism
@@ -312,11 +311,11 @@ of the solutions
 where $u_{0}$ represents the deterministic matching condition between
 the incoming and outgoing waves. The two distributions, $\mu_{t}^{-},\mu_{t}^{+}$
 should also be matched at the depth change location $T_{\mathrm{ADC}}$,
-so that
+so that,
 \[
-\mu_{\infty}^{-}\left(u_{\Lambda}\right)=\mu_{t=T_{\mathrm{ADC}}}^{-}\left(u_{\Lambda}\right)=\mu_{t=T_{\mathrm{ADC}}}^{+}\left(u_{\Lambda}\right).
+\mu_{t=T_{\mathrm{ADC}}}^{-}\left(u_{\Lambda}\right)=\mu_{t=T_{\mathrm{ADC}}}^{+}\left(u_{\Lambda}\right).
 \]
-\todo[inline]{I do not believe we have defined $\mu_{\infty}^{-}$ anywhere.}
+\todo[inline]{I do not believe we have defined $\mu_{\infty}^{-}$ anywhere. (removed to avoid confusion)}
 In matching the flow statistics before and after the abrupt depth
 change, we first use the conservation of the deterministic Hamiltonian
 $H_{\Lambda}^{+}$ after the depth change. Then assuming ergodicity
@@ -460,9 +459,9 @@ $u_{\Lambda}$).
 
 As a result, the downstream statistics in final equilibrium predicted
 from the direct numerical simulations here agree with the equilibrium
-statistical mechanism prediction illustrated in Figure \ref{fig:matching}. The prediction from these two different approaches
+statistical mechanics prediction illustrated in Figure \ref{fig:matching}. The prediction from these two different approaches
 confirm each other.
-\todo[inline]{Again, do we mean statistical `mechanism' or `mechanics'?}
+\todo[inline]{Again, do we mean statistical `mechanism' or `mechanics'? (should be `mechanics')}
 
 
 \begin{figure*}
@@ -588,8 +587,8 @@ downstream compared with the upstream case. This is also observed
 in the direct numerical simulations here (detailed results shown
 in \textcolor{blue}{\emph{SI Appendix, C.2}}). The downstream state contains
 more energetic high frequencies.
-The peak frequency illustrates the occurrence of the transporting
-waves along the water tank.
+\textcolor{blue}{The peak frequency illustrates the characteristic time scale of the transporting
+wave trains along the water tank}.
 
 \todo[inline]{I do not understand the last sentence above. Why does the peak frequency illustrate the occurrence of transporting water waves?}
 
