@@ -11,6 +11,7 @@
 \usepackage{units}
 \usepackage{subfig}
 \newtheorem{remark}{Remark}
+\usepackage{todonotes}
 
 
 \title{A Statistical Dynamical Model to Predict Extreme Events and Anomalous Features in Shallow Water Waves with Abrupt Depth Change}
@@ -99,16 +100,20 @@ active contemporary topic in applied mathematics with qualitative
 and quantitative models \cite{majda2012lessons,mohamad2018sequential,qi2016predicting,majda2015intermittency,majda2018model,majda2018simple,thual2016simple}
 and novel numerical algorithms which overcome the curse of dimension
 for extreme event prediction in large complex systems \cite{chen2018efficient,chen2017beating,chen2018conditional,mohamad2018sequential,qi2018predicting}.
-The occurrence of Rogue waves as extreme events with different physical
+The occurrence of Rogue waves as extreme events within different physical
 settings of deep water \cite{adcock2014physics,cousins2015unsteady,farazmand2017reduced,onorato2001freak,dematteis2018rogue}
 and shallow water \cite{sergeeva2011nonlinear,trulsen2012laboratory,viotti2014extreme}
 is an important practical topic.
 
-Recent controlled laboratory experiments in weakly turbulent shallow
-water with abrupt depth change (ADC) exhibit a remarkable transition
-from nearly Gaussian statistics in incoming wave trains before the
-ADC to outgoing waves trains after the ADC with extreme anomalous
-statistics with large positive skewness of the surface height \cite{bolles2018anomalous}.
+% ORIGINAL
+%Recent controlled laboratory experiments in weakly turbulent shallow
+%water with abrupt depth change (ADC) exhibit a remarkable transition
+%from nearly Gaussian statistics in incoming wave trains before the
+%ADC to outgoing waves trains after the ADC with extreme anomalous
+%statistics with large positive skewness of the surface height \cite{bolles2018anomalous}.
+
+Recent laboratory experiments in weakly turbulent shallow water reveal a remarkable transition from Gaussian to anomalous behavior as surface waves cross an abrupt depth change (ADC). 
+A normally-distributed incoming wave train, upstream of the ADC, transitions to a highly non-Gaussian outgoing wave train, downstream of the ADC, that exhibits large positive skewness of the surface height and more frequent extreme events \cite{bolles2018anomalous}.
 Here we develop a statistical dynamical model to explain and quantitatively
 predict the above anomalous statistical behavior as experimental control
 parameters are varied. The first step is to use incoming and outgoing
@@ -124,12 +129,14 @@ formula for the anomalous outgoing skewness. The strategy here should
 be useful for predicting extreme anomalous statistical behavior in
 other dispersive media in different settings.
 
+\todo[inline]{If you are interested, we could cite papers on `Optical rogue waves' and/or rogue waves in microwave systems here.}
+
 \section{Experiments showing anomalous wave statistics by the abrupt depth change}
 
 A series of experiments are carried out \cite{bolles2018anomalous}
 studying the anomalous statistical behaviors in surface water waves
-going through an abrupt depth transition. The unidirectional waves
-propagate along a water tank over a step in the bottom topography,
+going through an abrupt depth transition. 
+The unidirectional waves propagate along a water tank over a step in the bottom topography,
 and the surface displacements of the wave levels are measured at several
 upstream and downstream locations. The wave field is excited by a
 paddle wheel forcing with angle
@@ -572,6 +579,9 @@ in \textcolor{blue}{\emph{SI Appendix, C.2}}). The downstream state contains
 more energetic high frequencies.
 The peak frequency illustrates the occurrence of the transporting
 waves along the water tank.
+
+\todo[inline]{I do not understand the last sentence above. Why does the peak frequency illustrate the occurrence of transporting water waves?}
+
 \end{itemize}
 
 \section{Concluding discussion}
