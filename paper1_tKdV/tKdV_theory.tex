@@ -155,11 +155,8 @@ larger energies generate stronger skewness in the surface displacement PDFs and 
 
 \section{Surface wave turbulence modeled by truncated KdV equation with depth dependence\label{sec:Surface-wave-turbulence}}
 
-The surface wave turbulence is modeled by a one-dimensional deterministic
-dynamical model. 
-\todo[inline]{This first sentence seems awkward to me.}
 The Korteweg-de Vries (KdV) equation \cite{johnson1997modern}
-is a leading-order approximation of the surface waves that are determined
+is a leading-order approximation of surface waves that are determined
 by the balance of nonlinear and dispersive effects in an appropriate
 far-field limit. Here, the KdV equation is truncated in the first
 $\Lambda$ modes (with $J=2\Lambda+1$ grid points) to generate weakly
@@ -172,29 +169,25 @@ which are conserved quantities, and $u_{\Lambda}\equiv\mathcal{P}_{\Lambda}u$
 denotes the subspace projection. The evolution of  $u_{\Lambda}^{\pm}$ is governed by the truncated
 KdV equation with depth change $D_{\pm}$
 \begin{equation}
-\frac{\partial u_{\Lambda}^{\pm}}{\partial t}+\frac{D_{\pm}^{-3/2}}{2}E_{0}^{1/2}L_{0}^{-3/2}\frac{\partial}{\partial x}\mathcal{P}_{\Lambda}\left(u_{\Lambda}^{\pm}\right)^{2}+D_{\pm}^{1/2}L_{0}^{-3}\frac{\partial^{3}u_{\Lambda}^{\pm}}{\partial x^{3}}=0,\label{eq:tKdV_nondim}
+\frac{\partial u_{\Lambda}^{\pm}}{\partial t}+\frac{D_{\pm}^{-3/2}}{2}E_{0}^{1/2}L_{0}^{-3/2}\frac{\partial}{\partial x}\mathcal{P}_{\Lambda}\left(u_{\Lambda}^{\pm}\right)^{2}+D_{\pm}^{1/2}L_{0}^{-3}\frac{\partial^{3}u_{\Lambda}^{\pm}}{\partial x^{3}}=0. \label{eq:tKdV_nondim}
 \end{equation}
-on the normalized periodic domain $x\in\left[-\pi,\pi\right]$. The conserved Hamiltonian can be decomposed into a cubic and a quadratic term
+Equation [\ref{eq:tKdV_nondim}] is non-dimensionalized on the periodic
+domain $x\in\left[-\pi,\pi\right]$. The depth is assumed to be unit $D_{-}=1$ before the ADC and becomes $D_{+}<1$ after the ADC. 
+The conserved Hamiltonian can be decomposed into a cubic and a quadratic term
 \begin{align*}
 \mathcal{H}_{\Lambda}^{\pm} & =  D_{\pm}^{-3/2}E_{0}^{1/2}L_{0}^{-3/2}H_{3}\left(u_{\Lambda}^{\pm}\right)-D_{\pm}^{1/2}L_{0}^{-3}H_{2}\left(u_{\Lambda}^{\pm}\right),\\
 & H_{3}\left(u\right) =  \frac{1}{6}\int_{-\pi}^{\pi}u^{3}dx,\;H_{2}\left(u\right)=\frac{1}{2}\int_{-\pi}^{\pi}\left(\frac{\partial u}{\partial x}\right)^{2}dx.
 \end{align*}
-Equation [\ref{eq:tKdV_nondim}] is non-dimensionalized in the periodic
-domain. The depth is assumed to be unit $D_{-}=1$
-before the ADC and becomes $D_{+}<1$
-after the ADC. We introduce parameters $\left(E_{0},L_{0},\Lambda\right)$
+We introduce parameters $\left(E_{0},L_{0},\Lambda\right)$
 based on the following assumptions:
 \begin{itemize}
-\item The wavenumber truncation $\Lambda$ is fixed in a moderate value
+\item The wavenumber truncation $\Lambda$ is fixed at a moderate value
 for generating weakly turbulent dynamics;
 \item The state variable $u_{\Lambda}^{\pm}$ is normalized with zero mean
 and unit energy, $\mathcal{M}\left(u_{\Lambda}\right)=0,\mathcal{E}\left(u_{\Lambda}\right)=1$,
 which are conserved during evolution. Meanwhile, $E_{0}$ characterizes the total
-energy injected into the system based on the paddle amplitude $\left(\Delta\theta\right)^{2}$;
-\item The length scale of the system is denoted $L_{0}$. The value is
-chosen so that the resolved scale $\Delta x=2\pi L_{0}/J$ is comparable
-to the the characteristic wave length $\lambda_{c}$ in
-the experiments.
+energy injected into the system based on the driving amplitude $\Delta \theta$;
+\item The length scale of the system $L_{0}$ is chosen so that the resolved scale $\Delta x=2\pi L_{0}/J$ is comparable to the the characteristic wave length $\lambda_{c}$ from the experiments.
 \end{itemize}
 % ORIGINAL
 %The intuition for the distinct model dynamics comes from the balance
@@ -203,7 +196,7 @@ the experiments.
 %term, $H_{3}$, for stronger nonlinearity and weaker dispersion for
 %the third-order derivative term reflected by the smaller coefficient
 %for $H_{2}$ in the Hamiltonian. 
-Some intuition for how \eqref{eq:tKdV_nondim} produces different dynamics on either side of the ADC can be gained by considering the balance of the cubic and quadratic terms in the Hamiltonian $\mathcal{H}_{\Lambda}^{\pm}$. The depth change, $D_{+}<1$, increases the weight of $H_3$ and decreases that of $H_2$, thus promoting the effects of nonlinearity and reducing dispersion.
+Some intuition for how \eqref{eq:tKdV_nondim} produces different dynamics on either side of the ADC can be gained by considering the relative contributions of the cubic and quadratic terms to the Hamiltonian $\mathcal{H}_{\Lambda}^{\pm}$. The depth change, $D_{+}<1$, increases the weight of $H_3$ and decreases that of $H_2$, thus promoting the effects of nonlinearity and reducing dispersion.
 Since $\frac{\partial u}{\partial x}$ is the slope of the wave height, $H_{2}\left(u\right)$ measures the
 wave slope energy.
 
@@ -213,9 +206,7 @@ u_{\Lambda}^{-}\left(x,t\right)\mid_{t=T_{\mathrm{ADC}}-}=u_{\Lambda}^{+}\left(x
 \]
 Equation [\ref{eq:tKdV_nondim}] is not designed to capture the short
 scale changes in rapid time. 
-Rather, since we are interested in modeling statistics before and after the depth change, we will examine the long-time dynamics of large-scale structures.
-
-\todo[inline]{I modified the last sentence above. Feel free to revert to your original sentence if you do not like mine. (the change looks good)}
+Rather, since we are interested in modeling statistics before and after the ADC, we will examine the long-time dynamics of large-scale structures.
 
 
 \subsection{Interpreting experimental parameters in the dynamical model}
