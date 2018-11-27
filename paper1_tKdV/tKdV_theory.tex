@@ -155,29 +155,20 @@ larger energies generate stronger skewness in the surface displacement PDFs and 
 
 \section{Surface wave turbulence modeled by truncated KdV equation with depth dependence\label{sec:Surface-wave-turbulence}}
 
-The Korteweg-de Vries (KdV) equation \cite{johnson1997modern}
-is a leading-order approximation of surface waves that are determined
-by the balance of nonlinear and dispersive effects in an appropriate
-far-field limit. Here, the KdV equation is truncated in the first
-$\Lambda$ modes (with $J=2\Lambda+1$ grid points) to generate weakly
-turbulent dynamics. The surface displacement is described by
-the state variable $u_{\Lambda}^{\pm}\left(x,t\right)$ with superscript `$-$'
-for the incoming waves and `$+$' for the outgoing waves. The Galerkin
-truncated variable $u_{\Lambda}=\sum_{1\leq\left|k\right|\leq\Lambda}\hat{u}_{k}\left(t\right)e^{ikx}$
-is normalized with zero mean $\hat{u}_{0}=0$ and unit energy $2\pi\sum_{k=1}^{\Lambda}\left|\hat{u}_{k}\right|^{2}=1$,
-which are conserved quantities, and $u_{\Lambda}\equiv\mathcal{P}_{\Lambda}u$
-denotes the subspace projection. The evolution of  $u_{\Lambda}^{\pm}$ is governed by the truncated
-KdV equation with depth change $D_{\pm}$
+The Korteweg-de Vries (KdV) equation is a one-dimensional, deterministic model capable of describing {\color{blue} (weak?)} surface wave turbulence. More specifically, KdV is leading-order approximation for surface waves governed by a balance of nonlinear and dispersive effects, valid in an appropriate far-field limit \cite{johnson1997modern}. Moreover, KdV has been adapted to describe waves propagating over variable depth  \cite{johnson1997modern}. 
+Here, we consider the variable-depth KdV equation truncated at wavenumber $\Lambda$ (with $J=2\Lambda+1$ grid points) in order to generate weakly turbulent dynamics. The surface displacement is described by the state variable $u_{\Lambda}^{\pm}\left(x,t\right)$ with superscript `$-$' for the incoming waves and `$+$' for the outgoing waves.
+The Galerkin truncated variable $u_{\Lambda}=\sum_{1\leq\left|k\right|\leq\Lambda}\hat{u}_{k}\left(t\right)e^{ikx}$ is normalized with zero mean $\hat{u}_{0}=0$ and unit energy $2\pi\sum_{k=1}^{\Lambda}\left|\hat{u}_{k}\right|^{2}=1$, which are conserved quantities. Here, $u_{\Lambda}\equiv\mathcal{P}_{\Lambda}u$ denotes the subspace projection. The evolution of  $u_{\Lambda}^{\pm}$ is governed by the truncated KdV equation with depth change $D_{\pm}$
 \begin{equation}
 \frac{\partial u_{\Lambda}^{\pm}}{\partial t}+\frac{D_{\pm}^{-3/2}}{2}E_{0}^{1/2}L_{0}^{-3/2}\frac{\partial}{\partial x}\mathcal{P}_{\Lambda}\left(u_{\Lambda}^{\pm}\right)^{2}+D_{\pm}^{1/2}L_{0}^{-3}\frac{\partial^{3}u_{\Lambda}^{\pm}}{\partial x^{3}}=0. \label{eq:tKdV_nondim}
 \end{equation}
 Equation [\ref{eq:tKdV_nondim}] is non-dimensionalized on the periodic
-domain $x\in\left[-\pi,\pi\right]$. The depth is assumed to be unit $D_{-}=1$ before the ADC and becomes $D_{+}<1$ after the ADC. 
-The conserved Hamiltonian can be decomposed into a cubic and a quadratic term
+domain $x\in\left[-\pi,\pi\right]$. The depth is assumed to be unit $D_{-}=1$ before the ADC and $D_{+}<1$ after the ADC. 
+The conserved Hamiltonian can be decomposed as
 \begin{align*}
 \mathcal{H}_{\Lambda}^{\pm} & =  D_{\pm}^{-3/2}E_{0}^{1/2}L_{0}^{-3/2}H_{3}\left(u_{\Lambda}^{\pm}\right)-D_{\pm}^{1/2}L_{0}^{-3}H_{2}\left(u_{\Lambda}^{\pm}\right),\\
 & H_{3}\left(u\right) =  \frac{1}{6}\int_{-\pi}^{\pi}u^{3}dx,\;H_{2}\left(u\right)=\frac{1}{2}\int_{-\pi}^{\pi}\left(\frac{\partial u}{\partial x}\right)^{2}dx.
 \end{align*}
+where we refer to $H_3$ as the cubic term and $H_2$ the quadratic term.
 We introduce parameters $\left(E_{0},L_{0},\Lambda\right)$
 based on the following assumptions:
 \begin{itemize}
