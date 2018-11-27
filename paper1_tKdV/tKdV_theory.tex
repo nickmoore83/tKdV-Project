@@ -201,32 +201,33 @@ Rather, since we are interested in modeling statistics before and after the ADC,
 
 \subsection{Interpreting experimental parameters in the dynamical model}
 
+\cite{bolles2018anomalous}
+
 The model parameters $\left(E_{0},L_{0},\Lambda\right)$ in [\ref{eq:tKdV_nondim}]
 can be directly linked to the basic scales from the physical problem.
-The important characterizing parameters measured from the experiments
-include: $\epsilon=\frac{a}{H_{0}}$ the wave amplitude $a$ to water
+The important parameters that characterize the experiments
+include: $\epsilon=\frac{a}{H_{0}}$ the wave amplitude $a$ to (upstream) water
 depth $H_{0}$ ratio; $\delta=\frac{H_{0}}{\lambda_{c}}$ the water
-depth to wavelength scale $\lambda_{c}$ ratio; and $D_{0}=\frac{d}{H_{0}}$
-the normalized wave depth ratio with incoming flow depth $d=H_{0}$
-to the outgoing flow depth $d<H_{0}$. The interpretations and reference
-values of these model parameters are based on the experimental setup
-\cite{bolles2018anomalous}. By comparing the characteristic physical
-scales, the normalized TKdV equation [\ref{eq:tKdV_nondim}] can be
-linked directly with the measured non-dimensional quantities by
+depth to wavelength $\lambda_{c}$ ratio; and $D_{0}=\frac{d}{H_{0}}$ 
+the depth ratio with upstream value $d=H_{0}$
+and downstream value $d<H_{0}$. 
+By comparing the characteristic physical scales, the normalized TKdV equation [\ref{eq:tKdV_nondim}] can be
+linked directly to the above experimental parameters via
 \begin{equation}
 L_{0}=6^{\frac{1}{3}}\left(M\epsilon^{\frac{1}{2}}\delta^{-1}\right),\;E_{0}=\frac{27}{2}\gamma^{-2}\left(M\epsilon^{\frac{1}{2}}\delta^{-1}\right),\label{eq:params}
 \end{equation}
 where $M$ defines the computational domain size $M\lambda_{c}$
 as $M$-multiple of the characteristic wavelength $\lambda_{c}$,
-and $\gamma=\frac{U}{a}$ represents the factor to normalize the total
-energy in the state variable $u_{\Lambda}$ to one. 
+and $\gamma=\frac{U}{a}$ normalizes the total
+energy of the state variable $u_{\Lambda}$ to one.
+\todo[inline]{What is the variable $U$? Have we defined it?}
 
-Consider the spatial discretization $J=2\Lambda+1$ so that the smallest
-resolved scale is comparable with the characteristic wavelength
+Consider a spatial discretization with $J=2\Lambda+1$ grid points, so that the smallest
+resolved scale is comparable to the characteristic wavelength
 \[
 \Delta x=\frac{2\pi M\lambda_{c}}{J}\lesssim\lambda_{c}\:\Rightarrow\:M=\frac{J}{2\pi}\sim5,\;J=32.
 \]
-Therefore in the practical numerical simulations, we pick $M=5$ and
+In the practical numerical simulations, we select $M=5$ and
 $\gamma$ varies in the range $\left[0.5,1\right]$. Using the reference
 experimental measurements \cite{bolles2018anomalous}, $\epsilon\in\left[0.0024,0.024\right],\delta\sim0.22$,
 and $D_{0}$ changes from 1 to 0.24 before and after the depth change.
