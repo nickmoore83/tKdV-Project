@@ -149,13 +149,13 @@ disturbances: incoming waves display near-Gaussian statistics,
 while outgoing waves skew strongly towards positive displacement.
 \item The degree of non-Gaussianity present in the outgoing waves depends on the injected energy $E$: 
 larger energies generate stronger skewness in the surface displacement PDFs and more extreme events.
-\item \textcolor{blue} {Compared to the incoming wave train, the power spectrum of the outgoing wave field decays more slowly, which indicates that the anomalous behavior is associated with an elevated level of high frequencies.}
+\item Compared to the incoming wave train, the power spectrum of the outgoing wave field decays more slowly, which indicates that the anomalous behavior is associated with an elevated level of high frequencies.
 %{The waves also show different slopes in the power spectra at upstream and downstream locations}.
 \end{itemize}
 
 \section{Surface wave turbulence modeled by truncated KdV equation with depth dependence\label{sec:Surface-wave-turbulence}}
 
-The Korteweg-de Vries (KdV) equation is a one-dimensional, deterministic model capable of describing {\color{blue} (weak?)} surface wave turbulence. More specifically, KdV is leading-order approximation for surface waves governed by a balance of nonlinear and dispersive effects, valid in an appropriate far-field limit \cite{johnson1997modern}. Moreover, KdV has been adapted to describe waves propagating over variable depth  \cite{johnson1997modern}. 
+The Korteweg-de Vries (KdV) equation is a one-dimensional, deterministic model capable of describing surface wave turbulence. More specifically, KdV is leading-order approximation for surface waves governed by a balance of nonlinear and dispersive effects, valid in an appropriate far-field limit \cite{johnson1997modern}. Moreover, KdV has been adapted to describe waves propagating over variable depth  \cite{johnson1997modern}. 
 Here, we consider the variable-depth KdV equation truncated at wavenumber $\Lambda$ (with $J=2\Lambda+1$ grid points) in order to generate weakly turbulent dynamics. The surface displacement is described by the state variable $u_{\Lambda}^{\pm}\left(x,t\right)$ with superscript `$-$' for the incoming waves and `$+$' for the outgoing waves.
 The Galerkin truncated variable $u_{\Lambda}=\sum_{1\leq\left|k\right|\leq\Lambda}\hat{u}_{k}\left(t\right)e^{ikx}$ is normalized with zero mean $\hat{u}_{0}=0$ and unit energy $2\pi\sum_{k=1}^{\Lambda}\left|\hat{u}_{k}\right|^{2}=1$, which are conserved quantities. Here, $u_{\Lambda}\equiv\mathcal{P}_{\Lambda}u$ denotes the subspace projection. The evolution of  $u_{\Lambda}^{\pm}$ is governed by the truncated KdV equation with depth change $D_{\pm}$
 \begin{equation}
@@ -187,7 +187,7 @@ energy injected into the system based on the driving amplitude $\Delta \theta$.
 %term, $H_{3}$, for stronger nonlinearity and weaker dispersion for
 %the third-order derivative term reflected by the smaller coefficient
 %for $H_{2}$ in the Hamiltonian. 
-Some intuition for how \eqref{eq:tKdV_nondim} produces different dynamics on either side of the ADC can be gained by considering the relative contributions of $H_3$ and $H_2$ in the Hamiltonian $\mathcal{H}_{\Lambda}^{\pm}$. The depth change, $D_{+}<1$, increases the weight of $H_3$ and decreases that of $H_2$, thereby promoting the effects of nonlinearity over dispersion and creating conditions favorable for extreme events. Since $\frac{\partial u}{\partial x}$ is the slope of the wave height, $H_{2}\left(u\right)$ measures the
+Some intuition for how equation [\ref{eq:tKdV_nondim}] produces different dynamics on either side of the ADC can be gained by considering the relative contributions of $H_3$ and $H_2$ in the Hamiltonian $\mathcal{H}_{\Lambda}^{\pm}$. The depth change, $D_{+}<1$, increases the weight of $H_3$ and decreases that of $H_2$, thereby promoting the effects of nonlinearity over dispersion and creating conditions favorable for extreme events. Since $\frac{\partial u}{\partial x}$ is the slope of the wave height, $H_{2}\left(u\right)$ measures the
 wave slope energy.
 
 A \emph{deterministic matching condition} is applied to the surface displacement $u_{\Lambda}^{\pm}$ to link the incoming and outgoing wave trains. Assuming the abrupt depth change is met at $t=T_{\mathrm{ADC}}$, the matching condition is given by
@@ -216,9 +216,7 @@ L_{0}=6^{\frac{1}{3}}\left(M\epsilon^{\frac{1}{2}}\delta^{-1}\right),\;E_{0}=\fr
 \end{equation}
 where $M$ defines the computational domain size $M\lambda_{c}$
 as $M$-multiple of the characteristic wavelength $\lambda_{c}$,
-and $\gamma=\frac{U}{a}$ normalizes the total
-energy of the state variable $u_{\Lambda}$ to one.
-\todo[inline]{What is the variable $U$? Have we defined it?}
+and $\gamma=\frac{U}{a}$ with $U$ a scaling factor for the state variable $u_{\Lambda}$ normalizes the total energy of the system to one.
 
 Consider a spatial discretization with $J=2\Lambda+1$ grid points, so that the smallest
 resolved scale is comparable to the characteristic wavelength
@@ -257,7 +255,7 @@ the expectation of any functional $F\left(u\right)$ can be computed as
 \]
 The value of $\theta$ in the invariant measure is specified from
 $\left\langle H_{\Lambda}\right\rangle _{\mathcal{G}_{\theta}}$ \cite{abramov2003hamiltonian,bajars2013weakly}.
-\todo[inline]{I do not quite understand the above sentence.}
+
 In addition to producing equilibrium PDFs of $u_{\Lambda}$, the invariant measure can be used to predict the equilibrium energy spectrum without the direct simulation of TKdV. Direct simulation, however, is required to recover transient statistics of $u_{\Lambda}$ and time autocorrelations.
 %The invariant measure also predicts an equilibrium energy spectrum without running the TKdV equation directly. On the other hand, the time autocorrelation and transient statistics about the state variable $u_{\Lambda}$ cannot be recovered from the statistical theory.
 
@@ -577,7 +575,7 @@ media in different settings.
 
 \acknow{This research of A. J. M. is partially supported by the Office of
 Naval Research through MURI N00014-16-1-2161. D. Q. is supported as
-a postdoctoral fellow on the second grant. M.N.J.M would like to acknowledge support from Simons grant 524259.}
+a postdoctoral fellow on the grant. M.N.J.M would like to acknowledge support from Simons grant 524259.}
 
 \showacknow % Display the acknowledgments section
 
