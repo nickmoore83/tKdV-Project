@@ -66,7 +66,7 @@ either the upstream or downstream Gibbs measure with given theta. =#
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
 		amp::Float64, D0::Float64, lamfac::Int, theta::Float64, gibbsup::Bool)
 	hamdn = getham(H3vec,H2vec,amp,D0,lamfac)
-	gibbsup? ham=getham(H3vec,H2vec,amp,1.,lamfac) : ham = hamdn
+	gibbsup ? ham=getham(H3vec,H2vec,amp,1.,lamfac) : ham = hamdn
 	return dot(exp.(-theta*ham), hamdn) / sum(exp.(-theta*ham))
 end
 #= Determine the downstream thetas that satisfy the statistical matching condition. =#

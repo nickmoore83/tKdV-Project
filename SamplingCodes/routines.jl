@@ -15,20 +15,20 @@ datafolder(run_number::Int) = string("../SamplingData/run",run_number,"/")
 savemicro() = true
 #---------------------------------#
 
-#---------- Data Types ----------#
+#---------- Data Structures ----------#
 # Sampled state
-type RandSet
+struct RandSet
 	H3::Vector{Float64}; H2::Vector{Float64}; rvar::Array{Float64}
 end
 # Accepted state
-type AcceptedState
-	H3::Vector{Float64}; H2::Vector{Float64}; uhat::Array{Complex128}; naccepted::Int
+struct AcceptedState
+	H3::Vector{Float64}; H2::Vector{Float64}; uhat::Array{Complex{Float64}}; naccepted::Int
 end
 # Initiate a new StateAccepted
 function new_acc_state(nmodes::Int)
 	micmax, macmax = maxparams()
 	return AcceptedState(zeros(Float64,macmax), zeros(Float64,macmax), 
-		zeros(Complex128,nmodes,micmax), 0)
+		zeros(Complex{Float64},nmodes,micmax), 0)
 end
 #---------------------------------#
 
@@ -45,7 +45,7 @@ function writedata(data::Array, filename::AbstractString)
 	close(iostream)
 end
 function newfolder(foldername::AbstractString)
-	isdir(foldername)? rm(foldername; recursive=true) : 0
+	isdir(foldername) ? rm(foldername; recursive=true) : 0
 	mkdir(foldername)
 end
 #---------------------------------#
@@ -61,13 +61,13 @@ function realfft(uu::Vector{Float64})
 	return uhat[2:end]
 end
 #= Basic irealfft to go from uhat to uu (no upsampling). =#
-function irealfft(uhat::Vector{Complex128})
+function irealfft(uhat::Vector{Complex{Float64}})
 	nmodes = endof(uhat)
 	uu = irfft([0; uhat], npoints(nmodes))
 	return uu*endof(uu)
 end
 #= Upsampled version of irealfft. =#
-function ifftup(uhat::Vector{Complex128})
+function ifftup(uhat::Vector{Complex{Float64}})
 	uhat = [uhat; zeros(eltype(uhat), endof(uhat))]
 	return irealfft(uhat)
 end
@@ -88,17 +88,17 @@ I used the shorthand convention int = (1/2*pi) int_0^{2*pi}.
 and nmodes is the same as Lambda. =#
 
 #= Compute the energy, E = 1/2 int u^2 dx. =#
-function energy(uhat::Vector{Complex128})
+function energy(uhat::Vector{Complex{Float64}})
 	return norm(uhat)^2
 end
 # Compute H2 = 1/2 int u_x^2 dx
-function ham2(uhat::Vector{Complex128})
+function ham2(uhat::Vector{Complex{Float64}})
 	kvec = 1:endof(uhat)
 	uxhat = im*kvec.*uhat
 	return energy(uxhat)
 end
 #= Compute H3 using FFT to physical space, H3 = 1/6 int u^3 dx. =#
-function ham3(uhat::Vector{Complex128})
+function ham3(uhat::Vector{Complex{Float64}})
 	uu = ifftup(uhat)
 	return sum(uu.^3) / (6*endof(uu))
 end
@@ -135,7 +135,7 @@ function microcan(nmodes::Int, nsamples::Int)
 	return RandSet(H3vec,H2vec,rvar)
 end
 #= Convert each accepted uhat to physical space for analysis. =#
-function getuacc(uhacc::Array{Complex128})
+function getuacc(uhacc::Array{Complex{Float64}})
 	nmodes = size(uhacc)[1]
 	nsamples = size(uhacc)[2]
 	npts = npoints(nmodes)
@@ -146,7 +146,7 @@ function getuacc(uhacc::Array{Complex128})
 	return uacc
 end
 #= Compute the ensemble average of abs(uhat) for each mode =#
-function getuhavg(uhacc::Array{Complex128})
+function getuhavg(uhacc::Array{Complex{Float64}})
 	nmodes = size(uhacc)[1]
 	uhavg = zeros(Float64,nmodes)
 	for kk=1:nmodes
@@ -183,7 +183,7 @@ function gibbs_sample!(rset::RandSet, accstate::AcceptedState,
 	# With the normalized acceptance rate, decide to accept/reject each.
 	univar = rand(nsamp)
 	for nn=1:nsamp
-		accstate.naccepted >= macmax? break : 0
+		accstate.naccepted >= macmax ? break : 0
 		if univar[nn] <= accept_vec[nn]
 			accstate.naccepted += 1
 			mm = accstate.naccepted
