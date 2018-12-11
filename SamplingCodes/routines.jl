@@ -5,6 +5,7 @@ using Roots
 using Plots
 using DelimitedFiles
 using LinearAlgebra
+using FFTW
 # Fix some parameters for the maximum number of accepted micro and macro states.
 function maxparams()
 	micmax = 2*10^5
@@ -23,7 +24,7 @@ struct RandSet
 	H3::Vector{Float64}; H2::Vector{Float64}; rvar::Array{Float64}
 end
 # Accepted state
-struct AcceptedState
+mutable struct AcceptedState
 	H3::Vector{Float64}; H2::Vector{Float64}; uhat::Array{Complex{Float64}}; naccepted::Int
 end
 # Initiate a new StateAccepted
@@ -130,7 +131,7 @@ function microcan(nmodes::Int, nsamples::Int)
 		H3vec[nn] = ham3(uhat)
 		H2vec[nn] = ham2(uhat)
 		if mod(nn, 10^4) == 0
-			println("Microcanonical sampling is ", signif(100*nn/nsamples,3), "% completed.")
+			println("Microcanonical sampling is ", round(100*nn/nsamples,sigdigits=3), "% completed.")
 		end
 	end
 	println("Microcanonical sampling completed.")
@@ -178,7 +179,7 @@ function gibbs_sample!(rset::RandSet, accstate::AcceptedState,
 	nsamp = size(rvar)[3]
 	# Determine the acceptance rate based on the Hamiltonian.
 	println("\nSampling from Gibbs distribution with D0 = ", 
-		signif(D0,2), " and theta = ", signif(theta,2))
+		round(D0,sigdigits=2), " and theta = ", round(theta,sigdigits=2))
 	hamvec = getham(H3all,H2all,amp,D0,lamfac)
 	accept_vec = exp.(-theta * hamvec)
 	accept_vec *= 1/(maximum(accept_vec))

@@ -14,7 +14,7 @@ To Do\ulnone \
 - Parallelize the for loops that compute H3 and H2.\
 \
 \
-- Make code nicer by collapsing collection of paramter (amp, D0, lamfac) into a single vector or an object.\
+- Make code nicer by collapsing collection of parameter (amp, D0, lamfac) into a single vector or an object.\
 \
 - Idea to get higher acceptance rates: We need higher acceptance rates for Lambda = 16 and theta = -0.4. To get this, we can predispose the initial samples to have a decaying spectrum by making the variance of the Gaussian random variables decay with k. This will alter the base measure, dmu, to something else and we need to figure out what that something else is. Once we figure it out, we can correct for it in the acceptance probability.\
 \
@@ -26,6 +26,10 @@ Good idea: We could probably approximate theta+ as function of theta- using a Ta
 \
 - Confirm the scaling result for energy of u_x.\
 \
+\
+\
+\ul Dec 11, 2018\ulnone \
+I updated my Julia codes to run on Julia 1.0. After some toiling, everything works now.\
 \
 \ul Oct 6, 2018\ulnone \
 

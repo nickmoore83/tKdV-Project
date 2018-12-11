@@ -104,11 +104,11 @@ function main(run_number::Int=0)
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
 	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,amp,D0,lamfac,thup_vec)
-	cput_match = signif(cput_match/60,2)
+	cput_match = round(cput_match/60,sigdigits=2)
 	println("The CPU time for enforcing matching condition is ", cput_match, " minutes.")
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)	
 	# Initialize the accepted set of states.
-	accstate = Array{AcceptedState}(nthetas,2)
+	accstate = Array{AcceptedState}(undef,nthetas,2)
 	for nn=1:nthetas
 		accstate[nn,1] = new_acc_state(nmodes)
 		accstate[nn,2] = new_acc_state(nmodes)
@@ -131,7 +131,7 @@ function main(run_number::Int=0)
 		rset = microcan(nmodes,nsamp)
 		gibbs_sample_updn(rset,accstate)
 	end
-	cput_sample = signif((time()-tm0)/60, 2)
+	cput_sample = round((time()-tm0)/60,sigdigits=2)
 	println("\n\nCompleted the Gibbs sampling phase.")
 	println("The CPU time for sampling is ", cput_sample, " minutes.")
 	cputimes = [cput_match, cput_sample]
