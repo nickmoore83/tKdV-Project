@@ -8,7 +8,7 @@ function extractparams(params::Vector)
 	lamfac = Int(params[6]) 
 	thmin, thmax, dth = params[7:9]
 	thup_vec = collect(thmin:dth:thmax)
-	nthetas = endof(thup_vec)
+	nthetas = lastindex(thup_vec)
 	return nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas
 end
 # Write the macrostate data.
@@ -73,7 +73,7 @@ end
 function matchmean(nmodes::Int, nsamp::Int, 
 		amp::Float64, D0::Float64, lamfac::Int, thup_vec::Vector{Float64})
 	# Preliminaries
-	nthetas = endof(thup_vec)
+	nthetas = lastindex(thup_vec)
 	thdn_vec = zeros(Float64,nthetas)
 	# Sample H3 and H2 from a microcanonical distribution.
 	rset = microcan(nmodes,nsamp)
@@ -95,7 +95,12 @@ function main(run_number::Int=0)
 	newfolder(datafolder(run_number))
 	paramsfile = string("params",run_number,".txt")
 	params = readvec(paramsfile)
+	
+	println("params")
+	println(params)
+
 	nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas = extractparams(params)
+
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
 	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,amp,D0,lamfac,thup_vec)

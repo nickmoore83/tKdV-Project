@@ -3,6 +3,8 @@
 using Distributions
 using Roots
 using Plots
+using DelimitedFiles
+using LinearAlgebra
 # Fix some parameters for the maximum number of accepted micro and macro states.
 function maxparams()
 	micmax = 2*10^5
@@ -35,7 +37,7 @@ end
 #---------- IO Routines ----------#
 function readvec(file::AbstractString)
 	iostream = open(file, "r")
-	vec1 = readdlm(iostream)[:,1]
+	vec1 = readdlm(iostream, comments=true, comment_char='#')[:,1]
 	close(iostream)
 	return vec1
 end
@@ -56,19 +58,19 @@ end
 Note: uu has length npoints = 2*nmodes. =#
 #= Basic realfft to go from uu to uhat. =#
 function realfft(uu::Vector{Float64})
-	uhat = rfft(uu)/endof(uu)
+	uhat = rfft(uu)/lastindex(uu)
 	assert(abs(uhat[1])/max.(abs,uhat) < 1e-6) 
 	return uhat[2:end]
 end
 #= Basic irealfft to go from uhat to uu (no upsampling). =#
 function irealfft(uhat::Vector{Complex{Float64}})
-	nmodes = endof(uhat)
+	nmodes = lastindex(uhat)
 	uu = irfft([0; uhat], npoints(nmodes))
-	return uu*endof(uu)
+	return uu*lastindex(uu)
 end
 #= Upsampled version of irealfft. =#
 function ifftup(uhat::Vector{Complex{Float64}})
-	uhat = [uhat; zeros(eltype(uhat), endof(uhat))]
+	uhat = [uhat; zeros(eltype(uhat), lastindex(uhat))]
 	return irealfft(uhat)
 end
 #= Valid choices for npts are 2*nmodes or 2*nmodes+1, 
@@ -93,14 +95,14 @@ function energy(uhat::Vector{Complex{Float64}})
 end
 # Compute H2 = 1/2 int u_x^2 dx
 function ham2(uhat::Vector{Complex{Float64}})
-	kvec = 1:endof(uhat)
+	kvec = 1:lastindex(uhat)
 	uxhat = im*kvec.*uhat
 	return energy(uxhat)
 end
 #= Compute H3 using FFT to physical space, H3 = 1/6 int u^3 dx. =#
 function ham3(uhat::Vector{Complex{Float64}})
 	uu = ifftup(uhat)
-	return sum(uu.^3) / (6*endof(uu))
+	return sum(uu.^3) / (6*lastindex(uu))
 end
 #---------------------------------------#
 
@@ -115,13 +117,13 @@ end
 function microcan(nmodes::Int, nsamples::Int)
 	println("\nSampling from microcanonical distribution.")
 	# Get all the random samples and allocate space.
-	#rvar = randn(nmodes,2,nsamples)
-	#H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
-	# Parallel variables.
-	rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
-	H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
+	rvar = randn(nmodes,2,nsamples)
+	H3vec, H2vec = [zeros(Float64,nsamples) for nn=1:2]
+	# Parallel variables (obselete in Julia 1.0)
+	#rvar = SharedArray{Float64}( randn(nmodes,2,nsamples) )
+	#H3vec, H2vec = [SharedVector{Float64}(nsamples) for nn=1:2]
 	# Compute H3 and H2 for each sample in a parallel for loop.
-	println("Entering parallel for loop for microcanonical sampling.")
+	println("Entering the loop for microcanonical sampling.")
 	#@parallel
 	for nn=1:nsamples
 		uhat = getuhat(rvar,nn)
