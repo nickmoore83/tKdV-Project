@@ -8,7 +8,7 @@ function extractparams(params::Vector)
 	lamfac = Int(params[6]) 
 	thmin, thmax, dth = params[7:9]
 	thup_vec = collect(thmin:dth:thmax)
-	nthetas = endof(thup_vec)
+	nthetas = lastindex(thup_vec)
 	return nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas
 end
 # Write the macrostate data.
@@ -66,14 +66,14 @@ either the upstream or downstream Gibbs measure with given theta. =#
 function meanham(H3vec::Vector{Float64}, H2vec::Vector{Float64}, 
 		amp::Float64, D0::Float64, lamfac::Int, theta::Float64, gibbsup::Bool)
 	hamdn = getham(H3vec,H2vec,amp,D0,lamfac)
-	gibbsup? ham=getham(H3vec,H2vec,amp,1.,lamfac) : ham = hamdn
+	gibbsup ? ham=getham(H3vec,H2vec,amp,1.,lamfac) : ham = hamdn
 	return dot(exp.(-theta*ham), hamdn) / sum(exp.(-theta*ham))
 end
 #= Determine the downstream thetas that satisfy the statistical matching condition. =#
 function matchmean(nmodes::Int, nsamp::Int, 
 		amp::Float64, D0::Float64, lamfac::Int, thup_vec::Vector{Float64})
 	# Preliminaries
-	nthetas = endof(thup_vec)
+	nthetas = lastindex(thup_vec)
 	thdn_vec = zeros(Float64,nthetas)
 	# Sample H3 and H2 from a microcanonical distribution.
 	rset = microcan(nmodes,nsamp)
@@ -95,15 +95,20 @@ function main(run_number::Int=0)
 	newfolder(datafolder(run_number))
 	paramsfile = string("params",run_number,".txt")
 	params = readvec(paramsfile)
+	
+	println("params")
+	println(params)
+
 	nmodes, nsamp, nsweeps, amp, D0, lamfac, thup_vec, nthetas = extractparams(params)
+
 	# Determine thdn to match the means.
 	println("Enforcing the statistical matching condition.")
 	cput_match = @elapsed (thdn_vec, rset) = matchmean(nmodes,nsamp,amp,D0,lamfac,thup_vec)
-	cput_match = signif(cput_match/60,2)
+	cput_match = round(cput_match/60,sigdigits=2)
 	println("The CPU time for enforcing matching condition is ", cput_match, " minutes.")
 	#plt = plot(thup_vec,thdn_vec, xlabel="theta_up",ylabel="theta_dn"); display(plt)	
 	# Initialize the accepted set of states.
-	accstate = Array{AcceptedState}(nthetas,2)
+	accstate = Array{AcceptedState}(undef,nthetas,2)
 	for nn=1:nthetas
 		accstate[nn,1] = new_acc_state(nmodes)
 		accstate[nn,2] = new_acc_state(nmodes)
@@ -126,7 +131,7 @@ function main(run_number::Int=0)
 		rset = microcan(nmodes,nsamp)
 		gibbs_sample_updn(rset,accstate)
 	end
-	cput_sample = signif((time()-tm0)/60, 2)
+	cput_sample = round((time()-tm0)/60,sigdigits=2)
 	println("\n\nCompleted the Gibbs sampling phase.")
 	println("The CPU time for sampling is ", cput_sample, " minutes.")
 	cputimes = [cput_match, cput_sample]
