@@ -299,6 +299,7 @@ H_3 = \frac{1}{6} \sum_{\substack{ k_1 + k_2 + k_3 = 0 \\ \abs{k_1}, \abs{k_2}, 
 \subsection{The optimizer of the Hamiltonian is a traveling wave solution}
 For the acceptance-rejection algorithm presented below, it will be important to find the maximal value of the Hamiltonian subject to the constraints of fixed energy $E = E_0$ and zero momentum $M = 0$. For simplicity, consider the KdV equation
 \begin{equation}
+\label{KdVsimple}
 u_t + u u_x + \mu u_{xxx} = 0
 \end{equation}
 with corresponding Hamiltonian
@@ -314,7 +315,11 @@ where $\lambda_1$ and $\lambda_2$ are Lagrangian multipliers. Taking the variati
 \begin{equation}
 \frac{\delta F}{\delta u} = \frac{1}{2} u^2 + \mu u_{xx} + \lambda_1 u + \lambda_2 = 0
 \end{equation}
-which is a second-order nonlinear ODE for the optimizer $u = U(x)$. Note that this is identical to the condition for a traveling wave solution!!!
+which is a second-order nonlinear ODE for the optimizer $u = U(x)$. Note that this is identical to the condition for a traveling wave solution!!! To see this, consider traveling wave solutions of \ref{KdVsimple}, $u(x,t) = U(x-Vt)$. Inserting into \ref{KdVsimple} and integrating once gives
+\begin{equation}
+\frac{1}{2} U^2 + \mu U'' - V U = \text{Const}
+\end{equation}
+which is exactly the same condition!!!
 
 \subsection{Some useful estimates/bounds for $H_2$ and $H_3$}
 
