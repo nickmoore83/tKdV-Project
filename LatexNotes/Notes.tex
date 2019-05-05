@@ -247,6 +247,8 @@ Then the Hamiltonian structure is given by
 
 
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Mathematical Preliminaries
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -294,6 +296,26 @@ We note that $H_3$ can be written explicitly in Fourier space as \cite{abramov20
 H_3 = \frac{1}{6} \sum_{\substack{ k_1 + k_2 + k_3 = 0 \\ \abs{k_1}, \abs{k_2}, \abs{k_3} \le \Lambda}}\uhat_{k_1} \uhat_{k_2} \uhat_{k_3}
 \end{equation}
 
+\subsection{The optimizer of the Hamiltonian is a traveling wave solution}
+For the acceptance-rejection algorithm presented below, it will be important to find the maximal value of the Hamiltonian subject to the constraints of fixed energy $E = E_0$ and zero momentum $M = 0$. For simplicity, consider the KdV equation
+\begin{equation}
+u_t + u u_x + \mu u_{xxx} = 0
+\end{equation}
+with corresponding Hamiltonian
+\begin{equation}
+H = \frac{1}{6} \intt u^3 dx - \frac{\mu}{2} \intt u_x^2 dx
+\end{equation}
+
+Consider the functional
+\begin{equation}
+F[u] = H[u] + \lambda_1 (E-E_0) + \lambda_2 (M-0)
+\end{equation}
+where $\lambda_1$ and $\lambda_2$ are Lagrangian multipliers. Taking the variational derivative gives
+\begin{equation}
+\frac{\delta F}{\delta u} = \frac{1}{2} u^2 + \mu u_{xx} + \lambda_1 u + \lambda_2 = 0
+\end{equation}
+which is a second-order nonlinear ODE for the optimizer $u = U(x)$. Note that this is identical to the condition for a traveling wave solution!!!
+
 \subsection{Some useful estimates/bounds for $H_2$ and $H_3$}
 
 Since we examine the statistical mechanics of TKDV, it is valuable to have some a priori bounds and estimates for the components of the Hamiltonian, $H_2$ and $H_3$. In this section, we frequently appeal to the idea of an equipartition of energy among all the modes. For energy $E_0$, if the equipartition holds, then
@@ -301,6 +323,9 @@ Since we examine the statistical mechanics of TKDV, it is valuable to have some 
 \abs{u_k} = \sqrt{\frac{E_0}{\Lambda}} \qquad \text{for } k=1,\cdots,\Lambda
 \end{equation}
 We might expect equipartition of energy to hold, for example, in the case of long-time averages or ensemble averages (appealing to ergodicity).
+
+
+
 
 \subsubsection{Expected value of $H_2$ given $E=E_0$}
 
