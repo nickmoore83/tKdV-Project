@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10660\viewh10940\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 \
+Key observation: \
+The value var(slope) upstream essentially sets the value of the upstream Hamiltonian (since skewness upstream is negligible). If this is interpreted as the expected value of the Hamiltonian, then the upstream inverse temperature is essentially set, which is what we have been looking for: some way to deduce the upstream inverse temperature! It would be interesting to see how var(slope) depends on driving amplitude and depth ratio (although the depth ratio data is probably not clean enough).\
+\
+Other things to plot and to think about:\
+- Key figure: plot the ratio skew(u)/(delta var(slope) versus driving amplitude against the theoretical prediction of 1/amp^3.\
+- Plot a whole series of var(slope) and skew(u) versus position for a range of driving amplitude experiments. These plots seemed very nice when Tyler showed them because you could identify distinct trends that were consistent across different experiments.\
+- Also plot the value of A3 H3 - A2 H2, which should be constant according to theory. In the experiments it will not be constant, due to the transition oscillation of slope(var), but it should at least be roughly the same value upstream and downstream, with variation in the transition zone.\
+- The variable depth ratio data is not clean enough for slope(var) stuff but I would still like to plot something in paper 2, to show that we did the experiments. I could simply plot the maximum downstream skewness versus depth ratio (maybe kurtosis too) and show a few histograms to get the point across.\
+- Also, we could test the scaling observations from the experiments (e.g. skewness ~ amp^1/4) in the theory. Does this require calibrating the inverse temperature, or alternatively does it give us how the inverse temperature depends on amplitude?\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 Original goals with the experimental data\ulnone \
+Things to look for with Tyler:\ul \
+\ulnone 1a. Conservation of Hamiltonian gives a relationship between slope energy and displacement skewness. Test it!\
+1b. Analytical formula for skewness in terms of difference of wave-slope energy. Test it!\
+1c. We could compare the ratio of outgoing to incoming skewness.\
+\
+2a. Do we have useable data for different values of the step height? If so, we could perform a more robust comparison of theory vs experiment.\
+2b. If we do have the data, we could test out the role of the depth ratio and see if it has the effect that the theory predicts.\
+\
+3. Can we somehow use the experiment to \'91calibrate\'92 the incoming inverse temperature? That is the only model parameter that has to be guessed at.\
+\
+4. Power spectrum and autocorrelation from experiments, from all of the experiments.\
+\
+\
+\ul June 10, 2019\
+\ulnone Tyler and I looked at a lot of data of var(slope) = E[u_x^2] with the main goal of looking for the H3 and H2 relationship.\
+- For the varied amplitude runs, the data looks pretty clean. var(slope) has a distinct up-and-down feature just upstream of the depth change that is consistent across runs.\
+- For the varied depth runs, the data does not quite look clean enough to use. It seems that we cannot see far enough upstream to get a reliable estimate of var(slope) up and down stream. Also we see inconsistent features from run to run.\
+\
+\ul June 11, 2019\
+\ulnone - First, Tyler and I tried the same thing we were doing yesterday, testing the explicit formula for skewness, but this time with the varied amplitude data which is cleaner than varied depth. We get that the ratio skewness/(change in slope variance) scales like the amplitude to a power between -4 and -3; the prediction is -4. So this is good agreement!\
+- Tyler made some very nice plots showing the skewness and var(slope) versus position x, for each of the varied amplitude runs. The plots show very clear trends. Doing the same thing for the varied depth runs, the plots are not nearly as clean and the trends are not really discernible compared to the noise.\
+- We looked at autocorrelation upstream and downstream. There seems to be no significant qualitative difference between the upstream and downstream data. In particular, we do not see the autocorrelation timescale shorten at all, as we thought was predicted by theory. Looking back at the theory, that effect is probably a byproduct of the different nondimensionalizations upstream and downstream.\
+\
+\
+\ul Python\ulnone \
+var(), variance = E[(x-mu)^2] = E[x^2] - E[x]^2\
+skew(), skewness = E[((x-mu)/sigma)^3] = E[(x-mu)^3]/E[(x-mu)^2]^(3/2)\
+}
