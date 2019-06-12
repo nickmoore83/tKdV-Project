@@ -54,6 +54,8 @@
 \newcommand{\Hm}{H^{-}}
 \newcommand{\Gp}{\Gibbs^{+}}
 \newcommand{\Gm}{\Gibbs^{-}}
+\newcommand{\meanp}[1]{\mean{#1}_{+}}
+\newcommand{\meanm}[1]{\mean{#1}_{-}}
 
 % Dashed integral
 \def\Xint#1{\mathchoice
@@ -118,8 +120,8 @@ Then the Hamiltonian is given by
 \end{align}
 where
 \begin{align}
-&H_3 = \intt u^3 \dx	\, , \\
-&H_2 = \intt u_x^2 \dx	\, .
+&H_3 = \frac{1}{6} \intt u^3 \dx	\, , \\
+&H_2 = \frac{1}{2} \intt u_x^2 \dx	\, .
 \end{align}
 
 Note: after giving it some deliberation, I believe we should use $\lamfac=1$. My reason is that the peak in the wave spectrum occurs at a frequency of $f_p$ or wavelength of $\lambda_p$. In the tKdV Gibbs measure, the spectrum decays monotonically, so that the peak is at the lowest resolved frequency (or largest resolved wavelength). Thus, we want $\lambda_p$ to correspond to the largest resolved wavelength, i.e.~the length of the periodic domain in the tKdV framework.
@@ -161,7 +163,15 @@ Depth ratio			& $D = d/h_0$				& dimensionless
 
 The statistical matching condition is
 \begin{equation}
-\mean{\Hp}_{\Gm} = \mean{\Hp}_{\Gp}
+\meanm{\Hp} = \meanp{\Hp}
+\end{equation}
+An experimental observation is that the incoming skewness is small, thus
+\begin{equation}
+\meanm{H_3} \approx 0
+\end{equation}
+which immediately gives
+\begin{equation}
+\ampp D_0^{-3/2} \meanp{H_3} = \mu D_0^{1/2} \left( \meanp{H_2} - \meanm{H_2} \right)
 \end{equation}
 
 
