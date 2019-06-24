@@ -17,27 +17,24 @@ The value var(slope) upstream essentially sets the value of the upstream Hamilto
 Other things to plot and to think about:\
 - The variable depth ratio data is not clean enough for slope(var) stuff but I would still like to plot something in the second paper, to show that we did the experiments. I could simply plot the maximum downstream skewness versus depth ratio (maybe kurtosis too) and show a few histograms to get the point across.\
 - Also, we could test the scaling observations from the experiments (e.g. skewness ~ amp^1/4) in the theory. Does this require calibrating the inverse temperature, or alternatively does it give us how the inverse temperature depends on amplitude?\
-\
-\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 - Can we somehow use the experiment to \'91calibrate\'92 the incoming inverse temperature? That is the only model parameter that has to be guessed at.\
+- Power spectrum and autocorrelation from all experiments.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
 \ul Plots done\ulnone \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 - Key figure: plot the ratio skew(u)/(delta var(slope) versus driving amplitude against the theoretical prediction of 1/amp^3.\
 - Plot a whole series of var(slope) and skew(u) versus position for a range of driving amplitude experiments. These plots seemed very nice when Tyler showed them because you could identify distinct trends that were consistent across different experiments.\
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \
-\ul Original goals with the experimental data\ulnone \
-Things to look for with Tyler:\ul \
+\
+\
+\
+
+\b\fs40 Misc Notes
+\b0\fs28 \ul \
 \ulnone \
-\
-2a. Do we have useable data for different values of the step height? If so, we could perform a more robust comparison of theory vs experiment.\
-2b. If we do have the data, we could test out the role of the depth ratio and see if it has the effect that the theory predicts.\
-\
-3. Can we somehow use the experiment to \'91calibrate\'92 the incoming inverse temperature? That is the only model parameter that has to be guessed at.\
-\
-4. Power spectrum and autocorrelation from experiments, from all of the experiments.\
-\
-\
 \ul June 10, 2019\
 \ulnone Tyler and I looked at a lot of data of var(slope) = E[u_x^2] with the main goal of looking for the H3 and H2 relationship.\
 - For the varied amplitude runs, the data looks pretty clean. var(slope) has a distinct up-and-down feature just upstream of the depth change that is consistent across runs.\
@@ -46,10 +43,4 @@ Things to look for with Tyler:\ul \
 \ul June 11, 2019\
 \ulnone - First, Tyler and I tried the same thing we were doing yesterday, testing the explicit formula for skewness, but this time with the varied amplitude data which is cleaner than varied depth. We get that the ratio skewness/(change in slope variance) scales like the amplitude to a power between -4 and -3; the prediction is -4. So this is good agreement!\
 - Tyler made some very nice plots showing the skewness and var(slope) versus position x, for each of the varied amplitude runs. The plots show very clear trends. Doing the same thing for the varied depth runs, the plots are not nearly as clean and the trends are not really discernible compared to the noise.\
-- We looked at autocorrelation upstream and downstream. There seems to be no significant qualitative difference between the upstream and downstream data. In particular, we do not see the autocorrelation timescale shorten at all, as we thought was predicted by theory. Looking back at the theory, that effect is probably a byproduct of the different nondimensionalizations upstream and downstream.\
-\
-\
-\ul Python\ulnone \
-var(), variance = E[(x-mu)^2] = E[x^2] - E[x]^2\
-skew(), skewness = E[((x-mu)/sigma)^3] = E[(x-mu)^3]/E[(x-mu)^2]^(3/2)\
-}
+- We looked at autocorrelation upstream and downstream. There seems to be no significant qualitative difference between the upstream and downstream data. In particular, we do not see the autocorrelation timescale shorten at all, as we thought was predicted by theory. Looking back at the theory, that effect is probably a byproduct of the different nondimensionalizations upstream and downstream.}
