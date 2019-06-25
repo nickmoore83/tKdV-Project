@@ -30,25 +30,12 @@
 \newcommand{\mean}[1]{\left< #1 \right>}
 \newcommand{\eps}{\varepsilon}
 
-% Experimental parameters
-\newcommand{\lamm}{\lambda^{-}}
-\newcommand{\lamp}{\lambda^{+}}
-\newcommand{\hm}{h^{-}}
-\newcommand{\hp}{h^{+}}
-\newcommand{\etastd}{\eta_{\text std}}
-% Theory for truncated KdV and stat mech
-\newcommand{\uhat}{\hat{u}}
-\newcommand{\RR}{\mathbb{R}}
-\newcommand{\Real}{\text{Re}}
-\newcommand{\Fspace}{\mathscr{F}_{\Lambda}}
-\newcommand{\Proj}{P_{\Lambda}}
-\newcommand{\sumk}{\sum_{k=1}^{\Lambda}}
-\newcommand{\sumn}{\sum_{n=1}^{N}}
-\newcommand{\uDir}{u_{\text{Dir}}}
-\newcommand{\Gibbs}{\mathcal{G}}
-\newcommand{\ampp}{\mathcal{A}}
-\newcommand{\lamfac}{N}
 
+% New
+\newcommand{\etastd}{\eta_{\text std}}
+\newcommand{\ampp}{\mathcal{A}}
+\newcommand{\Gibbs}{\mathcal{G}}
+\newcommand{\lamfac}{N}
 % New
 \newcommand{\Hp}{H^{+}}
 \newcommand{\Hm}{H^{-}}
@@ -61,10 +48,11 @@
 
 % New
 \newcommand{\depth}{d}
-\newcommand{\dpm}{\depth^{-}}
-\newcommand{\dpp}{\depth^{+}}
-
-
+\newcommand{\dup}{\depth^{-}}
+\newcommand{\ddn}{\depth^{+}}
+\newcommand{\lamup}{\lambda^{-}}
+\newcommand{\lamdn}{\lambda^{+}}
+\newcommand{\freqp}{f_p}
 
 % Dashed integral
 \def\Xint#1{\mathchoice
@@ -102,9 +90,9 @@
 %----------------------------------------------------------%
 \section{The truncated KdV framework}
 
-\subsection{KdV with depth change}
+\subsection{The Korteweg–de Vries equation with variable depth}
 Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
-To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation, which in dimensional form is given by
+To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by
 \begin{equation}
 2 \eta_t + \frac{3 c}{\depth} \eta \eta_{\xi} + \frac{c \depth^2}{3} \eta_{\xi \xi \xi} = 0
 \end{equation}
@@ -113,20 +101,20 @@ We will primarily consider the case in which waves originate from a region of co
 \begin{align}
 \depth = 
 \begin{cases}
-\it \dpm \quad \mbox{if } x<0 \\
-\it \dpp \quad \mbox{if } x>0
+\it \dup \quad \mbox{if } x<0 \\
+\it \ddn \quad \mbox{if } x>0
 \end{cases}
 \end{align}
-Most often, we will consider waves moving into shallower depth, so that $\dpp < \dpm$.
+Most often, we will consider waves moving into shallower depth, so that $\ddn < \dup$. The incoming waves are randomized and generated with a peak forcing frequency of $\freqp$. 
 
-\subsection{Nondimensionalization}
+\subsection{Nondimensionalization of KdV}
 
 We introduce the following characteristic scales
 \begin{align}
-\mbox{\em characteristic wave amplitude} \qquad
-a = \etastd = \mean{\eta^2}^{1/2} \\
-\mbox{\em characteristic wave length} \qquad
- = \etastd = \mean{\eta^2}^{1/2}
+&a = \etastd = \mean{\eta^2}^{1/2} 
+&&\mbox{\em upstream characteristic wave amplitude} \\
+&\lamup = \sqrt{g \dup} / \freqp
+&&\mbox{\em upstream characteristic wave length}
 \end{align}
 
 \vsp{10}
