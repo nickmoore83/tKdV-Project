@@ -59,6 +59,11 @@
 \newcommand{\skw}{\text{skew}}
 \newcommand{\var}{\text{var}}
 
+% New
+\newcommand{\depth}{d}
+\newcommand{\dpm}{\depth^{-}}
+\newcommand{\dpp}{\depth^{+}}
+
 
 
 % Dashed integral
@@ -98,13 +103,33 @@
 \section{The truncated KdV framework}
 
 \subsection{KdV with depth change}
-In dimensional form the Korteweg–de Vries equation is given by
+Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
+To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation, which in dimensional form is given by
 \begin{equation}
-2 \eta_t + \frac{3 c}{h_0} \eta \eta_{\xi} + \frac{c h_0^2}{3} \eta_{\xi \xi \xi} = 0
+2 \eta_t + \frac{3 c}{\depth} \eta \eta_{\xi} + \frac{c \depth^2}{3} \eta_{\xi \xi \xi} = 0
 \end{equation}
- 
+
+We will primarily consider the case in which waves originate from a region of constant depth, encounter an abrupt depth change, and then continue in another region of constant depth. Thus, depth will be piecewise constant
+\begin{align}
+\depth = 
+\begin{cases}
+\it \dpm \quad \mbox{if } x<0 \\
+\it \dpp \quad \mbox{if } x>0
+\end{cases}
+\end{align}
+Most often, we will consider waves moving into shallower depth, so that $\dpp < \dpm$.
+
 \subsection{Nondimensionalization}
 
+We introduce the following characteristic scales
+\begin{align}
+\mbox{\em characteristic wave amplitude} \qquad
+a = \etastd = \mean{\eta^2}^{1/2} \\
+\mbox{\em characteristic wave length} \qquad
+ = \etastd = \mean{\eta^2}^{1/2}
+\end{align}
+
+\vsp{10}
 The dimensionless KdV equation is
 \begin{align}
 \label{varKdV}
