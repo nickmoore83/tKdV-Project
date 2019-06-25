@@ -30,6 +30,18 @@
 \newcommand{\mean}[1]{\left< #1 \right>}
 \newcommand{\eps}{\varepsilon}
 
+% New
+\newcommand{\depth}{d}
+\newcommand{\dup}{\depth^{-}}
+\newcommand{\ddn}{\depth^{+}}
+\newcommand{\lamup}{\lambda^{-}}
+\newcommand{\lamdn}{\lambda^{+}}
+\newcommand{\freqp}{f_p}
+% New
+\newcommand{\meanup}[1]{\mean{#1}_{-}}
+\newcommand{\meandn}[1]{\mean{#1}_{+}}
+\newcommand{\skw}{\text{skew}}
+\newcommand{\var}{\text{var}}
 
 % New
 \newcommand{\etastd}{\eta_{\text std}}
@@ -41,18 +53,9 @@
 \newcommand{\Hm}{H^{-}}
 \newcommand{\Gp}{\Gibbs^{+}}
 \newcommand{\Gm}{\Gibbs^{-}}
-\newcommand{\meanp}[1]{\mean{#1}_{+}}
-\newcommand{\meanm}[1]{\mean{#1}_{-}}
-\newcommand{\skw}{\text{skew}}
-\newcommand{\var}{\text{var}}
 
-% New
-\newcommand{\depth}{d}
-\newcommand{\dup}{\depth^{-}}
-\newcommand{\ddn}{\depth^{+}}
-\newcommand{\lamup}{\lambda^{-}}
-\newcommand{\lamdn}{\lambda^{+}}
-\newcommand{\freqp}{f_p}
+
+
 
 % Dashed integral
 \def\Xint#1{\mathchoice
@@ -107,14 +110,22 @@ We will primarily consider the case in which waves originate from a region of co
 \end{align}
 Most often, we will consider waves moving into shallower depth, so that $\ddn < \dup$. The incoming waves are randomized and generated with a peak forcing frequency of $\freqp$. 
 
-\subsection{Nondimensionalization of KdV}
+\subsection{Dimensionless variables}
 
 We introduce the following characteristic scales
 \begin{align}
-&a = \etastd = \mean{\eta^2}^{1/2} 
+&a = \mean{\eta^2}^{1/2} 
 &&\mbox{\em upstream characteristic wave amplitude} \\
 &\lamup = \sqrt{g \dup} / \freqp
 &&\mbox{\em upstream characteristic wave length}
+\end{align}
+and the dimensionless variables
+\begin{align}
+&u = \eta/a
+&&\mbox{\em dimensionless displacement} \\
+&\tilde{x} = \xi/\lamup = (x-ct)/\lamup
+&&\mbox{\em dimensionless position} \\
+& \tilde{t} = 
 \end{align}
 
 \vsp{10}
@@ -189,22 +200,22 @@ Depth ratio			& $D = d/h_0$				& dimensionless
 
 The statistical matching condition is
 \begin{equation}
-\meanm{\Hp} = \meanp{\Hp}
+\meanup{\Hp} = \meandn{\Hp}
 \end{equation}
 An experimental observation is that the incoming skewness is small, thus
 \begin{equation}
-\meanm{H_3} \approx 0
+\meanup{H_3} \approx 0
 \end{equation}
 which immediately gives
 \begin{equation}
-\ampp D^{-3/2} \meanp{H_3} = \mu D^{1/2} \left( \meanp{H_2} - \meanm{H_2} \right)
+\ampp D^{-3/2} \meandn{H_3} = \mu D^{1/2} \left( \meandn{H_2} - \meanup{H_2} \right)
 \end{equation}
 or equivalently
 \begin{equation}
 \label{H3H2}
-\meanp{H_3} = \frac{\mu D^{2}}{\ampp} \, \Delta \mean{H_2}
+\meandn{H_3} = \frac{\mu D^{2}}{\ampp} \, \Delta \mean{H_2}
 \end{equation}
-where $\Delta \mean{H_2} =  \meanp{H_2} - \meanm{H_2}$  indicates the difference between the upstream and downstream values.
+where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
 
 To convert to dimensional, i.e.~experimental, values we use
 \begin{align}
