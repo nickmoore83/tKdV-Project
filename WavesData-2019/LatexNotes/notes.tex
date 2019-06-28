@@ -35,15 +35,19 @@
 \newcommand{\dup}{\depth^{-}}
 \newcommand{\ddn}{\depth^{+}}
 \newcommand{\freqp}{f_p}
-\newcommand{\lamup}{\lambda^{-}}
-\newcommand{\lamdn}{\lambda^{+}}
+\newcommand{\lam}{\lambda}
 \newcommand{\lamfac}{N}
-% Dimensionless parameters
-\newcommand{\ampp}{\mathcal{A}}
+% More parameters
+\newcommand{\etastd}{\eta_{\text std}}
+\newcommand{\amp}{a}
 % Statistical quantities
 \newcommand{\skw}{\text{skew}}
 \newcommand{\var}{\text{var}}
-\newcommand{\etastd}{\eta_{\text std}}
+% Dimensionless parameters
+\newcommand{\epsup}{\eps_0}
+\newcommand{\delup}{\delta_0}
+\newcommand{\drat}{D}
+\newcommand{\ampp}{\mathcal{A}}
 % Hamiltonian and Gibbs stuff
 \newcommand{\Hp}{H^{+}}
 \newcommand{\Hm}{H^{-}}
@@ -113,19 +117,32 @@ Most often, we will consider waves moving into shallower depth, so that $\ddn < 
 
 We introduce the following characteristic scales
 \begin{align}
-&a = \mean{\eta^2}^{1/2} 
-&&\mbox{\em upstream characteristic wave amplitude} \\
-&\lamup = \sqrt{g \dup} / \freqp
-&&\mbox{\em upstream characteristic wave length}
+&\amp = \mean{\eta^2}^{1/2} 
+&&\mbox{\em characteristic wave amplitude} \\
+&\lam = \sqrt{g \depth} / \freqp
+&&\mbox{\em characteristic wave length}
 \end{align}
-and the dimensionless variables
+where $\mean{\cdot}$ indicates the mean of a quantity. Note that the characteristic wavelength $\lam$ takes different values upstream and downstream of the ADC.
+We introduce the following dimensionless variables
 \begin{align}
-&u = \eta/a
-&&\mbox{\em dimensionless displacement} \\
-&\tilde{x} = \frac{2 \pi \xi}{\lamfac \lamup} = \frac{2 \pi (x-ct)}{\lamfac \lamup}
+&u = \eta/\amp
+&&\mbox{\em dimensionless surface displacement} \\
+&\tilde{x} = \frac{2 \pi \xi}{\lamfac \lam} = \frac{2 \pi (x-ct)}{\lamfac \lam}
 &&\mbox{\em dimensionless position} \\
-& \tilde{t} = 
+& \tilde{t} = \freqp^{-1}
 \end{align}
+Then the dimensionless KdV becomes
+\begin{equation}
+u_t + \frac{3 \pi}{\lamfac} \epsup \drat^{-1} u u_x + \frac{4 \pi^3}{3 \lamfac^3} \delup^2 \drat u_{xxx} = 0
+\end{equation}
+
+
+Sidenote: If one simply uses the most naive scales, $u = \eta/\amp$, $\tilde{x} = \xi/\lam$, $\tilde{t} = t \freqp$, then the dimensionless KdV is the more standard one:
+\begin{equation}
+2 u_t + 3 \eps u u_x + \frac{\delta^2}{3} u_{xxx} = 0
+\end{equation}
+where $\eps = a/h$ and $\delta = h/\lam$.
+
 
 \vsp{10}
 The dimensionless KdV equation is
