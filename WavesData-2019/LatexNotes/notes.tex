@@ -36,6 +36,7 @@
 \newcommand{\ddn}{\depth^{+}}
 \newcommand{\freqp}{f_p}
 \newcommand{\lam}{\lambda}
+\newcommand{\lamup}{\lam^{-}}
 \newcommand{\lamfac}{N}
 % More parameters
 \newcommand{\etastd}{\eta_{\text std}}
@@ -135,7 +136,7 @@ Then the dimensionless KdV becomes
 \begin{equation}
 u_t + \frac{3 \pi}{\lamfac} \epsup \drat^{-1} u u_x + \frac{4 \pi^3}{3 \lamfac^3} \delup^2 \drat u_{xxx} = 0
 \end{equation}
-
+where $\epsup = \amp/\dup$ and $\delup = \dup/\lamup = \sqrt{\dup \freqp^2/g}$.
 
 Sidenote: If one simply uses the most naive scales, $u = \eta/\amp$, $\tilde{x} = \xi/\lam$, $\tilde{t} = t \freqp$, then the dimensionless KdV is the more standard one:
 \begin{equation}
