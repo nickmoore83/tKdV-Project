@@ -93,12 +93,15 @@ Di Qi\thanks{Courant Institute of Mathematical Sciences} }
 
 
 
-%----------------------------------------------------------%
+%----------------------------------------------------------------------------%
 % Mathematical framework
-%----------------------------------------------------------%
+%----------------------------------------------------------------------------%
 \section{The truncated KdV framework}
 
 
+%----------------------------------------------------------------------------%
+% KdV
+%----------------------------------------------------------------------------%
 \subsection{The Korteweg–de Vries equation with variable depth}
 Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
 To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by
@@ -118,7 +121,9 @@ We will primarily consider the case in which waves originate from a region of co
 Most often, we will consider waves moving into shallower depth, so that $\dup > \ddn$. The incoming waves are randomized and generated with a peak forcing frequency of $\freqp$, which gives rise to peak wavelength $\lam = c/\freqp = \sqrt{g \depth} / \freqp$.
 
 
+%----------------------------------------------------------------------------%
 % Nondimensionalization
+%----------------------------------------------------------------------------%
 \subsection{Dimensionless variables}
 \label{nondim}
 
@@ -134,12 +139,12 @@ Most often, we will consider waves moving into shallower depth, so that $\dup > 
 \hline
 Peak forcing frequency		& $f_p$						& 2 Hz \\
 Upstream depth			& $\dup$						& 12.5 cm \\
-Downstream depth			& $\ddn$						& 3 cm \\
+Downstream depth			& $\ddn$						& 3 cm (and varied) \\
 Characteristic wave amplitude	& $a = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
 Upstream wavelength		& $\lamup = \sqrt{g \dup}/f_p$		& 56 cm \\
 Amplitude-to-depth ratio		& $\epsup = a / \dup$			& 0.0024--0.024 \\
 Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& 0.22 \\
-Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 \\
+Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied) \\
 \hline \multicolumn{3} { c }{Parameters that change value across ADC} \\
 \hline Description & Notation and definition \\
 \hline
@@ -214,6 +219,9 @@ where $\eps = a/h$ and $\delta = h/\lam$.
 \end{comment}
 
 
+%----------------------------------------------------------------------------%
+% Johnson alternative
+%----------------------------------------------------------------------------%
 \subsubsection{Alternative KdV formulation following Johnson}
 Section \ref{nondim} makes the implicit assumption of continuous surface displacement crossing the ADC. This is a very physically motivated assumption, but there is a small amount of debate surrounding the assumption. An alternative is to appeal to Green's law and assume the quantity $\depth^{1/4} \eta$ to be continuous across the ADC, which necessarily implies a small discontinuity in the surface (which of course cannot be true literally), as is the approach taken in Johnson't book. The dimensional KdV equation would then be expressed as
 \begin{equation}
@@ -232,8 +240,9 @@ Notice the only difference is a small change in the power of $\drat$ in the seco
 We will not use this alternative formulation.
 
 
-
-
+%----------------------------------------------------------------------------%
+% Hamiltonian
+%----------------------------------------------------------------------------%
 \subsection{Hamiltonian structure}
 
 We now consider the Hamiltonian structure of the dimensionless variable-depth KdV equation \eqref{dimlessKdV}, over dimensionless domain $x \in [-\pi,\pi]$. First, the spatial average of any quantity is given by
@@ -250,7 +259,8 @@ Next, the definition of the characteristic amplitude in \eqref{ampdefn} implies 
 \begin{equation}
 E[u] \defeq \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = \pi
 \end{equation}
-
+TO DO: Add Fourier stuff including Parseval.
+\vsp{4}
 
 We introduce the cubic and quadratic Hamiltonian components as
 \begin{align}
@@ -267,14 +277,12 @@ where $\drat$ changes value across the ADC. More specifically, there exists an u
 &\Hup = 3 \pi \epsup \, H_3 - \frac{4 \pi^3}{3 \lamfac^2} \delup^2 \, H_2 \\
 &\Hdn = 3 \pi \epsup \dratdn^{-1} \, H_3 - \frac{4 \pi^3}{3 \lamfac^2} \delup^2 \dratdn \, H_2
 \end{align}
-$\Hup$ is a conserved quantity for $t<0$ and $\Hdn$ is a conserved quantity for $t>0$. Each Hamiltonian $\Ham^{\pm}$generates a corresponding Gibbs measure $\Gibbs^{\pm}$. (FILL IN DEFINITIONS)
+$\Hup$ is a conserved quantity for $t<0$ and $\Hdn$ is a conserved quantity for $t>0$. Each Hamiltonian $\Ham^{\pm}$ generates a corresponding Gibbs measure $\Gibbs^{\pm}$ with corresponding ensemble means $\mean{}_{\pm}$. (FILL IN DEFINITIONS)
 
 
-
-
-
-
-\vsp{10} 
+%----------------------------------------------------------------------------%
+% Matching
+%----------------------------------------------------------------------------%
 \subsection{Matching condition}
 
 The statistical matching condition is
@@ -285,6 +293,39 @@ An experimental observation is that the incoming skewness is small, thus
 \begin{equation}
 \meanup{H_3} \approx 0
 \end{equation}
+which immediately gives
+\begin{equation}
+3 \pi \epsup \dratdn^{-1} \meandn{H_3} = \frac{4 \pi^3}{3 \lamfac^2} \delup^2 \dratdn \left( \meandn{H_2} - \meanup{H_2} \right)
+\end{equation}
+or more simply
+\begin{equation}
+\label{H3H2}
+\meandn{H_3} = \frac{4 \pi^2}{9 \lamfac^2} \frac{\delup^2}{\epsup} \dratdn^2 \,\, \Delta \mean{H_2}
+\end{equation}
+where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
+To convert to dimensional, i.e.~experimental, values we use
+\begin{align}
+&\mean{u^3} = \frac{\mean{\eta^3}}{a^3} = 
+\frac{\mean{\eta^3}}{\mean{\eta^2}^{3/2}} = \skw(\eta) \\
+&\mean{u_x^2} = \left(\frac{\lam}{a} \right)^2 \mean{\eta_x^2} 
+= \left(\frac{\lam}{a} \right)^2 \var(\eta_x)
+\end{align}
+Then \eqref{H3H2} gives the relationship
+\begin{equation}
+\frac{\skw(\eta)}{\Delta \var(\eta_x)} =
+3 \mu D^2 \left( \frac{h_0}{a} \right)^3 = 3 \eps^{-3} \mu D^2
+\end{equation}
+In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude (as well as the square of the depth ratio).
+
+WORK TO DO HERE WITH LAMBDA
+
+
+
+
+
+
+\vsp{10}
+OLD VERSION: \\
 which immediately gives
 \begin{equation}
 \ampp D^{-3/2} \meandn{H_3} = \mu D^{1/2} \left( \meandn{H_2} - \meanup{H_2} \right)
