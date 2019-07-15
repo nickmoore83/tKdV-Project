@@ -97,6 +97,7 @@
 %----------------------------------------------------------%
 \section{The truncated KdV framework}
 
+
 \subsection{The Korteweg–de Vries equation with variable depth}
 Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
 To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by
@@ -113,10 +114,12 @@ We will primarily consider the case in which waves originate from a region of co
 \it \ddn \quad \mbox{if } x>0
 \end{cases}
 \end{align}
-Most often, we will consider waves moving into shallower depth, so that $\dup > \ddn$. The incoming waves are randomized and generated with a peak forcing frequency of $\freqp$. 
+Most often, we will consider waves moving into shallower depth, so that $\dup > \ddn$. The incoming waves are randomized and generated with a peak forcing frequency of $\freqp$, which gives rise to peak wavelength $\lam = c/\freqp = \sqrt{g \depth} / \freqp$.
 
+
+% Nondimensionalization
 \subsection{Dimensionless variables}
-
+\label{nondim}
 We introduce the following characteristic scales
 \begin{align}
 \label{ampdefn}
@@ -133,14 +136,14 @@ We introduce the following dimensionless variables
 &&\mbox{\em dimensionless surface displacement} \\
 &\tilde{x} = \frac{2 \pi \xi}{\lamfac \lam} = \frac{2 \pi (x-ct)}{\lamfac \lam}
 &&\mbox{\em dimensionless position in moving frame} \\
-& \tilde{t} = t \freqp
+& \tilde{t} = t \freqp / \lamfac
 &&\mbox{\em dimensionless time} \\
 \end{align}
-We will consider the physical domain $\xi \in [0, \lamfac \lam]$, i.e.~an integer multiple of the characteristic wavelength. Then (after a shift) the dimensionless domain can be taken to be $\tilde{x} \in [-\pi,\pi]$.
+We will consider the physical domain $\xi \in [0, \lamfac \lam]$, which is an integer multiple of the characteristic wavelength where $\lamfac$ will be selected later (probably about 5). Above, we have chosen the scale to normalize position as $\lamfac \lam/(2\pi)$ so that the dimensionless domain can be taken (after a shift) to be $\tilde{x} \in [-\pi,\pi]$. Accordingly, we have also chosen the time scale as $\lamfac/\freqp$, so that a wave traveling at the local wavespeed $c = \lam \freqp = \sqrt{g \depth}$ crosses the physical domain $x \in [0, \lamfac \lam]$ in one unit of dimensionless time. Said differently, the dimensionless wave speed is $(2 \pi)^{-1}$ so that a wave crosses the entire domain $[-\pi,\pi]$ in unit time.
 
 Dropping the tildes, the dimensionless KdV equation takes the form
 \begin{equation}
-u_t + \frac{3 \pi}{\lamfac} \epsup \drat^{-1} \, u u_x + \frac{4 \pi^3}{3 \lamfac^3} \delup^2 \drat \, u_{xxx} = 0
+u_t + {3 \pi} \epsup \drat^{-1} \, u u_x + \frac{4 \pi^3}{3 \lamfac^2} \delup^2 \drat \, u_{xxx} = 0
 \qquad \text{for } x \in [-\pi,\pi]
 \end{equation}
 where dimensionless variables are as follows
@@ -149,7 +152,7 @@ where dimensionless variables are as follows
 &\delup = \dup/\lamup = \sqrt{\dup \freqp^2/g} \, \\
 &\drat(x) = {\depth(x)}/{\dup} \, .
 \end{align}
-Here, $\drat = \drat(x)$ is the local dimensionless depth.
+Here, $\drat = \drat(x)$ is the local dimensionless depth. See Table \ref{paramtable} for a summary of important parameters.
 
 \begin{comment}
 {\bf Sidenote}: In the case of constant depth, if one simply uses the most naive scales, $u = \eta/\amp$, $\tilde{x} = \xi/\lam$, $\tilde{t} = t \freqp$, then the dimensionless KdV is the more standard one:
@@ -165,55 +168,53 @@ where $\eps = a/h$ and $\delta = h/\lam$.
 \begin{center}
 \caption{Table of parameters}
 \label{paramtable}
-\begin{tabular}{l l l l}
-\hline \multicolumn{4} { c }{Parameters that are constant throughout the domain} \\
-\hline Description & Notation and definition & Units & Value in experiments \\
+\begin{tabular}{l l l}
+\hline \multicolumn{3} { c }{Parameters that are constant in a single experiment} \\
+\hline Description & Notation and definition & Value in experiments \\
 \hline
-Peak forcing frequency		& $f_p$						& frequency	& 2 Hz \\
-Characteristic wave amplitude	& $a = \mean{\eta^2}^{1/2} = \etastd$		& length		& 0.03--0.3 cm \\
-Upstream wavelength			& $\lamup = \sqrt{g \dup}/f_p$	& length		& 56 cm \\
-Amplitude-to-depth ratio		& $\epsup = a / \dup$			& dimensionless	& 0.0024--0.024 \\
-Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& dimensionless		& 0.22 \\
-%Amplitude parameter			& $\ampp = \eps \delta^{-2} = a \lambda_0^2 h_0^{-3} = ag h_0^{-2} f_p^{-2}$	& dimensionless		& 0.05--0.5\\
-%Catch-all parameter		& $\mu = 4 \pi^2 / (9 \lamfac^2)$			& dimensionless		& 0.27 if $\lamfac=4$ \\
-\hline \multicolumn{4} { c }{Parameters that change value across ADC} \\
-\hline Description & Notation and definition & Units \\
+Peak forcing frequency		& $f_p$						& 2 Hz \\
+Upstream depth			& $\dup$						& 12.5 cm \\
+Characteristic wave amplitude	& $a = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
+Upstream wavelength		& $\lamup = \sqrt{g \dup}/f_p$		& 56 cm \\
+Amplitude-to-depth ratio		& $\epsup = a / \dup$			& 0.0024--0.024 \\
+Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& 0.22 \\
+\hline \multicolumn{3} { c }{Parameters that change value across ADC} \\
+\hline Description & Notation and definition \\
 \hline
-Local depth			& $\depth$				& length \\
-Local wavespeed		& $c = \sqrt{g \depth}$		& speed \\
-Local peak wavelength	& $\lam = \sqrt{gd}/f_p$	& length \\
-%Characteristic wavelength	& $\lambda_c = \lamfac \lambda_p$	& length \\
-Depth ratio			& $\drat = \depth/\dup$		& dimensionless
+Local depth			& $\depth$			\\
+Local wavespeed		& $c = \sqrt{g \depth}$	\\
+Local peak wavelength	& $\lam = \sqrt{gd}/f_p$	\\
+Depth ratio			& $\drat = \depth/\dup$	
 \end{tabular}
 \end{center}
 \end{table}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 
 \subsubsection{Alternative KdV formulation following Johnson}
-The above makes the implicit assumption of continuous surface displacement crossing the ADC. This is a very physically motivated assumption, but there is a small amount of debate surrounding the assumption. An alternative is to appeal to Green's law and assume the quantity $\depth^{1/4} \eta$ to be continuous across the ADC, which necessarily implies a small discontinuity in the surface (which of course cannot be true literally). The dimensional KdV equation would then be expressed as
+Section \ref{nondim} makes the implicit assumption of continuous surface displacement crossing the ADC. This is a very physically motivated assumption, but there is a small amount of debate surrounding the assumption. An alternative is to appeal to Green's law and assume the quantity $\depth^{1/4} \eta$ to be continuous across the ADC, which necessarily implies a small discontinuity in the surface (which of course cannot be true literally), as is the approach taken in Johnson't book. The dimensional KdV equation would then be expressed as
 \begin{equation}
 2 (\depth^{1/4} \eta)_t + \frac{3 c}{\depth^{5/4}} (\depth^{1/4} \eta) (\depth^{1/4} \eta)_{\xi} + \frac{c \depth^2}{3} (\depth^{1/4} \eta)_{\xi \xi \xi} = 0
 \end{equation}
-This is the approach taken in Johnson's book. This assumption results in a small modification of the coefficients in the dimensionless KdV. In particular, it gives
+Then, the dimensionless state variable is instead 
+\begin{equation}
+u = \frac{\depth^{1/4} \, \eta}{ \dup^{1/4} \, \amp}
+\end{equation}
+and the dimensionless KdV equation takes the form
 \begin{equation}
 u_t + \frac{3 \pi}{\lamfac} \epsup \drat^{-5/4} \, u u_x + \frac{4 \pi^3}{3 \lamfac^3} \delup^2 \drat \, u_{xxx} = 0
 \qquad \text{for } x \in [-\pi,\pi]
 \end{equation}
-where the state variable is
-\begin{equation}
-u = \frac{\depth^{1/4} \, \eta}{ \dup^{1/4} \, \amp}
-\end{equation}
-Notice the only changes are the definition of the state variable and the small change in the power of $\drat$ in the second term (changes from $\drat^{-1}$ to $\drat^{-5/4}$).
+Notice the only difference is a small change in the power of $\drat$ in the second term (changes from $\drat^{-1}$ to $\drat^{-5/4}$).
 We will not use this alternative formulation.
 
 
 \subsection{Hamiltonian analysis}
 
-The domain of consideration is $x \in [-\pi,\pi]$. We first define the spatial average of any quantity as
+The domain of consideration is $x \in [-\pi,\pi]$. First, the spatial average of any quantity is given by
 \begin{equation}
 \mean{q} = \frac{1}{2\pi} \int_{-\pi}^{\pi} q \dx \, .
 \end{equation}
-Note that from the definition of the characteristic amplitude in \eqref{ampdefn}, we have $\mean{u^2} = 1$. Consequently, the energy of $u$ is fixed as
+Appealing to near Ergodicity, we will typically assume equivalence between spatial, temporal, and ensemble averages. Note that from the definition of the characteristic amplitude in \eqref{ampdefn}, we have $\mean{u^2} = 1$. Consequently, the energy of $u$ is fixed as
 \begin{equation}
 E[u] \defeq \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = \pi
 \end{equation}
