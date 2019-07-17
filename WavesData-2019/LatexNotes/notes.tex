@@ -34,6 +34,7 @@
 % Basic physical parameters and scales
 \newcommand{\freqp}{f_p}
 \newcommand{\amp}{a}
+\newcommand{\ampscale}{A}
 %\newcommand{\etastd}{\eta_{\text std}}
 % Parameters that change crossing the ADC
 \newcommand{\depth}{d}
@@ -188,7 +189,9 @@ We introduce the following dimensionless variables
 & \tilde{t} = t \freqp / \lamfac
 &&\mbox{\em dimensionless time}
 \end{align}
-We will consider the physical domain $\xi \in [-\lamfac \lam, \lamfac \lam]$, which is an integer multiple of the characteristic wavelength, where $\lamfac$ will be selected later (probably about 5). Above, we chosen to normalize position by the scale $L = \lamfac \lam/\pi$ so that the dimensionless domain is $\tilde{x} \in [-\pi,\pi]$. Accordingly, we have also chosen the time scale as $\lamfac/\freqp$, so that a wave traveling at the local wavespeed $c = \lam \freqp = \sqrt{g \depth}$ crosses the physical domain of length $2 \lamfac \lam$ in one unit of dimensionless time. Said differently, the dimensionless wave speed is $(2 \pi)^{-1}$ so that a wave crosses the domain $[-\pi,\pi]$ in unit time.
+We will consider the physical domain $\xi \in [-\lamfac \lam, \lamfac \lam]$, which is an integer multiple of the characteristic wavelength, where $\lamfac$ will be selected later (probably about 5). Above, we chosen to normalize position by the scale $L = \lamfac \lam/\pi$ so that the dimensionless domain is $\tilde{x} \in [-\pi,\pi]$. 
+
+Accordingly, we have also chosen the time scale as $\lamfac/\freqp$, so that a wave traveling at the local wavespeed $c = \lam \freqp = \sqrt{g \depth}$ crosses the physical domain of length $2 \lamfac \lam$ in one unit of dimensionless time. Said differently, the dimensionless wave speed is $(2 \pi)^{-1}$ so that a wave crosses the domain $[-\pi,\pi]$ in unit time. Note: perhaps it is reasonable to normalize time differently, so that it is 'slow' time. Looking in Johnson, there does not seem to be a standard way to do this, it is very haphazard. So lets leave it for now. 
 
 %----------------------------------------------------------------------------%
 % COMMENT ON LAMFAC
@@ -201,8 +204,8 @@ New Thought (July 2019): Actually, it is very possible that the bandwidth (2 Hz 
 
 Dropping the tildes, the dimensionless KdV equation takes the form
 \begin{equation}
-\label{dimlessKdV}
-u_t + {3 \pi} \epsup \drat^{-1} \, u u_x + \frac{4 \pi^3}{3 \lamfac^2} \delup^2 \drat \, u_{xxx} = 0
+\label{dimlessKdV1}
+u_t + \frac{3}{2} \pi \epsup \drat^{-1} \, u u_x + \frac{1}{6} \pi^3 \lamfac^{-2} \delup^2 \drat \, u_{xxx} = 0
 \qquad \text{for } x \in [-\pi,\pi]
 \end{equation}
 where dimensionless variables are as follows
@@ -211,7 +214,7 @@ where dimensionless variables are as follows
 &\delup = \dup/\lamup = \sqrt{\dup \freqp^2/g} \, \\
 &\drat = {\depth}/{\dup} \, .
 \end{align}
-Here, $\drat = \dratupdn$ is the local dimensionless depth, which changes value crossing the ADC. In particular, since \eqref{dimlessKdV} is in the reference frame that moves with the characteristic wave speed, we can assume that the ADC is met at $t = T_{ADC} = 0$. Then we have
+Here, $\drat = \dratupdn$ is the local dimensionless depth, which changes value crossing the ADC. In particular, since \eqref{dimlessKdV1} is in the reference frame that moves with the characteristic wave speed, we can assume that the ADC is met at $t = T_{ADC} = 0$. Then we have
 \begin{equation}
 \drat = 
 \begin{cases}
@@ -279,21 +282,48 @@ To compare to the previous formulation, we note that
 \begin{align}
 \amp \equiv \mean{\eta^2}^{1/2} = \sqrt{ \frac{E}{\pi L} }
 \end{align}
-So that the new normalization factor is
+So that the new normalization factor for $\eta$ is
 \begin{equation}
 E^{1/2}L^{-1/2} = \sqrt{\pi} \amp
 \end{equation}
 In other words, the normalizations for surface displacement used here versus that in Section \ref{nondim}
  differ by a factor of $\sqrt{\pi}$. Fortunately, the normalization for position is identical in the two. We do have to remember that the normalization factor for position $L = \lamfac \lam / \pi$ takes two different values on either side of the ADC.
 
-TO DO: How to scale time ....
+Lets do the nondimensionalization generally, so that we can easily make modifications to what scales to use. In general, we introduce dimensionless variables as
+\begin{align}
+&u = \eta / \ampscale \\
+&\tilde{x} = x / L \\
+&\tilde{t} = t / T
+\end{align}
+where $\ampscale, L, T$ are the scales for surface displacement (amplitude), length, and time respectively, which we are free to choose later. Then the dimensionless KdV equation is
+\begin{equation}
+u_t + \frac{3}{2} \left( \frac{c T \ampscale}{\depth L} \right) u u_x 
++ \frac{1}{6} \left( \frac{c \depth^2 T}{L^3} \right) u_{xxx} = 0
+\end{equation}
+where $c = \sqrt{g \depth}$.
+In particular, choosing $\ampscale = \amp$, $L = \lamfac \lam/\pi$, and $T = \lamfac/\freqp$ produces \eqref{dimlessKdV1}. To see this, one has to recall $\lam = c/\freqp = \sqrt{g \depth}/\freqp$, and also has to collect all of the factors of $\depth$ that appear directly and appear in $L$.
+
+Alternatively, we would like to choose $\ampscale = E^{1/2} L^{-1/2} = \sqrt{\pi} \amp$, $L = \lamfac \lam/ \pi$, and not sure yet about $T$. Ahh, I tried, but I cannot make sense of this because I cannot discern if $L$ in the PNAS paper and J Stat Phys paper is supposed to be dimensional or dimensionless. Also, I cannot tell of $L$ is supposed to change value crossing the ADC. The wavelength $\lam$ certainly changes value across the ADC, which suggests that $L$ should too, but on the other hand $L$ is treated as a constant throughout in the PNAS paper. So is $L$ the upstream value? I am not sure.
+
+% Possible Flaw?
+%Note: I believe this normalization is flawed because, for periodicity of $u$ to be maintained, the scale $L$ must change across the ADC. In particular, $L \sim \sqrt{\depth}$. However, the equations in our PNAS paper treat $L$ as constant throughout, even when $\drat$ changes. This seems to be a flaw to me.
+% Maybe not a flow if you remember that $E^{1/2} L^{-1/2} = \sqrt{pi} \amp$ is the same on either side. Thus as L changes because wavelength changes, E changes accordingly.
+
+Therefore, lets stick with the original normalization \eqref{dimlessKdV1}, repeated here
+\begin{equation}
+\label{dimlessKdV2}
+u_t + \frac{3}{2} \pi \epsup \drat^{-1} \, u u_x + \frac{1}{6} \pi^3 \lamfac^{-2} \delup^2 \drat \, u_{xxx} = 0
+\qquad \text{for } x \in [-\pi,\pi]
+\end{equation}
+If we need to draw a comparison to the PNAS paper, we set something like $\epsup = E^{1/2}L^{-3/2}$ and $\delup^2 = L^{-3}$, etc.
+
 
 %----------------------------------------------------------------------------%
 % Hamiltonian
 %----------------------------------------------------------------------------%
 \subsection{Hamiltonian structure}
 
-We now consider the Hamiltonian structure of the dimensionless variable-depth KdV equation \eqref{dimlessKdV}, over dimensionless domain $x \in [-\pi,\pi]$. First, the spatial average of any quantity is given by
+We now consider the Hamiltonian structure of the dimensionless variable-depth KdV equation \eqref{dimlessKdV1}, over dimensionless domain $x \in [-\pi,\pi]$. First, the spatial average of any quantity is given by
 \begin{equation}
 \mean{q} = \frac{1}{2\pi} \int_{-\pi}^{\pi} q \dx \, .
 \end{equation}
@@ -316,7 +346,7 @@ H_3 = \frac{1}{6} \int_{-\pi}^{\pi} u^3 \dx	\, , \qquad
 H_2 = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx	\, .
 \end{align}
 
-Then the Hamiltonian of \eqref{dimlessKdV} is given by
+Then the Hamiltonian of \eqref{dimlessKdV1} is given by
 \begin{equation}
 \Ham = 3 \pi \epsup \drat^{-1} \, H_3 - \frac{4 \pi^3}{3 \lamfac^2} \delup^2 \drat \, H_2
 \end{equation}
