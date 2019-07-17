@@ -57,12 +57,8 @@
 % Dimensionless parameters
 \newcommand{\epsup}{\eps_0}
 \newcommand{\delup}{\delta_0}
-% Fourier
-\newcommand{\uhat}{\hat{u}}
-
-
-\newcommand{\ampp}{\mathcal{A}}
 % Hamiltonian and Gibbs stuff
+\newcommand{\uhat}{\hat{u}}
 \newcommand{\Ham}{H}
 \newcommand{\Hup}{\Ham^{-}}
 \newcommand{\Hdn}{\Ham^{+}}
@@ -316,15 +312,31 @@ Alternatively, we would like to choose $\ampscale = E^{1/2} L^{-1/2} = \sqrt{\pi
 %Note: I believe this normalization is flawed because, for periodicity of $u$ to be maintained, the scale $L$ must change across the ADC. In particular, $L \sim \sqrt{\depth}$. However, the equations in our PNAS paper treat $L$ as constant throughout, even when $\drat$ changes. This seems to be a flaw to me.
 % Maybe not a flow if you remember that $E^{1/2} L^{-1/2} = \sqrt{pi} \amp$ is the same on either side. Thus as L changes because wavelength changes, E changes accordingly.
 
-Therefore, lets stick with the original normalization \eqref{dimlessKdV1}, recast here in different form
+%----------------------------------------------------------------------------%
+%  Normalization to use
+%----------------------------------------------------------------------------%
+\subsubsection{Normalization to use in the paper}
+
+We will essential use the original normalization in \eqref{dimlessKdV1}, except with the slight modification that $\eta = \sqrt{\pi} \amp u$, so that the energy of $u$ is normalized to unity. This choice will be consistent with our PNAS paper and the J Stat Phys paper of Majda and Qi.
+Thus the dimensionless variables are
+\begin{align}
+&u = \eta/(\sqrt{\pi} \amp)
+&&\mbox{\em dimensionless surface displacement} \\
+&\tilde{x} = \frac{\pi \xi}{\lamfac \lam} = \frac{\pi (x-ct)}{\lamfac \lam}
+&&\mbox{\em dimensionless position in moving frame} \\
+& \tilde{t} = t \freqp / \lamfac
+&&\mbox{\em dimensionless time}
+\end{align}
+The explanation will be something like: instead of the most conventional choice, we scale displacement on $\sqrt{\pi} \amp$ so that energy is normalize to unity. This choice will be the most convenient for the Hamiltonian framework that we will rely on. Maybe we will have to scale time differently too to get the desired powers of $\drat$, but that will make no difference for now.
+Thus, the dimensionless KdV is given by
 \begin{align}
 \label{dimlessKdV2}
 &u_t + C_3 \drat^{-1} \, u u_x + C_2 \drat \, u_{xxx} = 0
 \qquad \text{for } x \in [-\pi,\pi] \\
-&C_3 = \frac{3}{2} \pi \epsup  \\
+&C_3 = \frac{3}{2} \pi^{3/2} \epsup  \\
 &C_2 = \frac{\pi^3 \delup^2}{6 \lamfac^2} 
 \end{align}
-If we need to draw a comparison to the PNAS paper, we set something like $\epsup = E^{1/2}L^{-3/2}$ and $\delup^2 = L^{-3}$, etc.
+When we draw a comparison to the PNAS paper, it will be something like $\epsup = E^{1/2}L^{-3/2}$ and $\delup^2 = L^{-3}$, etc.
 
 
 %----------------------------------------------------------------------------%
@@ -342,9 +354,9 @@ We measure the state variable $u$ as the displacement of the surface from equili
 \begin{equation}
 \Mo[u] \defeq \int_{-\pi}^{\pi} u \dx = 0
 \end{equation}
-Next, the definition of the characteristic amplitude in \eqref{ampdefn} implies that $\mean{u^2} = 1$. Consequently, the energy of $u$ is fixed as
+Next, the definition of the characteristic amplitude in \eqref{ampdefn} implies that $\mean{u^2} = \pi^{-1}$. Consequently, the energy of $u$ is fixed as
 \begin{equation}
-\En[u] \defeq \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = \pi
+\En[u] \defeq \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = 1
 \end{equation}
 
 We introduce the Fourier series
@@ -359,9 +371,9 @@ The above sum can be infinite $\Lambda = \infty$ or truncated at a finite wavenu
 Further, since $u$ is real valued, we have $\uhat_{-k} = {\uhat_{k}}^*$.
 By Parseval's identity, we have
 \begin{equation}
-\En[u] = \pi = \frac{1}{2} \int u^2 \dx = \pi \sum_{k=-\Lambda}^{\Lambda} \abs{\uhat_k}^2 = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2
+\En[u] = 1 = \frac{1}{2} \int u^2 \dx = \pi \sum_{k=-\Lambda}^{\Lambda} \abs{\uhat_k}^2 = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2
 \end{equation}
-% The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019, except that the total energy is one instead of pi.
+% The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
 
 We introduce the cubic and quadratic Hamiltonian components as
 \begin{align}
@@ -444,16 +456,6 @@ WORK TO DO HERE WITH LAMBDA
 
 \vsp{10}
 OLD VERSION: \\
-which immediately gives
-\begin{equation}
-\ampp D^{-3/2} \meandn{H_3} = \mu D^{1/2} \left( \meandn{H_2} - \meanup{H_2} \right)
-\end{equation}
-or equivalently
-\begin{equation}
-\label{H3H2}
-\meandn{H_3} = \frac{\mu D^{2}}{\ampp} \, \Delta \mean{H_2}
-\end{equation}
-where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
 
 To convert to dimensional, i.e.~experimental, values we use
 \begin{align}
