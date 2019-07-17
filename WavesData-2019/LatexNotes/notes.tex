@@ -35,7 +35,7 @@
 \newcommand{\freqp}{f_p}
 \newcommand{\amp}{a}
 \newcommand{\ampscale}{A}
-%\newcommand{\etastd}{\eta_{\text std}}
+\newcommand{\etastd}{\eta_{\text std}}
 % Parameters that change crossing the ADC
 \newcommand{\depth}{d}
 \newcommand{\dup}{\depth_{-}}
@@ -72,7 +72,7 @@
 \newcommand{\thupdn}{\theta^{\pm}}
 \newcommand{\meanup}[1]{\mean{#1}_{-}}
 \newcommand{\meandn}[1]{\mean{#1}_{+}}
-
+\newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
 
 
 % Dashed integral
@@ -317,17 +317,17 @@ Alternatively, we would like to choose $\ampscale = E^{1/2} L^{-1/2} = \sqrt{\pi
 %----------------------------------------------------------------------------%
 \subsubsection{Normalization to use in the paper}
 
-We will essential use the original normalization in \eqref{dimlessKdV1}, except with the slight modification that $\eta = \sqrt{\pi} \amp u$, so that the energy of $u$ is normalized to unity. This choice will be consistent with our PNAS paper and the J Stat Phys paper of Majda and Qi.
+We will essential use the original normalization in \eqref{dimlessKdV1}, except with the slight modification that $\eta = \sqrt{\pi} \etastd u$, so that the energy of $u$ is normalized to unity. This choice will be consistent with our PNAS paper and the J Stat Phys paper of Majda and Qi.
 Thus the dimensionless variables are
 \begin{align}
-&u = \eta/(\sqrt{\pi} \amp)
+&u = \eta/(\sqrt{\pi} \etastd)
 &&\mbox{\em dimensionless surface displacement} \\
 &\tilde{x} = \frac{\pi \xi}{\lamfac \lam} = \frac{\pi (x-ct)}{\lamfac \lam}
 &&\mbox{\em dimensionless position in moving frame} \\
 & \tilde{t} = t \freqp / \lamfac
 &&\mbox{\em dimensionless time}
 \end{align}
-The explanation will be something like: instead of the most conventional choice, we scale displacement on $\sqrt{\pi} \amp$ so that energy is normalize to unity. This choice will be the most convenient for the Hamiltonian framework that we will rely on. Maybe we will have to scale time differently too to get the desired powers of $\drat$, but that will make no difference for now.
+The explanation will be something like: instead of the most conventional choice, we scale displacement on $\sqrt{\pi} \etastd$ so that energy is normalize to unity. This choice will be the most convenient for the Hamiltonian framework that we will rely on. Maybe we will have to scale time differently too to get the desired powers of $\drat$, but that will make no difference for now.
 Thus, the dimensionless KdV is given by
 \begin{align}
 \label{dimlessKdV2}
@@ -422,32 +422,32 @@ Simplifying gives
 where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
 To convert to dimensional, i.e.~experimental, values we note
 \begin{align}
-&\mean{u^3} = \frac{\mean{\eta^3}}{a^3} = 
-\frac{\mean{\eta^3}}{\mean{\eta^2}^{3/2}} = \skw(\eta) \\
-&\mean{u_x^2} = \left(\frac{\lamupdn}{a} \right)^2 \mean{\eta_x^2} 
-= \left(\frac{\lamupdn}{a} \right)^2 \var(\eta_x)
+&\mean{u^3} =  \frac{\mean{\eta^3}} {\pi^{3/2} \mean{\eta^2}^{3/2}} = \pi^{-3/2} \skw(\eta) \\
+&\mean{u_x^2} = \pi^{-1} \left(\frac{\lamupdn}{\etastd} \right)^2 \mean{\eta_x^2} 
+= \pi^{-1} \left(\frac{\lamupdn}{\etastd} \right)^2 \var(\eta_x)
 \end{align}
 Therefore
-\begin{equation}
-\meandn{H_3} = \frac{\pi}{3} \skw_+(\eta)
-\end{equation}
-and more subtle
+\begin{align}
+& \meandn{H_3} = \frac{\pi}{3} \mean{u^3} = 
+\frac{1}{3} \pi^{-1/2} \skw_+(\eta) \\
+& \meanupdn{H_2} = \pi \meanupdn{u_x^2} = 
+\left(\frac{\lamupdn}{\etastd} \right)^2 \var(\eta_x)
+\end{align}
+The second equation implies
 \begin{equation}
 \Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2} = 
-\frac{\pi}{\amp^2} \left( \lamdn \var_+(\eta_x) - \lamup \var_{-}(\eta_x) \right) =
-\frac{\pi}{\amp^2} \Delta \left( \lam \var(\eta_x) \right)
+\etastd^{-2} \left( \lamdn^2 \var_+(\eta_x) - \lamup^2 \var_{-}(\eta_x) \right) =
+\etastd^{-2} \Delta \left( \lam^2 \var(\eta_x) \right)
 \end{equation}
 Then \eqref{H3H2} gives the relationship
 \begin{equation}
-\frac{\skw(\eta)} {\Delta \left( \lam \var(\eta_x) \right) } =
-\frac{3 C_2 \dratdn^2}{C_3 \amp^2}  =
-% OLD 3 \mu D^2 \left( \frac{h_0}{a} \right)^3 = 3 \eps^{-3} \mu D^2
+\frac{\skw(\eta)} {\Delta \left( \lam^2 \var(\eta_x) \right) } =
+\frac{3 \pi^{1/2} C_2 \dratdn^2}{C_3 \etastd^2}  =
+\frac{\pi^2}{3 \lamfac^2} \delup^2 \epsup^{-1} \etastd^{-2} \dratdn^2 =
+\frac{\pi^2}{3 \lamfac^2} \lamup^{-2} \epsup^{-3} \dratdn^2
 \end{equation}
-FINISH
-
 In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude (as well as the square of the depth ratio).
 
-WORK TO DO HERE WITH LAMBDA
 
 
 
