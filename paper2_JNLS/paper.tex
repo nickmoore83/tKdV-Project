@@ -1,0 +1,274 @@
+\documentclass[11pt]{article}
+%\documentclass[preprint, 10pt]{elsarticle}
+
+% PACKAGES
+\usepackage{graphicx, amsmath, amssymb, amsfonts, mathtools, mathrsfs, color}
+\usepackage{comment, enumerate, tabularx}
+\usepackage{natbib, hyperref, url}
+\usepackage[margin=1in]{geometry}
+%\usepackage[justification=RaggedRight]{caption}
+
+%----------------------------------------------------------------------------%
+%% LATEX DEFINITIONS
+%----------------------------------------------------------------------------%
+% Basic editing
+\newcommand{\tocite}{{\color{blue}(to cite)}}
+\newcommand{\vsp}[1]{\vspace{#1 pc} \noindent}
+\newcommand{\np}{\newpage \noindent}
+% Derivatives
+\newcommand{\pd}[2]    { \frac{\partial #1} {\partial #2} }
+\newcommand{\ppd}[2]  { \frac{\partial^2 #1}{{\partial #2}^2} }
+\newcommand{\pdi}[2] { {\partial_#2} #1 }
+\newcommand{\td}[2] { \frac{d #1} { d #2 } }
+\newcommand{\grad}{\nabla}
+\newcommand {\Lap} {\grad^2}
+% Vectors and operators
+\newcommand{\bvec}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\mean}[1]{\left< #1 \right>}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dx}{\, dx}
+% Basic physical parameters and scales
+\newcommand{\freqp}{f_p}
+%\newcommand{\amp}{a}
+\newcommand{\ampscale}{A}
+\newcommand{\etastd}{\eta_{\text std}}
+% Parameters that change crossing the ADC
+\newcommand{\depth}{d}
+\newcommand{\dup}{\depth_{-}}
+\newcommand{\ddn}{\depth_{+}}
+\newcommand{\dupdn}{\depth_{\pm}}
+\newcommand{\lam}{\lambda}
+\newcommand{\lamup}{\lam_{-}}
+\newcommand{\lamdn}{\lam_{+}}
+\newcommand{\lamupdn}{\lam_{\pm}}
+\newcommand{\lamfac}{N}
+\newcommand{\drat}{D}
+\newcommand{\dratdn}{\drat_+}
+\newcommand{\dratupdn}{\drat_{\pm}}
+% Statistical quantities
+\newcommand{\En}{\mathcal{E}}
+\newcommand{\Mo}{\mathcal{M}}
+\newcommand{\skw}{\text{skew}}
+\newcommand{\skwdn}{\skw_+}
+\newcommand{\var}{\text{var}}
+\newcommand{\varup}{\var_-}
+\newcommand{\vardn}{\var_+}
+% Dimensionless parameters
+\newcommand{\epsup}{\eps_0}
+\newcommand{\delup}{\delta_0}
+% Hamiltonian and Gibbs stuff
+\newcommand{\uhat}{\hat{u}}
+\newcommand{\Ham}{H}
+\newcommand{\Hup}{\Ham^{-}}
+\newcommand{\Hdn}{\Ham^{+}}
+\newcommand{\Hupdn}{\Ham^{\pm}}
+\newcommand{\Gibbs}{\mathcal{G}}
+\newcommand{\Gup}{\Gibbs^{-}}
+\newcommand{\Gdn}{\Gibbs^{+}}
+\newcommand{\Gupdn}{\Gibbs^{\pm}}
+\newcommand{\thup}{\theta^{-}}
+\newcommand{\thdn}{\theta^{+}}
+\newcommand{\thupdn}{\theta^{\pm}}
+\newcommand{\meanup}[1]{\mean{#1}_{-}}
+\newcommand{\meandn}[1]{\mean{#1}_{+}}
+\newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
+%----------------------------------------------------------------------------%
+
+%----------------------------------------------%
+%% TITLE
+%----------------------------------------------%
+\begin{document}
+%Deterministic and statistical truncated KdV models for anomalous waves induced by abrupt depth change
+\title{The truncated KdV framework for modeling anomalous waves induced by abrupt depth changes}
+
+\author{
+C.~Tyler Bolles\thanks{University of Michigan},
+Andrew J.~Majda\thanks{Courant Institute of Mathematical Sciences}, 
+M.~N.~J.~Moore\thanks{Florida State University}, 
+Di Qi\thanks{Courant Institute of Mathematical Sciences} }
+\maketitle
+
+
+\section{Introduction}
+
+
+%----------------------------------------------------------%
+% Mathematical framework
+%----------------------------------------------------------%
+\section{The truncated KdV framework}
+
+%----------------------------------------------------------------------------%
+% KdV
+%----------------------------------------------------------------------------%
+\subsection{The Korteweg–de Vries equation with variable depth}
+Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
+To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by
+\begin{equation}
+2 \eta_t + \frac{3 c}{\depth} \eta \eta_{\xi} + \frac{c \depth^2}{3} \eta_{\xi \xi \xi} = 0
+\end{equation}
+% The coefficients and scales can be verified on Wolfram KdV page (but what about the sign?). I would like an official source as confirmation though.
+
+We will primarily consider the case in which waves originate from a region of constant depth, encounter an abrupt depth change, and then continue in another region of constant depth. Thus, depth will be piecewise constant
+\begin{align}
+\depth = 
+\begin{cases}
+\dup \quad \mbox{if } x<0 \\
+\ddn \quad \mbox{if } x>0
+\end{cases}
+\end{align}
+Most often, we will consider waves moving into shallower depth, so that $\dup > \ddn$. 
+
+The incoming waves are randomized and generated with a peak forcing frequency of $\freqp$, which gives rise to the following quantities
+\begin{align}
+&c = \sqrt{g \depth}
+&&\mbox{\em local wave speed} \\
+&\lam = c/\freqp = \sqrt{g \depth} / \freqp
+&&\mbox{\em local peak wave length} \\
+&\etastd = \mean{\eta^2}^{1/2} 
+&&\mbox{\em surface displacement standard deviation} \\
+\end{align}
+where $\mean{\cdot}$ indicates the mean of a quantity. 
+Note that the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \lamupdn$ each take different values upstream and downstream of the ADC. We remark that experimental measurements indicate that $\etastd = \mean{\eta^2}^{1/2}$ is nearly the same on both values of the ADC. Hence, we will not distinguish between upstream and downstream values of $\etastd$.
+
+%----------------------------------------------------------------------------%
+% Nondimensionalization
+%----------------------------------------------------------------------------%
+\subsection{Nondimensionalization}
+
+% Table
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{table}[h]%[htbp]
+\begin{center}
+\caption{Table of parameters}
+\label{paramtable}
+\begin{tabular}{l l l}
+\hline \multicolumn{3} { c }{Parameters that are constant in a single experiment} \\
+\hline Description & Notation and definition & Value in experiments \\
+\hline
+Peak forcing frequency		& $f_p$						& 2 Hz \\
+Characteristic wave amplitude	& $\etastd = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
+Upstream depth			& $\dup$						& 12.5 cm \\
+Downstream depth			& $\ddn$						& 3 cm (and varied) \\
+Upstream wavelength		& $\lamup = \sqrt{g \dup}/f_p$		& 55 cm \\
+Upstream wavelength		& $\lamdn = \sqrt{g \ddn}/f_p$		& 27 cm \\
+%
+Amplitude-to-depth ratio		& $\epsup = \etastd / \dup$			& 0.0024--0.024 \\
+Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& 0.22 \\
+Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
+\end{tabular}
+\end{center}
+\end{table}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+
+Lets do the nondimensionalization generally, so that we can easily make modifications if needed. In general, we introduce dimensionless variables as
+\begin{align}
+&u = \eta / \ampscale
+&&\mbox{\em dimensionless surface displacement} \\
+&\tilde{x} = \xi / L
+&&\mbox{\em dimensionless position (moving frame)} \\
+&\tilde{t} = t / T
+&&\mbox{\em dimensionless time}
+\end{align}
+where the characteristic scales $\ampscale, L, T$ for wave amplitude, length, and time respectively, are free for us to choose.
+Then the dimensionless KdV equation is
+\begin{equation}
+u_t + \frac{3}{2} \left( \frac{c T \ampscale}{L \depth} \right) u u_x 
++ \frac{1}{6} \left( \frac{c T \depth^2}{L^3} \right) u_{xxx} = 0
+\end{equation}
+
+In particular, we make the following choices
+\begin{align}
+&\ampscale = \pi^{1/2} \, \etastd \\
+&L = \lamfac \lam / \pi \\
+&T = \lamfac / \freqp
+\end{align}
+where $\lamfac$ is an integer to be chosen later. In the physical domain, we will consider an integer multiple of the characteristic wavelength $\xi \in [-\lamfac \lam, \lamfac \lam]$, so that the state variable $u$ is periodic over the  dimensionless domain $\tilde{x} \in [-\pi, \pi]$. We have scaled time accordingly. Finally, our choice of the scale for wave amplitude $\ampscale$ is made to normalize the energy of $u$ to unity. The Hamiltonian framework that we will use relies heavily on the energy, and hence it is more convenient to have the energy normalized to unity rather than making the more common choice of $\etastd$ by itself as the scale for wave amplitude.
+
+With these choices, the dimensionless KdV is
+\begin{align}
+\label{dimlessKdV}
+&u_t + C_3 \drat^{-1} \, u u_x + C_2 \drat \, u_{xxx} = 0
+\qquad \text{for } x \in [-\pi,\pi] \\
+&C_3 = \frac{3}{2} \pi^{3/2} \epsup  \\
+&C_2 = \frac{\pi^3 \delup^2}{6 \lamfac^2} 
+\end{align}
+where we have the dimensionless parameters
+\begin{align}
+&\epsup = \etastd / \dup
+&&\mbox{\em upstream amplitude-to-depth ratio} \\
+&\delup = \dup / \lamup
+&&\mbox{\em upstream depth-to-wavelength ratio}
+\end{align}
+
+Note: When comparing to the PNAS paper, we have...
+
+Note: An alternative formulation found in Johnson's textbook is based on continuity of $\depth^{1/4} \eta$, rather than $\eta$ in crossing the ADC. In this formulation, the state variable is $u = \depth^{1/4} \, \eta / (\dup^{1/4} \, \ampscale)$. If this framework is used, the only change is that the $D^{-1}$ in the second term of \eqref{dimlessKdV} becomes $D^{-5/4}$, which makes little practical difference.
+
+
+%----------------------------------------------------------------------------%
+% Stuff
+%----------------------------------------------------------------------------%
+\subsection{Hamiltonian}
+
+We measure the state variable $u$ as the displacement of the surface from equilibrium, so that $\mean{u} = 0$. Consequently, the momentum of $u$ vanishes
+\begin{equation}
+\Mo[u] \equiv \int_{-\pi}^{\pi} u \dx = 0
+\end{equation}
+Next, the definition of the characteristic amplitude implies that $\mean{u^2} = \pi^{-1}$. Consequently, the energy of $u$ is fixed as
+\begin{equation}
+\En[u] \equiv \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = 1
+\end{equation}
+
+We introduce the Fourier series
+\begin{equation}
+u = \sum_{k=-\Lambda}^{\Lambda} \uhat_k e^{i k x}
+\end{equation}
+where
+\begin{equation}
+\uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
+\end{equation}
+The above sum can be infinite $\Lambda = \infty$ or truncated at a finite wavenumber $\Lambda < \infty$.
+Further, since $u$ is real valued, we have $\uhat_{-k} = {\uhat_{k}}^*$.
+By Parseval's identity, we have
+\begin{equation}
+\En[u] = 1 = \frac{1}{2} \int u^2 \dx = \pi \sum_{k=-\Lambda}^{\Lambda} \abs{\uhat_k}^2 = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2
+\end{equation}
+% The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
+
+
+\np
+\subsection{Galerkin truncation}
+
+\subsection{Optimizer of the Hamiltonian}
+The function that maximizes the Hamiltonian subject to the constraints of fixed energy and zero momentum is a traveling wave solution!
+
+
+%----------------------------------------------------------%
+% Direct numerical simulations
+%----------------------------------------------------------%
+\section{Direct numerical simulations}
+
+\section{Sampling Algorithms}
+
+\subsection{Naive acceptance-rejection algorithm}
+
+\subsection{Markov-chain Monte Carlo}
+
+\subsection{Improved acceptance-rejection algorithm}
+
+
+%----------------------------------------------------------%
+% Comparison with experiments
+%----------------------------------------------------------%
+\section{Comparison with experiments}
+
+\subsection{Comparison of basic features}
+
+\subsection{New experimental measurements guided by theory}
+
+%\bibliographystyle{plain}
+%\bibliography{Notesbib}
+
+\end{document}
