@@ -304,7 +304,7 @@ Lets do the nondimensionalization generally, so that we can easily make modifica
 where $\ampscale, L, T$ are the scales for surface displacement (amplitude), length, and time respectively, which we are free to choose later. Then the dimensionless KdV equation is
 \begin{equation}
 u_t + \frac{3}{2} \left( \frac{c T \ampscale}{\depth L} \right) u u_x 
-+ \frac{1}{6} \left( \frac{c \depth^2 T}{L^3} \right) u_{xxx} = 0
++ \frac{1}{6} \left( \frac{c T \depth^2}{L^3} \right) u_{xxx} = 0
 \end{equation}
 where $c = \sqrt{g \depth}$.
 In particular, choosing $\ampscale = \amp$, $L = \lamfac \lam/\pi$, and $T = \lamfac/\freqp$ produces \eqref{dimlessKdV1}. To see this, one has to recall $\lam = c/\freqp = \sqrt{g \depth}/\freqp$, and also has to collect all of the factors of $\depth$ that appear directly and appear in $L$.
@@ -412,56 +412,70 @@ The statistical matching condition is
 An experimental observation is that the incoming skewness is small, $\meanup{H_3} \approx 0$. Inserting and simplifying gives
 \begin{equation}
 \label{H3H2}
-\frac{\meandn{H_3}} {\meandn{H_2} - \meanup{H_2}} = \frac{C_2}{C_3} \dratdn^2
+\frac{\meandn{H_3^+}} {\meandn{H_2^+} - \meanup{H_2^+}} = \frac{C_2}{C_3} \dratdn^2
 \end{equation}
 %where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
 To convert to dimensional, i.e.~experimental, values we first note that
 \begin{align}
-\mean{H_3} = \frac{\pi}{3} \mean{u^3} = 
+\mean{H_3^+} = \frac{\pi}{3} \mean{u^3} = 
 \frac{1}{3} \pi^{-1/2} \frac{\mean{\eta^3}}{\etastd^3} = \frac{1}{3} \pi^{-1/2} \skw(\eta)
 \end{align}
-Second, to convert the surface slope, we note
+Second, to convert the downstream surface slope, we note
 \begin{align}
-\pd{u}{\tilde{x}} = \frac{\lamfac \lam}{\pi^{3/2} \etastd} \pd{\eta}{\xi}
+\pd{u}{\tilde{x}} = \frac{\lamfac \lamdn}{\pi^{3/2} \etastd} \pd{\eta}{\xi}
 \end{align}
 where slope with respect to $\xi$ is the same as with respect to dimensional $x$.
+Note: I believe it is important here to use $\lamdn$ since we are matching $\Hdn$.
 Hence, we have
 \begin{align}
-&\mean{H_2} = \pi \mean{ \left( \pd{u}{\tilde{x}} \right)^2} = 
-\left( \frac{\lamfac \lam}{\pi \etastd} \right)^2 \var(\eta_x)
+&\mean{H_2^+} = \pi \mean{ \left( \pd{u}{\tilde{x}} \right)^2} = 
+\left( \frac{\lamfac \lamdn}{\pi \etastd} \right)^2 \var(\eta_x)
 \end{align}
+%
+Then algebra gives
+\begin{equation}
+\frac{\meandn{H_3}} {\meandn{H_2} - \meanup{H_2}} = 
+\frac{\pi^{3/2} \, \etastd^2} {3 \lamfac^2 \lamdn^2} 
+\left( \frac{\skwdn(\eta)} { \vardn(\eta_x) - \varup(\eta_x)} \right)
+\end{equation}
+Also we have the simplification
+\begin{equation}
+\frac{C_2}{C_3} = \frac{\pi^{3/2} \delup^2}{9 \lamfac^2 \epsup}
+\end{equation}
+Hence, \eqref{H3H2} gives
+\begin{equation}
+\frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^4
+\end{equation}
+In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
+% Note: previously I had D^2 on the RHS. The power of 4 comes from using lamdn consistently in the nondimensionalization.
+
+\subsection{Derivation with $\lam$ changing across ADC}
+This derivation must be faulty, but here it is so that I remember it.
+Aha, I think the error is as follows: The matching condition is for $\Hdn$ only, using the two measures. So you have to use the downstream scales, in particular $\lamdn$. 
+
+\vsp{1}
+Anyway, here is the flawed derivation, so that we remember it.
 Algebra gives
 \begin{equation}
 \frac{\meandn{H_3}} {\meandn{H_2} - \meanup{H_2}} = 
-\frac{\pi^{3/2}} {3 \lamfac^2 \etastd^2} 
+\frac{\pi^{3/2} \, \etastd^2} {3 \lamfac^2} 
 \left( \frac{\skwdn(\eta)}{ \lamdn^2 \vardn(\eta_x) - \lamup^2 \varup(\eta_x)} \right) = 
-\frac{\pi^{3/2}} {3 \lamfac^2 \etastd^2 \lamup^2} 
+\frac{\pi^{3/2} \, \etastd^2} {3 \lamfac^2 \lamup^2} 
 \left( \frac{\skwdn(\eta)} {\dratdn \vardn(\eta_x) - \varup(\eta_x)} \right)
 \end{equation}
 where in the second equality, we have used the fact that
 \begin{equation}
 \frac{\lamdn^2}{\lamup^2} = \frac{\ddn}{\dup} = \dratdn
 \end{equation}
-
-
-\vsp{5}
-
-Then \eqref{H3H2} gives the relationship
+Also we have the simplification
 \begin{equation}
-\frac{\skw(\eta)} {\Delta \left( \lam^2 \var(\eta_x) \right) } =
-\frac{3 \pi^{1/2} C_2 \dratdn^2}{C_3 \etastd^2}  =
-\frac{\pi^2}{3 \lamfac^2} \delup^2 \epsup^{-1} \etastd^{-2} \dratdn^2 =
-\frac{\pi^2}{3 \lamfac^2} \lamup^{-2} \epsup^{-3} \dratdn^2
+\frac{C_2}{C_3} = \frac{\pi^{3/2} \delup^2}{9 \lamfac^2 \epsup}
 \end{equation}
-Performing some additional manipulations, and noting that $(\lamdn/\lamup)^2 = \ddn/\dup = \dratdn$, gives
+Hence, \eqref{H3H2} gives
 \begin{equation}
-\frac{\skwdn(\eta)} {\dratdn \vardn(\eta_x) - \varup(\eta_x)} = 
-\frac{\pi^2}{3 \lamfac^2} \epsup^{-3} \dratdn^2
+\frac{\skwdn(\eta)} {\dratdn \vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^2
 \end{equation}
 In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
-
-% Comparison to old calculation:
-% The old calculation used mu = 4 pi^2 / (9 N^2), but with a factor of two difference in the definition of N. The resulting coefficient on the RHS was 3 mu, which agrees with the RHS above once the factor of two is taken into account.
 
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[htbp]
