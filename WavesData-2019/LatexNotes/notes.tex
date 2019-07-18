@@ -29,7 +29,9 @@
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\mean}[1]{\left< #1 \right>}
 \newcommand{\eps}{\varepsilon}
-\newcommand{\defeq}{\mathrel{\mathop:}=}
+\newcommand{\dx}{\, dx}
+
+%\newcommand{\defeq}{\mathrel{\mathop:}=}
 
 % Basic physical parameters and scales
 \newcommand{\freqp}{f_p}
@@ -78,21 +80,6 @@
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
 
 
-% Dashed integral
-\def\Xint#1{\mathchoice
-   {\XXint\displaystyle\textstyle{#1}}%
-   {\XXint\textstyle\scriptstyle{#1}}%
-   {\XXint\scriptstyle\scriptscriptstyle{#1}}%
-   {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
-   \!\int}
-\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}
-     \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}}
-\def\ddashint{\Xint=}
-\def\dashint{\Xint-}
-\newcommand{\intt}{\dashint}%_0^{2 \pi}}
-\newcommand{\dx}{\, dx}
-
-
 %----------------------------------------------%
 %% TITLE
 %----------------------------------------------%
@@ -101,7 +88,7 @@
 \title{The truncated KdV framework for modeling anomalous waves induced by abrupt depth changes}
 
 \author{
-C. Tyler Bolles\thanks{University of Michigan},
+C.~Tyler Bolles\thanks{University of Michigan},
 Andrew J.~Majda\thanks{Courant Institute of Mathematical Sciences}, 
 M.~N.~J.~Moore\thanks{Florida State University}, 
 Di Qi\thanks{Courant Institute of Mathematical Sciences} }
@@ -355,11 +342,11 @@ Appealing to near Ergodicity, we will typically assume equivalence between spati
 
 We measure the state variable $u$ as the displacement of the surface from equilibrium, so that $\mean{u} = 0$. Consequently, the momentum of $u$ vanishes
 \begin{equation}
-\Mo[u] \defeq \int_{-\pi}^{\pi} u \dx = 0
+\Mo[u] \equiv \int_{-\pi}^{\pi} u \dx = 0
 \end{equation}
 Next, the definition of the characteristic amplitude in \eqref{ampdefn} implies that $\mean{u^2} = \pi^{-1}$. Consequently, the energy of $u$ is fixed as
 \begin{equation}
-\En[u] \defeq \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = 1
+\En[u] \equiv \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = 1
 \end{equation}
 
 We introduce the Fourier series
