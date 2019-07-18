@@ -8,10 +8,9 @@
 \usepackage[margin=1in]{geometry}
 %\usepackage[justification=RaggedRight]{caption}
 
-%----------------------------------------------%
+%----------------------------------------------------------------------------%
 %% LATEX DEFINITIONS
-%----------------------------------------------%
-
+%----------------------------------------------------------------------------%
 % Basic editing
 \newcommand{\tocite}{{\color{blue}(to cite)}}
 \newcommand{\vsp}[1]{\vspace{#1 pc} \noindent}
@@ -30,9 +29,6 @@
 \newcommand{\mean}[1]{\left< #1 \right>}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\dx}{\, dx}
-
-%\newcommand{\defeq}{\mathrel{\mathop:}=}
-
 % Basic physical parameters and scales
 \newcommand{\freqp}{f_p}
 \newcommand{\amp}{a}
@@ -78,6 +74,7 @@
 \newcommand{\meanup}[1]{\mean{#1}_{-}}
 \newcommand{\meandn}[1]{\mean{#1}_{+}}
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
+%----------------------------------------------------------------------------%
 
 
 %----------------------------------------------%
@@ -141,11 +138,11 @@ Most often, we will consider waves moving into shallower depth, so that $\dup > 
 \hline Description & Notation and definition & Value in experiments \\
 \hline
 Peak forcing frequency		& $f_p$						& 2 Hz \\
+Characteristic wave amplitude	& $\etastd = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
 Upstream depth			& $\dup$						& 12.5 cm \\
 Downstream depth			& $\ddn$						& 3 cm (and varied) \\
-Characteristic wave amplitude	& $a = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
 Upstream wavelength		& $\lamup = \sqrt{g \dup}/f_p$		& 56 cm \\
-Amplitude-to-depth ratio		& $\epsup = a / \dup$			& 0.0024--0.024 \\
+Amplitude-to-depth ratio		& $\epsup = \etastd / \dup$			& 0.0024--0.024 \\
 Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& 0.22 \\
 Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied) \\
 \hline \multicolumn{3} { c }{Parameters that change value across ADC} \\
@@ -436,7 +433,7 @@ Hence, \eqref{H3H2} gives
 In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
 % Note: previously I had D^2 on the RHS. The power of 3 comes from using lamdn consistently in the nondimensionalization.
 
-\subsection{Derivation with $\lam$ changing across ADC}
+\subsection{Derivation with $\lam$ changing across ADC (Obselete)}
 This derivation must be faulty, but here it is so that I remember it.
 Aha, I think the error is as follows: The matching condition is for $\Hdn$ only, using the two measures. So you have to use the downstream scales, in particular $\lamdn$. 
 
