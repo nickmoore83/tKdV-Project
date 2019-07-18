@@ -50,10 +50,13 @@
 \newcommand{\dratdn}{\drat_+}
 \newcommand{\dratupdn}{\drat_{\pm}}
 % Statistical quantities
-\newcommand{\skw}{\text{skew}}
-\newcommand{\var}{\text{var}}
 \newcommand{\En}{\mathcal{E}}
 \newcommand{\Mo}{\mathcal{M}}
+\newcommand{\skw}{\text{skew}}
+\newcommand{\skwdn}{\skw_+}
+\newcommand{\var}{\text{var}}
+\newcommand{\varup}{\var_-}
+\newcommand{\vardn}{\var_+}
 % Dimensionless parameters
 \newcommand{\epsup}{\eps_0}
 \newcommand{\delup}{\delta_0}
@@ -317,7 +320,7 @@ Alternatively, we would like to choose $\ampscale = E^{1/2} L^{-1/2} = \sqrt{\pi
 %----------------------------------------------------------------------------%
 \subsubsection{Normalization to use in the paper}
 
-We will essential use the original normalization in \eqref{dimlessKdV1}, except with the slight modification that $\eta = \sqrt{\pi} \etastd u$, so that the energy of $u$ is normalized to unity. This choice will be consistent with our PNAS paper and the J Stat Phys paper of Majda and Qi.
+We will essential use the original normalization in \eqref{dimlessKdV1}, except with the slight modification that $\eta = \sqrt{\pi} \etastd u$, so that the energy of $u$ is normalized to unity. This choice will be consistent with our PNAS paper and the {\it J Stat Phys} paper of Majda and Qi.
 Thus the dimensionless variables are
 \begin{align}
 &u = \eta/(\sqrt{\pi} \etastd)
@@ -406,15 +409,7 @@ The statistical matching condition is
 \begin{equation}
 \meanup{\Hdn} = \meandn{\Hdn}
 \end{equation}
-An experimental observation is that the incoming skewness is small, thus
-\begin{equation}
-\meanup{H_3} \approx 0
-\end{equation}
-which immediately gives
-\begin{equation}
-C_3 \dratdn^{-1} \meandn{H_3} = C_2 \dratdn \left( \meandn{H_2} - \meanup{H_2} \right)
-\end{equation}
-Simplifying gives
+An experimental observation is that the incoming skewness is small, $\meanup{H_3} \approx 0$. Inserting and simplifying gives
 \begin{equation}
 \label{H3H2}
 \meandn{H_3} = \frac{C_2}{C_3} \dratdn^2 \,\, \Delta \mean{H_2}
@@ -429,14 +424,14 @@ To convert to dimensional, i.e.~experimental, values we note
 Therefore
 \begin{align}
 & \meandn{H_3} = \frac{\pi}{3} \mean{u^3} = 
-\frac{1}{3} \pi^{-1/2} \skw_+(\eta) \\
+\frac{1}{3} \pi^{-1/2} \skwdn(\eta) \\
 & \meanupdn{H_2} = \pi \meanupdn{u_x^2} = 
 \left(\frac{\lamupdn}{\etastd} \right)^2 \var(\eta_x)
 \end{align}
 The second equation implies
 \begin{equation}
 \Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2} = 
-\etastd^{-2} \left( \lamdn^2 \var_+(\eta_x) - \lamup^2 \var_{-}(\eta_x) \right) =
+\etastd^{-2} \left( \lamdn^2 \vardn(\eta_x) - \lamup^2 \varup(\eta_x) \right) =
 \etastd^{-2} \Delta \left( \lam^2 \var(\eta_x) \right)
 \end{equation}
 Then \eqref{H3H2} gives the relationship
@@ -446,30 +441,15 @@ Then \eqref{H3H2} gives the relationship
 \frac{\pi^2}{3 \lamfac^2} \delup^2 \epsup^{-1} \etastd^{-2} \dratdn^2 =
 \frac{\pi^2}{3 \lamfac^2} \lamup^{-2} \epsup^{-3} \dratdn^2
 \end{equation}
-In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude (as well as the square of the depth ratio).
-
-TO DO: Simplify by manipulating $\lam$ on both sides. Then could simplify $\Delta$ term on left with $\dratdn$ factor.
-
-
-
-
-
-\vsp{10}
-OLD VERSION: \\
-
-To convert to dimensional, i.e.~experimental, values we use
-\begin{align}
-& \intt u^3 \dx = \frac{\mean{\eta^3}}{a^3} = 
-\frac{\mean{\eta^3}}{\mean{\eta^2}^{3/2}} = \skw(\eta) \\
-& \intt u_x^2 \dx = \left(\frac{\lambda_0}{a} \right)^2 \mean{\eta_x^2} 
-= \left(\frac{\lambda_0}{a} \right)^2 \var(\eta_x)
-\end{align}
-Then \eqref{H3H2} gives the relationship
+Performing some additional manipulations, and noting that $(\lamdn/\lamup)^2 = \ddn/\dup = \dratdn$, gives
 \begin{equation}
-\frac{\skw(\eta)}{\Delta \var(\eta_x)} =
-3 \mu D^2 \left( \frac{h_0}{a} \right)^3 = 3 \eps^{-3} \mu D^2
+\frac{\skwdn(\eta)} {\dratdn \vardn(\eta_x) - \varup(\eta_x)} = 
+\frac{\pi^2}{3 \lamfac^2} \epsup^{-3} \dratdn^2
 \end{equation}
-In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude (as well as the square of the depth ratio).
+In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
+
+% Comparison to old calculation:
+% The old calculation used mu = 4 pi^2 / (9 N^2), but with a factor of two difference in the definition of N. The resulting coefficient on the RHS was 3 mu, which agrees with the RHS above once the factor of two is taken into account.
 
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[htbp]
@@ -481,6 +461,7 @@ The ratio ${\skw(\eta)}/{\Delta \var(\eta_x)}$ plots against dimensionless wave 
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+
 
 
 %----------------------------------------------------------%
