@@ -483,6 +483,36 @@ The ratio ${\skw(\eta)}/{\Delta \var(\eta_x)}$ plots against dimensionless wave 
 
 \subsection{New experimental measurements guided by theory}
 
+\np
+%----------------------------------------------------------%
+% Misc
+%----------------------------------------------------------%
+\section{Misc}
+\subsection{The optimizer of the Hamiltonian is a traveling wave solution}
+For the acceptance-rejection algorithm, it is important to find the maximal value of the Hamiltonian subject to the constraints of fixed energy $E = E_0$ and zero momentum $M = 0$. For simplicity, consider the KdV equation
+\begin{equation}
+\label{KdVsimple}
+u_t + u u_x + \mu u_{xxx} = 0
+\end{equation}
+with corresponding Hamiltonian
+\begin{equation}
+H = \frac{1}{6} \int u^3 dx - \frac{\mu}{2} \int u_x^2 dx
+\end{equation}
+
+Consider the functional
+\begin{equation}
+F[u] = H[u] + \lambda_1 (E-E_0) + \lambda_2 (M-0)
+\end{equation}
+where $\lambda_1$ and $\lambda_2$ are Lagrangian multipliers. Taking the variational derivative gives
+\begin{equation}
+\frac{\delta F}{\delta u} = \frac{1}{2} u^2 + \mu u_{xx} + \lambda_1 u + \lambda_2 = 0
+\end{equation}
+which is a second-order nonlinear ODE for the optimizer $u = U(x)$. Note that this is identical to the condition for a traveling wave solution!!! To see this, consider traveling wave solutions of \ref{KdVsimple}, $u(x,t) = U(x-Vt)$. Inserting into \ref{KdVsimple} and integrating once gives
+\begin{equation}
+\frac{1}{2} U^2 + \mu U'' - V U = \text{Const}
+\end{equation}
+which is exactly the same condition!!!
+
 %\bibliographystyle{plain}
 %\bibliography{Notesbib}
 

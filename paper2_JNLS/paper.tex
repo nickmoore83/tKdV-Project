@@ -291,12 +291,16 @@ where
 \uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
 \end{equation}
 The above sum can be infinite $\Lambda = \infty$ or truncated at a finite wavenumber $\Lambda < \infty$.
-Further, since $u$ is real valued, we have $\uhat_{-k} = {\uhat_{k}}^*$.
+Further, since $u$ is real valued, we have $\uhat_{-k} = \uhat_{k}^*$.
 By Parseval's identity, we have
 \begin{equation}
 \En[u] = 1 = \frac{1}{2} \int u^2 \dx = \pi \sum_{k=-\Lambda}^{\Lambda} \abs{\uhat_k}^2 = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
+
+
+
+
 
 
 \np
@@ -325,6 +329,19 @@ The function that maximizes the Hamiltonian subject to the constraints of fixed 
 %----------------------------------------------------------%
 \section{Comparison with experiments}
 
+  % Figure
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{figure}%[!ht]
+\begin{center}
+\includegraphics[width = 0.85 \linewidth]{Figs/SkewAmp.pdf}
+\caption{
+Relationship predicted by the theory and confirmed by experiments.
+}
+\label{AAA}
+\end{center}
+\end{figure}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+ 
 \subsection{Comparison of basic features}
 
 \subsection{New experimental measurements guided by theory}
