@@ -31,8 +31,6 @@
 \newcommand{\dx}{\, dx}
 % Basic physical parameters and scales
 \newcommand{\freqp}{f_p}
-%\newcommand{\amp}{a}
-\newcommand{\ampscale}{A}
 \newcommand{\etastd}{\eta_{\text std}}
 % Parameters that change crossing the ADC
 \newcommand{\depth}{d}
@@ -44,7 +42,7 @@
 \newcommand{\lamdn}{\lam_{+}}
 \newcommand{\lamupdn}{\lam_{\pm}}
 \newcommand{\lamfac}{N}
-\newcommand{\drat}{D}
+\newcommand{\drat}{\mathcal{D}}
 \newcommand{\dratdn}{\drat_+}
 \newcommand{\dratupdn}{\drat_{\pm}}
 % Statistical quantities
@@ -56,6 +54,9 @@
 \newcommand{\varup}{\var_-}
 \newcommand{\vardn}{\var_+}
 % Dimensionless parameters
+\newcommand{\ampscale}{\mathcal{A}}
+\newcommand{\lengthscale}{\mathcal{L}}
+\newcommand{\timescale}{\mathcal{T}}
 \newcommand{\epsup}{\eps_0}
 \newcommand{\delup}{\delta_0}
 % Hamiltonian and Gibbs stuff
@@ -77,6 +78,8 @@
 \newcommand{\meandn}[1]{\mean{#1}_{+}}
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
 
+
+% Experiments
 \newcommand{\omavg}{\omega_0}
 \newcommand{\omsig}{\sigma_{\omega}}
 %----------------------------------------------------------------------------%
@@ -257,26 +260,25 @@ Lets do the nondimensionalization generally, so that we can easily make modifica
 \begin{align}
 &u = \eta / \ampscale
 &&\mbox{\em dimensionless surface displacement} \\
-&\tilde{x} = \xi / L
+&\tilde{x} = \xi / \lengthscale
 &&\mbox{\em dimensionless position (moving frame)} \\
-&\tilde{t} = t / T
+&\tilde{t} = t / \timescale
 &&\mbox{\em dimensionless time}
 \end{align}
-where the characteristic scales $\ampscale, L, T$ for wave amplitude, length, and time respectively, are free for us to choose.
+where the characteristic scales $\ampscale, \lengthscale, \timescale$ for wave amplitude, length, and time respectively, are free for us to choose.
 Then the dimensionless KdV equation is
 \begin{equation}
-u_t + \frac{3}{2} \left( \frac{c T \ampscale}{L \depth} \right) u u_x 
-+ \frac{1}{6} \left( \frac{c T \depth^2}{L^3} \right) u_{xxx} = 0
+u_t + \frac{3}{2} \left( \frac{c \timescale \ampscale}{\lengthscale \depth} \right) u u_x 
++ \frac{1}{6} \left( \frac{c \timescale \depth^2}{\lengthscale^3} \right) u_{xxx} = 0
 \end{equation}
 
 In particular, we make the following choices
 \begin{align}
 &\ampscale = \pi^{1/2} \, \etastd \\
-&L = \lamfac \lam / \pi \\
-&T = \lamfac / \freqp
+&\lengthscale = \lamfac \lam / \pi \\
+&\timescale = \lamfac / \freqp
 \end{align}
 where $\lamfac$ is an integer to be chosen later. In the physical domain, we will consider an integer multiple of the characteristic wavelength $\xi \in [-\lamfac \lam, \lamfac \lam]$, so that the state variable $u$ is periodic over the  dimensionless domain $\tilde{x} \in [-\pi, \pi]$. We have scaled time accordingly. Finally, our choice of the scale for wave amplitude $\ampscale$ is made to normalize the energy of $u$ to unity. The Hamiltonian framework that we will use relies heavily on the energy, and hence it is more convenient to have the energy normalized to unity rather than making the more common choice of $\etastd$ by itself as the scale for wave amplitude.
-\\(Note: The powers in our PNAS paper can be gotten by setting $T = \delta^{-1} \lamfac / \freqp$, since $\delta \sim \sqrt{\depth}$. This is a longer timescale, consistent with the KdV regime of validity. Also, it is a different timescale on either side of the ADC since $\depth$ changes across the ADC.)
 
 With these choices, the dimensionless KdV is
 \begin{align}
@@ -291,16 +293,33 @@ where we have the dimensionless parameters
 &\epsup = \etastd / \dup
 &&\mbox{\em upstream amplitude-to-depth ratio} \\
 &\delup = \dup / \lamup
-&&\mbox{\em upstream depth-to-wavelength ratio}
+&&\mbox{\em upstream depth-to-wavelength ratio} \\
+&\drat = {\depth}/{\dup} \, .
+&&\mbox{\em dimensionless depth}
 \end{align}
+Here, $\drat = \dratupdn$ is the local dimensionless depth, which changes value crossing the ADC. In particular, since \eqref{dimlessKdV} is in the reference frame that moves with the characteristic wave speed, we can assume that the ADC is met at $t = T_{ADC} = 0$. Then we have
+\begin{equation}
+\drat = 
+\begin{cases}
+1 		&\quad \mbox{for } t<0 \\
+\dratdn 	&\quad \mbox{for } t>0
+\end{cases}
+\end{equation}
+where $\dratdn = \ddn/\dup$.
+See Table \ref{paramtable} for a summary of important parameters.
 
-Note: When comparing to the PNAS paper, we have...
 
-Note: An alternative formulation found in Johnson's textbook is based on continuity of $\depth^{1/4} \eta$, rather than $\eta$ in crossing the ADC. In this formulation, the state variable is $u = \depth^{1/4} \, \eta / (\dup^{1/4} \, \ampscale)$. If this framework is used, the only change is that the $D^{-1}$ in the second term of \eqref{dimlessKdV} becomes $D^{-5/4}$, which makes little practical difference.
+\vsp{2}
+Notes
+\begin{itemize}
+\item The powers in our PNAS paper can be gotten by setting $T = \delta^{-1} \lamfac / \freqp$, since $\delta \sim \sqrt{\depth}$. This is a longer timescale, consistent with the KdV regime of validity. Also, it is a different timescale on either side of the ADC since $\depth$ changes across the ADC.
+\item We can briefly compare the parameters above to the parameters $E_0$ and $L_0$ in our PNAS paper.
+\item An alternative formulation found in Johnson's textbook is based on continuity of $\depth^{1/4} \eta$, rather than $\eta$ in crossing the ADC. In this formulation, the state variable is $u = \depth^{1/4} \, \eta / (\dup^{1/4} \, \ampscale)$. If this framework is used, the only change is that the $D^{-1}$ in the second term of \eqref{dimlessKdV} becomes $D^{-5/4}$, which makes little practical difference.
+\end{itemize}
 
 
 %----------------------------------------------------------------------------%
-% Stuff
+% Truncation
 %----------------------------------------------------------------------------%
 \subsection{The truncated KdV framework}
 
@@ -330,7 +349,7 @@ By Parseval's identity, we have
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
 
 %----------------------------------------------------------------------------%
-% Stuff
+% Hamiltonian
 %----------------------------------------------------------------------------%
 \subsection{Hamiltonian structure of TKdV}
 
@@ -348,14 +367,33 @@ where $\drat$ changes value across the ADC. More specifically, there exists an u
 &\Hup = C_3 \, \Hthree - C_2 \, \Htwo \\
 &\Hdn = C_3 \dratdn^{-1} \, \Hthree - C_2 \dratdn \, \Htwo
 \end{align}
-$\Hup$ is a conserved quantity for $t<0$ and $\Hdn$ is a conserved quantity for $t>0$. Each Hamiltonian $\Ham^{\pm}$ generates a corresponding Gibbs measure $\Gupdn$ 
+$\Hup$ is a conserved quantity for $t<0$ and $\Hdn$ is a conserved quantity for $t>0$. In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced in \cite{abramov2003hamiltonian} for the Burgers-Hopf system. Specifically, this ensemble is microcanonical in the energy, with a fixed energy value, and it is canonical in the Hamiltonian. By fixing the energy and hence confining to a compact set, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble. The resulting distribution is thus normalizable.
+Accordingly, each Hamiltonian $\Ham^{\pm}$ generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
 \Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - \pi)
 \end{align}
-where $\theta = \thupdn$ is the inverse temperature and $C_{\theta}$ a constant (the partition function) that depends on $\theta$. Each measure has corresponding ensemble mean $\mean{}_{\pm}$. 
+Here $\theta = \thupdn$ is the inverse temperature and $C_{\theta}$ a constant (inverse of the partition function) that depends on $\theta$. Each measure has corresponding ensemble mean $\mean{}_{\pm}$. 
 
 %Misc: The function that maximizes the Hamiltonian subject to the constraints of fixed energy and zero momentum is a traveling wave solution!
 
+%----------------------------------------------------------------------------%
+% Matching
+%----------------------------------------------------------------------------%
+\subsection{Matching at the ADC}
+
+Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales (specifically, longer than ???). Meanwhile, wave evolution over shorter timescales is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
+\begin{align}
+&u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+} \qquad \text{for } x \in [-\pi, \pi]
+%&&\mbox{\em deterministic matching condition}
+\end{align}
+%or in Johnson's formulation, it is $\depth^{1/4} \eta$ that matches.
+
+Since $u$ matches for every single trajectory, it must also match in the statistical sense. Moreover, the downstream Hamiltonian $\Hdn$ is a functional of $u$ and hence must also match. This gives the {\em statistical matching condition}
+\begin{align}
+&\meanup{\Hdn} = \meandn{\Hdn}
+%&&\mbox{\em statistical matching condition}
+\end{align}
+Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
 
 %----------------------------------------------------------%
 % Direct numerical simulations
