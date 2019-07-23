@@ -390,10 +390,53 @@ Recall that the abrupt depth change is met by traveling waves at some time $t = 
 
 Since $u$ matches for every single trajectory, it must also match in the statistical sense. Moreover, the downstream Hamiltonian $\Hdn$ is a functional of $u$ and hence must also match. This gives the {\em statistical matching condition}
 \begin{align}
+\label{statmatch}
 &\meanup{\Hdn} = \meandn{\Hdn}
 %&&\mbox{\em statistical matching condition}
 \end{align}
 Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
+
+An experimental observation is that the incoming skewness is small, $\meanup{H_3} \approx 0$. Inserting this approximation into the statistical matching condition \eqref{statmatch} and simplifying gives
+\begin{equation}
+\label{H3H2}
+\frac{\meandn{H_3^+}} {\meandn{H_2^+} - \meanup{H_2^+}} = \frac{C_2}{C_3} \dratdn^2
+\end{equation}
+%where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
+To convert to dimensional, i.e.~experimental, values we first note that
+\begin{align}
+\mean{H_3^+} = \frac{\pi}{3} \mean{u^3} = 
+\frac{1}{3} \pi^{-1/2} \frac{\mean{\eta^3}}{\etastd^3} = \frac{1}{3} \pi^{-1/2} \skw(\eta)
+\end{align}
+Second, to convert the downstream surface slope, we note
+\begin{align}
+\pd{u}{\tilde{x}} = \frac{\lamfac \lamdn}{\pi^{3/2} \etastd} \pd{\eta}{\xi}
+\end{align}
+where slope with respect to $\xi$ is the same as with respect to dimensional $x$.
+Note: I believe it is important here to use $\lamdn$ in reverting to dimensional variables since we are matching $\Hdn$.
+Hence, we have
+\begin{align}
+&\mean{H_2^+} = \pi \mean{ \left( \pd{u}{\tilde{x}} \right)^2} = 
+\left( \frac{\lamfac \lamdn}{\pi \etastd} \right)^2 \var(\eta_x)
+\end{align}
+%
+Then algebra gives
+\begin{equation}
+\frac{\meandn{H_3}} {\meandn{H_2} - \meanup{H_2}} = 
+\frac{\pi^{3/2} \, \etastd^2} {3 \lamfac^2 \lamdn^2} 
+\left( \frac{\skwdn(\eta)} { \vardn(\eta_x) - \varup(\eta_x)} \right)
+\end{equation}
+Also we have the simplification
+\begin{equation}
+\frac{C_2}{C_3} = \frac{\pi^{3/2} \delup^2}{9 \lamfac^2 \epsup}
+\end{equation}
+Hence, \eqref{H3H2} gives
+\begin{equation}
+\frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^3
+\end{equation}
+In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
+% Note: previously I had D^2 on the RHS. The power of 3 comes from using lamdn consistently in the nondimensionalization.
+
+
 
 %----------------------------------------------------------%
 % Direct numerical simulations
