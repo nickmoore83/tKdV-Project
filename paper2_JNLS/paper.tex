@@ -396,6 +396,10 @@ Since $u$ matches for every single trajectory, it must also match in the statist
 \end{align}
 Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
 
+%----------------------------------------------------------------------------%
+% Skewness formula
+%----------------------------------------------------------------------------%
+\subsection{Explicit formula for outgoing skewness}
 An experimental observation is that the incoming skewness is small, $\meanup{H_3} \approx 0$. Inserting this approximation into the statistical matching condition \eqref{statmatch} and simplifying gives
 \begin{equation}
 \label{H3H2}
@@ -429,9 +433,10 @@ Also we have the simplification
 \begin{equation}
 \frac{C_2}{C_3} = \frac{\pi^{3/2} \delup^2}{9 \lamfac^2 \epsup}
 \end{equation}
-Hence, \eqref{H3H2} gives
+Hence, \eqref{H3H2} gives the remarkably explicit formula
 \begin{equation}
-\frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^3
+\frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^3 =
+\frac{1}{3} \left( \frac{\ddn}{\etastd} \right)^3
 \end{equation}
 In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
 % Note: previously I had D^2 on the RHS. The power of 3 comes from using lamdn consistently in the nondimensionalization.
