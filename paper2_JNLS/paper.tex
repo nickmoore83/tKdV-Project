@@ -200,6 +200,7 @@ Spatial statistics from the experiments.
 Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
 To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by
 \begin{equation}
+\label{KdV}
 2 \eta_t + \frac{3 c}{\depth} \eta \eta_{\xi} + \frac{c \depth^2}{3} \eta_{\xi \xi \xi} = 0
 \end{equation}
 % The coefficients and scales can be verified on Wolfram KdV page (but what about the sign?). I would like an official source as confirmation though.
@@ -231,6 +232,23 @@ Note that the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \la
 %----------------------------------------------------------------------------%
 \subsection{Nondimensionalization of variable-depth KdV}
 
+Here, we recast the variable-depth KdV equation \eqref{KdV} in dimensionless variables.
+Of course, the choice of how to nondimensionalize is not unique, and our choices will made for convenience with the Hamiltonian structure introduced in the next section. It may be instructive to be able to compare against other traditional nondimensionalizations and hence we first introduce a generic nondimensionalization: nondimensionalize 
+\begin{align}
+&u = \eta / \ampscale
+&&\mbox{\em dimensionless surface displacement} \\
+&\tilde{x} = \xi / \lengthscale
+&&\mbox{\em dimensionless position (moving frame)} \\
+&\tilde{t} = t / \timescale
+&&\mbox{\em dimensionless time}
+\end{align}
+where the characteristic scales $\ampscale, \lengthscale, \timescale$ for wave amplitude, length, and time respectively, are free for us to choose.
+Then the dimensionless KdV equation is
+\begin{equation}
+u_t + \frac{3}{2} \left( \frac{c \timescale \ampscale}{\lengthscale \depth} \right) u u_x 
++ \frac{1}{6} \left( \frac{c \timescale \depth^2}{\lengthscale^3} \right) u_{xxx} = 0
+\end{equation}
+
 % Table
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{table}[h]%[htbp]
@@ -255,22 +273,6 @@ Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
 \end{center}
 \end{table}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-
-Lets do the nondimensionalization generally, so that we can easily make modifications if needed. In general, we introduce dimensionless variables as
-\begin{align}
-&u = \eta / \ampscale
-&&\mbox{\em dimensionless surface displacement} \\
-&\tilde{x} = \xi / \lengthscale
-&&\mbox{\em dimensionless position (moving frame)} \\
-&\tilde{t} = t / \timescale
-&&\mbox{\em dimensionless time}
-\end{align}
-where the characteristic scales $\ampscale, \lengthscale, \timescale$ for wave amplitude, length, and time respectively, are free for us to choose.
-Then the dimensionless KdV equation is
-\begin{equation}
-u_t + \frac{3}{2} \left( \frac{c \timescale \ampscale}{\lengthscale \depth} \right) u u_x 
-+ \frac{1}{6} \left( \frac{c \timescale \depth^2}{\lengthscale^3} \right) u_{xxx} = 0
-\end{equation}
 
 In particular, we make the following choices
 \begin{align}
