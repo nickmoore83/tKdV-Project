@@ -198,12 +198,12 @@ Spatial statistics from the experiments.
 %----------------------------------------------------------------------------%
 \subsection{The Korteweg–de Vries equation with variable depth}
 Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
-To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by
+To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by \cite{whitham2011linear}
 \begin{equation}
 \label{KdV}
-2 \eta_t + \frac{3 c}{\depth} \eta \eta_{\xi} + \frac{c \depth^2}{3} \eta_{\xi \xi \xi} = 0
+\eta_t + \frac{3 c}{2 \depth} \eta \eta_{\xi} + \frac{c \depth^2}{6} \eta_{\xi \xi \xi} = 0
 \end{equation}
-% The coefficients and scales can be verified on Wolfram KdV page (but what about the sign?). I would like an official source as confirmation though.
+% This dimensional form is given by Whitham on p. 461, Eq. 13.98. I first got it from the Wolfram KdV, which gives the same equation.
 
 We will primarily consider the case in which waves originate from a region of constant depth, encounter an abrupt depth change, and then continue in another region of constant depth. Thus, depth will be piecewise constant
 \begin{align}
