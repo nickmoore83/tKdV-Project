@@ -233,7 +233,7 @@ Note that the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \la
 \subsection{Nondimensionalization of variable-depth KdV}
 
 Here, we recast the variable-depth KdV equation \eqref{KdV} in dimensionless variables.
-Of course, the choice of how to nondimensionalize is not unique, and our choices will made for convenience with the Hamiltonian structure introduced in the next section. It may be instructive to be able to compare against other traditional nondimensionalizations and hence we first introduce a generic nondimensionalization: nondimensionalize 
+Of course, the choice of how to nondimensionalize is not unique, and our choices will made for convenience with the Hamiltonian structure introduced in the next section. It may be instructive to to compare against other traditional nondimensionalizations and hence we first introduce a generic nondimensionalization:
 \begin{align}
 &u = \eta / \ampscale
 &&\mbox{\em dimensionless surface displacement} \\
@@ -276,19 +276,19 @@ Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
 
 In particular, we make the following choices
 \begin{align}
-&\ampscale = \pi^{1/2} \, \etastd \\
-&\lengthscale = \lamfac \lam / \pi \\
-&\timescale = \lamfac / \freqp
+\ampscale = \pi^{1/2} \, \etastd \, , \qquad
+\lengthscale = \frac{\lamfac \lam}{\pi} \, , \qquad
+\timescale = \frac{\lamfac \lam}{\freqp \depth}
 \end{align}
 where $\lamfac$ is an integer to be chosen later. In the physical domain, we will consider an integer multiple of the characteristic wavelength $\xi \in [-\lamfac \lam, \lamfac \lam]$, so that the state variable $u$ is periodic over the  dimensionless domain $\tilde{x} \in [-\pi, \pi]$. We have scaled time accordingly. Finally, our choice of the scale for wave amplitude $\ampscale$ is made to normalize the energy of $u$ to unity. The Hamiltonian framework that we will use relies heavily on the energy, and hence it is more convenient to have the energy normalized to unity rather than making the more common choice of $\etastd$ by itself as the scale for wave amplitude.
 
 With these choices, the dimensionless KdV is
 \begin{align}
 \label{dimlessKdV}
-&u_t + C_3 \drat^{-1} \, u u_x + C_2 \drat \, u_{xxx} = 0
+&u_t + C_3 \drat^{-3/2} \, u u_x + C_2 \drat^{1/2} \, u_{xxx} = 0
 \qquad \text{for } x \in [-\pi,\pi] \\
-&C_3 = \frac{3}{2} \pi^{3/2} \epsup  \\
-&C_2 = \frac{\pi^3 \delup^2}{6 \lamfac^2} 
+&C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1}  \\
+&C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
 \end{align}
 where we have the dimensionless parameters
 \begin{align}
