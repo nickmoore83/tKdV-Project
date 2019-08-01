@@ -226,68 +226,8 @@ The incoming waves are randomized and generated with a peak forcing frequency of
 \end{align}
 where $\mean{\cdot}$ indicates the mean of a quantity. 
 Note that the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \lamupdn$ each take different values upstream and downstream of the ADC. We remark that experimental measurements indicate that $\etastd = \mean{\eta^2}^{1/2}$ is nearly the same on both values of the ADC. Hence, we will not distinguish between upstream and downstream values of $\etastd$.
-
-%----------------------------------------------------------------------------%
-% Nondimensionalization
-%----------------------------------------------------------------------------%
-\subsection{Nondimensionalization of variable-depth KdV}
-
-In this section, the variable-depth KdV equation \eqref{KdV} will be recast into a dimensionless form chosen for convenience in working with the Hamiltonian/statistical-mechanics framework introduced in \cite{majda2019statistical}. Since the choice of how to normalize is not unique, it is instructive to first introduce a generic normalization to facilitate comparison with other choices. To this end, consider characteristic scales, $\ampscale, \lengthscale, \timescale$ for the wave amplitude, longitudinal length, and time respectively, which can remain unspecified for the moment. We introduce the dimensionless variables
-\begin{align}
-&u = \eta / \ampscale
-&&\mbox{\em dimensionless surface displacement} \\
-&\tilde{x} = \xi / \lengthscale
-&&\mbox{\em dimensionless position (in moving frame)} \\
-&\tilde{t} = t / \timescale
-&&\mbox{\em dimensionless time}
-\end{align}
-Recasting \eqref{KdV} in terms of these variables and dropping the tildes for simplicity, gives the general dimensionless KdV equation:
-\begin{equation}
-u_t + \frac{3}{2} \left( \frac{c \timescale \ampscale}{\lengthscale \depth} \right) u u_x 
-+ \frac{1}{6} \left( \frac{c \timescale \depth^2}{\lengthscale^3} \right) u_{xxx} = 0
-\end{equation}
-
-Now, the scales $\ampscale, \lengthscale, \timescale$ can be chosen for ease in working with a particular framework. In particular, we choose the following scales,
-\begin{align}
-\ampscale = \pi^{1/2} \, \etastd \, , \qquad
-\lengthscale = \frac{\lamfac \lam}{\pi} \, , \qquad
-\timescale = \frac{\lamfac \lam}{\freqp \depth}
-\end{align}
-where $\lamfac$ is an integer to be chosen later. 
-The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding the choice of $\lengthscale$, recall that $\lam$ is the characteristic wavelength that corresponds to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over the physical interval $\xi \in [-\lam,\lam]$. Since, lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over $\xi \in [-\lam,\lam]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, hence our introduction of $\lamfac$. Thus, we have chosen $\lengthscale$ above so that the normalized state-variable $u$ exists on $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions can be reasonably imposed on this domain. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV corrects this behavior to leading order and describes dynamics that evolve over longer timescales. Hence, in line with traditional normalizations \cite{johnson1997modern}, we have chosen a suitably long timescale above.
-
-
-With the above choices, the dimensionless KdV takes the form
-\begin{align}
-\label{dimlessKdV}
-&u_t + C_3 \drat^{-3/2} \, u u_x + C_2 \drat^{1/2} \, u_{xxx} = 0
-\qquad \text{for } x \in [-\pi,\pi] \\
-&C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1}  \\
-&C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
-\end{align}
-where dimensionless parameters are given by
-\begin{align}
-&\drat = {\depth}/{\dup} \, .
-&&\mbox{\em dimensionless depth} \\
-&\epsup = \etastd / \dup
-&&\mbox{\em upstream amplitude-to-depth ratio} \\
-&\delup = \dup / \lamup
-&&\mbox{\em upstream depth-to-wavelength ratio}
-\end{align}
-While $\epsup$ and $\delup$ are fixed parameters, the dimensionless depth, $\drat = \dratupdn$, changes value across the ADC.
-
-\vsp{2} HERE
-Here, $\drat = \dratupdn$ is the local dimensionless depth, which changes value crossing the ADC. In particular, since \eqref{dimlessKdV} is in the reference frame that moves with the characteristic wave speed, we can assume that the ADC is met at $t = T_{ADC} = 0$. Then we have
-\begin{equation}
-\drat = 
-\begin{cases}
-1 		&\quad \mbox{for } t<0 \\
-\dratdn 	&\quad \mbox{for } t>0
-\end{cases}
-\end{equation}
-where $\dratdn = \ddn/\dup$.
+%
 See Table \ref{paramtable} for a summary of important parameters.
-
 
 % Table
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -315,13 +255,67 @@ Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
  
-\vsp{2}
-Notes
-\begin{itemize}
-\item The powers in our PNAS paper can be gotten by setting $T = \delta^{-1} \lamfac / \freqp$, since $\delta \sim \sqrt{\depth}$. This is a longer timescale, consistent with the KdV regime of validity. Also, it is a different timescale on either side of the ADC since $\depth$ changes across the ADC.
-\item We can briefly compare the parameters above to the parameters $E_0$ and $L_0$ in our PNAS paper.
-\item An alternative formulation found in Johnson's textbook is based on continuity of $\depth^{1/4} \eta$, rather than $\eta$ in crossing the ADC. In this formulation, the state variable is $u = \depth^{1/4} \, \eta / (\dup^{1/4} \, \ampscale)$. If this framework is used, the only change is that the $D^{-1}$ in the second term of \eqref{dimlessKdV} becomes $D^{-5/4}$, which makes little practical difference.
-\end{itemize}
+%----------------------------------------------------------------------------%
+% Nondimensionalization
+%----------------------------------------------------------------------------%
+\subsection{Nondimensionalization of variable-depth KdV}
+
+In this section, the variable-depth KdV equation \eqref{KdV} will be recast into a dimensionless form chosen for convenience in working with the statistical-mechanics framework introduced in \cite{majda2019statistical}. Since the choice of normalization not unique, it is instructive to first introduce a generic normalization to facilitate comparison with other choices. To this end, consider characteristic scales, $\ampscale, \lengthscale, \timescale$ for the wave amplitude, longitudinal length, and time respectively, which can remain unspecified for the moment. We introduce the dimensionless variables
+\begin{align}
+&u = \eta / \ampscale
+&&\mbox{\em dimensionless surface displacement} \\
+&\tilde{x} = \xi / \lengthscale
+&&\mbox{\em dimensionless position (in moving frame)} \\
+&\tilde{t} = t / \timescale
+&&\mbox{\em dimensionless time}
+\end{align}
+Recasting \eqref{KdV} in terms of these variables gives the generic dimensionless KdV equation:
+\begin{equation}
+u_t + \frac{3}{2} \left( \frac{c \timescale \ampscale}{\lengthscale \depth} \right) u u_x 
++ \frac{1}{6} \left( \frac{c \timescale \depth^2}{\lengthscale^3} \right) u_{xxx} = 0
+\end{equation}
+We have dropped the tilde notation above for simplicity and will henceforth use tildes only in cases of possible ambiguity.
+
+Now it is possible to choose the scales $\ampscale, \lengthscale, \timescale$ for ease in working with a particular framework. We choose the following scales,
+\begin{align}
+\ampscale = \pi^{1/2} \, \etastd \, , \qquad
+\lengthscale = \frac{\lamfac \lam}{\pi} \, , \qquad
+\timescale = \frac{\lamfac \lam}{\freqp \depth}
+\end{align}
+where $\lamfac$ is an integer to be chosen later. 
+The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding $\lengthscale$, recall that $\lam$ is the characteristic wavelength corresponding to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over lengthscale $\lam$. Since lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over the physical domain $\xi \in [-\lam,\lam]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, i.e.~$\xi \in [-\lamfac \lam, \lamfac \lam]$. Thus, we have chosen $\lengthscale$ above so that the dimensionless domain of consideration is $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions on $u$ can be  imposed on over this domain with accuracy that increases with $\lamfac$. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV equation provides the first correction to this behavior and describes dynamics that evolve over longer timescales. Hence we have rescaled $\freqp^{-1}$ by the factor $N \lam/\depth \gg 1$, which provides a suitably long timescale and is in line with previous normalizations \cite{johnson1997modern}. The scales $\lengthscale$ and $\timescale$ change value across the ADC, which is important to note when comparing the theory against experimental measurements.
+
+With the above choices, the dimensionless KdV takes the form
+\begin{align}
+\label{dimlessKdV}
+&u_t + C_3 \drat^{-3/2} \, u u_x + C_2 \drat^{1/2} \, u_{xxx} = 0
+\qquad \text{for } x \in [-\pi,\pi] \\
+&C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1}  \\
+&C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
+\end{align}
+where dimensionless parameters are given by
+\begin{align}
+&\drat = {\depth}/{\dup} \, .
+&&\mbox{\em dimensionless depth} \\
+&\epsup = \etastd / \dup
+&&\mbox{\em upstream amplitude-to-depth ratio} \\
+&\delup = \dup / \lamup
+&&\mbox{\em upstream depth-to-wavelength ratio}
+\end{align}
+While $\epsup$ and $\delup$ are fixed parameters, the dimensionless depth, $\drat = \dratupdn$, changes value across the ADC. Recall that the reference frame of \eqref{dimlessKdV} moves with the local wave speed via the variable $\xi = x-ct$ from \eqref{KdV}. Thus, the ADC is met at some time $T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. Then the dimensionless coefficient $\drat$ is a piece-wise constant function of dimensionless time
+\begin{equation}
+\drat = 
+\begin{cases}
+1 		&\quad \mbox{for } \tilde{t}<0 \\
+\dratdn = {\ddn}/{\dup} 	&\quad \mbox{for } \tilde{t}>0
+\end{cases}
+\end{equation}
+
+A few comments are in order. First, we note that the original formulation of the theory discussed here utilized a slightly different normalization \cite{majda2019statistical}, with identical powers of $\drat$ but with different expressions for the other dimensionless parameters. These differences are purely cosmetic, and we have made the choices above simply to facilitate comparison against the experiments. Second, an alternate formulation of the variable-depth KdV equation exists in which it is conjectured that the product $\depth^{1/4} \eta$, rather than $\eta$, varies continuously across the ADC \cite{johnson1997modern}. Of course, that formulation implies a discontinuity in surface displacement, which, though small, is physically unrealistic. We have chosen to enforce continuity of surface displacement in the above on the basis of physical realism. Using the alternative formulation would simply modify the power of $\drat$ in the second term of \eqref{dimlessKdV} by 1/4, i.e.~$\drat^{-7/4}$ instead of $\drat^{-3/2}$. Hence, all of the results discussed below would still hold qualitatively in this alternate formulation, with only slight quantitative modifications.
+
+%NOTE: Perhaps we should compare the dimensionless parameters to our PNAS paper \cite{majda2019statistical}, BUT the expressions for E0 and L0 given in the PNAS paper do not match with what I calculate comparing to the above. Plus, it seems like it could only add confusion.
+ 
+
 
 
 %----------------------------------------------------------------------------%
