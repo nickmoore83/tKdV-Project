@@ -232,55 +232,33 @@ Note that the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \la
 %----------------------------------------------------------------------------%
 \subsection{Nondimensionalization of variable-depth KdV}
 
-Here, we recast the variable-depth KdV equation \eqref{KdV} in dimensionless variables.
-Of course, the choice of how to nondimensionalize is not unique, and our choices will made for convenience with the Hamiltonian structure introduced in the next section. It may be instructive to to compare against other traditional nondimensionalizations and hence we first introduce a generic nondimensionalization:
+In this section, the variable-depth KdV equation \eqref{KdV} will be recast into a dimensionless form chosen for convenience in working with the Hamiltonian/statistical-mechanics framework introduced in \cite{majda2019statistical}. Since the choice of how to normalize is not unique, it is instructive to first introduce a generic normalization to facilitate comparison with other choices. To this end, consider characteristic scales, $\ampscale, \lengthscale, \timescale$ for the wave amplitude, longitudinal length, and time respectively, which can remain unspecified for the moment. We introduce the dimensionless variables
 \begin{align}
 &u = \eta / \ampscale
 &&\mbox{\em dimensionless surface displacement} \\
 &\tilde{x} = \xi / \lengthscale
-&&\mbox{\em dimensionless position (moving frame)} \\
+&&\mbox{\em dimensionless position (in moving frame)} \\
 &\tilde{t} = t / \timescale
 &&\mbox{\em dimensionless time}
 \end{align}
-where the characteristic scales $\ampscale, \lengthscale, \timescale$ for wave amplitude, length, and time respectively, are free for us to choose.
-Then the dimensionless KdV equation is
+Recasting \eqref{KdV} in terms of these variables and dropping the tildes for simplicity, gives the general dimensionless KdV equation:
 \begin{equation}
 u_t + \frac{3}{2} \left( \frac{c \timescale \ampscale}{\lengthscale \depth} \right) u u_x 
 + \frac{1}{6} \left( \frac{c \timescale \depth^2}{\lengthscale^3} \right) u_{xxx} = 0
 \end{equation}
 
-% Table
-%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-\begin{table}[h]%[htbp]
-\begin{center}
-\caption{Table of parameters}
-\label{paramtable}
-\begin{tabular}{l l l}
-\hline \multicolumn{3} { c }{Parameters that are constant in a single experiment} \\
-\hline Description & Notation and definition & Value in experiments \\
-\hline
-Peak forcing frequency		& $f_p$						& 2 Hz \\
-Characteristic wave amplitude	& $\etastd = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
-Upstream depth			& $\dup$						& 12.5 cm \\
-Downstream depth			& $\ddn$						& 3 cm (and varied) \\
-Upstream wavelength		& $\lamup = \sqrt{g \dup}/f_p$		& 55 cm \\
-Upstream wavelength		& $\lamdn = \sqrt{g \ddn}/f_p$		& 27 cm \\
-%
-Amplitude-to-depth ratio		& $\epsup = \etastd / \dup$			& 0.0024--0.024 \\
-Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& 0.22 \\
-Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
-\end{tabular}
-\end{center}
-\end{table}
- %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-
-In particular, we make the following choices
+Now, the scales $\ampscale, \lengthscale, \timescale$ can be chosen for ease in working with a particular framework. In particular, we choose the following scales,
 \begin{align}
 \ampscale = \pi^{1/2} \, \etastd \, , \qquad
 \lengthscale = \frac{\lamfac \lam}{\pi} \, , \qquad
 \timescale = \frac{\lamfac \lam}{\freqp \depth}
 \end{align}
-where $\lamfac$ is an integer to be chosen later. In the physical domain, we will consider an integer multiple of the characteristic wavelength $\xi \in [-\lamfac \lam, \lamfac \lam]$, so that the state variable $u$ is periodic over the  dimensionless domain $\tilde{x} \in [-\pi, \pi]$. We have scaled time accordingly. Finally, our choice of the scale for wave amplitude $\ampscale$ is made to normalize the energy of $u$ to unity. The Hamiltonian framework that we will use relies heavily on the energy, and hence it is more convenient to have the energy normalized to unity rather than making the more common choice of $\etastd$ by itself as the scale for wave amplitude.
+where $\lamfac$ is an integer to be chosen later. 
+The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding the choice of $\lengthscale$, recall that $\lam$ is the characteristic wavelength that corresponds to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over the physical interval $\xi \in [-\lam,\lam]$. Since, lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over $\xi \in [-\lam,\lam]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, hence our introduction of $\lamfac$. Thus, we have chosen $\lengthscale$ above so that the normalized state-variable $u$ exists on $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions can be reasonably imposed on this domain. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV corrects this behavior to leading order and describes dynamics that evolve over longer timescales. Hence, in line with traditional normalizations \cite{johnson1997modern}, we have chosen a suitably long timescale above.
+
+
+
+In the physical domain, we will consider an integer multiple of the characteristic wavelength $\xi \in [-\lamfac \lam, \lamfac \lam]$, so that the state variable $u$ is periodic over the  dimensionless domain $\tilde{x} \in [-\pi, \pi]$. We have scaled time accordingly. Finally, our choice of the scale for wave amplitude $\ampscale$ is made to normalize the energy of $u$ to unity. The Hamiltonian framework that we will use relies heavily on the energy, and hence it is more convenient to have the energy normalized to unity rather than making the more common choice of $\etastd$ by itself as the scale for wave amplitude.
 
 With these choices, the dimensionless KdV is
 \begin{align}
@@ -311,6 +289,32 @@ where $\dratdn = \ddn/\dup$.
 See Table \ref{paramtable} for a summary of important parameters.
 
 
+% Table
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{table}[h]%[htbp]
+\begin{center}
+\caption{Table of parameters}
+\label{paramtable}
+\begin{tabular}{l l l}
+\hline \multicolumn{3} { c }{Parameters that are constant in a single experiment} \\
+\hline Description & Notation and definition & Value in experiments \\
+\hline
+Peak forcing frequency		& $f_p$						& 2 Hz \\
+Characteristic wave amplitude	& $\etastd = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
+Upstream depth			& $\dup$						& 12.5 cm \\
+Downstream depth			& $\ddn$						& 3 cm (and varied) \\
+Upstream wavelength		& $\lamup = \sqrt{g \dup}/f_p$		& 55 cm \\
+Upstream wavelength		& $\lamdn = \sqrt{g \ddn}/f_p$		& 27 cm \\
+%
+Amplitude-to-depth ratio		& $\epsup = \etastd / \dup$			& 0.0024--0.024 \\
+Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& 0.22 \\
+Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
+\end{tabular}
+\end{center}
+\end{table}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+ 
+ 
 \vsp{2}
 Notes
 \begin{itemize}
@@ -324,6 +328,7 @@ Notes
 % Truncation
 %----------------------------------------------------------------------------%
 \subsection{The truncated KdV framework}
+\label{tKdVSec}
 
 Consider the Fourier series of the state variable
 \begin{equation}
