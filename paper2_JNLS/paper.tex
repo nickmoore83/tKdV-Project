@@ -257,10 +257,7 @@ where $\lamfac$ is an integer to be chosen later.
 The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding the choice of $\lengthscale$, recall that $\lam$ is the characteristic wavelength that corresponds to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over the physical interval $\xi \in [-\lam,\lam]$. Since, lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over $\xi \in [-\lam,\lam]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, hence our introduction of $\lamfac$. Thus, we have chosen $\lengthscale$ above so that the normalized state-variable $u$ exists on $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions can be reasonably imposed on this domain. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV corrects this behavior to leading order and describes dynamics that evolve over longer timescales. Hence, in line with traditional normalizations \cite{johnson1997modern}, we have chosen a suitably long timescale above.
 
 
-
-In the physical domain, we will consider an integer multiple of the characteristic wavelength $\xi \in [-\lamfac \lam, \lamfac \lam]$, so that the state variable $u$ is periodic over the  dimensionless domain $\tilde{x} \in [-\pi, \pi]$. We have scaled time accordingly. Finally, our choice of the scale for wave amplitude $\ampscale$ is made to normalize the energy of $u$ to unity. The Hamiltonian framework that we will use relies heavily on the energy, and hence it is more convenient to have the energy normalized to unity rather than making the more common choice of $\etastd$ by itself as the scale for wave amplitude.
-
-With these choices, the dimensionless KdV is
+With the above choices, the dimensionless KdV takes the form
 \begin{align}
 \label{dimlessKdV}
 &u_t + C_3 \drat^{-3/2} \, u u_x + C_2 \drat^{1/2} \, u_{xxx} = 0
@@ -268,15 +265,18 @@ With these choices, the dimensionless KdV is
 &C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1}  \\
 &C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
 \end{align}
-where we have the dimensionless parameters
+where dimensionless parameters are given by
 \begin{align}
+&\drat = {\depth}/{\dup} \, .
+&&\mbox{\em dimensionless depth} \\
 &\epsup = \etastd / \dup
 &&\mbox{\em upstream amplitude-to-depth ratio} \\
 &\delup = \dup / \lamup
-&&\mbox{\em upstream depth-to-wavelength ratio} \\
-&\drat = {\depth}/{\dup} \, .
-&&\mbox{\em dimensionless depth}
+&&\mbox{\em upstream depth-to-wavelength ratio}
 \end{align}
+While $\epsup$ and $\delup$ are fixed parameters, the dimensionless depth, $\drat = \dratupdn$, changes value across the ADC.
+
+\vsp{2} HERE
 Here, $\drat = \dratupdn$ is the local dimensionless depth, which changes value crossing the ADC. In particular, since \eqref{dimlessKdV} is in the reference frame that moves with the characteristic wave speed, we can assume that the ADC is met at $t = T_{ADC} = 0$. Then we have
 \begin{equation}
 \drat = 
