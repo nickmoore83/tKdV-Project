@@ -61,6 +61,8 @@
 \newcommand{\delup}{\delta_0}
 % Hamiltonian and Gibbs stuff
 \newcommand{\uhat}{\hat{u}}
+\newcommand{\sympJ}{\mathcal{J}}
+\newcommand{\vard}[2]{\frac{\delta #1}{\delta #2}}
 \newcommand{\Ham}{\mathcal{H}}
 \newcommand{\Hthree}{\Ham_{3}}
 \newcommand{\Htwo}{\Ham_{2}}
@@ -306,17 +308,34 @@ While $\epsup$ and $\delup$ are fixed parameters, the dimensionless depth, $\dra
 \begin{equation}
 \drat = 
 \begin{cases}
-1 		&\quad \mbox{for } \tilde{t}<0 \\
-\dratdn = {\ddn}/{\dup} 	&\quad \mbox{for } \tilde{t}>0
+1 		&\quad \mbox{for } {t}<0 \\
+\dratdn = {\ddn}/{\dup} 	&\quad \mbox{for } {t}>0
 \end{cases}
 \end{equation}
 
-A few comments are in order. First, we note that the original formulation of the theory discussed here utilized a slightly different normalization \cite{majda2019statistical}, with identical powers of $\drat$ but with different expressions for the other dimensionless parameters. These differences are purely cosmetic, and we have made the choices above simply to facilitate comparison against the experiments. Second, an alternate formulation of the variable-depth KdV equation exists in which it is conjectured that the product $\depth^{1/4} \eta$, rather than $\eta$, varies continuously across the ADC \cite{johnson1997modern}. Of course, that formulation implies a discontinuity in surface displacement, which, though small, is physically unrealistic. We have chosen to enforce continuity of surface displacement in the above on the basis of physical realism. Using the alternative formulation would simply modify the power of $\drat$ in the second term of \eqref{dimlessKdV} by 1/4, i.e.~$\drat^{-7/4}$ instead of $\drat^{-3/2}$. Hence, all of the results discussed below would still hold qualitatively in this alternate formulation, with only slight quantitative modifications.
+A few comments are in order. First, we note that the original formulation of this theory utilized a slightly different normalization \cite{majda2019statistical}, with identical powers of $\drat$ but with different expressions for the other dimensionless parameters. These differences are purely cosmetic, and we have made the choices above simply to facilitate comparison against the experiments. Second, an alternate formulation of the variable-depth KdV equation exists in which it is conjectured that the product $\depth^{1/4} \eta$, rather than $\eta$, varies continuously across the ADC \cite{johnson1997modern}. Of course, that assumption implies a discontinuity in surface displacement, which, though small, is physically unrealistic. We have chosen to enforce continuity of surface displacement in the above on the basis of physical realism. Using the alternative formulation would simply modify the power of $\drat$ in the second term of \eqref{dimlessKdV} by 1/4, i.e.~$\drat^{-7/4}$ instead of $\drat^{-3/2}$. Hence, all of the results discussed below would still hold qualitatively in this alternate formulation, with only slight quantitative modifications.
 
 %NOTE: Perhaps we should compare the dimensionless parameters to our PNAS paper \cite{majda2019statistical}, BUT the expressions for E0 and L0 given in the PNAS paper do not match with what I calculate comparing to the above. Plus, it seems like it could only add confusion.
  
 
+%----------------------------------------------------------------------------%
+% Hamiltonian
+%----------------------------------------------------------------------------%
+\subsection{Hamiltonian structure}
 
+The variable-depth KdV \eqref{dimlessKdV}, though not Hamiltonian throughout the entire domain, admits a Hamiltonian structure on each side of the ADC. Indeed, \eqref{dimlessKdV} can be expressed as
+\begin{align}
+\dot{u} = \sympJ \vard{\Ham}{u}
+\end{align}
+where $\sympJ = \pdi{}{x}$ and the Hamiltonian is given by
+\begin{equation}
+\Ham = C_3 \drat^{-3/2} \, \Hthree - C_2 \drat^{1/2} \, \Htwo
+\end{equation}
+Since $\drat$ changes value across the ADC, the Hamiltonian also changes value. More explicitly, we have an upstream and downstream Hamiltonian given by
+\begin{align}
+&\Hup = C_3 \, \Hthree - C_2 \, \Htwo \\
+&\Hdn = C_3 \dratdn^{-3/2} \, \Hthree - C_2 \dratdn^{1/2} \, \Htwo
+\end{align}
 
 %----------------------------------------------------------------------------%
 % Truncation
