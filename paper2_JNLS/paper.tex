@@ -327,15 +327,17 @@ The variable-depth KdV \eqref{dimlessKdV}, though not Hamiltonian throughout the
 \begin{align}
 \dot{u} = \sympJ \vard{\Ham}{u}
 \end{align}
-where $\sympJ = \pdi{}{x}$ and the Hamiltonian is given by
+where $\sympJ = \pdi{}{x}$ is the symplectic operator and the Hamiltonian is given by
 \begin{equation}
-\Ham = C_3 \drat^{-3/2} \, \Hthree - C_2 \drat^{1/2} \, \Htwo
+\Ham = C_2 \drat^{1/2} \, \Htwo - C_3 \drat^{-3/2} \, \Hthree
 \end{equation}
 Since $\drat$ changes value across the ADC, the Hamiltonian also changes value. More explicitly, we have an upstream and downstream Hamiltonian given by
 \begin{align}
-&\Hup = C_3 \, \Hthree - C_2 \, \Htwo \\
-&\Hdn = C_3 \dratdn^{-3/2} \, \Hthree - C_2 \dratdn^{1/2} \, \Htwo
+&\Hup = C_2 \, \Htwo - C_3 \, \Hthree  \\
+&\Hdn = C_2 \dratdn^{1/2} \, \Htwo - C_3 \dratdn^{-3/2} \, \Hthree
 \end{align}
+The above formulation differs cosmetically from previous ones \cite{abramov2003hamiltonian, majda2019statistical}, which used the opposite sign in both $\sympJ$ and $\Ham$ and found  {\em negative} inverse temperature to be appropriate for recovering the experimental observations. We have flipped the signs of both $\sympJ$ and $\Ham$ so that a {\em positive} inverse temperature could be used and thus fit the theory into the most conventional statistical mechanics.
+
 
 %----------------------------------------------------------------------------%
 % Truncation
