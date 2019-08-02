@@ -59,16 +59,18 @@
 \newcommand{\timescale}{\mathcal{T}}
 \newcommand{\epsup}{\eps_0}
 \newcommand{\delup}{\delta_0}
-% Hamiltonian and Gibbs stuff
+% Hamiltonian stuff
 \newcommand{\uhat}{\hat{u}}
 \newcommand{\sympJ}{\mathcal{J}}
 \newcommand{\vard}[2]{\frac{\delta #1}{\delta #2}}
 \newcommand{\Ham}{\mathcal{H}}
+\newcommand{\Hup}{\Ham_{-}}
+\newcommand{\Hdn}{\Ham_{+}}
+\newcommand{\Hupdn}{\Ham_{\pm}}
 \newcommand{\Hthree}{\Ham_{3}}
 \newcommand{\Htwo}{\Ham_{2}}
-\newcommand{\Hup}{\Ham^{-}}
-\newcommand{\Hdn}{\Ham^{+}}
-\newcommand{\Hupdn}{\Ham^{\pm}}
+\newcommand{\Fcnl}{\mathcal{F}}
+% Gibbs and theta
 \newcommand{\Gibbs}{\mathcal{G}}
 \newcommand{\Gup}{\Gibbs^{-}}
 \newcommand{\Gdn}{\Gibbs^{+}}
@@ -306,6 +308,7 @@ The reason for the subscripts $3$ and $2$ will become evident in the next sectio
 
 Meanwhile, the dimensionless depth $\drat = {\depth}/{\dup}$ {\em does} change value across the ADC since the depth $\depth$ changes. Recall that the reference frame of \eqref{dimlessKdV} moves with the local wave speed via the variable $\xi = x-ct$ from \eqref{KdV}. Thus, the ADC is met at some time $T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. Therefore, we can regard $\drat$ is a piece-wise constant function of dimensionless time
 \begin{equation}
+\label{dratpw}
 \drat = 
 \begin{cases}
 1 		&\quad \mbox{for } {t}<0 \\
@@ -325,27 +328,31 @@ A few comments are in order. First, we note that the original formulation of thi
 
 The variable-depth KdV \eqref{dimlessKdV}, though not Hamiltonian throughout the entire domain, admits a Hamiltonian structure on each side of the ADC. Indeed, \eqref{dimlessKdV} can be expressed as
 \begin{align}
-\dot{u} = \sympJ \vard{\Ham}{u}
+\dot{u}_{\pm} = \sympJ \vard{\Hupdn}{u}
 \end{align}
-where $\sympJ = \pdi{}{x}$ is the symplectic operator and $\Ham$ the Hamiltonian, which will take different forms on either side of the ADC. It is convenient to decompose the Hamiltonian into a so-called cubic and quadratic component, given respectively by
+where $\sympJ = \pdi{}{x}$ is the symplectic operator and $\Ham = \Hupdn$ is the Hamiltonian, which will take different forms on either side of the ADC. It is convenient to decompose the Hamiltonian into a so-called cubic and quadratic component, given respectively by
 \begin{align}
 \Hthree = \frac{1}{6} \int_{-\pi}^{\pi} u^3 \dx	\, , \qquad
 \Htwo = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx	\, .
 \end{align}
 Then the Hamiltonian can be expressed as
 \begin{equation}
-\Ham = C_2 \drat^{1/2} \, \Htwo - C_3 \drat^{-3/2} \, \Hthree
+\Hupdn = C_2 \dratupdn^{1/2} \, \Htwo - C_3 \dratupdn^{-3/2} \, \Hthree
 \end{equation}
-where $\drat$ changers value across the ADC. More explicitly, the separate upstream and downstream Hamiltonians are given by
+where $\drat = \dratupdn$ changes value across the ADC. More explicitly, substituting \eqref{dratpw}, the separate upstream and downstream Hamiltonians are
 \begin{align}
-&\Hup = C_2 \, \Htwo - C_3 \, \Hthree  \\
-&\Hdn = C_2 \dratdn^{1/2} \, \Htwo - C_3 \dratdn^{-3/2} \, \Hthree
+&\Hup = C_2 \, \Htwo - C_3 \, \Hthree 						&& \text{for } t<0 \\
+&\Hdn = C_2 \dratdn^{1/2} \, \Htwo - C_3 \dratdn^{-3/2} \, \Hthree	&& \text{for } t>0
 \end{align}
-The above formulation differs cosmetically from some previous ones \cite{abramov2003hamiltonian, bajars2013weakly, majda2019statistical}, which used the opposite sign in both $\sympJ$ and $\Ham$. With those signs, \cite{majda2019statistical} found  {\em negative} inverse temperature to be appropriate for recovering the experimental observations. We used the signs above so that a {\em positive} inverse temperature could be used and thus fit the theory into the most conventional statistical mechanics.
+The above formulation differs cosmetically from some previous ones \cite{abramov2003hamiltonian, bajars2013weakly, majda2019statistical}, which used the opposite sign in both $\sympJ$ and $\Ham$. With that sign convention, a {\em negative} inverse temperature is required to accurately describe the experimental observations, as found in \cite{majda2019statistical}. We, however, choose the sign convention above so that a {\em positive} inverse temperature could be used and thus fit the theory into the most conventional form of statistical mechanics.
 
 % Notes for myself on the sign change: Abramov CPAM 2003, Bajars Nonlinearity 2013, and our 2019 PNAS paper all use J = -d/dx with the opposite sign in the Hamiltonian. However, I was able to easily find several references online that use J = d/dx, so there is nothing wrong with it. The exact criteria that J has to satisfy are listed in the CPAM 2003 paper, and J = d/dx satisfies all these criteria just as well as J = -d/dx does.
 
-
+The evolution of any functional $\Fcnl[u]$ is given by 
+\begin{align}
+\partial_t \Fcnl = \{ \Fcnl, \Ham \} = \int_{-\pi}^{\pi} \vard{F}{u} \sympJ \vard{\Ham}{u} \dx
+\end{align}
+where again $\Ham = \Hup$ if $t<0$ and $\Ham = \Hdn$ if $t>0$.
 %----------------------------------------------------------------------------%
 % Truncation
 %----------------------------------------------------------------------------%
