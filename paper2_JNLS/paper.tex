@@ -327,14 +327,16 @@ A few comments are in order. First, we note that the original formulation of thi
 %----------------------------------------------------------------------------%
 % Hamiltonian
 %----------------------------------------------------------------------------%
-\subsection{Hamiltonian structure}
+\subsection{Hamiltonian structure of KdV}
+\label{HamiltonianSection}
 
 The variable-depth KdV \eqref{dimlessKdV}, though not Hamiltonian throughout the entire domain, admits a Hamiltonian structure on each side of the ADC. Indeed, \eqref{dimlessKdV} can be expressed as
 \begin{align}
-\dot{u}_{\pm} = \sympJ \vard{\Hupdn}{u}
+\partial_t{u}_{\pm} = \sympJ \vard{\Hupdn}{u}
 \end{align}
 where $\sympJ = \pdi{}{x}$ is the symplectic operator and $\Ham = \Hupdn$ is the Hamiltonian, which will take different forms on either side of the ADC. It is convenient to decompose the Hamiltonian into a so-called cubic and quadratic component, given respectively by
 \begin{align}
+\label{H3H2}
 \Hthree = \frac{1}{6} \int_{-\pi}^{\pi} u^3 \dx	\, , \qquad
 \Htwo = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx	\, .
 \end{align}
@@ -391,7 +393,20 @@ where $\Proj$ is a projection operator and \eqref{uhat} still holds. Projecting 
 &C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1} \, , \quad
 C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
 \end{align}
-Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants are the same as before and have been repeated here for convenience.
+Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants are the same as before and have been repeated here for convenience. 
+
+The TKdV system \eqref{TKdV} retains nearly the same Hamiltonian structure described in Section \ref{HamiltonianSection}, with the only modification being the inclusion of the projection operator. The piecewise defined Hamiltonian for TKdV is given by
+\begin{equation}
+\label{TruncHamiltonian}
+\Hupdn = C_2 \dratupdn^{1/2} \, \Htwo[\uL] - C_3 \dratupdn^{-3/2} \, \Hthree[\uL]
+\end{equation}
+where $\Hthree$ and $\Htwo$ the defined exactly as before \eqref{H3H2}, but now are simply applied to the projected variable $\uL = \Proj u$.
+Then TKdV \eqref{TKdV} can be expressed as
+\begin{align}
+\partial_t {u}_{\pm} = \partial_x \Proj \vard{\Hupdn}{\uL}
+\end{align}
+
+% Note: Bajars 2013 has some important details on the Hamiltonian on the truncated system.
 
 
 
