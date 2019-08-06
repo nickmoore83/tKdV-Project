@@ -382,26 +382,16 @@ The above sum can be infinite $\Lambda = \infty$ or truncated at a finite wavenu
 
 The KdV system (i.e. $\Lambda = \infty$) possesses the Hamiltonian \eqref{Hamiltonian} and momentum and energy \eqref{MomEn} and an infinite number of additional invariants \cite{lax1975periodic, whitham2011linear}. For the truncated system however, $\Lambda < \infty$, the only known invariants are the momentum, energy, and Hamiltonian. The infinite sequence of invariants apart from these first three may no longer be invariants of TKdV.
 
+
+WRITE PROJECTION OPERATOR AND TKDV
+
+\vsp{10}
 %----------------------------------------------------------------------------%
 % Hamiltonian
 %----------------------------------------------------------------------------%
 \subsection{Hamiltonian structure of TKdV}
 
-We introduce the cubic and quadratic Hamiltonian components as
-\begin{align}
-\Hthree = \frac{1}{6} \int_{-\pi}^{\pi} u^3 \dx	\, , \qquad
-\Htwo = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx	\, .
-\end{align}
-Then the Hamiltonian of \eqref{dimlessKdV} on each side of the ADC is given by
-\begin{equation}
-\Ham = C_3 \drat^{-1} \, \Hthree - C_2 \drat \, \Htwo
-\end{equation}
-where $\drat$ changes value across the ADC. More specifically, there exists an upstream and a downstream Hamiltonian
-\begin{align}
-&\Hup = C_3 \, \Hthree - C_2 \, \Htwo \\
-&\Hdn = C_3 \dratdn^{-1} \, \Hthree - C_2 \dratdn \, \Htwo
-\end{align}
-$\Hup$ is a conserved quantity for $t<0$ and $\Hdn$ is a conserved quantity for $t>0$. In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced in \cite{abramov2003hamiltonian} for the Burgers-Hopf system. Specifically, this ensemble is microcanonical in the energy, with a fixed energy value, and it is canonical in the Hamiltonian. By fixing the energy and hence confining to a compact set, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble. The resulting distribution is thus normalizable.
+In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced in \cite{abramov2003hamiltonian} for the Burgers-Hopf system. Specifically, this ensemble is microcanonical in the energy, with a fixed energy value, and it is canonical in the Hamiltonian. By fixing the energy and hence confining to a compact set, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble. The resulting distribution is thus normalizable.
 Accordingly, each Hamiltonian $\Ham^{\pm}$ generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
 \Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - \pi)
