@@ -64,14 +64,17 @@
 \newcommand{\sympJ}{\mathcal{J}}
 \newcommand{\vard}[2]{\frac{\delta #1}{\delta #2}}
 \newcommand{\Ham}{\mathcal{H}}
-\newcommand{\Hup}{\Ham_{-}}
-\newcommand{\Hdn}{\Ham_{+}}
-\newcommand{\Hupdn}{\Ham_{\pm}}
+\newcommand{\Hup}{\Ham^{-}}
+\newcommand{\Hdn}{\Ham^{+}}
+\newcommand{\Hupdn}{\Ham^{\pm}}
 \newcommand{\Hthree}{\Ham_{3}}
 \newcommand{\Htwo}{\Ham_{2}}
 \newcommand{\Fcnl}{\mathcal{F}}
+% Truncated stuff
 \newcommand{\Proj}{\mathcal{P}_{\Lambda}}
 \newcommand{\uL}{u_{\Lambda}}
+\newcommand{\HLupdn}{\Ham_{\Lambda}^{\pm}}
+\newcommand{\SympL}{\sympJ_{\Lambda}}
 % Gibbs and theta
 \newcommand{\Gibbs}{\mathcal{G}}
 \newcommand{\Gup}{\Gibbs^{-}}
@@ -332,7 +335,7 @@ A few comments are in order. First, we note that the original formulation of thi
 
 The variable-depth KdV \eqref{dimlessKdV}, though not Hamiltonian throughout the entire domain, admits a Hamiltonian structure on each side of the ADC. Indeed, \eqref{dimlessKdV} can be expressed as
 \begin{align}
-\partial_t{u}_{\pm} = \sympJ \vard{\Hupdn}{u}
+\partial_t{u} = \sympJ \vard{\Hupdn}{u}
 \end{align}
 where $\sympJ = \pdi{}{x}$ is the symplectic operator and $\Ham = \Hupdn$ is the Hamiltonian, which will take different forms on either side of the ADC. It is convenient to decompose the Hamiltonian into a so-called cubic and quadratic component, given respectively by
 \begin{align}
@@ -395,25 +398,22 @@ C_2 = \frac{\pi^3 \delup}{6 \lamfac^2}
 \end{align}
 Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants are the same as before and have been repeated here for convenience. 
 
-The TKdV system \eqref{TKdV} retains nearly the same Hamiltonian structure described in Section \ref{HamiltonianSection}, with the only modification being the inclusion of the projection operator. The piecewise defined Hamiltonian for TKdV is given by
+Remarkably, the TKdV system \eqref{TKdV} retains nearly the same Hamiltonian structure described in Section \ref{HamiltonianSection}, with the only modification being the inclusion of the projection operator \cite{bajars2013weakly, majda2019statistical}. The piecewise defined Hamiltonian for TKdV is given by
 \begin{equation}
 \label{TruncHamiltonian}
-\Hupdn = C_2 \dratupdn^{1/2} \, \Htwo[\uL] - C_3 \dratupdn^{-3/2} \, \Hthree[\uL]
+\HLupdn = C_2 \dratupdn^{1/2} \, \Htwo[\uL] - C_3 \dratupdn^{-3/2} \, \Hthree[\uL]
 \end{equation}
 where $\Hthree$ and $\Htwo$ the defined exactly as before \eqref{H3H2}, but now are simply applied to the projected variable $\uL = \Proj u$.
 Then TKdV \eqref{TKdV} can be expressed as
 \begin{align}
-\partial_t {u}_{\pm} = \partial_x \Proj \vard{\Hupdn}{\uL}
+\partial_t {\uL} = \partial_x \Proj \, \vard{\HLupdn}{\uL}
 \end{align}
-
+where the new symplectic operator is $\SympL = \partial_x \Proj$.
 % Note: Bajars 2013 has some important details on the Hamiltonian on the truncated system.
 
-
-
-
-Parseval's identity gives
+The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with the same normalization values $\Mo[\uL] = 0$ and $\En[\uL] = 1$. Note that Parseval's identity gives
 \begin{equation}
-\En[u] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
+\En[\uL] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
 
