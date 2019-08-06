@@ -282,6 +282,7 @@ We have dropped the tilde notation above for simplicity and will henceforth use 
 
 Now it is possible to choose the scales $\ampscale, \lengthscale, \timescale$ for ease in working with a particular framework. We choose the following scales,
 \begin{align}
+\label{scales}
 \ampscale = \pi^{1/2} \, \etastd \, , \qquad
 \lengthscale = \frac{\lamfac \lam}{\pi} \, , \qquad
 \timescale = \frac{\lamfac \lam}{\freqp \depth}
@@ -337,6 +338,7 @@ where $\sympJ = \pdi{}{x}$ is the symplectic operator and $\Ham = \Hupdn$ is the
 \end{align}
 Then the Hamiltonian can be expressed as
 \begin{equation}
+\label{Hamiltonian}
 \Hupdn = C_2 \dratupdn^{1/2} \, \Htwo - C_3 \dratupdn^{-3/2} \, \Hthree
 \end{equation}
 where $\drat = \dratupdn$ changes value across the ADC. More explicitly, substituting \eqref{dratpw}, the separate upstream and downstream Hamiltonians are
@@ -344,9 +346,17 @@ where $\drat = \dratupdn$ changes value across the ADC. More explicitly, substit
 &\Hup = C_2 \, \Htwo - C_3 \, \Hthree 						&& \text{for } t<0 \\
 &\Hdn = C_2 \dratdn^{1/2} \, \Htwo - C_3 \dratdn^{-3/2} \, \Hthree	&& \text{for } t>0
 \end{align}
-The above formulation differs cosmetically from some previous ones \cite{abramov2003hamiltonian, bajars2013weakly, majda2019statistical}, which used the opposite sign in both $\sympJ$ and $\Ham$. With that sign convention, a {\em negative} inverse temperature is required to accurately describe the experimental observations, as found in \cite{majda2019statistical}. We, however, choose the sign convention above so that a {\em positive} inverse temperature could be used and thus fit the theory into the most conventional form of statistical mechanics.
+The above formulation differs cosmetically from some previous ones \cite{abramov2003hamiltonian, bajars2013weakly, majda2019statistical}, which used the opposite sign in both $\sympJ$ and $\Ham$. With that sign convention, Majda et al. 2019 found that a {\em negative} inverse temperature is required to accurately describe the experimental observations \cite{majda2019statistical}. We have chosen the sign convention above so that a {\em positive} inverse temperature could be used and thus fit the theory into the most conventional form of statistical mechanics.
 
 % Notes for myself on the sign change: Abramov CPAM 2003, Bajars Nonlinearity 2013, and our 2019 PNAS paper all use J = -d/dx with the opposite sign in the Hamiltonian. However, I was able to easily find several references online that use J = d/dx, so there is nothing wrong with it. The exact criteria that J has to satisfy are listed in the CPAM 2003 paper, and J = d/dx satisfies all these criteria just as well as J = -d/dx does.
+
+We introduce two important invariants of KdV, the momentum and the energy
+\begin{align}
+\label{MomEn}
+\Mo[u] \equiv \int_{-\pi}^{\pi} u \dx \, = 0 , \qquad
+\En[u] \equiv \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = 1
+\end{align}
+As indicated above, the momentum of $u$ vanishes since it is measured as displacement from equilibrium. Second, by the scale chosen for $\ampscale$ in \eqref{scales}, the energy has been normalized to unity.
 
 The evolution of any functional $\Fcnl[u]$ is given by 
 \begin{align}
@@ -360,29 +370,17 @@ where again $\Ham = \Hup$ if $t<0$ and $\Ham = \Hdn$ if $t>0$.
 \label{tKdVSec}
 
 Consider the Fourier series of the state variable
-\begin{equation}
-u = \sum_{k=-\Lambda}^{\Lambda} \uhat_k e^{i k x}
-\end{equation}
-where
-\begin{equation}
+\begin{align}
+u = \sum_{k=-\Lambda}^{\Lambda} \uhat_k e^{i k x} \, , \qquad
 \uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
-\end{equation}
-The above sum can be infinite $\Lambda = \infty$ or truncated at a finite wavenumber $\Lambda < \infty$. Further, since $u$ is real valued, we have $\uhat_{-k} = \uhat_{k}^*$.
-
-
-We measure the state variable $u$ as the displacement of the surface from equilibrium, so that $\mean{u} = 0$. Consequently, the momentum of $u$ vanishes
+\end{align}
+The above sum can be infinite $\Lambda = \infty$ or truncated at a finite wavenumber $\Lambda < \infty$. Further, since $u$ is real valued, we have $\uhat_{-k} = \uhat_{k}^*$. Since momentum vanishes, we have $\uhat_0 = 0$. Meanwhile, Parseval's identity gives
 \begin{equation}
-\Mo[u] \equiv \int_{-\pi}^{\pi} u \dx = 0
-\end{equation}
-Next, the definition of the characteristic amplitude implies that $\mean{u^2} = \pi^{-1}$. Consequently, the energy of $u$ is fixed as
-\begin{equation}
-\En[u] \equiv \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = 1
-\end{equation}
-By Parseval's identity, we have
-\begin{equation}
-\En[u] = 1 = \frac{1}{2} \int u^2 \dx = \pi \sum_{k=-\Lambda}^{\Lambda} \abs{\uhat_k}^2 = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2
+\En[u] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
+
+The KdV system (i.e. $\Lambda = \infty$) possesses the Hamiltonian \eqref{Hamiltonian} and momentum and energy \eqref{MomEn} and an infinite number of additional invariants \cite{lax1975periodic, whitham2011linear}. For the truncated system however, $\Lambda < \infty$, the only known invariants are the momentum, energy, and Hamiltonian. The infinite sequence of invariants apart from these first three may no longer be invariants of TKdV.
 
 %----------------------------------------------------------------------------%
 % Hamiltonian
