@@ -70,6 +70,7 @@
 \newcommand{\Hthree}{\Ham_{3}}
 \newcommand{\Htwo}{\Ham_{2}}
 \newcommand{\Fcnl}{\mathcal{F}}
+\newcommand{\Proj}{\mathcal{P}}
 % Gibbs and theta
 \newcommand{\Gibbs}{\mathcal{G}}
 \newcommand{\Gup}{\Gibbs^{-}}
@@ -371,10 +372,18 @@ where again $\Ham = \Hup$ if $t<0$ and $\Ham = \Hdn$ if $t>0$.
 
 Consider the Fourier series of the state variable
 \begin{align}
-u = \sum_{k=-\Lambda}^{\Lambda} \uhat_k e^{i k x} \, , \qquad
-\uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
+&u(x,t) = \sum_{k=-\infty}^{\infty} \uhat_k e^{i k x} \, , \\
+&\uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
 \end{align}
-The above sum can be infinite $\Lambda = \infty$ or truncated at a finite wavenumber $\Lambda < \infty$. Further, since $u$ is real valued, we have $\uhat_{-k} = \uhat_{k}^*$. Since momentum vanishes, we have $\uhat_0 = 0$. Meanwhile, Parseval's identity gives
+Since $u$ is real valued, we have $\uhat_{-k} = \uhat_{k}^*$ and since momentum vanishes $\uhat_0 = 0$.
+Next, consider the Galerkin projection
+\begin{align}
+u_{\Lambda}(x,t) = \Proj_{\Lambda} u =
+\sum_{\abs{k} \le \Lambda} \uhat_k e^{i k x} \, , \qquad
+\end{align}
+where $\Proj_{\Lambda}$ is a projection onto the finite dimensional space.
+
+Parseval's identity gives
 \begin{equation}
 \En[u] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
 \end{equation}
