@@ -70,7 +70,8 @@
 \newcommand{\Hthree}{\Ham_{3}}
 \newcommand{\Htwo}{\Ham_{2}}
 \newcommand{\Fcnl}{\mathcal{F}}
-\newcommand{\Proj}{\mathcal{P}}
+\newcommand{\Proj}{\mathcal{P}_{\Lambda}}
+\newcommand{\uL}{u_{\Lambda}}
 % Gibbs and theta
 \newcommand{\Gibbs}{\mathcal{G}}
 \newcommand{\Gup}{\Gibbs^{-}}
@@ -373,15 +374,27 @@ where again $\Ham = \Hup$ if $t<0$ and $\Ham = \Hdn$ if $t>0$.
 Consider the Fourier series of the state variable
 \begin{align}
 &u(x,t) = \sum_{k=-\infty}^{\infty} \uhat_k e^{i k x} \, , \\
+\label{uhat}
 &\uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
 \end{align}
 Since $u$ is real valued, we have $\uhat_{-k} = \uhat_{k}^*$ and since momentum vanishes $\uhat_0 = 0$.
-Next, consider the Galerkin projection
+Next, consider the Galerkin truncation at wave number $\Lambda$
 \begin{align}
-u_{\Lambda}(x,t) = \Proj_{\Lambda} u =
+\uL(x,t) = \Proj u =
 \sum_{\abs{k} \le \Lambda} \uhat_k e^{i k x} \, , \qquad
 \end{align}
-where $\Proj_{\Lambda}$ is a projection onto the finite dimensional space.
+where $\Proj$ is a projection operator and \eqref{uhat} still holds. Projecting the KdV equation \eqref{dimlessKdV} onto the finite dimensional space gives the truncated KdV equation (TKdV)
+\begin{align}
+\label{TKdV}
+&\pd{\uL}{t} +  \frac{1}{2} C_3 \drat^{-3/2} \,\Proj (\uL)^2 + C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = 0
+\qquad \text{for } x \in [-\pi,\pi] \\
+&C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1} \, , \quad
+C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
+\end{align}
+Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants are the same as before and have been repeated here for convenience.
+
+
+
 
 Parseval's identity gives
 \begin{equation}
