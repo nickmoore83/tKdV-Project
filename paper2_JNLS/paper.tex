@@ -200,7 +200,7 @@ Spatial statistics from the experiments.
 %----------------------------------------------------------%
 % Theory
 %----------------------------------------------------------%
-\section{The truncated KdV framework}
+\section{Theoretical framework}
 
 %----------------------------------------------------------------------------%
 % KdV
@@ -267,7 +267,7 @@ Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
 %----------------------------------------------------------------------------%
 % Nondimensionalization
 %----------------------------------------------------------------------------%
-\subsection{Nondimensionalization of variable-depth KdV}
+\subsection{Nondimensionalization and relation to experimental scales}
 
 In this section, the variable-depth KdV equation \eqref{KdV} will be recast into a dimensionless form chosen for convenience in working with the statistical-mechanics framework introduced in \cite{majda2019statistical}. Since the choice of normalization not unique, it is instructive to first introduce a generic normalization to facilitate comparison with other choices. To this end, consider characteristic scales, $\ampscale, \lengthscale, \timescale$ for the wave amplitude, longitudinal length, and time respectively, which can remain unspecified for the moment. We introduce the dimensionless variables
 \begin{align}
@@ -370,13 +370,15 @@ The evolution of any functional $\Fcnl[u]$ is given by
 \partial_t \Fcnl = \{ \Fcnl, \Ham \} = \int_{-\pi}^{\pi} \vard{F}{u} \sympJ \vard{\Ham}{u} \dx
 \end{align}
 where again $\Ham = \Hup$ if $t<0$ and $\Ham = \Hdn$ if $t>0$.
+
+
 %----------------------------------------------------------------------------%
-% Truncation
+% Truncated KdV
 %----------------------------------------------------------------------------%
-\subsection{The truncated KdV framework}
+\subsection{Truncated KdV}
 \label{tKdVSec}
 
-Consider the Fourier series of the state variable
+We now introduce the truncated KdV (TKdV) system, which is the main focus of this study. Consider the Fourier series of the state variable
 \begin{align}
 &u(x,t) = \sum_{k=-\infty}^{\infty} \uhat_k e^{i k x} \, , \\
 \label{uhat}
@@ -408,7 +410,7 @@ Then TKdV \eqref{TKdV} can be expressed as
 \begin{align}
 \partial_t {\uL} = \partial_x \Proj \, \vard{\HLupdn}{\uL}
 \end{align}
-where the new symplectic operator is $\SympL = \partial_x \Proj$.
+where the truncated symplectic operator is $\SympL = \partial_x \Proj$.
 % Note: Bajars 2013 has some important details on the Hamiltonian on the truncated system.
 
 The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with the same normalization values $\Mo[\uL] = 0$ and $\En[\uL] = 1$. Note that Parseval's identity gives
@@ -416,20 +418,19 @@ The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with
 \En[\uL] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
+As has been noted before, the (untruncated) KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}. The projected counterparts of these invariants, however, are not necessarily invariants of the truncated system.
 
-The KdV system (i.e. $\Lambda = \infty$) possesses the Hamiltonian \eqref{Hamiltonian} and momentum and energy \eqref{MomEn} and an infinite number of additional invariants \cite{lax1975periodic, whitham2011linear}. For the truncated system however, $\Lambda < \infty$, the only known invariants are the momentum, energy, and Hamiltonian. The infinite sequence of invariants apart from these first three may no longer be invariants of TKdV.
+% Is it true that the only 3 known invariants of TKdV are the ones mentioned here: momentum, energy, and Hamiltonian.
 
 
-WRITE PROJECTION OPERATOR AND TKDV
-
-\vsp{10}
 %----------------------------------------------------------------------------%
-% Hamiltonian
+% Gibbs
 %----------------------------------------------------------------------------%
-\subsection{Hamiltonian structure of TKdV}
+\subsection{Mixed microcanonical-canonical Gibbs ensemble}
 
-In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced in \cite{abramov2003hamiltonian} for the Burgers-Hopf system. Specifically, this ensemble is microcanonical in the energy, with a fixed energy value, and it is canonical in the Hamiltonian. By fixing the energy and hence confining to a compact set, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble. The resulting distribution is thus normalizable.
-Accordingly, each Hamiltonian $\Ham^{\pm}$ generates a corresponding mixed ensemble, or Gibbs measure given by 
+In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced in \cite{abramov2003hamiltonian} for the Burgers-Hopf system. Specifically, this ensemble is microcanonical in the energy, with a fixed energy value, and it is canonical in the Hamiltonian. By fixing the energy and hence confining to a compact set, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble and hence yields a normalizable distribution. This framework applies equally well to the truncated or untruncated system and hence we will not distinguish between the two.
+
+The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
 \Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - \pi)
 \end{align}
@@ -437,12 +438,13 @@ Here $\theta = \thupdn$ is the inverse temperature and $C_{\theta}$ a constant (
 
 %Misc: The function that maximizes the Hamiltonian subject to the constraints of fixed energy and zero momentum is a traveling wave solution!
 
+
 %----------------------------------------------------------------------------%
 % Matching
 %----------------------------------------------------------------------------%
 \subsection{Matching at the ADC}
 
-Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales (specifically, $t \gg \delta^{-2}$ for dimensionless time). Meanwhile, wave evolution over shorter timescales, $t \ll \delta^{-2}$, is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
+Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales, $t \gg \delta^{-2}$. Meanwhile, wave evolution over shorter timescales, $t \ll \delta^{-2}$, is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
 \begin{align}
 &u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+} \qquad \text{for } x \in [-\pi, \pi]
 %&&\mbox{\em deterministic matching condition}
