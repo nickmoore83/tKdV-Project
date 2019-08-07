@@ -69,7 +69,7 @@
 \newcommand{\Hupdn}{\Ham^{\pm}}
 \newcommand{\Hthree}{\Ham_{3}}
 \newcommand{\Htwo}{\Ham_{2}}
-\newcommand{\Fcnl}{\mathcal{F}}
+%\newcommand{\Fcnl}{\mathcal{F}}
 % Truncated stuff
 \newcommand{\Proj}{\mathcal{P}_{\Lambda}}
 \newcommand{\uL}{u_{\Lambda}}
@@ -366,11 +366,12 @@ We introduce two important invariants of KdV, the momentum and the energy
 \end{align}
 As indicated above, the momentum of $u$ vanishes since it is measured as displacement from equilibrium. Second, by the scale chosen for $\ampscale$ in \eqref{scales}, the energy has been normalized to unity.
 
-The evolution of any functional $\Fcnl[u]$ is given by 
+The evolution of any functional $\mathcal{F}[u]$ is given by 
 \begin{align}
-\partial_t \Fcnl = \{ \Fcnl, \Ham \} = \int_{-\pi}^{\pi} \vard{F}{u} \sympJ \vard{\Ham}{u} \dx
+\partial_t \mathcal{F} = \{ \mathcal{F}, \Ham \} = \int_{-\pi}^{\pi} \vard{\mathcal{F}}{u} \sympJ \vard{\Ham}{u} \dx
 \end{align}
-where again $\Ham = \Hup$ if $t<0$ and $\Ham = \Hdn$ if $t>0$.
+where again $\Ham = \Hup$ if $t<0$ and $\Ham = \Hdn$ if $t>0$ and $\{\}$ is the Poisson bracket induced by $\sympJ$.
+
 
 
 %----------------------------------------------------------------------------%
