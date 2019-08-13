@@ -414,10 +414,10 @@ where $\Proj$ is a projection operator and \eqref{uhat} still holds. Projecting 
 \label{TKdV}
 &\pd{\uL}{t} +  \frac{1}{2} C_3 \drat^{-3/2} \,\Proj (\uL)^2 + C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = 0
 \qquad \text{for } x \in [-\pi,\pi] \\
-&C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1} \, , \quad
-C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
+&C_3 = \frac{3}{2} \pi^{1/2} \epsup \delup^{-1} \, , \quad
+C_2 = \frac{\pi^2 \delup}{6 \lamfac^2} 
 \end{align}
-Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants are the same as before and have been repeated here for convenience. 
+Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants $C_3$ and $C_2$ are the same as before and have been repeated here for convenience. 
 
 Remarkably, the TKdV system \eqref{TKdV} retains nearly the same Hamiltonian structure described in Section \ref{HamiltonianSection}, with the only modification being the inclusion of the projection operator \cite{bajars2013weakly, majda2019statistical}. The piecewise defined Hamiltonian for TKdV is given by
 \begin{equation}
@@ -451,7 +451,7 @@ In examining statistical mechanics of this Hamiltonian system, we will appeal to
 
 The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
-\Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - \pi) CHANGE
+\Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - 1)
 \end{align}
 Here $\theta = \thupdn$ is the inverse temperature and $C_{\theta}$ a constant (inverse of the partition function) that depends on $\theta$. Each measure has corresponding ensemble mean $\mean{}_{\pm}$. 
 
