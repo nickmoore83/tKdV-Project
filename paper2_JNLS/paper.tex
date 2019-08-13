@@ -485,12 +485,12 @@ Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field
 An experimental observation is that the incoming skewness is small, $\meanup{H_3} \approx 0$. Inserting this approximation into the statistical matching condition \eqref{statmatch} and simplifying gives
 \begin{equation}
 \label{H3H2}
-\frac{\meandn{H_3^+}} {\meandn{H_2^+} - \meanup{H_2^+}} = \frac{C_2}{C_3} \dratdn^2
+\frac{\meandn{\Hthree^+}} {\meandn{\Htwo^+} - \meanup{\Htwo^+}} = \frac{C_2}{C_3} \dratdn^2
 \end{equation}
 %where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
 To convert to dimensional, i.e.~experimental, values we first note that
 \begin{align}
-\mean{H_3^+} = \frac{\pi}{3} \mean{u^3} = 
+\mean{\Hthree^+} = \frac{\pi}{3} \mean{u^3} = 
 \frac{1}{3} \pi^{-1/2} \frac{\mean{\eta^3}}{\etastd^3} = \frac{1}{3} \pi^{-1/2} \skw(\eta)
 \end{align}
 Second, to convert the downstream surface slope, we note
@@ -501,13 +501,13 @@ where slope with respect to $\xi$ is the same as with respect to dimensional $x$
 Note: I believe it is important here to use $\lamdn$ in reverting to dimensional variables since we are matching $\Hdn$.
 Hence, we have
 \begin{align}
-&\mean{H_2^+} = \pi \mean{ \left( \pd{u}{\tilde{x}} \right)^2} = 
+&\mean{\Htwo^+} = \pi \mean{ \left( \pd{u}{\tilde{x}} \right)^2} = 
 \left( \frac{\lamfac \lamdn}{\pi \etastd} \right)^2 \var(\eta_x)
 \end{align}
 %
 Then algebra gives
 \begin{equation}
-\frac{\meandn{H_3}} {\meandn{H_2} - \meanup{H_2}} = 
+\frac{\meandn{\Hthree}} {\meandn{\Htwo} - \meanup{\Htwo}} = 
 \frac{\pi^{3/2} \, \etastd^2} {3 \lamfac^2 \lamdn^2} 
 \left( \frac{\skwdn(\eta)} { \vardn(\eta_x) - \varup(\eta_x)} \right)
 \end{equation}
