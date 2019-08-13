@@ -308,7 +308,7 @@ Now it is possible to choose the scales $\ampscale, \lengthscale, \timescale$ fo
 \label{scales}
 \ampscale = \pi^{1/2} \, \etastd \, , \qquad
 \lengthscale = \frac{\lamfac \lam}{\pi} \, , \qquad
-\timescale = \frac{\lamfac \lam}{\freqp \depth}
+\timescale = \frac{\lamfac \lam}{\pi \freqp \depth}
 \end{align}
 where $\lamfac$ is an integer to be chosen later. 
 The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding $\lengthscale$, recall that $\lam$ is the characteristic wavelength corresponding to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over lengthscale $\lam$. Since lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over the physical domain $\xi \in [-\lam,\lam]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, i.e.~$\xi \in [-\lamfac \lam, \lamfac \lam]$. Thus, we have chosen $\lengthscale$ above so that the dimensionless domain of consideration is $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions on $u$ can be  imposed on over this domain with accuracy that increases with $\lamfac$. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV equation provides the first correction to this behavior and describes dynamics that evolve over longer timescales. Hence we have rescaled $\freqp^{-1}$ by the factor $N \lam/\depth \gg 1$, which provides a suitably long timescale and is in line with previous normalizations \cite{johnson1997modern}. The scales $\lengthscale$ and $\timescale$ change value across the ADC, which is important to note when comparing the theory against experimental measurements.
@@ -318,8 +318,8 @@ With the above choices, the dimensionless KdV takes the form
 \label{dimlessKdV}
 &u_t + C_3 \drat^{-3/2} \, u u_x + C_2 \drat^{1/2} \, u_{xxx} = 0
 \qquad \text{for } x \in [-\pi,\pi] \\
-&C_3 = \frac{3}{2} \pi^{3/2} \epsup \delup^{-1} \, , \quad
-C_2 = \frac{\pi^3 \delup}{6 \lamfac^2} 
+&C_3 = \frac{3}{2} \pi^{1/2} \epsup \delup^{-1} \, , \quad
+C_2 = \frac{\pi^2 \delup}{6 \lamfac^2} 
 \end{align}
 The constants $C_3$ and $C_2$ do {\em not} change value crossing the ADC and are given in terms of the dimensionless parameters
 \begin{align}
@@ -451,7 +451,7 @@ In examining statistical mechanics of this Hamiltonian system, we will appeal to
 
 The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
-\Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - \pi)
+\Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - \pi) CHANGE
 \end{align}
 Here $\theta = \thupdn$ is the inverse temperature and $C_{\theta}$ a constant (inverse of the partition function) that depends on $\theta$. Each measure has corresponding ensemble mean $\mean{}_{\pm}$. 
 
