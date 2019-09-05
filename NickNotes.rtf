@@ -47,6 +47,25 @@ Other things to plot and to think about:\
 \
 \
 \
+\ul Di Qi\'92s Codes\ulnone \
+\
+Di Qi email from Aug 25, 2019:\
+All the new codes are in the folder 'code_rescaledModel'.\
+The main function for the DNS is 'SolverKdV_SymplecticM4a_MC':\
+for MC = 1 is the single trajectory simulation, and you can use MC > 1 for running multiple ensemble simulations;\
+um = 0 is the background mean state. I think it can be kept as zero for the first conserved moment.\
+The initial ensemble is sampled from a gibbs measure with inverse temperature 'theta' and the depth 'gibd'\
+theta < 0 is the negative inverse temperature (I found a reference regime should be [-100, -300] for the skewed distributions);\
+gibs = 1 or 0.24 is only used for sampling the initial state of the model.\
+The initial ensemble members are sampled from the function 'sampling_MH_phy'\
+\
+fi is the index with 0 for incoming flow (D0=1) and 1 for outgoing flow (with D0=0.24).\
+\
+The iterative integrator to solve the symplectic scheme is from the function 'iterativeKdV_M4a_MC'\
+'u' is the solution of the state; 'uk' is the fft of u; 'du' is the derivative u_x. The time-series of the mean, variance, skewness, and kurtosis of u and du are also computed for the ensemble simulation.\
+\
+\
+\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \b\fs40 \cf0 Older Notes
