@@ -23,8 +23,8 @@ if fi == 0     % fi == 0 for upstream flow
 else
     D0 = Dp;
 end
-C2 = pi^2*del0^2/6/Nw^2;
-C3 = 3/2*pi^(1/2)*epsi0;
+C2 = pi^2*del0/(6*Nw^2);
+C3 = 3/2*pi^(1/2)*epsi0/del0;
 
 
 % Put useful stuff into a struct
