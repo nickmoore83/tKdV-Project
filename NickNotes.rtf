@@ -49,6 +49,12 @@ Other things to plot and to think about:\
 \
 \ul Di Qi\'92s Codes\ulnone \
 \
+Sep 10, 2019\
+Over the past week or two, Di and I made a few changes to the Matlab code:\
+- In SolverKdV_SymplecticM4a_MC, I changed the coefficients C3 and C2 to be consistent with my JNLS draft.\
+- Di changed the sign of the Hamiltonian so that we can use positive inverse temperature, as is consistent with my JNLS draft. Changes were made in SolverKdV_SymplecticM4a_MC and in sampling_MH_phy.m\
+- In SolverKdV_SymplecticM4a_MC, Di changed lines 58 and 88 so that a single trajectory simulation could be run without error.\
+\
 Di Qi email from Aug 25, 2019:\
 All the new codes are in the folder 'code_rescaledModel'.\
 The main function for the DNS is 'SolverKdV_SymplecticM4a_MC':\
