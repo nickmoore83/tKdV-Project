@@ -23,7 +23,7 @@ E = .5*sum(abs(uk).^2) *2*pi/J^2;
 uk = sqrt(Enorm/E)*uk; 
 
 % previous distribution
-H_pre = ( 1/6*D0^(-1)*C3*real(sum(u2k_dealiasing(uk,p).*conj(uk))) ...
+H_pre = -( 1/6*D0^(-1)*C3*real(sum(u2k_dealiasing(uk,p).*conj(uk))) ...
           -1/2*D0^(1)*C2*sum(abs(Dk.*uk).^2) ) *2*pi/J^2;
 count_acpt = zeros(N_iter,1);
 % run Markov chain p(x|y)~exp(-.5*|x-y|^2)
@@ -42,9 +42,9 @@ for ii = 1:N_iter
 
         
         % new distribution
-        H_new = ( 1/6*D0^(-1)*C3*real(sum(u2k_dealiasing(uk_tilde,p).*conj(uk_tilde))) ...
+        H_new = -( 1/6*D0^(-1)*C3*real(sum(u2k_dealiasing(uk_tilde,p).*conj(uk_tilde))) ...
                   -1/2*D0^(1)*C2*sum(abs(Dk.*uk_tilde).^2) ) *2*pi/J^2;
-        alpha = exp(-theta*(H_new-H_pre));
+        alpha = exp(theta*(H_new-H_pre));
         r = rand(1);
         if r <= alpha
             uk = uk_tilde;

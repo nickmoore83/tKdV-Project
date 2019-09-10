@@ -55,7 +55,7 @@ T = zeros(1,Nt/countDiag);
 u = ifft(uk);
 mass = zeros(1,Nt/countDiag);
 energy = zeros(1,Nt/countDiag);
-hamiltonian = zeros(10,Nt/countDiag);
+hamiltonian = zeros(1,Nt/countDiag);
 
 meanu = zeros(J,Nt/countDiag);
 covau = zeros(J,Nt/countDiag);
@@ -83,9 +83,9 @@ for ii=1:Nt
         
         mass(ii/countDiag) = mean( sum(u)/J );
         energy(ii/countDiag) = mean( 2*pi*.5*sum(abs(uk(2:end,:)).^2)/J^2 );
-        temp = (C3*D0^(-1)*1/6*real(sum(u2k_dealiasing_MC(uk,params).*conj(uk))) ...
+        temp = -(C3*D0^(-1)*1/6*real(sum(u2k_dealiasing_MC(uk,params).*conj(uk))) ...
                 -C2*D0^(1)*1/2*sum(abs(k.*uk).^2)) *2*pi/J^2;
-        hamiltonian(1:10,ii/countDiag) = temp(1:10);
+        hamiltonian(1:10,ii/countDiag) = temp(1:1);
 
         if mod(ii,1e3)==0
             display(['iteration i = ', num2str(ii),'; E = ',num2str(energy(ii/countDiag)),', H = ',num2str(mean(hamiltonian(:,ii/countDiag)))]);
