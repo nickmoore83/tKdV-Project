@@ -90,7 +90,10 @@ for ii=1:Nt
         if mod(ii,1e3)==0
             display(['iteration i = ', num2str(ii),'; E = ',num2str(energy(ii/countDiag)),', H = ',num2str(mean(hamiltonian(:,ii/countDiag)))]);
         end
-%             toc;
+        % toc;
+        
+        % SAVE DATA TO OUTPUT FILE
+        save('output.mat', 'T','meanu','covau','skewu','kurtu', 'skewdu','kurtdu', 'energy','hamiltonian')
     end
     
     

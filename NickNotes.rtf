@@ -47,10 +47,28 @@ Other things to plot and to think about:\
 \
 \
 \
-\ul Di Qi\'92s Codes\ulnone \
+\ul Di Qi\'92s Matlab Codes\ulnone \
 \
 Main routine: SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)\
 Example run: SolverKdV_SymplecticM4a_MC(1, 0, 1, 10, 0.24, 1)\
+\
+Di\'92s instructions to generate output on Sep 10, 2019:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li723\fi-18\pardirnatural\partightenfactor0
+
+\fs24 \cf0 Sorry I don't save the output states u, du in the script because it is too huge to save in a .mat file (what I did is to save it in a binary file and then write another script to read it).\
+\
+Here to check the basic statistics, you can add\
+save('filename.mat', 'T','meanu','covau','skewu','kurtu', 'skewdu','kurtdu', 'energy','hamiltonian') after line 91\
+T: the time steps;\
+meanu: ensemble mean of u at each recorded time;\
+covau: ensemble variance of u;\
+skewu & kurtu: ensemble skewness and kurtosis of u;\
+skewdu & kurtdu: ensemble skewness and kurtosis of du.\
+\
+I only compute these statistics in the code. You can add more quantities of interest in the diagnostic section between line 73-94.
+\fs28 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
 \
 Sep 10, 2019\
 Over the past week or two, Di and I made a few changes to the Matlab code:\
@@ -59,7 +77,9 @@ Over the past week or two, Di and I made a few changes to the Matlab code:\
 - In SolverKdV_SymplecticM4a_MC, Di changed lines 58 and 88 so that a single trajectory simulation could be run without error.\
 \
 Di Qi email from Aug 25, 2019:\
-All the new codes are in the folder 'code_rescaledModel'.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li715\fi0\pardirnatural\partightenfactor0
+
+\fs24 \cf0 All the new codes are in the folder 'code_rescaledModel'.\
 The main function for the DNS is 'SolverKdV_SymplecticM4a_MC':\
 for MC = 1 is the single trajectory simulation, and you can use MC > 1 for running multiple ensemble simulations;\
 um = 0 is the background mean state. I think it can be kept as zero for the first conserved moment.\
@@ -71,8 +91,10 @@ The initial ensemble members are sampled from the function 'sampling_MH_phy'\
 fi is the index with 0 for incoming flow (D0=1) and 1 for outgoing flow (with D0=0.24).\
 \
 The iterative integrator to solve the symplectic scheme is from the function 'iterativeKdV_M4a_MC'\
-'u' is the solution of the state; 'uk' is the fft of u; 'du' is the derivative u_x. The time-series of the mean, variance, skewness, and kurtosis of u and du are also computed for the ensemble simulation.\
-\
+'u' is the solution of the state; 'uk' is the fft of u; 'du' is the derivative u_x. The time-series of the mean, variance, skewness, and kurtosis of u and du are also computed for the ensemble simulation.
+\fs28 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
