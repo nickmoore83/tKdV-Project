@@ -134,5 +134,3 @@ for ii=1:Nt
     if any(abs(u(:))>ulim),break,end
 end
 
-
-
