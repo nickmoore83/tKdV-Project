@@ -52,15 +52,18 @@ Other things to plot and to think about:\
 \b0\fs28 \
 \
 Main routine: SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)\
-Example run: SolverKdV_SymplecticM4a_MC(1, 0, 1, 10, 0.24, 1)\
+Example run: SolverKdV_SymplecticM4a_MC(10, 0, 1, 50, 0.24, 1)\
 \
 \ul Input parameters\ulnone \
 MC: number of trajectories\
 um: mean of u, can always keep at 0\
 Nw: the N from JNLS notes\
-theta: inverse temperature (upstream or downstream?)\
+theta: inverse temperature (upstream or downstream?); Di recommended the range [100,300] \
 gibs: equal to 1 or 0.24, used for sampling initial state\
 fi: index with 0 for incoming flow and 1 for outgoing flow\
+\
+\ul Hard-coded parameters\
+\ulnone Nt: the final time. Di original set this to 1e5. I might use a shorter time to run tests.\
 \
 \ul Variables\
 \ulnone u is the state variable in physical space\

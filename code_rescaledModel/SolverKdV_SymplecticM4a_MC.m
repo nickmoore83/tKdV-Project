@@ -7,7 +7,7 @@ function SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)
 J = 32;      % Number of points in each direction, J devidable by 4
 % MC = 1E4;  % reference MC size
 dt = .5E-3;    % initial time step size
-Nt = 1e5;    % Number of time steps
+Nt = 1e4;    % Number of time steps
 ulim = 1.5E5; % if any u > ulim, simulation stops
 
 tol = 1e-12;  % iteration tolerance, ref 1e-10 1e-11 1e-20
@@ -56,14 +56,15 @@ u = ifft(uk);
 mass = zeros(1,Nt/countDiag);
 energy = zeros(1,Nt/countDiag);
 hamiltonian = zeros(1,Nt/countDiag);
-
+% Di's Diagnostics
 meanu = zeros(J,Nt/countDiag);
 covau = zeros(J,Nt/countDiag);
 skewu = zeros(J,Nt/countDiag);
 kurtu = zeros(J,Nt/countDiag);
 skewdu = zeros(J,Nt/countDiag);
 kurtdu = zeros(J,Nt/countDiag);
-
+% Nick's Diagnostics
+uarray = zeros(J,MC,Nt/countDiag);
 
 
 % Main loop 
@@ -74,12 +75,13 @@ for ii=1:Nt
         T(ii/countDiag)=t;
         du=real(ifft(1i*k.*uk));
         
-        meanu(:,ii/countDiag)=mean(uk,2);
-        covau(:,ii/countDiag)=var(uk,[],2);
-        skewu(:,ii/countDiag)=skewness(u,[],2);
-        kurtu(:,ii/countDiag)=kurtosis(u,[],2);
-        skewdu(:,ii/countDiag)=skewness(du,[],2);
-        kurtdu(:,ii/countDiag)=kurtosis(du,[],2);
+        % Original diagnostics introduced by Di
+        %meanu(:,ii/countDiag)=mean(uk,2);
+        %covau(:,ii/countDiag)=var(uk,[],2);
+        %skewu(:,ii/countDiag)=skewness(u,[],2);
+        %kurtu(:,ii/countDiag)=kurtosis(u,[],2);
+        %skewdu(:,ii/countDiag)=skewness(du,[],2);
+        %kurtdu(:,ii/countDiag)=kurtosis(du,[],2);
         
         mass(ii/countDiag) = mean( sum(u)/J );
         energy(ii/countDiag) = mean( 2*pi*.5*sum(abs(uk(2:end,:)).^2)/J^2 );
@@ -87,13 +89,17 @@ for ii=1:Nt
                 -C2*D0^(1)*1/2*sum(abs(k.*uk).^2)) *2*pi/J^2;
         hamiltonian(1:10,ii/countDiag) = temp(1:1);
 
+        % Nick's attempt at diagnostics
+        uarray(:,:,ii/countDiag) = u;
+        
         if mod(ii,1e3)==0
             display(['iteration i = ', num2str(ii),'; E = ',num2str(energy(ii/countDiag)),', H = ',num2str(mean(hamiltonian(:,ii/countDiag)))]);
         end
         % toc;
         
         % SAVE DATA TO OUTPUT FILE
-        save('output.mat', 'T','meanu','covau','skewu','kurtu', 'skewdu','kurtdu', 'energy','hamiltonian')
+        %save('output.mat', 'T','meanu','covau','skewu','kurtu', 'skewdu','kurtdu', 'energy','hamiltonian')
+        save('output.mat', 'uarray', 'T')
     end
     
     
