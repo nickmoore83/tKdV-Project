@@ -1,4 +1,4 @@
-function SolverKdV_SymplecticM4a_MC(MC, um,Nw, theta,gibd, fi)
+function SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)
 % This script solves the rescaled KdV equation in a periodic domain
 % using pseudo-spectral & symplectic M4a integrator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
