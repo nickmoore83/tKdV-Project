@@ -7,7 +7,7 @@ function SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)
 J = 16;      % Number of points in each direction, J dividable by 4
 % MC = 1E4;  % reference MC size
 dt = .5E-3;    % initial time step size
-Nt = 5e4;    % Number of time steps
+Nt = 1e4;    % Number of time steps
 ulim = 1.5E5; % if any u > ulim, simulation stops
 
 tol = 1e-12;  % iteration tolerance, ref 1e-10 1e-11 1e-20
