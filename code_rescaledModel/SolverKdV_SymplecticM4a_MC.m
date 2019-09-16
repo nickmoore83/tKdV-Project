@@ -1,20 +1,32 @@
-function SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)
+function SolverKdV_SymplecticM4a_MC(J, tfin, dt, nout, MC, um, Nw, theta, gibd, fi)
 % This script solves the rescaled KdV equation in a periodic domain
 % using pseudo-spectral & symplectic M4a integrator
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Set simulation parameters
-J = 16;      % Number of points in each direction, J divisible by 4
-% MC = 1E4;  % reference MC size
-dt = .5E-3;    % initial time step size
-Nt = 1e4;    % Number of time steps
-ulim = 1.5E5; % if any u > ulim, simulation stops
+% Input
+% J: Number of points in each direction, divisible by 4. reference J = 16.
+% tfin: The stopping time of the simulation.
+% dt: The numerical time step; reference dt = .5E-3;
+% nout: The number of output times
+% MC: The number of trajectories; reference MC = 1E4
+% um: The momentum of u; generally set um = 0.
+% Nw: The number of wavelengths in the domain; reference Nw = 1.
+% theta: The inverse temperature
+% gibd: The Gibbs distribution to sample the initial state; 1 or 0.24.
+% fi: Index 0 for incoming or 1 for outgoing.
 
+% Set simulation parameters
+Nt = round(tfin/dt);        % Number of time steps
+countDiag = round(Nt/nout)  % Compute diagnostics every countDiag steps
+
+
+% Other simulation parameters
+ulim = 1.5E5; % if any u > ulim, simulation stops
 tol = 1e-12;  % iteration tolerance, ref 1e-10 1e-11 1e-20
 w1=(2+2^(1/3)+2^(-1/3))/3;
 w2=1-2*w1;     % integration fractional time steps
 
-% model parameters from experiments
+% Model parameters from experiments
 epsi0 = 0.016;  % amplitude-to-depth ratio
 del0 = 0.22;    % depth-to-wavelength ratio
 Dm = 1;  Dp = 0.24;  % depth ratio
@@ -48,9 +60,7 @@ ukm2 = uk0;  % at time n-2
 interp = @(u0,um1,um2,w) (.5*w*(w+3)+1).*u0 - w*(w+2).*um1 +.5*w*(w+1).*um2;
 
 
-
 % Diagnostics
-countDiag = .01/dt;  % Compute diagnostics every countDiag steps
 T = zeros(1,Nt/countDiag);
 u = ifft(uk);
 mass = zeros(1,Nt/countDiag);
@@ -89,7 +99,7 @@ for ii=1:Nt
                 -C2*D0^(1)*1/2*sum(abs(k.*uk).^2)) *2*pi/J^2;
         hamiltonian(1:10,ii/countDiag) = temp(1:1);
 
-        % Nick's attempt at diagnostics
+        % Nick's diagnostics
         uarray(:,:,ii/countDiag) = u;
         
         if mod(ii,1e3)==0
