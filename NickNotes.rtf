@@ -1,16 +1,11 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
-{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\fmodern\fcharset0 Courier;}
+{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \margl1440\margr1440\vieww11460\viewh9280\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs28 \cf0 \ul \ulc0 To do\ulnone \
-\
-Plan: \
-- In DNS, make sure I can reproduce histograms from PNAS paper, at least that they look roughly the same.\
-- Then find parameters in DNS to match experimental statistics (i.e. fit inverse temperature).\
-- Then make plots of those trajectories in space time domain.\
+\f0\fs28 \cf0 \
 \
 \
 \
@@ -18,137 +13,4 @@ Plan: \
 \
 \
 \
-- Compare histograms of surface slope in experiments, DNS, Gibbs.\
-\
-- Test the prediction skew(eta)/Delta var(slope) ~ A^-3 D^3; test the scaling with the depth ratio using the DNS because the experimental data is not clean enough.\
-\
-- Plot autocorrelation upstream and downstream for several amplitudes.\
-- Note: I realize that we should not expect the autocorrelation functions in the experiment and simulations to match at all because they are measuring different things. The experiment is measuring waves fixed at a location. Whereas the KdV simulations are already in the reference frame moving with waves and are looking at long time scales, not the passage of individual waves.\
-- Also, we could plot power spectrum.\
-\
-- Can we somehow use the experiment to \'91calibrate\'92 the incoming inverse temperature? That is the only model parameter that has to be guessed at.\
-\
-\
-\
-\ul Observations\ulnone \
-\
-Key observation: \
-The value var(slope) upstream essentially sets the value of the upstream Hamiltonian (since skewness upstream is negligible). If this is interpreted as the expected value of the Hamiltonian, then the upstream inverse temperature is essentially set, which is what we have been looking for: some way to deduce the upstream inverse temperature! It would be interesting to see how var(slope) depends on driving amplitude and depth ratio (although the depth ratio data is probably not clean enough).\
-\
-Other things to plot and to think about:\
-- The variable depth ratio data is not clean enough for slope(var) stuff but I would still like to plot something in the second paper, to show that we did the experiments. I could simply plot the maximum downstream skewness versus depth ratio (maybe kurtosis too) and show a few histograms to get the point across.\
-- Also, we could test the scaling observations from the experiments (e.g. skewness ~ amp^1/4) in the theory. Does this require calibrating the inverse temperature, or alternatively does it give us how the inverse temperature depends on amplitude?\
-- Can we somehow use the experiment to \'91calibrate\'92 the incoming inverse temperature? That is the only model parameter that has to be guessed at.\
-- Power spectrum and autocorrelation from all experiments.\
-\
-- Remember, we removed the slope statistical data from the experimental paper when we changed from JFM to PRF. We can insert this data in the second paper. It would be cool to see what the model predicts on this.\
-\
-\
-\ul Plots done\ulnone \
-- Key figure: plot the ratio skew(u)/(delta var(slope) versus driving amplitude against the theoretical prediction of 1/amp^3.\
-- Plot a whole series of var(slope) and skew(u) versus position for a range of driving amplitude experiments. These plots seemed very nice when Tyler showed them because you could identify distinct trends that were consistent across different experiments.\
-\
-\
-\ul Literature\
-\ulnone Daisuke recommended Linyan Li from the department of Ocean and Resources Engineering at Hawaii who has done work that mentions abrupt changes in depth in the ocean. There was mention of a ridge between Hawaii and Alaska.\
-\
-\
-\ul Journal of Nonlinear Science\
-\ulnone There is no latex template; they reformat the paper after it is accepted.\
-\
-\
-\
-
-\b\fs36 Di Qi\'92s Matlab Codes
-\b0\fs28 \
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\b \cf0 Comparing to PNAS paper simulations\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\b0 \cf0 I want to compare simulations that use the new framework to the simulations from our PNAS paper, just to get a baseline. In comparing the equations, we have\
-C3 = E0^(1/2)*L0^(-3/2)\
-C2 = L0^(-3)\
-\
-In the simulations of Fig. 2 in the PNAS paper, we used L0=6 and E0=100, giving\
-C3 = 0.6804 and C2 = 0.004630\
-C3/C2 ~ 150
-\f1\fs24 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\f0\fs28 \cf0 thetaup = -0.5 and thetadn ~ -0.3\
-\
-In the experiments, we have delta0 = 0.22, eps0 = 0.016, giving\
-C3 = 0.1934 and C2 = 0.3619/N^2\
-C3/C2 = 0.53*N^2\
-So to be consistent with PNAS, I could set N ~ 16.\
-\
-
-\fs32 \ul Questions to ask Di next time
-\fs28 \ulnone \
-\
-\
-\
-\
-
-\b Original Codes before I modified on Sep 16, 2019
-\b0 \
-Main routine: SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)\
-Example run: SolverKdV_SymplecticM4a_MC(10, 0, 1, 50, 0.24, 1)\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Di original set J=32.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
-\ul Input parameters\ulnone \
-MC: number of trajectories\
-um: mean of u, can always keep at 0\
-Nw: the N from JNLS notes\
-theta: inverse temperature (upstream or downstream?); Di recommended the range [100,300] \
-gibd: equal to 1 or 0.24, used for sampling initial state\
-fi: index with 0 for incoming flow and 1 for outgoing flow\
-\
-\ul Variables\
-\ulnone u is the state variable in physical space\
-uk is the Fourier coefficients\
-u and uk only store values at the current time; i.e. they do not have values stored at all previous times.\
-statistics: meanu(space, time)\
-\
-\
-\
-\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\b\fs40 \cf0 JNLS Paper introduction ideas
-\b0\fs28 \
-- Intro from PNAS paper by Vanden Eijden\
-- Intro from Bolles PRF paper\
-- Stories on the web\
-https://news.fsu.edu/news/science-technology/2019/02/01/fsu-researchers-variations-in-seafloor-create-freak-ocean-waves/\
-https://www.treehugger.com/natural-sciences/scientists-mystery-behind-catastrophic-freak-waves.html\
-\
-\
-
-\b\fs40 Older Notes
-\b0\fs28 \
-Detail: We could include explanation of how we harvested the slope data. Keyword: Savitzky\'96Golay filter.\
-Detail: We could include the alternative formulation with D^(1/4) u being continuous across ACD; show that this causes only slight differences.\
-\
-Conjecture: I believe the wave-form that maximizes the Hamiltonian is the sech^2 traveling wave solution (or its approximate counterpart in the truncated system). I believe this because the Hamiltonian maximizer will also have all of its translates as maximizes (by simply considering the definition of Hamiltonian in physical space). The Hamiltonian is conserved in time and so the maximizer will simply translate, as does the sech^2 traveling wave solution.\
-\
-\
-
-\b\fs40 Misc Notes working with Tyler June 2019
-\b0\fs28 \ul \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone \
-\ul June 10, 2019\
-\ulnone Tyler and I looked at a lot of data of var(slope) = E[u_x^2] with the main goal of looking for the H3 and H2 relationship.\
-- For the varied amplitude runs, the data looks pretty clean. var(slope) has a distinct up-and-down feature just upstream of the depth change that is consistent across runs.\
-- For the varied depth runs, the data does not quite look clean enough to use. It seems that we cannot see far enough upstream to get a reliable estimate of var(slope) up and down stream. Also we see inconsistent features from run to run.\
-\
-\ul June 11, 2019\
-\ulnone - First, Tyler and I tried the same thing we were doing yesterday, testing the explicit formula for skewness, but this time with the varied amplitude data which is cleaner than varied depth. We get that the ratio skewness/(change in slope variance) scales like the amplitude to a power between -4 and -3; the prediction is -4. So this is good agreement!\
-- Tyler made some very nice plots showing the skewness and var(slope) versus position x, for each of the varied amplitude runs. The plots show very clear trends. Doing the same thing for the varied depth runs, the plots are not nearly as clean and the trends are not really discernible compared to the noise.\
-- We looked at autocorrelation upstream and downstream. There seems to be no significant qualitative difference between the upstream and downstream data. In particular, we do not see the autocorrelation timescale shorten at all, as we thought was predicted by theory. Looking back at the theory, that effect is probably a byproduct of the different nondimensionalizations upstream and downstream.}
+}
