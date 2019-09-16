@@ -38,11 +38,15 @@ end
 C2 = pi^2*del0/(6*Nw^2);
 C3 = 3/2*pi^(1/2)*epsi0/del0;
 
+%%------------------------------------------%%
+%% Hard code values from PNAS paper for test.
+C2 = 0.004630; C3 = 0.6804;
+%%------------------------------------------%%
 
 % Put useful stuff into a struct
 params = struct('MC',MC,'theta',theta, 'epsi0',epsi0,'del0',del0,'D0',D0,'Nw',Nw,...
                 'C2',C2,'C3',C3, 'gibd',gibd,'J',J,'dt',dt,'um',um, 'Nt',Nt,'tol',tol);
-x=(-pi:2*pi/J:pi-2*pi/J)';
+%x=(-pi:2*pi/J:pi-2*pi/J)';
 
 % Set up implicit dispersion
 k = repmat([0:J/2 -J/2+1:-1]',[1 MC]); % wavenumbers

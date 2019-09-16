@@ -1,5 +1,5 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
-{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
+{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\fmodern\fcharset0 Courier;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \margl1440\margr1440\vieww11460\viewh9280\viewkind0
@@ -58,21 +58,48 @@ Other things to plot and to think about:\
 \
 \
 \
-\
-
-\fs32 \ul Questions to ask Di next time
-\fs28 \ulnone \
-- Did you ever see the double-hump in histogram of u? Does that suggest the time of averaging was too short?\
-- For the simulations in the PNAS paper, what were the values of the coefficients C2 and C3?  How long did you have to run it to see reasonable statistics emerge?\
-\
-\
 
 \b\fs36 Di Qi\'92s Matlab Codes
 \b0\fs28 \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b \cf0 Comparing to PNAS paper simulations\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 I want to compare simulations that use the new framework to the simulations from our PNAS paper, just to get a baseline. In comparing the equations, we have\
+C3 = E0^(1/2)*L0^(-3/2)\
+C2 = L0^(-3)\
+\
+In the simulations of Fig. 2 in the PNAS paper, we used L0=6 and E0=100, giving\
+C3 = 0.6804 and C2 = 0.004630\
+C3/C2 ~ 150
+\f1\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 thetaup = -0.5 and thetadn ~ -0.3\
+\
+In the experiments, we have delta0 = 0.22, eps0 = 0.016, giving\
+C3 = 0.1934 and C2 = 0.3619/N^2\
+C3/C2 = 0.53*N^2\
+So to be consistent with PNAS, I could set N ~ 16.\
+\
+
+\fs32 \ul Questions to ask Di next time
+\fs28 \ulnone \
+\
+\
+\
+\
+
+\b Original Codes before I modified on Sep 16, 2019
+\b0 \
 Main routine: SolverKdV_SymplecticM4a_MC(MC, um, Nw, theta, gibd, fi)\
 Example run: SolverKdV_SymplecticM4a_MC(10, 0, 1, 50, 0.24, 1)\
-\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Di original set J=32.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
 \ul Input parameters\ulnone \
 MC: number of trajectories\
 um: mean of u, can always keep at 0\
@@ -81,59 +108,13 @@ theta: inverse temperature (upstream or downstream?); Di recommended the range [
 gibd: equal to 1 or 0.24, used for sampling initial state\
 fi: index with 0 for incoming flow and 1 for outgoing flow\
 \
-\ul Hard-coded parameters\
-\ulnone Nt: the final time. Di originally set to 1e5. I might use a shorter time to run tests.\
-J: The number of grid point. Di originally set to 32, but I have experimented with 16 too.\
-\
 \ul Variables\
 \ulnone u is the state variable in physical space\
 uk is the Fourier coefficients\
 u and uk only store values at the current time; i.e. they do not have values stored at all previous times.\
 statistics: meanu(space, time)\
 \
-Di\'92s instructions to generate output on Sep 10, 2019:\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li723\fi-18\pardirnatural\partightenfactor0
-
-\fs24 \cf0 Sorry I don't save the output states u, du in the script because it is too huge to save in a .mat file (what I did is to save it in a binary file and then write another script to read it).\
 \
-Here to check the basic statistics, you can add\
-save('filename.mat', 'T','meanu','covau','skewu','kurtu', 'skewdu','kurtdu', 'energy','hamiltonian') after line 91\
-T: the time steps;\
-meanu: ensemble mean of u at each recorded time;\
-covau: ensemble variance of u;\
-skewu & kurtu: ensemble skewness and kurtosis of u;\
-skewdu & kurtdu: ensemble skewness and kurtosis of du.\
-\
-I only compute these statistics in the code. You can add more quantities of interest in the diagnostic section between line 73-94.
-\fs28 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 I followed these instructions and it seems to work!\
-\
-Sep 10, 2019\
-Over the past week or two, Di and I made a few changes to the Matlab code:\
-- In SolverKdV_SymplecticM4a_MC, I changed the coefficients C3 and C2 to be consistent with my JNLS draft.\
-- Di changed the sign of the Hamiltonian so that we can use positive inverse temperature, as is consistent with my JNLS draft. Changes were made in SolverKdV_SymplecticM4a_MC and in sampling_MH_phy.m\
-- In SolverKdV_SymplecticM4a_MC, Di changed lines 58 and 88 so that a single trajectory simulation could be run without error.\
-\
-Di Qi email from Aug 25, 2019:\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li715\pardirnatural\partightenfactor0
-
-\fs24 \cf0 All the new codes are in the folder 'code_rescaledModel'.\
-The main function for the DNS is 'SolverKdV_SymplecticM4a_MC':\
-for MC = 1 is the single trajectory simulation, and you can use MC > 1 for running multiple ensemble simulations;\
-um = 0 is the background mean state. I think it can be kept as zero for the first conserved moment.\
-The initial ensemble is sampled from a gibbs measure with inverse temperature 'theta' and the depth 'gibd'\
-theta < 0 is the negative inverse temperature (I found a reference regime should be [-100, -300] for the skewed distributions);\
-gibs = 1 or 0.24 is only used for sampling the initial state of the model.\
-The initial ensemble members are sampled from the function 'sampling_MH_phy'\
-\
-fi is the index with 0 for incoming flow (D0=1) and 1 for outgoing flow (with D0=0.24).\
-\
-The iterative integrator to solve the symplectic scheme is from the function 'iterativeKdV_M4a_MC'\
-'u' is the solution of the state; 'uk' is the fft of u; 'du' is the derivative u_x. The time-series of the mean, variance, skewness, and kurtosis of u and du are also computed for the ensemble simulation.
-\fs28 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
 \
 \
 \
