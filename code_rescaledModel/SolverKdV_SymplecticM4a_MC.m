@@ -35,7 +35,7 @@ if fi == 0     % fi == 0 for upstream flow
 else
     D0 = Dp;
 end
-C2 = pi^2*del0/(6*Nw^2)
+C2 = (2/3)*pi^2*del0/Nw^2
 C3 = 3/2*pi^(1/2)*epsi0/del0
 
 %%------------------------------------------%%
