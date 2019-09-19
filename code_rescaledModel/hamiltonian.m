@@ -6,10 +6,9 @@ JJ = size(uk,1);
 MC = size(uk,2);
 kvec = [0:JJ/2 -JJ/2+1:-1]';
 kmat = repmat(kvec,[1 MC]);
-dx = 2*pi/JJ;
 % Compute the Hamiltonian piece by piece.
-ham2 = 0.5 * sum(abs(kmat.*uk).^2) * dx;
-ham3 = 1/6 * real(sum(u2k_dealiasing_MC(uk).*conj(uk))) * dx;
+ham2 = 0.5 * sum(abs(kmat.*uk).^2) * 2*pi/JJ^2;
+ham3 = 1/6 * real(sum(u2k_dealiasing_MC(uk).*conj(uk))) * 2*pi/JJ^2;
 ham = C2*D0^(1/2)*ham2 - C3*D0^(-3/2)*ham3;
 
 
