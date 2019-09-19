@@ -1,9 +1,9 @@
 clear all; close all;
 % Input parameters.
-J = 16;
-MC = 2e3;
-Nw = 10;
-theta = 20;
+J = 8;
+MC = 5;
+Nw = 4;
+theta = 10;
 gibd = 0.24;
 fi = 1;
 % time step parameters
