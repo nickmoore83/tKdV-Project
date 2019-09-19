@@ -1,13 +1,15 @@
-function ham = hamiltonian(uk,params)
+function ham = hamiltonian(uk,C2,C3,D0)
 % Basic stuff.
-J = size(uk,1);
+%% NOTE: JJ and MC should be defined from the size of uk, instead of from 
+%% a params variable, so that the code works for a single uk or an ensemble.
+JJ = size(uk,1);
 MC = size(uk,2);
-kvec = [0:J/2 -J/2+1:-1]';
+kvec = [0:JJ/2 -JJ/2+1:-1]';
 kmat = repmat(kvec,[1 MC]);
-dx = 2*pi/J;
+dx = 2*pi/JJ;
 % Compute the Hamiltonian piece by piece.
 ham2 = 0.5 * sum(abs(kmat.*uk).^2) * dx;
-ham3 = 1/6 * real(sum(u2k_dealiasing_MC(uk,params).*conj(uk))) * dx;
+ham3 = 1/6 * real(sum(u2k_dealiasing_MC(uk).*conj(uk))) * dx;
 ham = C2*D0^(1/2)*ham2 - C3*D0^(-3/2)*ham3;
 
 

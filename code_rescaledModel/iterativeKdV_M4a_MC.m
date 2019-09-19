@@ -20,7 +20,7 @@ err0=0;
 Ni=500;  % maximum interation steps
 for ll=1:Ni
     
-    zk2=M.*(yk-tau/2*.5*Dk1.*u2k_dealiasing_MC(zk1,p));
+    zk2=M.*(yk-tau/2*.5*Dk1.*u2k_dealiasing_MC(zk1));
     
     err=sum(abs(zk2-zk1).^2);
     if max(err)<tol && sum(err)>=sum(err0)

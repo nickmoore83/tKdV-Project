@@ -99,10 +99,10 @@ for ii=1:Nt
         
         mass(ii/countDiag) = mean( sum(u)/J );
         energy(ii/countDiag) = mean( 2*pi*.5*sum(abs(uk(2:end,:)).^2)/J^2 );
-        temp = hamiltonian(uk,params);
+        %temp = hamiltonian(uk,C2,C3,D0,params);
         % OLD CODE
-        %temp = -(C3*D0^(-1)*1/6*real(sum(u2k_dealiasing_MC(uk,params).*conj(uk))) ...
-        %        -C2*D0^(1)*1/2*sum(abs(k.*uk).^2)) *2*pi/J^2;
+        temp = -(C3*D0^(-1)*1/6*real(sum(u2k_dealiasing_MC(uk).*conj(uk))) ...
+                -C2*D0^(1)*1/2*sum(abs(k.*uk).^2)) *2*pi/J^2;
         hamilt(1:10,ii/countDiag) = temp(1:1);
 
         % Nick's diagnostics
