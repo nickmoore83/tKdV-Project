@@ -1,4 +1,4 @@
-function ham = hamiltonian(uk,C2,C3,D0)
+function [ham,ham2,ham3] = hamiltonian(uk,C2,C3,D0)
 % Basic stuff.
 %% NOTE: JJ and MC should be defined from the size of uk, instead of from 
 %% a params variable, so that the code works for a single uk or an ensemble.
@@ -11,7 +11,9 @@ ham2 = 0.5 * sum(abs(kmat.*uk).^2) * 2*pi/JJ^2;
 ham3 = 1/6 * real(sum(u2k_dealiasing_MC(uk).*conj(uk))) * 2*pi/JJ^2;
 ham = C2*D0^(1/2)*ham2 - C3*D0^(-3/2)*ham3;
 
+% Note: The 1/JJ^2 factor comes from normalizing Matlab's FFt.
 
+%% Old Codes
 % SolverKdV_SymplecxticM4a_MC.m lines 102-103
 %k = repmat([0:J/2 -J/2+1:-1]',[1 MC]); % wavenumbers
 %temp = -(C3*D0^(-1)*1/6*real(sum(u2k_dealiasing_MC(uk,params).*conj(uk))) ...
