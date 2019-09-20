@@ -86,7 +86,7 @@
 \newcommand{\meanup}[1]{\mean{#1}_{-}}
 \newcommand{\meandn}[1]{\mean{#1}_{+}}
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
-
+\newcommand{\tavg}[1]{\overline{#1}}
 
 % Experiments
 \newcommand{\omavg}{\omega_0}
@@ -461,9 +461,16 @@ In examining statistical mechanics of this Hamiltonian system, we will appeal to
 
 The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
-\Gupdn = C_{\thupdn} \exp(-\thupdn \Hupdn) \delta(\En - 1)
+\Gupdn = Z_{\thupdn}^{-1} \exp(-\thupdn \Hupdn) \delta(\En - 1)
 \end{align}
-Here $\theta = \thupdn$ is the inverse temperature and $C_{\theta}$ a constant (inverse of the partition function) that depends on $\theta$. Each measure has corresponding ensemble mean $\mean{}_{\pm}$. 
+% Note: The PNAS paper uses C_theta^{1}. The Majda, Qi Stat Phys paper uses C_theta sometimes and C_theta^{-1} in other places (page 11). So I'll just pick the one I like better.
+Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (the partition function) that depends on $\theta$. Each measure $\Gupdn$ induces a corresponding ensemble average $\mean{}_{\pm}$. Throughout this paper we use a bracket for ensemble average and overbar for a time average; i.e.~for any quantity $Q$,
+\begin{align}
+&\mean{Q} = \int_{\Omega}  Q \, d \Gibbs
+&&\mbox{\em ensemble average} \\
+&\tavg{Q} = \frac{1}{T_2-T_1} \int_{T_1}^{T_2} Q \, dt	 
+&&\mbox{\em time average}
+\end{align}
 
 %Misc: The function that maximizes the Hamiltonian subject to the constraints of fixed energy and zero momentum is a traveling wave solution!
 
