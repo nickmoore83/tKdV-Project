@@ -1,0 +1,218 @@
+\documentclass[11pt]{article}
+%\documentclass[preprint, 10pt]{elsarticle}
+
+% PACKAGES
+\usepackage{graphicx, amsmath, amssymb, amsfonts, mathtools, mathrsfs, color}
+\usepackage{comment, enumerate, tabularx}
+\usepackage{natbib, hyperref, url}
+\usepackage[margin=1in]{geometry}
+%\usepackage[justification=RaggedRight]{caption}
+
+%----------------------------------------------------------------------------%
+%% LATEX DEFINITIONS
+%----------------------------------------------------------------------------%
+% Basic editing
+\newcommand{\tocite}{{\color{blue}(to cite)}}
+\newcommand{\vsp}[1]{\vspace{#1 pc} \noindent}
+\newcommand{\np}{\newpage \noindent}
+\newcommand{\seclabel}[1]{\vsp{1} {\bf#1:}}
+
+% Derivatives
+\newcommand{\pd}[2]    { \frac{\partial #1} {\partial #2} }
+\newcommand{\ppd}[2]  { \frac{\partial^2 #1}{{\partial #2}^2} }
+\newcommand{\pdi}[2] { {\partial_#2} #1 }
+\newcommand{\td}[2] { \frac{d #1} { d #2 } }
+\newcommand{\grad}{\nabla}
+\newcommand {\Lap} {\grad^2}
+% Vectors and operators
+\newcommand{\bvec}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\mean}[1]{\left< #1 \right>}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\dx}{\, dx}
+% Basic physical parameters and scales
+\newcommand{\freqp}{f_p}
+\newcommand{\etastd}{\eta_{\text std}}
+% Parameters that change crossing the ADC
+\newcommand{\depth}{d}
+\newcommand{\dup}{\depth_{-}}
+\newcommand{\ddn}{\depth_{+}}
+\newcommand{\dupdn}{\depth_{\pm}}
+\newcommand{\lam}{\lambda}
+\newcommand{\lamup}{\lam_{-}}
+\newcommand{\lamdn}{\lam_{+}}
+\newcommand{\lamupdn}{\lam_{\pm}}
+\newcommand{\lamfac}{N}
+\newcommand{\drat}{\mathcal{D}}
+\newcommand{\dratdn}{\drat_+}
+\newcommand{\dratupdn}{\drat_{\pm}}
+\newcommand{\DD}{\dratdn}
+% Statistical quantities
+\newcommand{\En}{\mathcal{E}}
+\newcommand{\Mo}{\mathcal{M}}
+\newcommand{\skw}{\text{skew}}
+\newcommand{\skwdn}{\skw_+}
+\newcommand{\var}{\text{var}}
+\newcommand{\varup}{\var_-}
+\newcommand{\vardn}{\var_+}
+% Dimensionless parameters
+\newcommand{\ampscale}{\mathcal{A}}
+\newcommand{\lengthscale}{\mathcal{L}}
+\newcommand{\timescale}{\mathcal{T}}
+\newcommand{\epsup}{\eps_0}
+\newcommand{\delup}{\delta_0}
+% Hamiltonian stuff
+\newcommand{\uhat}{\hat{u}}
+\newcommand{\sympJ}{\mathcal{J}}
+\newcommand{\vard}[2]{\frac{\delta #1}{\delta #2}}
+\newcommand{\Ham}{\mathcal{H}}
+\newcommand{\Hup}{\Ham^{-}}
+\newcommand{\Hdn}{\Ham^{+}}
+\newcommand{\Hupdn}{\Ham^{\pm}}
+\newcommand{\Hthree}{\Ham_{3}}
+\newcommand{\Htwo}{\Ham_{2}}
+%\newcommand{\Fcnl}{\mathcal{F}}
+% Truncated stuff
+\newcommand{\Proj}{\mathcal{P}_{\Lambda}}
+\newcommand{\uL}{u_{\Lambda}}
+\newcommand{\HLupdn}{\Ham_{\Lambda}^{\pm}}
+\newcommand{\SympL}{\sympJ_{\Lambda}}
+% Gibbs and theta
+\newcommand{\Gibbs}{\mathcal{G}}
+\newcommand{\Gup}{\Gibbs^{-}}
+\newcommand{\Gdn}{\Gibbs^{+}}
+\newcommand{\Gupdn}{\Gibbs^{\pm}}
+\newcommand{\thup}{\theta^{-}}
+\newcommand{\thdn}{\theta^{+}}
+\newcommand{\thupdn}{\theta^{\pm}}
+\newcommand{\meanup}[1]{\mean{#1}_{-}}
+\newcommand{\meandn}[1]{\mean{#1}_{+}}
+\newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
+\newcommand{\meanz}[1]{\mean{#1}_0}
+
+% Experiments
+\newcommand{\omavg}{\omega_0}
+\newcommand{\omsig}{\sigma_{\omega}}
+%----------------------------------------------------------------------------%
+
+%----------------------------------------------%
+%% TITLE
+%----------------------------------------------%
+\begin{document}
+
+\title{Notes on JNLS paper}
+
+\author{
+M.~N.~J.~Moore\thanks{Florida State University} }
+\maketitle
+
+
+%----------------------------------------------------------------------------%
+% Transfer function
+%----------------------------------------------------------------------------%
+\section{Notes on the transfer function}
+
+Consider the transfer function that maps the upstream inverse temperature to the downstream one
+\begin{equation}
+\thdn = F(\thup)
+\end{equation}
+This transfer function results from the matching condition
+\begin{align}
+\label{statmatch}
+&\meanup{\Hdn} = \meandn{\Hdn}
+\end{align}
+The Hamiltonian is given by
+\begin{align}
+\label{Hamiltonian}
+&\Hupdn = C_2 \dratupdn^{1/2} \, \Htwo - C_3 \dratupdn^{-3/2} \, \Hthree \\
+&C_3 = \frac{3}{2} \pi^{1/2} \epsup \delup^{-1} \, , \quad
+C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2} 
+\end{align}
+where
+\begin{align}
+\label{H3H2}
+&\Hthree = \frac{1}{6} \int_{-\pi}^{\pi} u^3 \dx	\\
+&\Htwo = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx =
+2 \pi \sum_{k=1}^{\Lambda} \abs{k}^ 2\abs{\uhat_k}^2
+\end{align}
+
+\subsection{Scaling to make the transfer function relatively independent of $\Lambda$}
+{\bf Goal:} Ideally, we would like the transfer function $F$ to be approximately independent of $\Lambda$, or at least not exceedingly sensitive to $\Lambda$. This is the only way that we could reasonably match the values of $\theta$ to the experiment with some meaning.
+
+\seclabel{Issue with scaling of $\Htwo$}
+I believe the heart of the matter is that $\mean{\Htwo} \sim \Lambda^2$, which can make the matching condition and thus the transfer function too sensitive to $\Lambda$. As a demonstration, consider the uniform distribution, i.e.~Gibbs measure with zero inverse temperature, and the corresponding mean $\mean{}_0$. With this as the invariant measure, one can consider the equipartition of energy as a heuristic
+\begin{align}
+&\En[\uL] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1 \\
+&\abs{\uhat_k}^2 \approx \frac{1}{2 \pi \Lambda}	 \qquad \mbox{for equipartition}
+\end{align}
+Then the expected value of $\Htwo$ is
+\begin{equation}
+\mean{\Htwo}_0 = 2 \pi \sum_{k=1}^{\Lambda} \abs{k}^ 2 \mean{\abs{\uhat_k}^2}_0 \approx \frac{1}{3} \Lambda^2
+\end{equation}
+We have used the identity
+\begin{equation}
+\sum_{k=1}^{n} \abs{k}^ 2 = \frac{1}{6} n(n+1)(2n+1) \approx n^3/3
+\end{equation}
+% Like the Gauss sum.
+% Source: https://brilliant.org/wiki/sum-of-n-n2-or-n3/
+
+\seclabel{Resolution, scale $C_2$ appropriately}
+Recall the definition
+\begin{equation}
+C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2} 
+\end{equation}
+In particular, if we let $\lamfac \sim \Lambda$, then we will have
+\begin{equation}
+\mean{C_2 \Htwo}_0 \sim \Lambda^0 
+\end{equation}
+which removes the extreme sensitivity issue. More specifically, lets let $\Lambda = a \lamfac$ where $a = $ 1 or 2. Then we have
+\begin{equation}
+\mean{C_2 \Htwo}_0 \approx \frac{2}{9} \pi^2 a^2 \delup^2
+\end{equation}
+which is not sensitive to the truncation wavenumber $\Lambda$.
+
+\seclabel{Tests}
+I ran some tests and they seem to support my analysis that we should scale $
+\lamfac$ with $\Lambda$. The best looking results came from $\lamfac = \Lambda/2$ and $\lamfac = \Lambda/3$, where the later is integer division.
+
+
+
+\subsection{Approximating the transfer function}
+Consider the matching condition \eqref{statmatch}. The upstream mean is
+\begin{align}
+&\meanup{\Hdn} = \frac{\int \exp\left(-\thup \Hup\right) \Hdn d\mu}{ \int \exp\left(-\thup \Hup \right) d\mu}
+\end{align}
+where $d \mu$ is the uniform measure on the surface $\En=1$. Similarly, we have the downstream mean
+\begin{align}
+&\meandn{\Hdn} = \frac{\int \exp\left(-\thdn \Hdn\right) \Hdn d\mu}{ \int \exp\left(-\thdn \Hdn \right) d\mu}
+\end{align}
+In both cases, we Taylor expand $\exp(-\theta \Ham) \sim 1 - \theta \Ham$ for small $\theta$. Enforcing the matching condition gives
+\begin{equation}
+\thup \int \Hup (\Hdn -1 ) d\mu = \thdn \int \Hdn (\Hdn - 1) d\mu
+\end{equation}
+Therefore an approximation to the Transfer function is 
+\begin{equation}
+\thdn = F(\thup) \approx m \thup
+\end{equation}
+where
+\begin{equation}
+m = \frac{  \int \Hup (\Hdn -1 ) d\mu }{ \int \Hdn (\Hdn - 1) d\mu }
+\end{equation}
+Using the definition of the Hamiltonian gives
+\begin{equation}
+m = \frac{ C_2^2 \DD^{1/2} \meanz{\Htwo^2} 
+	- C_2 C_3(\DD^{-3/2} + \DD^{1/2})  \meanz{\Hthree \Htwo} 
+	+ C_3^2 \DD^{-3/2} \meanz{\Hthree^2} - C_2 \meanz{\Htwo}}
+	{ C_2^2 \DD \meanz{\Htwo^2} 
+	- 2 C_2 C_3 \DD^{-1} \meanz{\Hthree \Htwo} 
+	+ C_3^2 \DD^{-3} \meanz{\Hthree^2} - C_2 \DD^{1/2} \meanz{\Htwo}}
+\end{equation}
+
+I believe that by symmetry $\meanz{\Hthree \Htwo} = 0$
+TO CONTINUE
+
+\section{Testing the computation of the Hamiltonian in the Matlab DNS and Julia Sampling}
+
+\end{document}
+
