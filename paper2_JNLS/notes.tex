@@ -225,7 +225,8 @@ Wolfram alpha gives that
 &\Htwo[u] = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx = 1 + \frac{3}{1+16 a^2} \\
 &\Hthree[u] = \frac{1}{6} \int_{-\pi}^{\pi} u^3 \dx = 8 \sqrt{2} \pi a^2 \left( 16 \pi a^2 + \pi \right)^{-3/2}
 \end{align}
-$\bullet$ I tested the Matlab DNS code and it works! I tested $\Htwo$ and $\Hthree$ separately. Each gave a relative error on the order of machine precision.
+$\bullet$ I tested the Matlab DNS code and it works! I tested $\Htwo$ and $\Hthree$ separately. Each gave a relative error on the order of machine precision. \\
+$\bullet$ I tested the Julia sampling and found a bug in the computation of $\Hthree$ (that is why we do tests!!!) Once I fixed the bug, the tests passed with relative error on the order of machine accuracy.
 
 \end{document}
 
