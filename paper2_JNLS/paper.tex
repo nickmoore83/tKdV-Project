@@ -87,6 +87,7 @@
 \newcommand{\meandn}[1]{\mean{#1}_{+}}
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
 \newcommand{\tavg}[1]{\overline{#1}}
+\newcommand{\transf}{\mathcal{F}}
 
 % Experiments
 \newcommand{\omavg}{\omega_0}
@@ -431,7 +432,7 @@ C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2}
 \end{align}
 Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants $C_3$ and $C_2$ are the same as before and have been repeated here for convenience. 
 
-Briefly, consider the parameter $\lamfac$, the number of characteristic wavelengths in the physical domain. We require $\lamfac \le \Lambda$, so that the mode $\uhat_{\lamfac}$ corresponding to the physical wavelength $\lambda$ is resolved. In the case $\lamfac = \Lambda$, $\lambda$ corresponds to the smallest resolved wavelength. Often, we will choose $\lamfac = \Lambda$ or $\Lambda/2$.
+Briefly, consider the parameter $\lamfac$, the number of characteristic wavelengths in the physical domain. We require $\lamfac \le \Lambda$, so that the mode $\uhat_{\lamfac}$, corresponding to the characteristic wavelength $\lam$ in the experiments, is resolved in the truncated dynamical system. If $\lamfac = \Lambda$, then $\lam$ corresponds to the smallest resolved wavelength. Often, we will choose an intermediate value such as $\lamfac = \Lambda/2$ or $\Lambda/4$, so that the truncated system \eqref{TKdV} resolves scales that are both bigger and smaller than the characteristic value $\lam$.
 
 
 Remarkably, the TKdV system \eqref{TKdV} retains nearly the same Hamiltonian structure described in Section \ref{HamiltonianSection}, with the only modification being the inclusion of the projection operator \cite{bajars2013weakly, majda2019statistical}. The piecewise defined Hamiltonian for TKdV is given by
@@ -483,14 +484,14 @@ Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (
 %----------------------------------------------------------------------------%
 % Matching
 %----------------------------------------------------------------------------%
-\subsection{Matching at the ADC}
+\subsection{Matching conditions and the transfer function}
 
 Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales, $t \gg \delta^{-2}$. Meanwhile, wave evolution over shorter timescales, $t \ll \delta^{-2}$, is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
 \begin{align}
 u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+},
 \qquad \mbox{\em Deterministic matching condition}
 \end{align}
-holding for $x \in [-\pi, \pi]$.
+holding for $x \in [-\pi, \pi]$. This matching condition is used for the dynamical system \eqref{TKdV}.
 %or in Johnson's formulation, it is $\depth^{1/4} \eta$ that matches.
 
 Since $u$ matches for every single trajectory, it must also match in the statistical sense. Moreover, the downstream Hamiltonian $\Hdn$ is a functional of $u$ and hence must also match. This gives the {\em statistical matching condition}
@@ -501,13 +502,26 @@ Since $u$ matches for every single trajectory, it must also match in the statist
 \end{align}
 Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
 
+The statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by matching statistics at the ADC. In this way, \eqref{statmatch} implies the functional dependence
+\begin{equation}
+\thdn = \transf \left( \thup \right)
+\end{equation}
+The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
+
 
 %----------------------------------------------------------------------------%
 % Results
 %----------------------------------------------------------------------------%
 \section{Results}
 
-With the experimental setup described and the theory outlined, we now present results comparing the two. Unless stated otherwise, all parameters used in the theory are taken directly from their experimental values listed in Table (ref). In particular, we set $\delup = 0.22$ in all tests, and for the `representative' experiments, we set $\dratdn = 0.24$ and $\epsup = 0.17$. 
+With the experimental setup described and the theory outlined, we now present results comparing the two. Unless stated otherwise, all parameters used in the theory are taken directly from their experimental values listed in Table \ref{paramtable}. In particular, we set $\delup = 0.22$ in all tests, and for the `representative' experiments, we set $\dratdn = 0.24$ and $\epsup = 0.17$. 
+
+\subsection{Calibration of the inverse temperature}
+
+All parameters that appear in the theoretical model follow directly from experimental parameters, with the exception of the inverse temperature, $\thup$, of the incoming flow and the parameter $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. The parameter $\lamfac$ can be chosen in a sensible way by simply selecting an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. Hence, we will simply chose $\lamfac = \Lambda/2$ throughout, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. The incoming inverse temperature, $\thup$, however, is more difficult to pin down without using information from the experiments. Our strategy is to use the outgoing skewness as the main diagnostic to determine a realistic range for $\thup$. That is, for an input $\thup$, the downstream inverse temperature $\thdn$ is determined by \eqref{statmatch}, which ultimately sets the skewness of the outgoing wave-field.
+
+
+
 
 
 % Later: Plot of transfer function for different lambdas. Shows that the transfer function is relatively insensitive to truncation index, as long as N scales appropriately.
