@@ -1,17 +1,18 @@
 clear all; close all;
 % Input parameters.
-J = 8;
-MC = 5;
-Nw = 4;
+Lambda = 16;
+Nw = 8;
+MC = 1e3;
 theta = 10;
-gibd = 0.24;
-fi = 1;
+gibd = 1.;
+fi = 0;
 % time step parameters
 dt = 5E-4;
 nout = 1;
 tfin = dt;
 
 % Run the simulation.
+J = 2*Lambda;
 SolverKdV_SymplecticM4a_MC(J, tfin, dt, nout, MC, 0, Nw, theta, gibd, fi)
 
 % Load the output file.

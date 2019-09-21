@@ -1,4 +1,4 @@
-function [ham,ham2,ham3] = hamiltonian(uk,C2,C3,D0)
+function ham = hamiltonian(uk,C2,C3,D0)
 % Basic stuff.
 %% NOTE: JJ and MC should be defined from the size of uk, instead of from 
 %% a params variable, so that the code works for a single uk or an ensemble.
