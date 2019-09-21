@@ -27,7 +27,7 @@ w1=(2+2^(1/3)+2^(-1/3))/3;
 w2=1-2*w1;     % integration fractional time steps
 
 % Model parameters from experiments
-epsi0 = 0.016;  % amplitude-to-depth ratio
+epsi0 = 0.017;  % amplitude-to-depth ratio
 del0 = 0.22;    % depth-to-wavelength ratio
 Dm = 1;  Dp = 0.24;  % depth ratio
 if fi == 0     % fi == 0 for upstream flow

@@ -134,6 +134,8 @@ The purpose of the present manuscript is to expand on both the experimental find
 % with an even closer comparison between theoretical predictions and experimental measurements.
 
 
+% More careful development of theory and experiments, *in conjunction* with one another.
+
 
 \vsp{4}
 
@@ -180,6 +182,9 @@ The pivoting motion of the paddle is driven by a 5-phase stepper motor. To gener
 
 	The free surface is illuminated by light-emitting diodes running along the bottom of the tank and then imaged from the sideview with a Nikon D3300 at 60 frames per second. The illumination technique coupled with high pixel count of the camera allows surface displacements to be resolved with a accuracy better than 1/3 millimeter. Representative free surface measurements are shown in Figs.~\ref{fig2}(a)--(b) at a position upstream and downstream of the ADC. The corresponding histograms are shown in Figs.~\ref{fig2}(c)--(d).
 
+
+TO DO: Describe the `representative' experiments in which $\dratdn = 0.24$ and $\epsup = 0.017$.
+% These use
 
  % Figure 2
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -467,9 +472,9 @@ The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a correspondi
 Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (the partition function) that depends on $\theta$. Each measure $\Gupdn$ induces a corresponding ensemble average $\mean{}_{\pm}$. Throughout this paper we use a bracket for ensemble average and overbar for a time average; i.e.~for any quantity $Q$,
 \begin{align}
 &\mean{Q} = \int_{\Omega}  Q \, d \Gibbs
-&&\mbox{\em ensemble average} \\
+&&\mbox{\em Ensemble average} \\
 &\tavg{Q} = \frac{1}{T_2-T_1} \int_{T_1}^{T_2} Q \, dt	 
-&&\mbox{\em time average}
+&&\mbox{\em Time average}
 \end{align}
 
 %Misc: The function that maximizes the Hamiltonian subject to the constraints of fixed energy and zero momentum is a traveling wave solution!
@@ -482,23 +487,42 @@ Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (
 
 Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales, $t \gg \delta^{-2}$. Meanwhile, wave evolution over shorter timescales, $t \ll \delta^{-2}$, is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
 \begin{align}
-&u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+} \qquad \text{for } x \in [-\pi, \pi]
-%&&\mbox{\em deterministic matching condition}
+u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+},
+\qquad \mbox{\em Deterministic matching condition}
 \end{align}
+holding for $x \in [-\pi, \pi]$.
 %or in Johnson's formulation, it is $\depth^{1/4} \eta$ that matches.
 
 Since $u$ matches for every single trajectory, it must also match in the statistical sense. Moreover, the downstream Hamiltonian $\Hdn$ is a functional of $u$ and hence must also match. This gives the {\em statistical matching condition}
 \begin{align}
 \label{statmatch}
-&\meanup{\Hdn} = \meandn{\Hdn}
-%&&\mbox{\em statistical matching condition}
+\meanup{\Hdn} = \meandn{\Hdn}
+\qquad \mbox{\em Statistical matching condition}
 \end{align}
 Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
 
+
+%----------------------------------------------------------------------------%
+% Results
+%----------------------------------------------------------------------------%
+\section{Results}
+
+With the experimental setup described and the theory outlined, we now present results comparing the two. Unless stated otherwise, all parameters used in the theory are taken directly from their experimental values listed in Table (ref). In particular, we set $\delup = 0.22$ in all tests, and for the `representative' experiments, we set $\dratdn = 0.24$ and $\epsup = 0.17$. 
+
+
+% Later: Plot of transfer function for different lambdas. Shows that the transfer function is relatively insensitive to truncation index, as long as N scales appropriately.
+
+
+
+
+
+
+\vsp{5}
 %----------------------------------------------------------------------------%
 % Skewness formula
 %----------------------------------------------------------------------------%
 \subsection{Explicit formula for outgoing skewness}
+We now examine an explicit formula for the outgoing skewness as originally founded in \cite{majda2019statistical}.
 An experimental observation is that the incoming skewness is small, $\meanup{H_3} \approx 0$. Inserting this approximation into the statistical matching condition \eqref{statmatch} and simplifying gives
 \begin{equation}
 \label{H3H2}
@@ -541,22 +565,20 @@ In particular, the ratio on the left, which can be measured in the experiments, 
 % Note: previously I had D^2 on the RHS. The power of 3 comes from using lamdn consistently in the nondimensionalization.
 
 
-\vsp{5}
-\section{Results}
-Plot of transfer function for different lambdas. Shows that the transfer function is relatively insensitive to truncation index, as long as N scales appropriately.
 
+
+
+
+\vsp{10}
 %----------------------------------------------------------%
 % Direct numerical simulations
 %----------------------------------------------------------%
 \section{Direct numerical simulations}
 
 \section{Sampling Algorithms}
-
-\subsection{Naive acceptance-rejection algorithm}
-
-\subsection{Markov-chain Monte Carlo}
-
-\subsection{Improved acceptance-rejection algorithm}
+%\subsection{Naive acceptance-rejection algorithm}
+%\subsection{Markov-chain Monte Carlo}
+%\subsection{Improved acceptance-rejection algorithm}
 
 
 %----------------------------------------------------------%
@@ -564,7 +586,7 @@ Plot of transfer function for different lambdas. Shows that the transfer functio
 %----------------------------------------------------------%
 \section{Comparison with experiments}
 
-  % Figure
+% Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
@@ -576,10 +598,7 @@ Relationship predicted by the theory and confirmed by experiments.
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
- 
-\subsection{Comparison of basic features}
-
-\subsection{New experimental measurements guided by theory}
+ %New experimental measurements guided by theory
 
 \section*{Acknowledgements}
 CTB acknowledges support from the IDEA grant at Florida State University, as well as from the Geophysical Fluid Dynamics Institute. 
