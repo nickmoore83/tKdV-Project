@@ -107,6 +107,8 @@ for ii=1:Nt
 
         % Nick's diagnostics
         uarray(:,:,ii/countDiag) = u;
+        duarray(:,:,ii/countDiag) = du;
+
         
         if mod(ii,1e3)==0
             display(['iteration i = ', num2str(ii),'; E = ',num2str(energy(ii/countDiag)),', H = ',num2str(mean(hamilt(:,ii/countDiag)))]);
@@ -115,7 +117,7 @@ for ii=1:Nt
         
         % SAVE DATA TO OUTPUT FILE
         %save('output.mat', 'T','meanu','covau','skewu','kurtu', 'skewdu','kurtdu', 'energy','hamiltonian')
-        save('output.mat', 'uarray', 'T')
+        save('output.mat', 'uarray', 'duarray', 'T')
     end
     
     
