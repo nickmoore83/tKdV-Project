@@ -3,17 +3,18 @@ clear all; close all;
 Lambda = 16;
 Nw = 8;
 MC = 1e3;
-theta = 10;
+theta = 13;
 gibd = 0.24;
 fi = 1;
 % time step parameters
 dt = 5E-4;
-nout = 1;
-tfin = dt;
+nout = 100; % Default 100?
+tfin = 10;
 
 % Run the simulation.
-J = 2*Lambda;
+J = 2*Lambda; tic;
 SolverKdV_SymplecticM4a_MC(J, tfin, dt, nout, MC, 0, Nw, theta, gibd, fi)
+cputime = toc
 
 % Load the output file.
 load('output.mat')
@@ -25,12 +26,13 @@ ulist = reshape(uarray,1,[]);
 dulist = reshape(duarray,1,[]);
 % Write output to a text file.
 fileID = fopen('ulist.txt','w');
-fprintf(fileID,'# Number of grid points, trajectories, and time steps.\n');
-fprintf(fileID,'%d\n',[J,MC,Ntsteps]);
+fprintf(fileID,'# Number of grid points, trajectories, time steps, ');
+fprintf(fileID,'value of Nw, theta, tfin.\n');
+fprintf(fileID,'%d\n',[J,MC,Ntsteps,Nw,theta,tfin]);
 fprintf(fileID,'# Values of u\n');
-fprintf(fileID,'%12.8f\n', ulist);
+fprintf(fileID,'%9.5f\n', ulist);
 fprintf(fileID,'# Values of du\n');
-fprintf(fileID,'%12.8f\n', dulist);
+fprintf(fileID,'%9.5f\n', dulist);
 fclose(fileID);
 
 % Make a plot to see the waves.
