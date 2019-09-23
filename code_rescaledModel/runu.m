@@ -5,13 +5,13 @@ epsi0 = 0.017;  % amplitude-to-depth ratio
 del0 = 0.22;    % depth-to-wavelength ratio
 Drat = 0.24;    % depth ratio.
 % Simulation parameters
-Lambda = 16;
-Nw = 8;
-MC = 1e1;
+Lambda = 16;    % Reference 16
+Nw = Lambda/2;  % Reference Lambda/2
+MC = 1E3;       % Reference 1E4
 % time step parameters
-dt = 5E-4;
-nout = 10; % Default 100?
-tfin = 1;
+dt = 5E-4;  % Reference 5E-4
+nout = 100; % Reference 100
+tfin = 10.; % Reference 10
 
 % Choose upstream or downstream
 down = true;
@@ -42,13 +42,17 @@ ulist = reshape(uarray,1,[]);
 dulist = reshape(duarray,1,[]);
 % Write output to a text file.
 fileID = fopen('ulist.txt','w');
-fprintf(fileID,'# Input parameters: ');
-
-%fprintf(fileID,'value of Nw, theta, tfin.\n');
-
-fprintf(fileID,'%d\n',[]);
-%fprintf(fileID,'%d\n',[JJ,MC,Ntsteps,Nw,theta,tfin]);
-
+% Input parameters
+fprintf(fileID,'#Basic integers: JJ, MC, Nt, Nw.\n');
+out1 = [JJ,MC,nout,Nw]; fprintf(fileID,'%d\n', out1);
+fprintf(fileID,'#Basic floats: theta, tfin, cputime (mins).\n');
+out2 = [theta, tfin, cputime]; fprintf(fileID,'%9.5f\n', out2);
+fprintf(fileID,'# All other inputs: C2,C3,Drat,gibd,fi,dt.\n');
+out3 = [C2,C3,Drat,gibd,fi,dt]; fprintf(fileID,'%9.5f\n', out3);
+fprintf(fileID,'# Pad with zeros until index 20.\n');
+len = 20 - length(out1)-length(out2)-length(out3);
+fprintf(fileID,'%d\n', zeros(len,1) );
+% Microstates
 fprintf(fileID,'# Values of u\n'); fprintf(fileID,'%9.5f\n', ulist);
 fprintf(fileID,'# Values of du\n'); fprintf(fileID,'%9.5f\n', dulist);
 fclose(fileID);
