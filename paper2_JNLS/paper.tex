@@ -541,7 +541,7 @@ Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outg
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
-\includegraphics[width = 0.99 \linewidth]{Figs/hist_expsim.pdf}
+\includegraphics[width = 0.99 \linewidth]{Figs/uhist_expsim.pdf}
 \caption{
 Amazing!
 }
@@ -551,7 +551,27 @@ Amazing!
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 % As of now the simulations use thup=15, thdn=13.
 
+We show histograms of the surface slope in Fig.~\ref{slopehist}, from both the experiments (top) and theory (bottom). The derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$. 
+Therefore, in Fig.~\ref{slopehist}, we convert the theoretical calculated values of $\partial u/\partial \tilde{x}$ to physical slope via
+\begin{equation}
+\pd{\eta}{x} = \frac{\ampscale \lamfac}{\lengthscale} \pd{u}{\tilde{x}}
+\end{equation}
+We have included the $\lamfac$ in the numerator due to the differences in forcing spectra. If the experiments were conducted with the forcing given by the incoming Gibbs measure literally, then there would be no need for $\lamfac$. But the experimental forcing (which was decided before the theory) has a peak frequency of $\freqp = 2 Hz$ and so the factor $\lamfac$ makes $\freqp$ correspond to the dominant value in the spectrum in the theory (REWORD).
 
+
+% Figure
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{figure}%[!ht]
+\begin{center}
+\includegraphics[width = 0.99 \linewidth]{Figs/slopehist.pdf}
+\caption{
+Amazing!
+}
+\label{slopehist}
+\end{center}
+\end{figure}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+% As of now the simulations use thup=15, thdn=13.
 
 
 \vsp{5}
