@@ -75,6 +75,9 @@
 \newcommand{\uL}{u_{\Lambda}}
 \newcommand{\HLupdn}{\Ham_{\Lambda}^{\pm}}
 \newcommand{\SympL}{\sympJ_{\Lambda}}
+\newcommand{\uup}{u_{-}}
+\newcommand{\udn}{u_{+}}
+\newcommand{\uupdn}{u_{\pm}}
 % Gibbs and theta
 \newcommand{\Gibbs}{\mathcal{G}}
 \newcommand{\Gup}{\Gibbs^{-}}
@@ -526,7 +529,7 @@ All parameters that appear in the theoretical model follow directly from experim
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/transfig.pdf}
 \caption{
-stuff
+Transfer function
 }
 \label{transfig}
 \end{center}
@@ -552,9 +555,10 @@ Amazing!
 % As of now the simulations use thup=15, thdn=13.
 
 We show histograms of the surface slope in Fig.~\ref{slopehist}, from both the experiments (top) and theory (bottom). The derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$. 
-Therefore, in Fig.~\ref{slopehist}, we convert the theoretical calculated values of $\partial u/\partial \tilde{x}$ to physical slope via
+Therefore, in Fig.~\ref{slopehist}, we convert the theoretical calculated values to physical slope via
 \begin{equation}
-\pd{\eta}{x} = \frac{\ampscale \lamfac}{\lengthscale} \pd{u}{\tilde{x}}
+\pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
+%\frac{\ampscale \lamfac}{\lengthscale} \pd{\uupdn}{\tilde{x}}
 \end{equation}
 We have included the $\lamfac$ in the numerator due to the differences in forcing spectra. If the experiments were conducted with the forcing given by the incoming Gibbs measure literally, then there would be no need for $\lamfac$. But the experimental forcing (which was decided before the theory) has a peak frequency of $\freqp = 2 Hz$ and so the factor $\lamfac$ makes $\freqp$ correspond to the dominant value in the spectrum in the theory (REWORD).
 
@@ -565,7 +569,7 @@ We have included the $\lamfac$ in the numerator due to the differences in forcin
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/slopehist.pdf}
 \caption{
-Amazing!
+Slopes
 }
 \label{slopehist}
 \end{center}

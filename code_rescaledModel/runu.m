@@ -3,13 +3,22 @@ clear all; close all;
 Lambda = 16;
 Nw = 8;
 MC = 1e3;
-theta = 13;
-gibd = 0.24;
-fi = 1;
+% Choose upstream or downstream
+down = false;
+if down == true
+    theta = 13;
+    gibd = 0.24;
+    fi = 1;
+else
+    theta = 15;
+    gibd = 1.;
+    fi = 0;
+end
 % time step parameters
 dt = 5E-4;
 nout = 100; % Default 100?
 tfin = 10;
+
 
 % Run the simulation.
 J = 2*Lambda; tic;
