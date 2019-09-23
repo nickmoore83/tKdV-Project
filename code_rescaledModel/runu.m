@@ -1,10 +1,20 @@
 clear all; close all;
-% Input parameters.
+
+% Model parameters from experiments
+epsi0 = 0.017;  % amplitude-to-depth ratio
+del0 = 0.22;    % depth-to-wavelength ratio
+Drat = 0.24;    % depth ratio.
+% Simulation parameters
 Lambda = 16;
 Nw = 8;
-MC = 1e3;
+MC = 1e1;
+% time step parameters
+dt = 5E-4;
+nout = 10; % Default 100?
+tfin = 1;
+
 % Choose upstream or downstream
-down = false;
+down = true;
 if down == true
     theta = 13;
     gibd = 0.24;
@@ -14,20 +24,17 @@ else
     gibd = 1.;
     fi = 0;
 end
-% time step parameters
-dt = 5E-4;
-nout = 100; % Default 100?
-tfin = 10;
-
 
 % Run the simulation.
-J = 2*Lambda; tic;
-SolverKdV_SymplecticM4a_MC(J, tfin, dt, nout, MC, 0, Nw, theta, gibd, fi)
-cputime = toc
+tic;
+C2 = (2/3)*pi^2*del0/Nw^2
+C3 = 3/2*pi^(1/2)*epsi0/del0
+SolverKdV_SymplecticM4a_MC(C2,C3,Drat,Lambda,MC,theta,gibd,fi,dt,nout,tfin);
+cputime = round(toc/60, 2, 'significant')
 
 % Load the output file.
 load('output.mat')
-J = size(uarray,1);
+JJ = size(uarray,1);
 MC = size(uarray,2);
 Ntsteps = size(uarray,3);
 % Flatten the array of u into a single list.
@@ -35,13 +42,15 @@ ulist = reshape(uarray,1,[]);
 dulist = reshape(duarray,1,[]);
 % Write output to a text file.
 fileID = fopen('ulist.txt','w');
-fprintf(fileID,'# Number of grid points, trajectories, time steps, ');
-fprintf(fileID,'value of Nw, theta, tfin.\n');
-fprintf(fileID,'%d\n',[J,MC,Ntsteps,Nw,theta,tfin]);
-fprintf(fileID,'# Values of u\n');
-fprintf(fileID,'%9.5f\n', ulist);
-fprintf(fileID,'# Values of du\n');
-fprintf(fileID,'%9.5f\n', dulist);
+fprintf(fileID,'# Input parameters: ');
+
+%fprintf(fileID,'value of Nw, theta, tfin.\n');
+
+fprintf(fileID,'%d\n',[]);
+%fprintf(fileID,'%d\n',[JJ,MC,Ntsteps,Nw,theta,tfin]);
+
+fprintf(fileID,'# Values of u\n'); fprintf(fileID,'%9.5f\n', ulist);
+fprintf(fileID,'# Values of du\n'); fprintf(fileID,'%9.5f\n', dulist);
 fclose(fileID);
 
 % Make a plot to see the waves.

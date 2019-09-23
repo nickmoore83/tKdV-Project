@@ -1,8 +1,8 @@
-function [samp_u,sampk_u, enek,samp_H] = sampling_MH_phy(J, MC, theta,p)
+function [samp_u,sampk_u, enek,samp_H] = sampling_MH_phy(J, MC, theta,params)
 % Sampling from microcanonical-canonical ensemble with constant energy
 % using a Metropolis-Hastings MC approach
-C2=p.C2; C3=p.C3;
-D0=p.gibd;
+C2=params.C2; C3=params.C3;
+D0=params.gibd;
 
 kk = [0:J/2 -J/2+1:-1]';
 Dk = 1i*kk; % wavenumbers
@@ -24,9 +24,6 @@ uk = sqrt(Enorm/E)*uk;
 
 % previous distribution
 H_pre = hamiltonian(uk,C2,C3,D0);
-% OLD CODE
-%H_pre = -( 1/6*D0^(-1)*C3*real(sum(u2k_dealiasing(uk).*conj(uk))) ...
-%          -1/2*D0^(1)*C2*sum(abs(Dk.*uk).^2) ) *2*pi/J^2;
       
 count_acpt = zeros(N_iter,1);
 % run Markov chain p(x|y)~exp(-.5*|x-y|^2)
@@ -46,9 +43,6 @@ for ii = 1:N_iter
         
         % new distribution
         H_new = hamiltonian(uk_tilde,C2,C3,D0);
-        % OLD CODE
-        %H_new = -( 1/6*D0^(-1)*C3*real(sum(u2k_dealiasing(uk_tilde).*conj(uk_tilde))) ...
-        %          -1/2*D0^(1)*C2*sum(abs(Dk.*uk_tilde).^2) ) *2*pi/J^2;
         
         alpha = exp(-theta*(H_new-H_pre));
         r = rand(1);

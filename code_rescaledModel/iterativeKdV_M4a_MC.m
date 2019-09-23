@@ -1,10 +1,10 @@
 
-function [zk,ik]=iterativeKdV_M4a_MC(zk0, tau,yk,p, tol)
+function [zk,ik]=iterativeKdV_M4a_MC(zk0, tau,yk,params, tol)
 % Function iterates to solve the solution for Z-Y=tau/2*F(Z)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-C2=p.C2; C3=p.C3;
-D0=p.D0;
-J = p.J; MC = p.MC;
+C2=params.C2; C3=params.C3;
+D0=params.D0;
+J = params.J; MC = params.MC;
 
 k = repmat([0:J/2 -J/2+1:-1]',[1 MC]);
 Lk1 = C2*D0^(1/2)*1i*k.^3;
