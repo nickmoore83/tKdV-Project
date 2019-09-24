@@ -33,10 +33,10 @@ C3 = 3/2*pi^(1/2)*epsi0/del0;
     C2,C3,Drat,Lambda,MC,theta,gibd,fi,dt,nout,tfin);
 
 % Save output
-cputime = round(toc/60, 2, 'significant')
+runtime = round(toc/60, 3, 'significant')
 save('output.mat', 'C2','C3','Drat','Lambda',...
     'MC','theta','gibd','fi','dt','nout','tfin',...
-    'Nw','cputime','uarray', 'duarray');
+    'Nw','runtime','uarray', 'duarray');
 
 % Make a histogram of u.
 ulist = reshape(uarray,1,[]);
