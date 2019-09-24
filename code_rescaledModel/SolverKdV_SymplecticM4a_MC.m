@@ -1,5 +1,5 @@
-function SolverKdV_SymplecticM4a_MC(C2,C3,Drat,Lambda,...
-    MC,theta,gibd,fi,dt,nout,tfin)  
+function [uarray,duarray] = SolverKdV_SymplecticM4a_MC(...
+    C2,C3,Drat,Lambda,MC,theta,gibd,fi,dt,nout,tfin)  
 
 % This script solves the rescaled KdV equation in a periodic domain
 % using pseudo-spectral & symplectic M4a integrator
@@ -47,8 +47,8 @@ ukm2 = uk0;  % at time n-2
 interp = @(u0,um1,um2,w) ...
     (.5*w*(w+3)+1).*u0 - w*(w+2).*um1 +.5*w*(w+1).*um2;
 % Main variables
-tsave = zeros(1,Nt/MM);
 uu = ifft(uk);
+%tout = zeros(1,Nt/MM);
 uarray = zeros(JJ,MC,Nt/MM);
 duarray = zeros(JJ,MC,Nt/MM);
 
@@ -59,7 +59,7 @@ for ii=1:Nt
         iout = ii/MM;
         du=real(ifft(1i*kvec.*uk));
         % Save the microstate, u and du.
-        tsave(iout)=tt;
+        %tout(iout)=tt;
         uarray(:,:,iout) = uu;
         duarray(:,:,iout) = du;
         % Check energy and hamiltonian.        
@@ -101,8 +101,3 @@ for ii=1:Nt
     uk = fft(uu); uk(JJ/2+1,:)=0;
     if any(abs(uu(:))>ulim),break,end
 end
-
-% Save output
-save('output.mat', 'C2','C3','Drat','Lambda',...
-    'MC','theta','gibd','fi','dt','nout','tfin',...
-    'uarray', 'duarray', 'tsave');
