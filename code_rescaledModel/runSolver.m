@@ -10,8 +10,8 @@ Nw = Lambda/2;  % Reference Lambda/2
 MC = 1E1;       % Reference 1E4
 % time step parameters
 dt = 5E-4;  % Reference 5E-4
-nout = 150; % Reference 100
-tfin = 1.; % Reference 10
+nout = 100; % Reference 100
+tfin = 1.;  % Reference 10
 
 % Choose upstream or downstream
 down = true;

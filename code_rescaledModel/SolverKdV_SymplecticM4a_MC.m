@@ -13,7 +13,7 @@ function [uarray,duarray] = SolverKdV_SymplecticM4a_MC(...
 % gibd: The Gibbs distribution to sample the initial state.
 % fi: Flow index; fi = 0 for incoming or 1 for outgoing.
 % dt: The numerical time step; reference dt = .5E-3.
-% nout: The number of output times; reference nout = 100.
+% nout: Desired number of output times (actual may vary); ref nout = 100.
 % tfin: The stopping time of the simulation; reference tfin = 10.
 
 % Set simulation parameters
@@ -48,17 +48,16 @@ interp = @(u0,um1,um2,w) ...
     (.5*w*(w+3)+1).*u0 - w*(w+2).*um1 +.5*w*(w+1).*um2;
 % Main variables
 uu = ifft(uk);
-
-outsize = floor(Nt/MM);
+outsize = floor(Nt/MM)+1;
 %tout = zeros(1,outsize);
 uarray = zeros(JJ,MC,outsize);
 duarray = zeros(JJ,MC,outsize);
 
 % Main loop 
-for ii=1:Nt
+for ii=0:Nt
     if mod(ii,MM)==0
         if any(isnan(uk(:))), break, end
-        iout = ii/MM;
+        iout = ii/MM+1;
         du=real(ifft(1i*kvec.*uk));
         % Save the microstate, u and du.
         %tout(iout)=tt;
