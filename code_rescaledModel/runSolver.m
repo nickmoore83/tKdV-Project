@@ -14,7 +14,7 @@ nout = 100; % Reference 100
 tfin = 10.;  % Reference 10
 
 % Choose upstream or downstream
-gibup = true;
+gibup = false;
 if gibup == true
     theta = 15;
     gibd = 1.;
