@@ -10,6 +10,15 @@ function makeOutput(filename)
     ulist = reshape(uarray,1,[]);
     dulist = reshape(duarray,1,[]);
     
+    % Compute the skewness of each trajectory.
+    skews = skewness(uarray,1,1);
+    skews = reshape(skews,MC,Ntout);
+    meanskew = skewness(uarray,1,[1,2]);
+    meanskew = reshape(meanskew,1,[]);
+    tt = [0: Ntout-1] * tfin/(Ntout-1);    
+    skewarray = [tt; meanskew; skews];    
+    skewlist = reshape(skewarray,1,[]);
+    
     % Write output to a text file.
     fileID = fopen([filename,'.txt'],'w');
     % Write input parameters.
@@ -22,8 +31,10 @@ function makeOutput(filename)
     fprintf(fileID,'# Pad with zeros until index 20.\n');
     len = 20 - length(out1)-length(out2)-length(out3);
     fprintf(fileID,'%d\n', zeros(len,1) );
-    % Write microstates u.
+    % Write microstates u and du.
     fprintf(fileID,'# Values of u\n'); fprintf(fileID,'%9.5f\n', ulist);
     fprintf(fileID,'# Values of du\n'); fprintf(fileID,'%9.5f\n', dulist);
+    % Write skewnesses.
+    fprintf(fileID,'# skews\n'); fprintf(fileID,'%9.5f\n', skewlist);
     fclose(fileID);
 end
