@@ -14,16 +14,16 @@ nout = 100; % Reference 100
 tfin = 10.;  % Reference 10
 
 % Choose upstream or downstream
-down = false;
-if down == true
-    theta = 13;
-    gibd = 0.24;
-    fi = 1;
-else
+gibup = true;
+if gibup == true
     theta = 15;
     gibd = 1.;
-    fi = 0;
+else
+    theta = 13;
+    gibd = 0.24;
 end
+fi = 1; % fi = 1 for outgoing and 0 for incoming
+
 
 % Run the simulation.
 tic;
