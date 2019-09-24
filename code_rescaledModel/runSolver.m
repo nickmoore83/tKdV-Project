@@ -7,11 +7,11 @@ Drat = 0.24;    % depth ratio.
 % Simulation parameters
 Lambda = 16;    % Reference 16
 Nw = Lambda/2;  % Reference Lambda/2
-MC = 1E3;       % Reference 1E4
+MC = 1E1;       % Reference 1E4
 % time step parameters
 dt = 5E-4;  % Reference 5E-4
-nout = 1; % Reference 100
-tfin = dt; % Reference 10
+nout = 150; % Reference 100
+tfin = 1.; % Reference 10
 
 % Choose upstream or downstream
 down = true;

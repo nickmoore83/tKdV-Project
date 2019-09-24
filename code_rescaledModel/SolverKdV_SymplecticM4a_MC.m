@@ -48,9 +48,11 @@ interp = @(u0,um1,um2,w) ...
     (.5*w*(w+3)+1).*u0 - w*(w+2).*um1 +.5*w*(w+1).*um2;
 % Main variables
 uu = ifft(uk);
-%tout = zeros(1,Nt/MM);
-uarray = zeros(JJ,MC,Nt/MM);
-duarray = zeros(JJ,MC,Nt/MM);
+
+outsize = floor(Nt/MM);
+%tout = zeros(1,outsize);
+uarray = zeros(JJ,MC,outsize);
+duarray = zeros(JJ,MC,outsize);
 
 % Main loop 
 for ii=1:Nt
