@@ -15,10 +15,16 @@ function makeOutput(filename)
     skews = reshape(skews,MC,Ntout);
     meanskew = skewness(uarray,1,[1,2]);
     meanskew = reshape(meanskew,1,[]);
+    kurts = kurtosis(uarray,1,1);
+    kurts = reshape(kurts,MC,Ntout);
+    meankurt = kurtosis(uarray,1,[1,2]);
+    meankurt = reshape(meankurt,1,[]);
     tt = [0: Ntout-1] * tfin/(Ntout-1);    
-    skewarray = [tt; meanskew; skews];    
+    skewarray = [tt; meanskew; skews]; 
     skewlist = reshape(skewarray,1,[]);
-    
+    kurtarray = [tt; meankurt; kurts];   
+    kurtlist = reshape(kurtarray,1,[]);
+
     % Write output to a text file.
     fileID = fopen([filename,'.txt'],'w');
     % Write input parameters.
@@ -34,7 +40,8 @@ function makeOutput(filename)
     % Write microstates u and du.
     fprintf(fileID,'# Values of u\n'); fprintf(fileID,'%9.5f\n', ulist);
     fprintf(fileID,'# Values of du\n'); fprintf(fileID,'%9.5f\n', dulist);
-    % Write skewnesses.
-    fprintf(fileID,'# skews\n'); fprintf(fileID,'%9.5f\n', skewlist);
+    % Write skewnesses and kurtosis.
+    fprintf(fileID,'# skewness\n'); fprintf(fileID,'%9.5f\n', skewlist);
+    fprintf(fileID,'# kurtosis\n'); fprintf(fileID,'%9.5f\n', kurtlist);
     fclose(fileID);
 end
