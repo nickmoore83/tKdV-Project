@@ -539,6 +539,8 @@ Transfer function
 
 Figure \ref{transfig}(a) shows the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $\thup \in [0,20]$. In this figure, all model parameters are set by their experimental values, and we show the cases $\Lambda = 8, 16, 32$ with $\lamfac = \Lambda/2$ in each. As seen here, the transfer function is relatively insensitive to the truncation index since all three curves are relatively close to one another. This insensitivity is a consequence of scaling $\lamfac$ with $\Lambda$ appropriately as discussed previously.
 
+\subsection{Statistical comparison between theory and experiments}
+
 Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depends on the incoming inverse temperature $\thup$. In line with experimental observations, the incoming skewness is small (always less than 0.2), while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness of about 0.7, we can choose the value of $\thup$ in the range 10--15.
 
 Figure \ref{uhist} shows histograms of the displacement $u$ from experiments and from TKdV theory. The experimental measurements have been normalized for comparison purposes. The comparison is fucking amazing!
@@ -579,6 +581,16 @@ Slopes
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 % As of now the simulations use thup=15, thdn=13.
+
+\subsection{Wave dynamics}
+
+We show individual trajectories in the next figure for upstream and downstream. In the upstream flow, due to the coefficients, the nonlinearity is very weak. Hence, wave propagation is dominated by linear dispersion. Indeed, with weak nonlinearity, \eqref{dimlessKdV} is approximated by
+\begin{equation}
+u_t + C_2 \drat^{1/2} \, u_{xxx} = 0
+\qquad \text{for } x \in [-\pi,\pi] \\
+\end{equation}
+which implies the dispersion relation $\omega_k = -C_2 k^3$ or for phase velocity $c_k = -C_2 k^2$, which implies left-going waves \cite{majdaqi2019}.
+
 
 
 \vsp{5}
