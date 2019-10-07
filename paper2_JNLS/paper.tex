@@ -15,6 +15,7 @@
 \newcommand{\tocite}{{\color{blue}(to cite)}}
 \newcommand{\vsp}[1]{\vspace{#1 pc} \noindent}
 \newcommand{\np}{\newpage \noindent}
+\newcommand{\nick}[1]{{\color{red} #1}}
 % Derivatives
 \newcommand{\pd}[2]    { \frac{\partial #1} {\partial #2} }
 \newcommand{\ppd}[2]  { \frac{\partial^2 #1}{{\partial #2}^2} }
@@ -185,7 +186,7 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
-\includegraphics[width = 0.8 \linewidth]{Figs/ExpSpatialStats.pdf}
+\includegraphics[width = 0.85 \linewidth]{Figs/ExpSpatialStats.pdf}
 \caption{Wave statistics as they vary in space for several different experiments of different driving amplitudes (see legend). $\etastd$ does not vary significantly crossing the ADC (a), but skewness (b) and kurtosis (c) show a strong response to the ADC. }
 \label{ExpSpatialStats}
 \end{center}
@@ -194,9 +195,10 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
  
 	The paddle amplitude in Fig.~\ref{ExpDiagStats} is $\Dphi = 1.38^{\circ}$, and this value was varied systematically in the range $\Dphi = 0.125^{\circ}$--$2^{\circ}$ to probe the different regimes of wave behavior, from linear to strongly nonlinear waves. Figure \ref{ExpSpatialStats} shows spatial statistics of both surface displacement $\eta$ and the surface slope $\eta_x$ for six different driving amplitudes (see legend). For each quantity, we show the standard deviation, the skewness, and the (excess) kurtosis as they vary in the vicinity of the ADC, located at $x=0$. First, the standard deviation of displacement, $\etastd$, gives the coarsest possible estimate for the amplitude of waves. Figure \ref{ExpSpatialStats}(a) shows that while $\etastd$ increases with driving amplitude, it remains relatively uniform in space for each individual experiment, indicating that the overall amplitude of the wave train is not significantly altered by the presence of the ADC. In experiments with sufficiently high driving amplitude, though, the skewness and kurtosis (b)--(c) respond strongly to the ADC. In these experiments, both the skewness and kurtosis are relatively small upstream of the ADC, indicating nearly Gaussian statistics, but then increase dramatically downstream and reach a peak near $x = 15$ cm. Remarkably, the location of the peak is the same for skewness and kurtosis and appears insensitive to driving amplitude. The maximum values of skewness and kurtosis (roughly 0.9 and 0.7 respectively) seen in the figure indicate a significant departure from Gaussian statistics, as is constant with the histogram in Fig.~\ref{ExpDiagStats}(e). Bolles et al.~found that, once a threshold driving amplitude is exceeded (roughly $\Dphi = 0.5^{\circ}$), the displacement statistics in this anomalous region are robustly described by the gamma distribution. We note that we have gathered data for 15 different driving amplitudes, but only display 6 in Fig.~\ref{ExpSpatialStats} to avoid clutter. 
 
-	To complement the displacement statistics, we report here statistics for the surface slope $\eta_x$ in the right column of Fig.~\ref{ExpSpatialStats}. Our attention to slope statistics was motivated by new theoretical developments by Majda et al.~\cite{majda2019}. We extract the surface slope by numerical differentiating images of the free surface using Savitzky-Golay smoothing filters. This ability to extract surface slope is another advantage of optical measurements over discrete probes. As seen in Fig.~\ref{ExpSpatialStats}(a) the standard deviation of slope behaves similar to displacement: $\std(\eta_x)$ increases with driving amplitude but remains nearly uniform in space in each individual experiment. The higher-order moments, however, once again respond strongly to the ADC. The skewness of slope becomes highly negative and reaches a minimum near $x = 8$ cm, which is downstream of the ADC but upstream of where the displacement reaches its peak. The kurtosis of slope is positive (by construction) and reaches a peak at nearly the same location of 8 cm. The large negative skewness of surface slope indicates a bias towards waves of large negative slope, which is consistent with a right-moving wave that is near overturning.
+	To complement the displacement statistics, we report here statistics for the surface slope $\eta_x$ in the right column of Fig.~\ref{ExpSpatialStats}. Our attention to slope statistics was motivated by new theoretical developments by Majda et al.~\cite{majda2019} and will be expanded upon in later sections. We extract the surface slope by numerical differentiating images of the free surface using Savitzky-Golay smoothing filters. This ability to extract surface slope is another advantage of our optical measurements over the more commonly used technique of placing a set of discrete wave probes in the tank. As seen in Fig.~\ref{ExpSpatialStats}(a) the standard deviation of slope behaves similar to displacement: $\std(\eta_x)$ increases with driving amplitude, but remains nearly uniform in space for each individual experiment and is not affected by the ADC. The higher-order moments, however, once again respond strongly to the ADC if the driving amplitude is sufficiently high. The skewness of slope becomes highly negative and reaches a minimum near $x = 8$ cm, which is downstream of the ADC but upstream of the position where the displacement statistics peak. The kurtosis of $\eta_x$ reaches a peak at nearly the same location as skewness. We note that the large {\em negative} skewness of $\eta_x$ indicates a bias towards negative slope, which is consistent with a right-moving wave of steep leading surface and shallower trailing surface, i.e.~a wave that is near overturning.
 
-	Bolles et al.~systematically explored the effect of varying the driving amplitude on the anomalous statistics for a fixed depth ratio. Here, we further explore the effect of driving amplitude, especially in conjunction with theoretical developments, and we also report experiments in which the depth ratio was varied. To have a simple baseline for comparison against theory, we refer to the data from Fig.~\ref{ExpDiagStats} as the {\em reference} experiments. In these experiments, the driving amplitude is $\Dphi = 1.38^{\circ}$ (intermediate between the cases $\Dphi = 1.25^{\circ}$ and $1.5^{\circ}$ shown in Fig.~\ref{ExpDiagStats}(a)), the upstream depth is $\dup = 12.5$ cm, and the downstream depth is $\ddn = 3$ cm, giving a depth ratio of $\dratdn = \ddn/\dup= 0.24$. From the data represented in Fig.~\ref{ExpSpatialStats}, we extract a characteristic wave amplitude for the representative experiments of $\etastd = 0.21$ cm, which will be important for setting dimensionless parameters that enter the theory. Table \ref{paramtable} lists the range of experimental parameters along with these representative values, as well as value of dimensionless parameters that will be introduced later.
+	Bolles et al.~systematically explored the effect of varying the driving amplitude on the anomalous statistics for a fixed depth ratio. Here, we further explore the effect of driving amplitude, especially in conjunction with theoretical developments, and we also report experiments in which the depth ratio was varied. To have a simple baseline for comparison against theory, we refer to the data from Fig.~\ref{ExpDiagStats} as the {\em reference} experiments. In these experiments, the driving amplitude is $\Dphi = 1.38^{\circ}$ (intermediate between the two largest amplitudes shown in Fig.~\ref{ExpSpatialStats}), the upstream depth is $\dup = 12.5$ cm, and the downstream depth is $\ddn = 3$ cm, giving a depth ratio of $\dratdn = \ddn/\dup= 0.24$. From the data represented in Fig.~\ref{ExpSpatialStats}, we extract a characteristic wave amplitude for the representative experiments of $\etastd = 0.21$ cm, which will be important for setting dimensionless parameters that enter the theory. Table \ref{paramtable} lists the range of experimental parameters along with these representative values, as well as values of dimensionless parameters that will be introduced later.
+% NOTE: Maybe modify slightly the last paragraph if it does not seem to fit next time I read it.
 
 % Table
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -222,32 +224,29 @@ Depth ratio			& $\dratdn = \ddn/\dup$		& RANGE		& 0.24 \\
 \end{center}
 \end{table}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
- 
-% NOTES
-% Maybe modify slightly the last paragraph if it does not seem to fit next time I read it.
- %$\epsup = 0.017$.
+
 
 %----------------------------------------------------------%
 % Theory
 %----------------------------------------------------------%
 \section{Theoretical framework}
 
-We now introduce the theoretical framework that will be used to understand and quantify the experimental observations. This framework is based on a Galerkin truncation of the variable-depth Korteweg–de Vries (KdV) equation. The KdV equation is a commonly excepted model for describing the propagation of unidirectional, shallow-water waves, accounting for weak nonlinearity and weak dispersion over long timescales and large spatial scales. We will perform Galerkin truncation of this system at wavenumber $\Lambda = $8--32 to obtain a finite-dimensional dynamical system that exhibits weak turbulence. We outline the Hamiltonian structure of both the continuous KdV and the truncated system. This structure is exploited to obtain invariant measures of the underlying dynamics and to ultimately understand the experimental findings on anomalous wave statistics triggered by an ADC.
+We now introduce the theoretical framework that will be used to understand and quantify the experimental observations. This framework is based on a Galerkin truncation of the variable-depth Korteweg–de Vries (KdV) equation. The KdV equation is a commonly excepted model for describing the propagation of unidirectional, shallow-water waves, and it accounts for weak nonlinearity and weak dispersion over long timescales and large spatial scales. We will perform Galerkin truncation of this system at wavenumber $\Lambda = $ (in the range 8 to 32) to obtain a finite-dimensional dynamical system that exhibits weak turbulence. We outline the Hamiltonian structure of both the continuous KdV and the truncated system. This structure is exploited to obtain invariant measures of the underlying dynamics and, ultimately, to rationalize the experimental findings on anomalous wave statistics triggered by an ADC.
 
 
 %----------------------------------------------------------------------------%
 % KdV
 %----------------------------------------------------------------------------%
 \subsection{The Korteweg–de Vries equation with variable depth}
-Consider waves propagating unidirectionally in shallow water. Consider the surface displacement $\eta(x,t)$ and the reference frame moving with the local wave speed $\xi = x - ct$, where $c = \sqrt{g \depth}$ is the wave speed, $g$ gravity, and $\depth$ the local depth.
-To first-correction in small amplitude, surface displacements are governed by the Korteweg–de Vries equation (KdV), which in dimensional form is given by \cite{whitham2011linear}
+
+We consider the surface displacement $\eta(x,t)$ of unidirectional, shallow-water waves in a reference frame moving with the characteristic wave speed, $\xi = x - ct$. Here, $c = \sqrt{g \depth}$ is leading-order approximation to the wave speed (i.e.~from linear theory), where $g$ gravity and $\depth$ is the local depth.
+The leading-order dynamics are corrected to first order in small amplitude by the Korteweg–de Vries equation (KdV), which in dimensional form is given by \cite{whitham2011linear}
 \begin{equation}
 \label{KdV}
 \eta_t + \frac{3 c}{2 \depth} \eta \eta_{\xi} + \frac{c \depth^2}{6} \eta_{\xi \xi \xi} = 0
 \end{equation}
-% This dimensional form is given by Whitham on p. 461, Eq. 13.98. I first got it from the Wolfram KdV, which gives the same equation.
-
-As in the experiments, we consider waves that originate from a region of constant depth, encounter an abrupt depth change, and continue in another region of constant depth. Thus, depth will be piecewise constant
+% Given by Whitham on p. 461, Eq. 13.98
+Motivated by the experiments, we consider waves that originate from a region of constant depth, encounter an abrupt depth change, and continue into another region of constant depth. Thus, depth will be piecewise constant
 \begin{align}
 \depth = 
 \begin{cases}
@@ -257,22 +256,9 @@ As in the experiments, we consider waves that originate from a region of constan
 \end{align}
 Most often, we will consider waves moving into shallower depth, so that $\dup > \ddn$. 
 
-The incoming waves are randomized and generated with a peak forcing frequency of $\freqp$, which gives rise to the following quantities
-\begin{align}
-&c = \sqrt{g \depth}
-&&\mbox{\em local wave speed} \\
-&\lam = c/\freqp = \sqrt{g \depth} / \freqp
-&&\mbox{\em local peak wave length} \\
-&\etastd = \mean{\eta^2}^{1/2} 
-&&\mbox{\em standard deviation of displacement} \\
-\end{align}
-where $\mean{\cdot}$ indicates the mean of a quantity. 
-Note that the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \lamupdn$ each take different values upstream and downstream of the ADC. We remark that experimental measurements indicate that $\etastd = \mean{\eta^2}^{1/2}$ is nearly the same on both values of the ADC. Hence, we will not distinguish between upstream and downstream values of $\etastd$.
-%
-See Table \ref{paramtable} for a summary of important parameters.
+In the experiments, the randomized incoming wave-field is generated with a peak forcing frequency of $\freqp = 2$ Hz, which gives rise to the characteristic wavelength of $\lam = c/\freqp = \sqrt{g \depth} / \freqp$. Note that both the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \lamupdn$ each take different values upstream and downstream of the ADC. We remark that experimental measurements indicate that $\etastd$ is nearly the same on both values of the ADC. Hence, we will not distinguish between upstream and downstream values of $\etastd$.
+%See Table \ref{paramtable} for a summary of important parameters.
 
-
- 
  
 %----------------------------------------------------------------------------%
 % Nondimensionalization
@@ -299,11 +285,11 @@ Now it is possible to choose the scales $\ampscale, \lengthscale, \timescale$ fo
 \begin{align}
 \label{scales}
 \ampscale = \pi^{1/2} \, \etastd \, , \qquad
-\lengthscale = \frac{\lamfac \lam}{2 \pi} \, , \qquad
-\timescale = \frac{\lamfac \lam}{2 \pi \freqp \depth}
+\lengthscale_{\pm} = \frac{\lamfac \lamupdn}{2 \pi} \, , \qquad
+\timescale_{\pm} = \frac{\lamfac \lamupdn}{2 \pi \freqp \dupdn}
 \end{align}
 where $\lamfac$ is an integer to be chosen later. 
-The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding $\lengthscale$, recall that $\lam$ is the characteristic wavelength corresponding to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over lengthscale $\lam$. Since lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over the physical domain $\xi \in [-\lam/2, \lam/2]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, i.e.~$\xi \in [-\lamfac \lam/2, \lamfac \lam/2]$. Thus, we have chosen $\lengthscale$ above so that the dimensionless domain of consideration is $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions on $u$ can be  imposed on over this domain with accuracy that increases with $\lamfac$. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV equation provides the first correction to this behavior and describes dynamics that evolve over longer timescales. Hence we have rescaled $\freqp^{-1}$ by the factor $N \lam/(2 \pi \depth) \gg 1$, which provides a suitably long timescale and is in line with previous normalizations \cite{johnson1997modern}. The scales $\lengthscale$ and $\timescale$ change value across the ADC, which is important to note when comparing the theory against experimental measurements.
+The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding $\lengthscale$, recall that $\lam$ is the characteristic wavelength corresponding to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over lengthscale $\lam$. Since lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over the physical domain $\xi \in [-\lam/2, \lam/2]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, i.e.~$\xi \in [-\lamfac \lam/2, \lamfac \lam/2]$. Thus, we have chosen $\lengthscale$ above so that the dimensionless domain of consideration is $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions on $u$ can be  imposed on over this domain with accuracy that increases with $\lamfac$. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV equation provides the first correction to this behavior and describes dynamics that evolve over longer timescales. Hence we have rescaled $\freqp^{-1}$ by the factor $N \lam/(2 \pi \depth) \gg 1$, which provides a suitably long timescale and is in line with previous normalizations \cite{johnson1997modern}. The scales $\lengthscale = \lengthscale_{\pm}$ and $\timescale = \timescale_{\pm}$ change value across the ADC, which is important to note when comparing the theory against experimental measurements.
 
 With the above choices, the dimensionless KdV takes the form
 \begin{align}
@@ -312,7 +298,6 @@ With the above choices, the dimensionless KdV takes the form
 \qquad \text{for } x \in [-\pi,\pi] \\
 &C_3 = \frac{3}{2} \pi^{1/2} \epsup \delup^{-1} \, , \quad
 C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2} 
-%C_2 = \frac{\pi^2 \delup}{6 \lamfac^2} 
 \end{align}
 The constants $C_3$ and $C_2$ do {\em not} change value crossing the ADC and are given in terms of the dimensionless parameters
 \begin{align}
@@ -332,10 +317,9 @@ Meanwhile, the dimensionless depth $\drat = {\depth}/{\dup}$ {\em does} change v
 \dratdn = {\ddn}/{\dup} 	&\quad \mbox{for } {t}>0
 \end{cases}
 \end{equation}
+See Table \ref{paramtable} for a summary of these dimensionless parameters and their values in experiments.
 
 A few comments are in order. First, we note that the original formulation of this theory utilized a slightly different normalization \cite{majda2019}, with identical powers of $\drat$ in \eqref{dimlessKdV} but with different expressions for the other dimensionless parameters. These differences are purely cosmetic, and we have made the choices above simply to facilitate comparison against the experiments. Second, an alternate formulation of the variable-depth KdV equation exists in which it is conjectured that the product $\depth^{1/4} \eta$, rather than $\eta$, varies continuously across the ADC \cite{johnson1997modern}. Of course, that assumption implies a discontinuity in surface displacement, which, though small, is physically unrealistic. We have chosen to enforce continuity of surface displacement in the above on the basis of physical realism. Using the alternative formulation would simply modify the power of $\drat$ in the second term of \eqref{dimlessKdV} by 1/4, i.e.~$\drat^{-7/4}$ instead of $\drat^{-3/2}$. Hence, all of the results discussed below would still hold qualitatively in this alternate formulation, with only slight quantitative modifications.
-
-%NOTE: Perhaps we should be more specific about comparing to the dimensionless parameters in our PNAS paper \cite{majda2019}, BUT the expressions for E0 and L0 given in the PNAS paper do not match with what I calculate comparing to the above. Plus, it seems like it could only add confusion.
  
 
 %----------------------------------------------------------------------------%
@@ -359,12 +343,12 @@ Then the Hamiltonian can be expressed as
 \label{Hamiltonian}
 \Hupdn = C_2 \dratupdn^{1/2} \, \Htwo - C_3 \dratupdn^{-3/2} \, \Hthree
 \end{equation}
-where $\drat = \dratupdn$ changes value across the ADC. More explicitly, substituting \eqref{dratpw}, the separate upstream and downstream Hamiltonians are
+where $\drat = \dratupdn$ changes value across the ADC. More explicitly, substituting \eqref{dratpw} gives the separate upstream and downstream Hamiltonians as
 \begin{align}
 &\Hup = C_2 \, \Htwo - C_3 \, \Hthree 						&& \text{for } t<0 \\
 &\Hdn = C_2 \dratdn^{1/2} \, \Htwo - C_3 \dratdn^{-3/2} \, \Hthree	&& \text{for } t>0
 \end{align}
-The above formulation differs cosmetically from some previous ones \cite{abramov2003hamiltonian, bajars2013weakly, majda2019}, which used the opposite sign in both $\sympJ$ and $\Ham$. With that sign convention, Majda et al. 2019 found that a {\em negative} inverse temperature is required to accurately describe the experimental observations \cite{majda2019}. We have chosen the sign convention above (which also happens to be consistent with Lax \cite{lax1975periodic}) so that a {\em positive} inverse temperature could be used and thus fit the theory into the most conventional form of statistical mechanics.
+The above formulation differs cosmetically from some previous ones \cite{abramov2003hamiltonian, bajars2013weakly, majda2019}, which used the opposite sign in both $\sympJ$ and $\Ham$. With that sign convention, Majda et al. 2019 found that a {\em negative} inverse temperature is required to accurately describe the experimental observations \cite{majda2019}. We have chosen the sign convention above (which also happens to be consistent with Lax \cite{lax1975periodic}) so that a {\em positive} inverse temperature could be used and thus fit the theory into the most conventional form of statistical mechanics. \nick{(Reword paragraph)}
 
 % Notes for myself on the sign change: Abramov CPAM 2003, Bajars Nonlinearity 2013, and our 2019 PNAS paper all use J = -d/dx with the opposite sign in the Hamiltonian. However, I was able to easily find several references online that use J = d/dx, so there is nothing wrong with it. The exact criteria that J has to satisfy are listed in the CPAM 2003 paper, and J = d/dx satisfies all these criteria just as well as J = -d/dx does.
 
@@ -396,7 +380,7 @@ We now introduce the truncated KdV (TKdV) system, which is the main focus of thi
 \label{uhat}
 &\uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
 \end{align}
-Since $u$ is real valued, we have $\uhat_{-k} = \uhat_{k}^*$ and since momentum vanishes $\uhat_0 = 0$.
+Since $u$ is real valued, $\uhat_{-k} = \uhat_{k}^*$, and since momentum vanishes $\uhat_0 = 0$.
 Next, consider the Galerkin truncation at wave number $\Lambda$
 \begin{align}
 \uL(x,t) = \Proj u =
@@ -428,13 +412,12 @@ Then TKdV \eqref{TKdV} can be expressed as
 where the truncated symplectic operator is $\SympL = \partial_x \Proj$.
 % Note: Bajars 2013 has some important details on the Hamiltonian on the truncated system.
 
-The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with the same normalization values $\Mo[\uL] = 0$ and $\En[\uL] = 1$. Note that Parseval's identity gives
+The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with the same normalization values $\Mo[\uL] = 0$ and $\En[\uL] = 1$. Note that Parseval's identity implies
 \begin{equation}
 \En[\uL] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
-As has been noted before, the (untruncated) KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}. The projected counterparts of these invariants, however, are not necessarily invariants of the truncated system.
-
+As has been noted before, the untruncated KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}. The projected counterparts of these invariants, however, are not necessarily invariants of the truncated system. \nick{Check literature to refine this statement.}
 % Is it true that the only 3 known invariants of TKdV are the ones mentioned here: momentum, energy, and Hamiltonian.
 
 
