@@ -196,10 +196,35 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
 
 	To complement the displacement statistics, we report here statistics for the surface slope $\eta_x$ in the right column of Fig.~\ref{ExpSpatialStats}. Our attention to slope statistics was motivated by new theoretical developments by Majda et al.~\cite{majda2019}. We extract the surface slope by numerical differentiating images of the free surface using Savitzky-Golay smoothing filters. This ability to extract surface slope is another advantage of optical measurements over discrete probes. As seen in Fig.~\ref{ExpSpatialStats}(a) the standard deviation of slope behaves similar to displacement: $\std(\eta_x)$ increases with driving amplitude but remains nearly uniform in space in each individual experiment. The higher-order moments, however, once again respond strongly to the ADC. The skewness of slope becomes highly negative and reaches a minimum near $x = 8$ cm, which is downstream of the ADC but upstream of where the displacement reaches its peak. The kurtosis of slope is positive (by construction) and reaches a peak at nearly the same location of 8 cm. The large negative skewness of surface slope indicates a bias towards waves of large negative slope, which is consistent with a right-moving wave that is near overturning.
 
-	Bolles et al.~systematically explored the effect of varying the driving amplitude on the anomalous statistics for a fixed depth ratio. Here, we further explore the effect of driving amplitude, especially in conjunction with theoretical developments, and we also report experiments in which the depth ratio was varied. To have a simple baseline for comparison against theory, we refer to the experiments from Fig.~\ref{ExpDiagStats} as the {\em reference} experiments. In these experiments, the driving amplitude is $\Dphi = 1.38^{\circ}$ (intermediate between the cases $\Dphi = 1.25^{\circ}$ and $1.5^{\circ}$ shown in Fig.~\ref{ExpDiagStats}(a)), the upstream depth is $\dup = 12.5$ cm, and the downstream depth is $\ddn = 3$ cm, giving a depth ratio of $\dratdn = \ddn/\dup= 0.24$. From the data represented in Fig.\ref{ExpSpatialStats}, we extract a characteristic wave amplitude of $\etastd = 0.21$ cm for these representative experiments, which will be important for setting dimensionless parameters that enter the theory.
+	Bolles et al.~systematically explored the effect of varying the driving amplitude on the anomalous statistics for a fixed depth ratio. Here, we further explore the effect of driving amplitude, especially in conjunction with theoretical developments, and we also report experiments in which the depth ratio was varied. To have a simple baseline for comparison against theory, we refer to the data from Fig.~\ref{ExpDiagStats} as the {\em reference} experiments. In these experiments, the driving amplitude is $\Dphi = 1.38^{\circ}$ (intermediate between the cases $\Dphi = 1.25^{\circ}$ and $1.5^{\circ}$ shown in Fig.~\ref{ExpDiagStats}(a)), the upstream depth is $\dup = 12.5$ cm, and the downstream depth is $\ddn = 3$ cm, giving a depth ratio of $\dratdn = \ddn/\dup= 0.24$. From the data represented in Fig.~\ref{ExpSpatialStats}, we extract a characteristic wave amplitude for the representative experiments of $\etastd = 0.21$ cm, which will be important for setting dimensionless parameters that enter the theory. Table \ref{paramtable} lists the range of experimental parameters along with these representative values, as well as value of dimensionless parameters that will be introduced later.
 
+% Table
+%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+\begin{table}[h]%[htbp]
+\begin{center}
+\caption{Table of parameters}
+\label{paramtable}
+\begin{tabular}{l l l l}
+%\hline \multicolumn{3} { c }{Parameters that are constant in a single experiment} \\
+\hline Description & Notation & Experimental range & `Representative' values \\
+\hline
+Peak forcing frequency	& $f_p$					& 2 Hz 		& 2 Hz \\
+Characteristic amplitude	& $\etastd$				& 0.03--0.3 cm	& 0.21 cm \\
+Upstream depth		& $\dup$					& 12.5 cm 	& 12.5 cm \\
+Downstream depth		& $\ddn$					& RANGE		& 3 cm \\
+Upstream wavelength	& $\lamup = \sqrt{g \dup}/f_p$	& 55 cm 		& 55 cm \\
+Downstream wavelength	& $\lamdn = \sqrt{g \ddn}/f_p$	& RANGE		& 27 cm \\
+%
+Amplitude-to-depth ratio	& $\epsup = \etastd / \dup$	&0.0024--0.024	& 0.017 \\
+Depth-to-wavelength ratio	& $\delup = \dup / \lamup$	& RANGE		& 0.22 \\
+Depth ratio			& $\dratdn = \ddn/\dup$		& RANGE		& 0.24 \\
+\end{tabular}
+\end{center}
+\end{table}
+ %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+ 
 % NOTES
-% Maybe modify slightly this last paragraph if it does not seem to fit next time I read it.
+% Maybe modify slightly the last paragraph if it does not seem to fit next time I read it.
  %$\epsup = 0.017$.
 
 %----------------------------------------------------------%
@@ -207,7 +232,7 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
 %----------------------------------------------------------%
 \section{Theoretical framework}
 
-We now introduce the theoretical framework that will be used to understand and quantify the experimental observations. This framework is based on a Galerkin truncation of the variable-depth Korteweg–de Vries (KdV) equation. The KdV equation is a commonly excepted model for describing the propagation of unidirectional, shallow-water waves, accounting for weak nonlinearity and weak dispersion over long timescales and large spatial scales. We will perform Galerkin truncation of this system at wavenumber $\Lambda = $8--32 to obtain a finite dimensional dynamical system exhibiting weak turbulence. We outline the Hamiltonian structure of both the continuous KdV and the truncated system. This structure is exploited to obtain invariant measures of the underlying dynamics and to ultimately understand the experimental findings on anomalous wave statistics triggered by an ADC.
+We now introduce the theoretical framework that will be used to understand and quantify the experimental observations. This framework is based on a Galerkin truncation of the variable-depth Korteweg–de Vries (KdV) equation. The KdV equation is a commonly excepted model for describing the propagation of unidirectional, shallow-water waves, accounting for weak nonlinearity and weak dispersion over long timescales and large spatial scales. We will perform Galerkin truncation of this system at wavenumber $\Lambda = $8--32 to obtain a finite-dimensional dynamical system that exhibits weak turbulence. We outline the Hamiltonian structure of both the continuous KdV and the truncated system. This structure is exploited to obtain invariant measures of the underlying dynamics and to ultimately understand the experimental findings on anomalous wave statistics triggered by an ADC.
 
 
 %----------------------------------------------------------------------------%
@@ -246,30 +271,7 @@ Note that the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \la
 %
 See Table \ref{paramtable} for a summary of important parameters.
 
-% Table
-%^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-\begin{table}[h]%[htbp]
-\begin{center}
-\caption{Table of parameters}
-\label{paramtable}
-\begin{tabular}{l l l}
-\hline \multicolumn{3} { c }{Parameters that are constant in a single experiment} \\
-\hline Description & Notation and definition & Value in experiments \\
-\hline
-Peak forcing frequency		& $f_p$						& 2 Hz \\
-Characteristic wave amplitude	& $\etastd = \mean{\eta^2}^{1/2} $		& 0.03--0.3 cm \\
-Upstream depth			& $\dup$						& 12.5 cm \\
-Downstream depth			& $\ddn$						& 3 cm (and varied) \\
-Upstream wavelength		& $\lamup = \sqrt{g \dup}/f_p$		& 55 cm \\
-Upstream wavelength		& $\lamdn = \sqrt{g \ddn}/f_p$		& 27 cm \\
-%
-Amplitude-to-depth ratio		& $\epsup = \etastd / \dup$			& 0.0024--0.024 \\
-Depth-to-wavelength ratio		& $\delup = \dup / \lamup$		& 0.22 \\
-Depth ratio				& $\dratdn = \ddn/\dup$			& 0.24 (and varied)
-\end{tabular}
-\end{center}
-\end{table}
- %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+
  
  
 %----------------------------------------------------------------------------%
