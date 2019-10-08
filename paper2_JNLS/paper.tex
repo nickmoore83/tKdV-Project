@@ -522,25 +522,26 @@ With the experimental setup described and the theory outlined, we now present re
 At this point, all parameters that appear in the theoretical model have been linked directly to experimental parameters with the exception of the inverse temperature of the incoming flow, $\thup$.
 Our strategy is to use the outgoing skewness as the main diagnostic to determine a realistic range for $\thup$. That is, for an input $\thup$, the downstream inverse temperature $\thdn$ is determined by \eqref{statmatch}, which ultimately sets the skewness of the outgoing wave-field.
 
+	Figures \ref{transfig}(a)-(b) show the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $0 \le \thup \le 20$. In this figure, all model parameters are set by their experimental values, and we show the cases $\Lambda = 12, 16, 20$. In Fig.~\ref{transfig}(a), the parameter $\lamfac$ is fixed at $\lamfac = 8$. In this figure, the transfer function changes significantly with $\Lambda$. Figure~\ref{transfig}(b) shows the same but with $\lamfac = \Lambda/2$ scaled as argued in the previous section. In this figure, the three curves come much closer to one another. Thus scaling $\lamfac$ appropriately does not completely remove sensitivity of the transfer function to $\Lambda$, but it greatly mitigates the sensitivity.
+
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/transfig.pdf}
 \caption{
-Transfer function
+Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and calibration of the inverse temperature. (a)--(b) The transfer function for three values of $\Lambda$ with either (a) $\lamfac = 8$ fixed or (b) $\lamfac = \Lambda/2$ scaled. Scaling $\lamfac$ with $\Lambda$ mitigates the sensitivity to $\Lambda$. (c) The incoming and outgoing skewness versus $\thup$ implied by the matching condition. In line with experiments, the skewness is enhanced significantly in the outgoing wave field.
 }
 \label{transfig}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-
-Figure \ref{transfig}(a) shows the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $\thup \in [0,20]$. In this figure, all model parameters are set by their experimental values, and we show the cases $\Lambda = 8, 16, 32$ with $\lamfac = \Lambda/2$ in each. As seen here, the transfer function is relatively insensitive to the truncation index since all three curves are relatively close to one another. This insensitivity is a consequence of scaling $\lamfac$ with $\Lambda$ appropriately as discussed previously. \\
-\nick{TO DO: Show a case with different N for contrast.}
+ 
+	Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$ for the case $\Lambda = 16$, $\lamfac = 8$. In line with experimental observations, the incoming skewness is small (always less than 0.2), while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness of about 0.7, we can choose the value of $\thup$ in the range 10--15.
 
 \subsection{Statistical comparison between theory and experiments}
 
-Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$. In line with experimental observations, the incoming skewness is small (always less than 0.2), while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness of about 0.7, we can choose the value of $\thup$ in the range 10--15.
+
 
 Figure \ref{uhist} shows histograms of the displacement $u$ from experiments and from TKdV theory. The experimental measurements have been normalized for comparison purposes. The comparison is fucking amazing! Offers convincing evidence that the theory works and the parameters have been matched as well as possible. (At some point, I need to mention the minor point about the forcing spectrum not being matched to the Gibbs measure because it came first).
 
