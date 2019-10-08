@@ -480,7 +480,7 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 %----------------------------------------------------------------------------%
 % Scaling
 %----------------------------------------------------------------------------%
-\subsection{Scaling analysis to link model parameters to experiments}
+\subsection{Scaling analysis to link inverse temperature to experiments}
 
 	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that the value of $\theta$ does not depend sensitively on the truncation number, $\Lambda$, as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\theta$ to be asymptotically independent of $\Lambda$.
 	
@@ -506,7 +506,7 @@ where we have used the identity for the Gauss-like sum
 \end{equation}
 
 	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence with respect to $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
-Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discussed in that section would be valid. In particular, if $\lamfac = \Lambda$, then the characteristic wavelength in experiments corresponds to the smallest resolved wavelength in the dynamical system. It is even more sensible to choose $\lamfac$ to be an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. As default, we will choose $\lamfac = \Lambda/2$, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
+Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discussed in that section would be valid. In particular, if $\lamfac = \Lambda$, then the characteristic wavelength in experiments corresponds to the smallest resolved wavelength in the dynamical system. It is perhaps more sensible to choose $\lamfac$ to be an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. As default, we will choose $\lamfac = \Lambda/2$, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
 
 
 
@@ -540,7 +540,7 @@ Figure \ref{transfig}(a) shows the transfer function $\thdn = \transf(\thup)$ th
 
 \subsection{Statistical comparison between theory and experiments}
 
-Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depends on the incoming inverse temperature $\thup$. In line with experimental observations, the incoming skewness is small (always less than 0.2), while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness of about 0.7, we can choose the value of $\thup$ in the range 10--15.
+Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$. In line with experimental observations, the incoming skewness is small (always less than 0.2), while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness of about 0.7, we can choose the value of $\thup$ in the range 10--15.
 
 Figure \ref{uhist} shows histograms of the displacement $u$ from experiments and from TKdV theory. The experimental measurements have been normalized for comparison purposes. The comparison is fucking amazing! Offers convincing evidence that the theory works and the parameters have been matched as well as possible. (At some point, I need to mention the minor point about the forcing spectrum not being matched to the Gibbs measure because it came first).
 
