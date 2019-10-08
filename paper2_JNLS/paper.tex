@@ -235,7 +235,7 @@ Depth ratio			& $\dratdn = \ddn/\dup$		& RANGE		& 0.24 \\
 %----------------------------------------------------------%
 \section{Theoretical framework}
 
-We now introduce the theoretical framework that will be used to understand and quantify the experimental observations. This framework is based on a Galerkin truncation of the variable-depth Korteweg–de Vries (KdV) equation. The KdV equation is a commonly excepted model for describing the propagation of unidirectional, shallow-water waves, and it accounts for weak nonlinearity and weak dispersion over long timescales and large spatial scales. We will perform Galerkin truncation of this system at wavenumber $\Lambda = $ (in the range 8 to 32) to obtain a finite-dimensional dynamical system that exhibits weak turbulence. We outline the Hamiltonian structure of both the continuous KdV and the truncated system. This structure is exploited to obtain invariant measures of the underlying dynamics and, ultimately, to rationalize the experimental findings on anomalous wave statistics triggered by an ADC.
+We now introduce the theoretical framework that will be used to understand and quantify the experimental observations. This framework is based on a Galerkin truncation of the variable-depth Korteweg–de Vries (KdV) equation. The KdV equation is a commonly excepted model for describing the propagation of unidirectional, shallow-water waves, and it accounts for weak nonlinearity and weak dispersion over long timescales and large spatial scales. We will perform Galerkin truncation of this system at wavenumber $\Lambda$ to obtain a finite-dimensional dynamical system that exhibits weak turbulence. We outline the Hamiltonian structure of both the continuous KdV and the truncated system. This structure is exploited to obtain invariant measures of the underlying dynamics and, ultimately, to rationalize the experimental findings on anomalous wave statistics triggered by an ADC.
 
 
 %----------------------------------------------------------------------------%
@@ -435,6 +435,7 @@ In examining statistical mechanics of this Hamiltonian system, we will appeal to
 
 The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
+\label{Gibbs}
 \Gupdn = Z_{\thupdn}^{-1} \exp(-\thupdn \Hupdn) \delta(\En - 1)
 \end{align}
 % Note: The PNAS paper uses C_theta^{1}. The Majda, Qi Stat Phys paper uses C_theta sometimes and C_theta^{-1} in other places (page 11). So I'll just pick the one I like better.
@@ -487,7 +488,7 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 	The invariant measure exhibits the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ where to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
 To achieve this insensitivity, we will appeal to the uniform measure $\Gz$ and the idea of equipartition of energy \cite{abramov2003}, since these two concepts afford simple scaling estimates.
 
-Recall that $\Ham_{\Lambda}$ is composed of the cubic and quadratic components $\Hthree$ and $\Htwo$. Due to the odd symmetry of $\Hthree$, it is easy to see that $\meanz{\Hthree} = 0$. The quadratic component, however, requires closer inspection. Due to Parseval's identity, it is given by
+Recall that $\Ham_{\Lambda}$ is composed of the cubic and quadratic components $\Hthree$ and $\Htwo$. Due to the odd symmetry of $\Hthree$, it is easy to see that $\meanz{\Hthree} = 0$. The quadratic component, however, requires closer inspection. Due to Parseval's identity, $\Htwo$ is given by
 \begin{equation}
 \Htwo = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx = 2 \pi \sum_{k=1}^{\Lambda} k^2 \abs{\uhat_k}^2
 \end{equation}
@@ -498,7 +499,7 @@ Due to the constraint $\En[\uL] = 1$, the equipartioned microstate is given by
 Then the expected value of $\Htwo$ under the uniform measure is
 \begin{equation}
 \label{HtwoExpect}
-\mean{\Htwo}_0 = 2 \pi \sum_{k=1}^{\Lambda} \abs{k}^ 2 \mean{\abs{\uhat_k}^2}_0 \approx \frac{1}{3} \Lambda^2
+\mean{\Htwo}_0 = 2 \pi \sum_{k=1}^{\Lambda} \abs{k}^ 2 \mean{\abs{\uhat_k}^2}_0 \sim \frac{1}{3} \Lambda^2
 \end{equation}
 where we have used the identity for the Gauss-like sum
 \begin{equation}
@@ -508,7 +509,7 @@ where we have used the identity for the Gauss-like sum
 	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence with respect to $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
 Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discussed in that section would be valid. In particular, if $\lamfac = \Lambda$, then the characteristic wavelength in experiments corresponds to the smallest resolved wavelength in the dynamical system. It is perhaps more sensible to choose $\lamfac$ to be an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. As default, we will choose $\lamfac = \Lambda/2$, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
 
-
+	We note that the experiments discussed here preceded the development of the theory, and hence had no intent of mimicking a Gibbs measure, such as that in \eqref{Gibbs}. We expect that if the driving featured in the experiments were designed to mimic the Gibbs measure, in particular the spectral decay, then it would be more straightforward to assign a value to the model parameter $\lamfac$. We, however, leave that task for future research due to the significant cost of performing an entirely new set of experiments compared to the relative ease and great value in re-analyzing existing experimental measurements in light of the new theoretical developments.
 
 %----------------------------------------------------------------------------%
 % Results
@@ -522,7 +523,7 @@ With the experimental setup described and the theory outlined, we now present re
 At this point, all parameters that appear in the theoretical model have been linked directly to experimental parameters with the exception of the inverse temperature of the incoming flow, $\thup$.
 Our strategy is to use the outgoing skewness as the main diagnostic to determine a realistic range for $\thup$. That is, for an input $\thup$, the downstream inverse temperature $\thdn$ is determined by \eqref{statmatch}, which ultimately sets the skewness of the outgoing wave-field.
 
-	Figures \ref{transfig}(a)-(b) show the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $0 \le \thup \le 20$. In this figure, all model parameters are set by their experimental values, and we show the cases $\Lambda = 12, 16, 20$. In Fig.~\ref{transfig}(a), the parameter $\lamfac$ is fixed at $\lamfac = 8$. In this figure, the transfer function changes significantly with $\Lambda$. Figure~\ref{transfig}(b) shows the same but with $\lamfac = \Lambda/2$ scaled as argued in the previous section. In this figure, the three curves come much closer to one another. Thus scaling $\lamfac$ appropriately does not completely remove sensitivity of the transfer function to $\Lambda$, but it greatly mitigates the sensitivity.
+	Figures \ref{transfig}(a)-(b) show the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $0 \le \thup \le 20$. Figure \ref{transfig}(a) shows the cases $\Lambda = $ 12, 16, and 20 with $\lamfac = 8$. In this figure, the transfer function changes significantly with $\Lambda$. Figure~\ref{transfig}(b) shows the same but with $\lamfac = \Lambda/2$ scaled as argued in the previous section. In this figure, the three curves come much closer to one another. Thus scaling $\lamfac$ appropriately greatly mitigates the sensitivity of the transfer function to $\Lambda$, though it does not completely remove the dependence.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -537,12 +538,14 @@ Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and c
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$ for the case $\Lambda = 16$, $\lamfac = 8$. In line with experimental observations, the incoming skewness is small (always less than 0.2), while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness of about 0.7, we can choose the value of $\thup$ in the range 10--15.
+	Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$ for the case $(\Lambda, \lamfac) = (16, 8)$. In line with experimental observations, the incoming skewness is small, while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness of about 0.6-0.9, we can choose the value of $\thup$ in the range 10--20.
 
 \subsection{Statistical comparison between theory and experiments}
 
+	We now aim to compare the statistics measured in the experiments versus the theory. We focus on the representative set of experiments, detailed in Section BLAH and Table BLAH. In these experiments, the peak downstream skewness is precisely 0.83. According to Fig.~\ref{transfig}, we can achieve that value of skewness for the case $(\Lambda, \lamfac) = (16, 8)$ by setting $\thup = 17$, which gives $\thdn = 13.5$. We thus run the DNS with these model parameters (and with a sufficiently fine timestep, and number of samples, and to a final dimensionless time of 10).
 
 
+\vsp{5}
 Figure \ref{uhist} shows histograms of the displacement $u$ from experiments and from TKdV theory. The experimental measurements have been normalized for comparison purposes. The comparison is fucking amazing! Offers convincing evidence that the theory works and the parameters have been matched as well as possible. (At some point, I need to mention the minor point about the forcing spectrum not being matched to the Gibbs measure because it came first).
 
 % Figure
