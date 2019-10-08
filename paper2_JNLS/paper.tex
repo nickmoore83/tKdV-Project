@@ -401,8 +401,7 @@ C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2}
 \end{align}
 Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants $C_3$ and $C_2$ are the same as before and have been repeated here for convenience. 
 
-Briefly, consider the parameter $\lamfac$, the number of characteristic wavelengths in the physical domain. We require $\lamfac \le \Lambda$, so that the mode $\uhat_{\lamfac}$, corresponding to the characteristic wavelength $\lam$ in the experiments, is resolved in the truncated dynamical system. If $\lamfac = \Lambda$, then $\lam$ corresponds to the smallest resolved wavelength. Often, we will choose an intermediate value such as $\lamfac = \Lambda/2$ or $\Lambda/4$, so that the truncated system \eqref{TKdV} resolves scales that are both bigger and smaller than the characteristic value $\lam$.
-
+Briefly, consider the parameter $\lamfac$, the number of characteristic wavelengths in the physical domain. We require $\lamfac \le \Lambda$, so that the mode $\uhat_{\lamfac}$, corresponding to the characteristic wavelength $\lam$ in the experiments, is resolved in the truncated dynamical system. If $\lamfac = \Lambda$, then $\lam$ corresponds to the smallest resolved wavelength. In contrast, if $\lamfac$ is chosen as an intermediate value, e.g.~$\lamfac = \Lambda/2$ or $\Lambda/4$, then the truncated system \eqref{TKdV} resolves scales that are both bigger and smaller than the characteristic value $\lam$.
 
 Remarkably, the TKdV system \eqref{TKdV} retains nearly the same Hamiltonian structure described in Section \ref{HamiltonianSection}, with the only modification being the inclusion of the projection operator \cite{bajars2013weakly, majda2019}. The piecewise defined Hamiltonian for TKdV is given by
 \begin{equation}
@@ -483,7 +482,7 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 %----------------------------------------------------------------------------%
 \subsection{Scaling analysis to link model parameters to experiments}
 
-	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that its value does not depend sensitively on the truncation number, $\Lambda$, as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\theta$ to be asymptotically independent of $\Lambda$.
+	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that the value of $\theta$ does not depend sensitively on the truncation number, $\Lambda$, as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\theta$ to be asymptotically independent of $\Lambda$.
 	
 	The invariant measure exhibits the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ where to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
 To achieve this insensitivity, we will appeal to the uniform measure $\Gz$ and the idea of equipartition of energy \cite{abramov2003}, since these two concepts afford simple scaling estimates.
@@ -506,13 +505,8 @@ where we have used the identity for the Gauss-like sum
 \sum_{k=1}^{n} \abs{k}^ 2 = \frac{1}{6} n(n+1)(2n+1) \approx n^3/3
 \end{equation}
 
-	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, to obtain asymptotic independence of $\Lambda$, it is necessary that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
-Thus, any of the choices $\lamfac = \Lambda, \Lambda/2, \Lambda/4$, discussed in that section would be valid.
-
-\vsp{5}
-
-
-The parameter $\lamfac$ can be chosen in a sensible way by simply selecting an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. Hence, we will simply chose $\lamfac = \Lambda/2$ throughout, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
+	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence with respect to $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
+Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discussed in that section would be valid. In particular, if $\lamfac = \Lambda$, then the characteristic wavelength in experiments corresponds to the smallest resolved wavelength in the dynamical system. It is even more sensible to choose $\lamfac$ to be an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. As default, we will choose $\lamfac = \Lambda/2$, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
 
 
 
