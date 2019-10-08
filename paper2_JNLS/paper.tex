@@ -293,7 +293,7 @@ Now it is possible to choose the scales $\ampscale, \lengthscale, \timescale$ fo
 \timescale_{\pm} = \frac{\lamfac \lamupdn}{2 \pi \freqp \dupdn}
 \end{align}
 where $\lamfac$ is an integer to be chosen later. 
-The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding $\lengthscale$, recall that $\lam$ is the characteristic wavelength corresponding to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over lengthscale $\lam$. Since lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over the physical domain $\xi \in [-\lam/2, \lam/2]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, i.e.~$\xi \in [-\lamfac \lam/2, \lamfac \lam/2]$. Thus, we have chosen $\lengthscale$ above so that the dimensionless domain of consideration is $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions on $u$ can be  imposed on over this domain with accuracy that increases with $\lamfac$. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV equation provides the first correction to this behavior and describes dynamics that evolve over longer timescales. Hence we have rescaled $\freqp^{-1}$ by the factor $N \lam/(2 \pi \depth) \gg 1$, which provides a suitably long timescale and is in line with previous normalizations \cite{johnson1997modern}. The scales $\lengthscale = \lengthscale_{\pm}$ and $\timescale = \timescale_{\pm}$ change value across the ADC, which is important to note when comparing the theory against experimental measurements.
+The explanation for these choices is as follows. First, we have chosen the characteristic amplitude, $\ampscale$, above to normalize the energy of the state-variable $u$ to unity, as will be demonstrated in Section \ref{tKdVSec}. Second, regarding $\lengthscale$, recall that $\lam$ is the characteristic wavelength corresponding to the peak forcing frequency $\freqp$ in the experiments. If only integer multiples of $\freqp$ were imposed (e.g.~lower frequencies were not present), then the forcing would produce waves that are periodic over lengthscale $\lam$. Since lower frequencies do exist, strict periodicity is not satisfied, but rather waves may be nearly periodic over the physical domain $\xi \in [-\lam/2, \lam/2]$. The approximation of near-periodicity becomes more accurate if integer multiples of $\lam$ are considered, i.e.~$\xi \in [-\lamfac \lam/2, \lamfac \lam/2]$. Thus, we have chosen $\lengthscale$ above so that the dimensionless domain of consideration is $\tilde{x} \in [-\pi, \pi]$ and periodic boundary conditions on $u$ can be  imposed on over this domain with accuracy that increases with $\lamfac$. Lastly, regarding $\timescale$, the most basic timescale in the experiments is simply $\freqp^{-1}$, i.e.~the period of waves passing a fixed reference point. Of course, the leading-order behavior in shallow water is simple translation of waves with uniform speed $c$. The KdV equation provides the first correction to this behavior and describes dynamics that evolve over longer timescales. Hence we have rescaled $\freqp^{-1}$ by the factor $N \lam/(2 \pi \depth) \gg 1$, which provides a suitable long timescale in line with previous normalizations \cite{johnson1997modern}. The scales $\lengthscale = \lengthscale_{\pm}$ and $\timescale = \timescale_{\pm}$ change value across the ADC, which is important to note when comparing the theory against experimental measurements.
 
 With the above choices, the dimensionless KdV takes the form
 \begin{align}
@@ -423,8 +423,8 @@ The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
 Thus, the dynamics of interest are confined to the unit hypersphere of $\En = 1$ in $\CC^{\Lambda}$.
-As has been noted before, the untruncated KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}. The projected counterparts of these invariants, however, are not necessarily invariants of the truncated system. \nick{Check literature to refine this statement.}
-% Is it true that the only 3 known invariants of TKdV are the ones mentioned here: momentum, energy, and Hamiltonian.
+%
+In summary, the TKdV system possesses three important invariants: momentum, energy, and hamiltonian. The untruncated KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}, but their truncated counterparts are not generally invariants of TKdV.
 
 
 %----------------------------------------------------------------------------%
@@ -481,11 +481,11 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 %----------------------------------------------------------------------------%
 % Scaling
 %----------------------------------------------------------------------------%
-\subsection{Scaling analysis to set $\lamfac$}
+\subsection{Scaling analysis to link model parameters to experiments}
 
-	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that its value does not depend sensitively on the truncation number, $\Lambda$, as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$.
+	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that its value does not depend sensitively on the truncation number, $\Lambda$, as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\theta$ to be asymptotically independent of $\Lambda$.
 	
-	The invariant measure enjoys the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ where to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
+	The invariant measure exhibits the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ where to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
 To achieve this insensitivity, we will appeal to the uniform measure $\Gz$ and the idea of equipartition of energy \cite{abramov2003}, since these two concepts afford simple scaling estimates.
 
 Recall that $\Ham_{\Lambda}$ is composed of the cubic and quadratic components $\Hthree$ and $\Htwo$. Due to the odd symmetry of $\Hthree$, it is easy to see that $\meanz{\Hthree} = 0$. The quadratic component, however, requires closer inspection. Due to Parseval's identity, it is given by
@@ -506,11 +506,13 @@ where we have used the identity for the Gauss-like sum
 \sum_{k=1}^{n} \abs{k}^ 2 = \frac{1}{6} n(n+1)(2n+1) \approx n^3/3
 \end{equation}
 
-	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters the definition of $\Ham$ in produce with the coefficient $C_2$, which itself depends on $\lamfac$ as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence of $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$.
-
-
+	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, to obtain asymptotic independence of $\Lambda$, it is necessary that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
+Thus, any of the choices $\lamfac = \Lambda, \Lambda/2, \Lambda/4$, discussed in that section would be valid.
 
 \vsp{5}
+
+
+The parameter $\lamfac$ can be chosen in a sensible way by simply selecting an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. Hence, we will simply chose $\lamfac = \Lambda/2$ throughout, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
 
 
 
@@ -523,7 +525,8 @@ With the experimental setup described and the theory outlined, we now present re
 
 \subsection{Calibration of the inverse temperature}
 
-All parameters that appear in the theoretical model follow directly from experimental parameters, with the exception of the inverse temperature of the incoming flow, $\thup$, and the parameter $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. The parameter $\lamfac$ can be chosen in a sensible way by simply selecting an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. Hence, we will simply chose $\lamfac = \Lambda/2$ throughout, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. The incoming inverse temperature, $\thup$, however, is more difficult to pin down without using information from the experiments. Our strategy is to use the outgoing skewness as the main diagnostic to determine a realistic range for $\thup$. That is, for an input $\thup$, the downstream inverse temperature $\thdn$ is determined by \eqref{statmatch}, which ultimately sets the skewness of the outgoing wave-field.
+At this point, all parameters that appear in the theoretical model have been linked directly to experimental parameters with the exception of the inverse temperature of the incoming flow, $\thup$.
+Our strategy is to use the outgoing skewness as the main diagnostic to determine a realistic range for $\thup$. That is, for an input $\thup$, the downstream inverse temperature $\thdn$ is determined by \eqref{statmatch}, which ultimately sets the skewness of the outgoing wave-field.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -538,9 +541,8 @@ Transfer function
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 
-Figure \ref{transfig}(a) shows the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $\thup \in [0,20]$. In this figure, all model parameters are set by their experimental values, and we show the cases $\Lambda = 8, 16, 32$ with $\lamfac = \Lambda/2$ in each. As seen here, the transfer function is relatively insensitive to the truncation index since all three curves are relatively close to one another. This insensitivity is a consequence of scaling $\lamfac$ with $\Lambda$ appropriately as discussed previously. \nick{(I should show the little calculation that justifies this)}
-
-\nick{PICK IT UP AROUND HERE}
+Figure \ref{transfig}(a) shows the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $\thup \in [0,20]$. In this figure, all model parameters are set by their experimental values, and we show the cases $\Lambda = 8, 16, 32$ with $\lamfac = \Lambda/2$ in each. As seen here, the transfer function is relatively insensitive to the truncation index since all three curves are relatively close to one another. This insensitivity is a consequence of scaling $\lamfac$ with $\Lambda$ appropriately as discussed previously. \\
+\nick{TO DO: Show a case with different N for contrast.}
 
 \subsection{Statistical comparison between theory and experiments}
 
