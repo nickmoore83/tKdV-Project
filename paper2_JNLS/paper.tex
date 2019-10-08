@@ -30,6 +30,7 @@
 \newcommand{\mean}[1]{\left< #1 \right>}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\dx}{\, dx}
+\newcommand{\CC}{{\mathbb{C}}}
 % Basic physical parameters and scales
 \newcommand{\freqp}{f_p}
 \newcommand{\etastd}{\eta_{\text std}}
@@ -92,6 +93,9 @@
 \newcommand{\meanup}[1]{\mean{#1}_{-}}
 \newcommand{\meandn}[1]{\mean{#1}_{+}}
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
+\newcommand{\Gz}{\Gibbs_0}
+\newcommand{\meanz}[1]{\mean{#1}_0}
+% Stuff
 \newcommand{\tavg}[1]{\overline{#1}}
 \newcommand{\transf}{\mathcal{F}}
 
@@ -349,7 +353,7 @@ where $\drat = \dratupdn$ changes value across the ADC. More explicitly, substit
 &\Hup = C_2 \, \Htwo - C_3 \, \Hthree 						&& \text{for } t<0 \\
 &\Hdn = C_2 \dratdn^{1/2} \, \Htwo - C_3 \dratdn^{-3/2} \, \Hthree	&& \text{for } t>0
 \end{align}
-Here, we have chosen the sign of Lax \cite{lax1975periodic}. More recent work of Bajars et al.~\cite{bajars2013weakly} and Majda et al.~\cite{majda2019} used a different convention, in which both the signs of $\sympJ$ and $\Ham$ are opposite. Clearly, these sign differences cancel in \eqref{HamStruct} and thus the two conventions are completely equivalent. With their sign convention, Majda et al.~found that a {\em negative} inverse temperature is required to accurately describe the experimental observations \cite{majda2019}. We have  chosen the convention above so that a {\em positive} inverse temperature may be used, allowing our theory to fit into the most orthodox form of statistical mechanics.
+Here, we have chosen the sign of Lax \cite{lax1975periodic}. More recent work of Bajars et al.~\cite{bajars2013weakly} and Majda et al.~\cite{majda2019} use a different convention, in which both the signs of $\sympJ$ and $\Ham$ are opposite. Clearly, these sign differences cancel in \eqref{HamStruct} and thus the two conventions are completely equivalent. With their sign convention, Majda et al.~found that a {\em negative} inverse temperature is required to accurately describe the experimental observations \cite{majda2019}. We have  chosen the convention above so that a {\em positive} inverse temperature may be used, allowing our theory to fit into the most standard form of statistical mechanics.
 
 % Notes for myself on the sign change: Abramov CPAM 2003, Bajars Nonlinearity 2013, and our 2019 PNAS paper all use J = -d/dx with the opposite sign in the Hamiltonian. However, I was able to easily find several references online that use J = d/dx, so there is nothing wrong with it. The exact criteria that J has to satisfy are listed in the CPAM 2003 paper, and J = d/dx satisfies all these criteria just as well as J = -d/dx does.
 
@@ -418,6 +422,7 @@ The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with
 \En[\uL] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
+Thus, the dynamics of interest are confined to the unit hypersphere of $\En = 1$ in $\CC^{\Lambda}$.
 As has been noted before, the untruncated KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}. The projected counterparts of these invariants, however, are not necessarily invariants of the truncated system. \nick{Check literature to refine this statement.}
 % Is it true that the only 3 known invariants of TKdV are the ones mentioned here: momentum, energy, and Hamiltonian.
 
@@ -427,7 +432,7 @@ As has been noted before, the untruncated KdV system possesses an infinite seque
 %----------------------------------------------------------------------------%
 \subsection{Mixed microcanonical-canonical Gibbs ensemble}
 
-In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced in \cite{abramov2003hamiltonian} for the Burgers-Hopf system. Specifically, this ensemble is microcanonical in the energy, with a fixed energy value, and it is canonical in the Hamiltonian. By fixing the energy and hence confining to a compact set, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble and hence yields a normalizable distribution. This framework applies equally well to the truncated or untruncated system and hence we will not distinguish between the two.
+In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced by Abramov et al.~for the Burgers-Hopf system \cite{abramov2003}. Specifically, this ensemble is microcanonical in the energy, with a fixed energy value, and it is canonical in the Hamiltonian. By fixing the energy and hence confining to the compact set of the unit hypersphere, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble. It thus yields a normalizable distribution. This framework applies equally well to the truncated or untruncated system and hence we will not distinguish between the two.
 
 The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a corresponding mixed ensemble, or Gibbs measure given by 
 \begin{align}
@@ -441,8 +446,8 @@ Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (
 &\tavg{Q} = \frac{1}{T_2-T_1} \int_{T_1}^{T_2} Q \, dt	 
 &&\mbox{\em Time average}
 \end{align}
+Note that if $\theta = 0$, then the Gibbs measure is a {\em uniform} measure on the unit hypersphere in $\CC^{\Lambda}$, which we will denote as either $\Gz$ or simply $d\mu$.
 
-%Misc: The function that maximizes the Hamiltonian subject to the constraints of fixed energy and zero momentum is a traveling wave solution!
 
 
 %----------------------------------------------------------------------------%
@@ -450,7 +455,7 @@ Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (
 %----------------------------------------------------------------------------%
 \subsection{Matching conditions and the transfer function}
 
-Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales, $t \gg \delta^{-2}$. Meanwhile, wave evolution over shorter timescales, $t \ll \delta^{-2}$, is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
+	Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales, $t \gg \delta^{-2}$. Meanwhile, wave evolution over shorter timescales, $t \ll \delta^{-2}$, is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
 \begin{align}
 u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+},
 \qquad \mbox{\em Deterministic matching condition}
@@ -458,7 +463,7 @@ u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+},
 holding for $x \in [-\pi, \pi]$. This matching condition is used for the dynamical system \eqref{TKdV}.
 %or in Johnson's formulation, it is $\depth^{1/4} \eta$ that matches.
 
-Since $u$ matches for every single trajectory, it must also match in the statistical sense. Moreover, the downstream Hamiltonian $\Hdn$ is a functional of $u$ and hence must also match. This gives the {\em statistical matching condition}
+	Since $u$ matches for every single trajectory, it must also match in the statistical sense. Moreover, the downstream Hamiltonian $\Hdn$ is a functional of $u$ and hence must also match. This gives the {\em statistical matching condition}
 \begin{align}
 \label{statmatch}
 \meanup{\Hdn} = \meandn{\Hdn}
@@ -466,11 +471,47 @@ Since $u$ matches for every single trajectory, it must also match in the statist
 \end{align}
 Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
 
-The statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by matching statistics at the ADC. In this way, \eqref{statmatch} implies the functional dependence
+	The statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by matching statistics at the ADC. In this way, \eqref{statmatch} implies the functional dependence
 \begin{equation}
 \thdn = \transf \left( \thup \right)
 \end{equation}
 The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
+
+
+%----------------------------------------------------------------------------%
+% Scaling
+%----------------------------------------------------------------------------%
+\subsection{Scaling analysis to set $\lamfac$}
+
+	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that its value does not depend sensitively on the truncation number, $\Lambda$, as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$.
+	
+	The invariant measure enjoys the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ where to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
+To achieve this insensitivity, we will appeal to the uniform measure $\Gz$ and the idea of equipartition of energy \cite{abramov2003}, since these two concepts afford simple scaling estimates.
+
+Recall that $\Ham_{\Lambda}$ is composed of the cubic and quadratic components $\Hthree$ and $\Htwo$. Due to the odd symmetry of $\Hthree$, it is easy to see that $\meanz{\Hthree} = 0$. The quadratic component, however, requires closer inspection. Due to Parseval's identity, it is given by
+\begin{equation}
+\Htwo = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx = 2 \pi \sum_{k=1}^{\Lambda} k^2 \abs{\uhat_k}^2
+\end{equation}
+Due to the constraint $\En[\uL] = 1$, the equipartioned microstate is given by 
+\begin{align}
+&\abs{\uhat_k}^2 \approx \frac{1}{2 \pi \Lambda}	 \qquad \mbox{\em for equipartition of energy}
+\end{align}
+Then the expected value of $\Htwo$ under the uniform measure is
+\begin{equation}
+\label{HtwoExpect}
+\mean{\Htwo}_0 = 2 \pi \sum_{k=1}^{\Lambda} \abs{k}^ 2 \mean{\abs{\uhat_k}^2}_0 \approx \frac{1}{3} \Lambda^2
+\end{equation}
+where we have used the identity for the Gauss-like sum
+\begin{equation}
+\sum_{k=1}^{n} \abs{k}^ 2 = \frac{1}{6} n(n+1)(2n+1) \approx n^3/3
+\end{equation}
+
+	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters the definition of $\Ham$ in produce with the coefficient $C_2$, which itself depends on $\lamfac$ as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence of $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$.
+
+
+
+\vsp{5}
+
 
 
 %----------------------------------------------------------------------------%
@@ -479,8 +520,6 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 \section{Results}
 
 With the experimental setup described and the theory outlined, we now present results comparing the two. Unless stated otherwise, all parameters used in the theory are taken directly from their experimental values listed in Table \ref{paramtable}. In particular, we set $\delup = 0.22$ in all tests, and for the `representative' experiments, we set $\dratdn = 0.24$ and $\epsup = 0.017$. 
-
-\nick{I think it makes sense to discuss $\lamfac$ here, in particular the simple scaling analysis of H2 and H3 that suggests we need to take $\lamfac$ scaling with $\Lambda$. Our desire is to have some sort of convergence as $\Lambda$ gets big, and this would be impossible if $\lamfac$ does not scale with $\Lambda$}
 
 \subsection{Calibration of the inverse temperature}
 
@@ -529,7 +568,7 @@ Therefore, in Fig.~\ref{slopehist}, we convert the theoretical calculated values
 \pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
 %\frac{\ampscale \lamfac}{\lengthscale} \pd{\uupdn}{\tilde{x}}
 \end{equation}
-We have included the $\lamfac$ in the numerator due to the differences in forcing spectra. If the experiments were conducted with the forcing given by the incoming Gibbs measure literally, then there would be no need for $\lamfac$. But the experimental forcing (which was decided before the theory) has a peak frequency of $\freqp = 2 Hz$ and so the factor $\lamfac$ makes $\freqp$ correspond to the dominant value in the spectrum in the theory (REWORD).
+We have included the $\lamfac$ in the numerator due to the differences in forcing spectra. If the experiments were conducted with the forcing given by the incoming Gibbs measure literally, then there would be no need for $\lamfac$. But the experimental forcing (which was decided before the theory) has a peak frequency of $\freqp = 2 Hz$ and so the factor $\lamfac$ makes $\freqp$ correspond to the dominant value in the spectrum in the theory \nick{(REWORD)}.
 
 
 % Figure
