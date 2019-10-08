@@ -6,7 +6,7 @@ function [samp_H0,samp_H1,samp_u,enek] = sampling_MH_scaled(D0,D1,Nw, theta, MC)
 J=32; %Nw=10; theta=-30.; D0=.24; 
 %MC = 1E4;
 % model parameters from experiments
-epsi0 = 0.016;  % amplitude-to-depth ratio
+epsi0 = 0.017;  % amplitude-to-depth ratio
 del0 = 0.22;    % depth-to-wavelength ratio
 C2 = (2/3)*pi^2*del0/Nw^2;
 C3 = (3/2)*pi^(1/2)*epsi0/del0;
