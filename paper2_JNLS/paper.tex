@@ -174,7 +174,7 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
-\includegraphics[width = 0.85 \linewidth]{Figs/ExpDiagStats.pdf}
+\includegraphics[width = 0.80 \linewidth]{Figs/ExpDiagStats.pdf}
 \caption{
 (a) Experimental schematic. 
 (b)--(c) Surface displacement measured at a representative upstream and downstream locations. (d)--(e) Corresponding histograms. Figure adapted from \cite{bolles2019}.}
@@ -231,13 +231,13 @@ where $\mean{}$ indicates a mean (here a long-time mean). Hereafter, we will sim
 Peak forcing frequency	& $f_p$					& 2 Hz 		& 2 Hz \\
 Characteristic amplitude	& $\etastd$				& 0.03--0.3 cm	& 0.21 cm \\
 Upstream depth		& $\dup$					& 12.5 cm 	& 12.5 cm \\
-Downstream depth		& $\ddn$					& RANGE		& 3 cm \\
+Downstream depth		& $\ddn$					& 2.2--5.3 cm	& 3 cm \\
 Upstream wavelength	& $\lamup = \sqrt{g \dup}/f_p$	& 55 cm 		& 55 cm \\
-Downstream wavelength	& $\lamdn = \sqrt{g \ddn}/f_p$	& RANGE		& 27 cm \\
+Downstream wavelength	& $\lamdn = \sqrt{g \ddn}/f_p$	& 23--36 cm	& 27 cm \\
 %
 Amplitude-to-depth ratio	& $\epsup = \etastd / \dup$	&0.0024--0.024	& 0.017 \\
-Depth-to-wavelength ratio	& $\delup = \dup / \lamup$	& RANGE		& 0.22 \\
-Depth ratio			& $\dratdn = \ddn/\dup$		& RANGE		& 0.24 \\
+Depth-to-wavelength ratio	& $\delup = \dup / \lamup$	& 0.22		& 0.22 \\
+Depth ratio			& $\dratdn = \ddn/\dup$		& 0.18--0.42	& 0.24 \\
 \end{tabular}
 \end{center}
 \end{table}
@@ -576,7 +576,7 @@ Comparison of displacement statistics from experiment and theory. Upon calibrati
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 % As of now the simulations use thup=15, thdn=13.
 
-We show histograms of the surface slope in Fig.~\ref{slopehist}, from both the experiments (top) and theory (bottom). The derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$. 
+We show histograms of the surface slope in Fig.~\ref{slopehist}, from both the experiments (top) and theory (bottom). The derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of the normalized derivative $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$. 
 Therefore, in Fig.~\ref{slopehist}, we convert the theoretical calculated values to physical slope via
 \begin{equation}
 \pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
