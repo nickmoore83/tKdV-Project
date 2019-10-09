@@ -5,9 +5,9 @@ epsi0 = 0.017;  % amplitude-to-depth ratio
 del0 = 0.22;    % depth-to-wavelength ratio
 Drat = 0.24;    % depth ratio.
 % Simulation parameters
-Lambda = 16;    % Reference 16
-Nw = Lambda/2;  % Reference Lambda/2
-MC = 1E3;       % Reference 1E3 or 1E4 for tfin=10.
+Lambda = 17;    % Reference 16
+Nw = 8;         % Reference Lambda/2
+MC = 1E3;       % Reference 1E3 or 5E3 for tfin=10.
 % time step parameters
 dt = 5E-4;  % Reference 5E-4
 nout = 100; % Reference 100
@@ -16,10 +16,10 @@ tfin = 10;  % Reference 10
 % Choose upstream or downstream
 gibup = true;
 if gibup == true
-    theta = 25;
+    theta = 17.5;
     gibd = 1.;
 else
-    theta = 13.5;
+    theta = 0.;
     gibd = 0.24;
 end
 fi = 1; % fi = 1 for outgoing and 0 for incoming
