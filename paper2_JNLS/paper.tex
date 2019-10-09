@@ -543,12 +543,9 @@ Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and c
 
 \subsection{Statistical comparison between theory and experiments}
 
-	We now aim to compare the statistics measured in the experiments versus the theory. We focus on the representative set of experiments, detailed in Section \ref{experiments} and Table \ref{paramtable}. In these experiments, the peak downstream skewness is precisely 0.83. According to Fig.~\ref{transfig}, we can achieve that value of skewness for the case $(\Lambda, \lamfac) = (16, 8)$ by setting $\thup = 17$, which gives $\thdn = 13.5$. We thus run the DNS with these model parameters (and with a sufficiently fine timestep, and number of samples, and to a final dimensionless time of 10).
-
-
-\vsp{5}
-
-Figure \ref{uhist} shows histograms of the displacement $u$ from experiments and from TKdV theory for comparison. The experiment histograms representative exactly the same data as shown in Fig.~\ref{ExpDiagStats}, only converted to the dimensionless variables. As mentioned previously, the upstream histogram is nearly symmetric, while downstream histogram skews strongly towards positive displacement. The TKdV histograms do a remarkable job of recovering these features, appearing to produce nearly exactly the same distributions, both in shape and in scale.
+	We now aim to compare the statistics measured in the experiments versus the theory. We focus on the representative set of experiments detailed in Table \ref{paramtable}. In these experiments, the peak downstream skewness measured was 0.83. We can then use Fig.~\ref{transfig}(c) as a guide to select the upstream inverse temperature $\thup$. With $(\Lambda, \lamfac) = (16, 8)$ fixed, the figure indicates a value of $\thup = 17$ to achieve the desired skewness. We thus run the DNS with these model parameters (and with a sufficiently fine timestep, and number of samples, and to a final dimensionless time of 10).
+	
+	Figure \ref{uhist} shows displacement histograms from these TKdV simulations in comparison to the experiment histograms. The later representative exactly the same data as shown in Fig.~\ref{ExpDiagStats}, only converted to the dimensionless variables. The TKdV simulations do a remarkable job of capturing both the symmetric upstream statistics and the skewed downstream statistics. Amazingly, the simulations reproduce the measured distributions in great detail, both in the shape of the distribution and the scale.
 %
 This comparison offers convincing evidence that the theory works and the parameters have been matched as well as possible. 
 
@@ -557,8 +554,8 @@ This comparison offers convincing evidence that the theory works and the paramet
 \begin{figure}%[!ht]
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/uhist.pdf}
-\caption{
-Amazing!
+\caption{ 
+Comparison of displacement statistics from experiment and theory. Upon calibrating the inverse temperature $\thup$, the TKdV simulations recover the experimentally measured statistics in remarkable detail. In particular, they exhibit the transition from a nearly symmetric distribution upstream to a highly skewed distribution downstream.
 }
 \label{uhist}
 \end{center}
@@ -581,7 +578,7 @@ In order to map the slope of the wavelength $\lam$ corresponding to $\freqp = 2$
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/slopehist.pdf}
 \caption{
-Slopes
+Comparison of slope statistics. The TKdV simulations show similar slope distributions upstream, but visual distributions in the downstream distributions are visible. While the simulations recover the spread of the downstream slope statistics, they do not capture the asymmetry seen in the experiments.
 }
 \label{slopehist}
 \end{center}
@@ -605,7 +602,7 @@ which implies the dispersion relation $\omega_k = -C_2 k^3$ or for phase velocit
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/trajectories.pdf}
 \caption{
-Trajectories
+Sample upstream and downstream solution trajectories from the same ensemble TKdV simulations featured in Figs.~\ref{uhist} and \ref{slopehist}. The upstream solutions exhibit only leftward propagating waves and a high degree of regularity, while the downstream solutions exhibit both left and rightward moving waves along with more intermittency.
 }
 \label{trajectories}
 \end{center}
