@@ -16,13 +16,13 @@ tfin = 10;  % Reference 10
 % Choose upstream or downstream
 gibup = true;
 if gibup == true
-    theta = 17.5;
+    theta = 20.;
     gibd = 1.;
 else
     theta = 0.;
     gibd = 0.24;
 end
-fi = 1; % fi = 1 for outgoing and 0 for incoming
+fi = 0; % fi = 1 for outgoing and 0 for incoming
 
 
 % Run the simulation.
