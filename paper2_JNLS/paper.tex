@@ -201,12 +201,12 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
  
 	The paddle amplitude in Fig.~\ref{ExpDiagStats} is $\Dphi = 1.38^{\circ}$, and this value was varied systematically in the range $\Dphi = 0.125^{\circ}$--$2^{\circ}$ to probe the different regimes of wave behavior, from linear to strongly nonlinear waves. Figure \ref{ExpSpatialStats} shows long-time statistics of both surface displacement $\eta$ and the surface slope $\eta_x$ as they vary in space for six different driving amplitudes (see legend). We will only be examining statistics of mean-zero quantities in this paper, and so, for an arbitrary mean-zero quantity $q$, we have the following definitions
 \begin{align}
-& \var(q) = \mean{q^2}		&&\mbox{\em variance} \\
-& \std(q) = q_{std}= \sqrt{\var(q)}
+%& \var(q) = \mean{q^2}		&&\mbox{\em variance} \\
+& \std(q) = q_{std}= \sqrt{\mean{q^2}}
 &&\mbox{\em standard deviation} \\
-& \skw(q) = \frac{\mean{q^3}} {q_{std}^3}	
+& \skw(q) = {\mean{q^3}} / {q_{std}^3}	
 &&\mbox{\em skewness} \\
-& \kurt(q) = \frac{\mean{q^4}} {q_{std}^4} - 3
+& \kurt(q) = {\mean{q^4}} / {q_{std}^4} - 3
 &&\mbox{\em (excess) kurtosis}
 \end{align}
 where $\mean{}$ indicates a mean (here a long-time mean). Hereafter, we will simply refer to the excess kurtosis as kurtosis.
