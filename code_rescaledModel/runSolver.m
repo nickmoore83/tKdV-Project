@@ -7,16 +7,16 @@ Drat = 0.24;    % depth ratio.
 % Simulation parameters
 Lambda = 16;    % Reference 16
 Nw = Lambda/2;  % Reference Lambda/2
-MC = 1E0;       % Reference 1E3 or 1E4 for tfin=10.
+MC = 1E3;       % Reference 1E3 or 1E4 for tfin=10.
 % time step parameters
 dt = 5E-4;  % Reference 5E-4
-nout = 1; % Reference 100
-tfin = dt;  % Reference 10
+nout = 100; % Reference 100
+tfin = 10;  % Reference 10
 
 % Choose upstream or downstream
-gibup = false;
+gibup = true;
 if gibup == true
-    theta = 17;
+    theta = 25;
     gibd = 1.;
 else
     theta = 13.5;
