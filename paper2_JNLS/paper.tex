@@ -578,8 +578,7 @@ Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and c
 
 	We now aim to compare the wave statistics measured in experiments against those that emerge from the TKdV theory. Throughout, we will focus on the representative set of experiments detailed in Table \ref{paramtable}. In these experiments, the peak downstream skewness was measured to be 0.83. We can then use Fig.~\ref{transfig}(c) as a guide to select the appropriate upstream inverse temperature $\thup$. With $(\Lambda, \lamfac) = (16, 8)$ fixed, the figure indicates a value of $\thup = 17$ achieves the desired outgoing skewness. We thus run the deterministic TKdV simulations with model parameters $\Lambda = 16$, $\lamfac = 8$, $\thup = 17$ and with $\epsup$, $\delup$, and $\dratdn$ set to the representative values in Table \ref{paramtable}. We run the simulations to a final dimensionless time of $t_{f} = 10$, with $dt = 5 \times 10^{-4}$ and with $10^3$ trajectories sampled from the upstream Gibbs measure $\Gup$.
 	
-	We thus run the with these model parameters (and with a sufficiently fine timestep, and number of samples, and to a final dimensionless time of 10).
-	
+	In Fig.~\ref{uhist} we show the displacement distributions that were measured in the experiments (top row) versus those that emerge from a mixed long-time/ensemble average of the TKdV simulations (bottom row). 	
 	\vsp{5}
 	
 	Figure \ref{uhist} shows displacement histograms from these TKdV simulations in comparison to the experiment histograms. The later representative exactly the same data as shown in Fig.~\ref{ExpDiagStats}, only converted to the dimensionless variables. The TKdV simulations do a remarkable job of capturing both the symmetric upstream statistics and the skewed downstream statistics. Amazingly, the simulations reproduce the measured distributions in great detail, both in the shape of the distribution and the scale.
