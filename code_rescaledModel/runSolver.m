@@ -2,10 +2,10 @@ clear all; close all;
 
 % Model parameters from experiments
 epsi0 = 0.017;  % amplitude-to-depth ratio
-del0 = 0.22;    % depth-to-wavelength ratio
+del0 = 0.23;    % depth-to-wavelength ratio
 Drat = 0.24;    % depth ratio.
 % Simulation parameters
-Lambda = 17;    % Reference 16
+Lambda = 16;    % Reference 16
 Nw = 8;         % Reference Lambda/2
 MC = 1E3;       % Reference 1E3 or 5E3 for tfin=10.
 % time step parameters
@@ -27,8 +27,8 @@ fi = 0; % fi = 1 for outgoing and 0 for incoming
 
 % Run the simulation.
 tic;
-C2 = (2/3)*pi^2*del0/Nw^2;
-C3 = 3/2*pi^(1/2)*epsi0/del0;
+C2 = (2/3)*pi^2*del0/Nw^2
+C3 = (3/2)*pi^(1/2)*epsi0/del0
 [uarray, duarray] = SolverKdV_SymplecticM4a_MC(...
     C2,C3,Drat,Lambda,MC,theta,gibd,fi,dt,nout,tfin);
 
