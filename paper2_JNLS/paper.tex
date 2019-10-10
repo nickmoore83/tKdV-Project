@@ -188,7 +188,7 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
  
 	The free surface is illuminated by light-emitting diodes and is imaged from the sideview with a Nikon D3300 at 60 frames per second. The illumination technique, coupled with high pixel count of the camera, allows surface displacements to be resolved with accuracy better than 1/3 millimeter. Furthermore, these optical measurements permit extraction of wave statistics {\em continuously} in space, rather than at a few discrete locations, which is crucial for identifying regions of anomalous wave activity. Further details of the experimental setup can be found in \cite{bolles2019}.
 
-	Example measurements of free-surface displacements $\eta$ are shown in Figs.~\ref{ExpDiagStats}(b)--(c). These measurements are extracted from the images at two representative locations: one a short distance (9 cm) upstream of the ADC and the other a short distance (15 cm) downstream. Both signals exhibit a combination of periodic and random behavior, with the dominant oscillations corresponding to the peak forcing frequency of 2 Hz. The nature of the random fluctuations is revealed by the corresponding histograms shown in Fig.~\ref{ExpDiagStats}(d)--(e). The upstream measurements are symmetrically distributed about the mean, $\eta = 0$. In fact, Bolles et al.~found that these measurements follow a Gaussian distribution closely \cite{bolles2019}. The downstream measurements, however, skew strongly towards positive displacement, $\eta > 0$. Bolles et al.~found these measurements to be well described by a mean-zero gamma distribution \cite{bolles2019}. The slower decay rate of this downstream distribution indicates an elevated level of extreme surface displacement, i.e.~rogue waves. Bolles et al.~estimated that a rogue wave can be up to 65 times more likely in these experiments than if displacements were Gaussian \cite{bolles2019}. 
+	Example measurements of free-surface displacements $\eta$ are shown in Figs.~\ref{ExpDiagStats}(b)--(c). These measurements are extracted from the images at two representative locations: one a short distance (9 cm) upstream of the ADC and the other a short distance (15 cm) downstream. Both signals exhibit a combination of periodic and random behavior, with the dominant oscillations corresponding to the peak forcing frequency of 2 Hz. The nature of the random fluctuations is revealed by the corresponding histograms shown in Fig.~\ref{ExpDiagStats}(d)--(e) on a semi-log scale. The upstream measurements are symmetrically distributed about the mean, $\eta = 0$. In fact, Bolles et al.~found that these measurements follow a Gaussian distribution closely \cite{bolles2019}. The downstream measurements, however, skew strongly towards positive displacement, $\eta > 0$. Bolles et al.~found these measurements to be well described by a mean-zero gamma distribution \cite{bolles2019}. The slower decay rate of this downstream distribution indicates an elevated level of extreme surface displacement, i.e.~rogue waves. Bolles et al.~estimated that a rogue wave can be up to 65 times more likely in these experiments than if displacements were Gaussian \cite{bolles2019}. 
 
 % Figure: Experimental Spatial Statistics
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -576,14 +576,9 @@ Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and c
 
 \subsection{Statistical comparison between theory and experiments}
 
-	We now aim to compare the wave statistics measured in experiments against those that emerge from the TKdV theory. Throughout, we will focus on the representative set of experiments detailed in Table \ref{paramtable}. In these experiments, the peak downstream skewness was measured to be 0.83. We can then use Fig.~\ref{transfig}(c) as a guide to select the appropriate upstream inverse temperature $\thup$. With $(\Lambda, \lamfac) = (16, 8)$ fixed, the figure indicates a value of $\thup = 17$ achieves the desired outgoing skewness. We thus run the deterministic TKdV simulations with model parameters $\Lambda = 16$, $\lamfac = 8$, $\thup = 17$ and with $\epsup$, $\delup$, and $\dratdn$ set to the representative values in Table \ref{paramtable}. We run the simulations to a final dimensionless time of $t_{f} = 10$, with $dt = 5 \times 10^{-4}$ and with $10^3$ trajectories sampled from the upstream Gibbs measure $\Gup$.
+	We now aim to compare the wave statistics measured in experiments against those that emerge from the TKdV theory. Throughout, we will focus on the representative set of experiments detailed in Table \ref{paramtable}. In these experiments, the peak downstream skewness was measured to be 0.83. We can then use Fig.~\ref{transfig}(c) as a guide to select the appropriate upstream inverse temperature $\thup$. With $(\Lambda, \lamfac) = (16, 8)$ fixed, the figure indicates a value of $\thup = 17$ achieves the desired outgoing skewness. We thus run the deterministic TKdV simulations with model parameters $\Lambda = 16$, $\lamfac = 8$, $\thup = 17$ and with $\epsup$, $\delup$, and $\dratdn$ set to the representative values in Table \ref{paramtable}. We run the simulations to a sufficiently long dimensionless time of $t_{f} = 10$, with $dt = 5 \times 10^{-4}$ and with $10^3$ trajectories sampled from the upstream Gibbs measure $\Gup$.
 	
-	In Fig.~\ref{uhist} we show the displacement distributions that were measured in the experiments (top row) versus those that emerge from a mixed long-time/ensemble average of the TKdV simulations (bottom row). 	
-	\vsp{5}
-	
-	Figure \ref{uhist} shows displacement histograms from these TKdV simulations in comparison to the experiment histograms. The later representative exactly the same data as shown in Fig.~\ref{ExpDiagStats}, only converted to the dimensionless variables. The TKdV simulations do a remarkable job of capturing both the symmetric upstream statistics and the skewed downstream statistics. Amazingly, the simulations reproduce the measured distributions in great detail, both in the shape of the distribution and the scale.
-%
-This comparison offers convincing evidence that the theory works and the parameters have been matched as well as possible. \nick{Reword and expand}
+	In Fig.~\ref{uhist} we show the displacement distributions that were measured in the experiments (top row) versus those that emerge from the TKdV simulations (bottom row). The experimental histograms represent exactly the same data depicted in Fig.~\ref{ExpDiagStats}, only converted to dimensionless displacement, $u$, for comparison against theory. Meanwhile, the TKdV distributions are extracted  from the long-time history of several trajectories sampled from the Gibbs ensemble, i.e.~mixed long-time/ensemble histograms. All histograms are shown on a semi-log scale to facilitate comparison of the tails, where extreme events lie.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -591,26 +586,25 @@ This comparison offers convincing evidence that the theory works and the paramet
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/uhist.pdf}
 \caption{ 
-Comparison of displacement statistics from experiment and theory. Upon calibrating the inverse temperature $\thup$, the TKdV simulations recover the experimentally measured statistics in remarkable detail. In particular, they exhibit the transition from a nearly symmetric distribution upstream to a highly skewed distribution downstream.
+Comparison of displacement histograms from experiment and theory. Upon calibrating the inverse temperature $\thup$, the TKdV simulations recover the experimentally measured distributions in remarkable detail. In particular, they exhibit the transition from a nearly symmetric distribution upstream to a highly skewed distribution downstream.
 }
 \label{uhist}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-% As of now the simulations use thup=15, thdn=13.
+ 
+	The comparison between theory and experiment is striking. As seen in the figure, both the experiments and theory show a transition from a nearly symmetric upstream distribution, to a highly skewed distribution downstream. The TKdV theory not only captures this transition, but also recovers the shape of the resulting downstream distribution in remarkable detail. Nearly every feature that can be compared --- the decay rate of the tail, the position and value of the peak, the rapid cutoff for negative $u$ --- matches surprisingly well. This comparison offers compelling visual evidence for: (a) the predictive power of the TKdV framework, and (b) the successful calibration of the incoming inverse temperature.
 
-We show histograms of the surface slope in Fig.~\ref{slopehist}, from both the experiments (top) and theory (bottom). The derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of the normalized derivative $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$. 
-Therefore, in Fig.~\ref{slopehist}, we convert the theoretical calculated values to physical slope via
+% Remarkable, spectacular, splendid, stupendous, striking, amazing, exquisite
+% Compelling, convincing
+
+	Next, we aim to make the same comparison for the slope of the free surface. We note that the derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$.  
+We therefore convert the theoretical calculated slope values back to physical slope via
 \begin{equation}
 \pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
 %\frac{\ampscale \lamfac}{\lengthscale} \pd{\uupdn}{\tilde{x}}
 \end{equation}
-In order to map the slope of the wavelength $\lam$ corresponding to $\freqp = 2$ Hz in the experiments onto the dominant spectral mode in the theory, the above conversion has not been corrected with the extra factor of $\lamfac$.
-
-	These slope histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation of slope that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but the excess kurtosis that jumps from a value of 0.46 to 3.4. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the jump in kurtosis, while not as extreme as that measured in experiments, is quite significant in the theory. These elevated levels of kurtosis give the distributions the look of being stretched in the tails and pointy near the centers (especially in the experiments).
-
-	Distinct differences in the shapes of the downstream slope distributions, however, are visible. While the theoretical distributions remain symmetric, the experimental distributions skew towards negative slope. As mentioned earlier, this skewness is consistent with a right-moving wave of steep leading surface (i.e.~negative slope), which is a phenomenon apparently not captured by the TKdV simulations.
-Finally, it should be commented that the experimental measurements of slope involve numerical differentiation of the free surface extracted from optical images, which naturally introduces error. Furthermore, high-order statistics, such as kurtosis, can be very sensitive to noise and measurement error. Hence, the experimental statistics of slope, while they are valuable, should be regarded with some level of caution.
+So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode,  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -618,13 +612,19 @@ Finally, it should be commented that the experimental measurements of slope invo
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/slopehist.pdf}
 \caption{
-Comparison of slope statistics. The TKdV simulations show similar slope distributions upstream, but visual distributions in the downstream distributions are visible. While the simulations recover the spread of the downstream slope statistics, they do not capture the asymmetry seen in the experiments.
+Comparison of slope histograms. The TKdV simulations show similar slope distributions upstream, but visual distributions in the downstream distributions are visible. While the simulations recover the spread of the downstream slope statistics, they do not capture the asymmetry seen in the experiments.
 }
 \label{slopehist}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
-% As of now the simulations use thup=15, thdn=13.
+ 
+	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the jump in kurtosis, while not as extreme as that measured in experiments, is quite significant in the theory. These elevated levels of kurtosis give the distributions the look of being stretched in the tails and pointy near the centers (especially in the experiments).
+
+	Distinct differences in the shapes of the downstream slope distributions, however, are visible. While the theoretical distributions remain symmetric, the experimental distributions skew towards negative slope. As mentioned earlier, this skewness is consistent with a right-moving wave of steep leading surface (i.e.~negative slope), which is a phenomenon apparently not captured by the TKdV simulations.
+Finally, it should be commented that the experimental measurements of slope involve numerical differentiation of the free surface extracted from optical images, which naturally introduces error. Furthermore, high-order statistics, such as kurtosis, can be very sensitive to noise and measurement error. Hence, the experimental statistics of slope, while highly valuable, should be regarded with some level of caution.
+
+
 
 \subsection{Wave dynamics}
 
