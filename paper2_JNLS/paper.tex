@@ -665,19 +665,21 @@ These observations can be rationalized with some simple analysis of the structur
 	
 	Finally, Fig.~\ref{trajectories} sheds some light on the timescales required for wave evolution in the TKdV framework. It appears that the normalized time of $t=10$ is roughly the correct timescale to observe substantial wave dynamics. More precisely, both the left-going waves in Fig.~\ref{trajectories}(a) and the right-going waves in Fig.~\ref{trajectories}(b) require a dimensionless time of about $t=7$ to traverse the entire periodic domain. For the representative experiments, the characteristic timescale, $\timescale$, is 2.8~sec upstream and 5.7~sec downstream. Hence, a dimensionless time of $t=7$ corresponds to roughly 20~sec and 40~sec upstream and downstream respectively. Given the wave speeds ($c = $ 110 cm/s upstream and 54 cm/s downstream), these timescales can be converted to distances traveled by the waves. In fact, a simple calculation using the definitions in Section \ref{theory} gives the distance traveled as $7 \lamfac g/(2 \pi \freqp^2)$. Notice the depth dependence has serendipitously canceled. Hence, the distance traveled by the waves over a dimensionless time of $t=7$ is the same value upstream and downstream,  roughly 22 meters. Note that this distance is significantly greater than the 6-meter length of the experimental wave tank.
 
-	These estimates raise an important question: if a distance of 22 meters is required for significant wave evolution under the KdV framework, how is it that the experiments exhibit substantial changes in wave statistics a much shorter distance downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of surface-displacement skewness (left) and kurtosis (right) computed by the same TKdV deterministic simulations as pictured in Fig.~\ref{trajectories}. The bold black curve shows the ensemble mean, while the skewness and kurtosis of 100 individual trajectories are shown by the faint gray curves to give a sense for the variance involved. Importantly, the skewness and kurtosis evolve over a much shorter timescale than the aforementioned $t=7$. More precisely, skewness and kurtosis have already saturated to their asymptotic by $t = 1$, and have reached half of that value by $t = 0.18$. These dimensionless times correspond to travel distances of 310 cm and 56 cm respectively --- much shorter than the previously mentioned 22 meters, and on the same order of magnitude as the relevant distances in the experiments.
-
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/skew-kurt.pdf}
 \caption{
-Skewness and kurtosis in DNS}
+Dynamic evolution of surface-displacement skewness and kurtosis from the TKdV simulations. Faint gray curves show skewness and kurtosis of 100 individual trajectories, and the bold black curves show the corresponding ensemble mean. Skewness and kurtosis evolve over much shorter timescales than that required for waves to cross the domain.}
 \label{skew-kurt}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
+ 
+	These estimates raise an important question: if a distance of 22 meters is required for significant wave evolution under the KdV framework, how is it that the experiments exhibit substantial changes in wave statistics a much shorter distance downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of surface-displacement skewness (left) and kurtosis (right) computed by the same TKdV deterministic simulations as pictured in Fig.~\ref{trajectories}. The bold black curve shows the ensemble mean (ensemble size of 1000), while the skewness and kurtosis of 100 individual trajectories are shown by the faint gray curves to give a sense for the variance involved. Importantly, the skewness and kurtosis evolve over a much shorter timescale than the aforementioned $t=7$. More precisely, skewness and kurtosis have already saturated to their asymptotic by $t = 1$, and have reached half of that value by $t = 0.18$. These dimensionless times correspond to travel distances of 310 cm and 56 cm respectively --- much shorter than the previously mentioned 22 meters, and on the same order of magnitude as the relevant distances in the experiments.
+
+
  
  
 \vsp{5}
