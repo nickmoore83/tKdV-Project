@@ -3,7 +3,7 @@
 
 % PACKAGES
 \usepackage{graphicx, amsmath, amssymb, amsfonts, mathtools, mathrsfs, color}
-\usepackage{comment, enumerate, tabularx}
+\usepackage{comment, enumerate, tabularx, todonotes}
 \usepackage{natbib, hyperref, url}
 \usepackage[margin=1in]{geometry}
 %\usepackage[justification=RaggedRight]{caption}
@@ -55,6 +55,7 @@
 \newcommand{\var}{\text{var}}
 \newcommand{\varup}{\var_-}
 \newcommand{\vardn}{\var_+}
+\newcommand{\varupdn}{\var_{\pm}}
 \newcommand{\kurt}{\text{kurt}}
 \newcommand{\std}{\text{std}}
 % Dimensionless parameters
@@ -318,6 +319,7 @@ With the above choices, the dimensionless KdV takes the form
 \label{dimlessKdV}
 &u_t + C_3 \drat^{-3/2} \, u u_x + C_2 \drat^{1/2} \, u_{xxx} = 0
 \qquad \text{for } x \in [-\pi,\pi] \\
+\label{C3C2}
 &C_3 = \frac{3}{2} \pi^{1/2} \epsup \delup^{-1} \, , \quad
 C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2} 
 \end{align}
@@ -489,6 +491,11 @@ holding for $x \in [-\pi, \pi]$. This matching condition is used for the dynamic
 \end{align}
 Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
 
+\todo[inline]{Here: Explain intuitive justification for matching condition}
+
+\nick{The downstream Hamiltonian is not conserved upstream and will vary dynamically in upstream wavefield. Once the wavefield crosses the ADC, whatever value $\Hdn$ happens to be is locked in for the rest of the time (is conserved thereafter). Hence, the downstream hamiltonian must match at the ADC on a trajectory by trajectory basis. Therefore, it must match statistically.}
+
+\vsp{5}
 	The statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by matching statistics at the ADC. In this way, \eqref{statmatch} implies the functional dependence
 \begin{equation}
 \thdn = \transf \left( \thup \right)
@@ -549,7 +556,7 @@ Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discu
 %----------------------------------------------------------------------------%
 % Results
 %----------------------------------------------------------------------------%
-\section{Results}
+\section{Comparison between theory and experiments}
 
 With the experimental setup described and the theory outlined, we now present results comparing the two. Unless stated otherwise, all parameters used in the theory are taken directly from their experimental values listed in Table \ref{paramtable}. 
 %In particular, we set $\delup = 0.23$ in all tests, and for the `representative' experiments, we set $\dratdn = 0.24$ and $\epsup = 0.017$. 
@@ -678,52 +685,57 @@ Dynamic evolution of surface-displacement skewness and kurtosis from the TKdV si
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
 	These estimates raise an important question: if a distance of 22 meters is required for significant wave evolution under the KdV framework, how is it that the experiments exhibit substantial changes in wave statistics a much shorter distance downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of surface-displacement skewness (left) and kurtosis (right) computed by the same TKdV deterministic simulations as pictured in Fig.~\ref{trajectories}. The bold black curve shows the ensemble mean (ensemble size of 1000), while the skewness and kurtosis of 100 individual trajectories are shown by the faint gray curves to give a sense for the variance involved. Importantly, the skewness and kurtosis evolve on a much shorter timescale than the aforementioned $t=7$. More precisely, skewness and kurtosis have already saturated to their asymptotic by $t = 1$, and reach half of that value by $t = 0.18$. These dimensionless times correspond to travel distances of 310 cm and 56 cm respectively --- much shorter than the previously mentioned 22 meters, and on the same order as the relevant distances in the experiments. Thus, after crossing the ADC, the wave-field rapidly reconfigures itself enough to fundamentally alter the statistical distributions, and this reconfiguration occurs on a much shorter timescale than that required for waves to cross the entire periodic domain.
-%Thus, the wave-field undergoes a rapid reconfiguration which significantly alters the statistical distributions
 
 
  %----------------------------------------------------------------------------%
-% Skewness formula
+% Skewness Ratio 
 %----------------------------------------------------------------------------%
+\section{Predicted outgoing skewness and experimental confirmation}
+
+This section discusses perhaps the most important single result of the manuscript. In the recent theoretical study, Majda et al.~2019 derived an explicit formula for the outgoing wave-field skewness in terms of the system parameters \cite{majda2019}. More specifically, this formula relates the downstream skewness of surface displacement $\skw(\eta)$ to the change in slope variance $\var(\eta_x)$, in particular how that ratio depends on driving amplitude and depth ratio. Below, we recap the derivation of this formula and then test the prediction against our direct experimental measurements.
+
 \subsection{Explicit formula for outgoing skewness}
-We now examine an explicit formula for the outgoing skewness as originally founded in \cite{majda2019}.
-An experimental observation is that the incoming skewness is small, $\meanup{H_3} \approx 0$. Inserting this approximation into the statistical matching condition \eqref{statmatch} and simplifying gives
+
+The explicit formula for outgoing skewness arises directly from the statistical matching condition \eqref{statmatch}, which states that the downstream Hamiltonian must match in expected value at the ADC, i.e.~with respect to the incoming and outgoing Gibbs measures.
+This condition can be written more explicitly as
 \begin{equation}
-\label{H3H2}
-\frac{\meandn{\Hthree^+}} {\meandn{\Htwo^+} - \meanup{\Htwo^+}} = \frac{C_2}{C_3} \dratdn^2
+\label{statmatchexp}
+C_2 \dratdn^{1/2} \, \meanup{\Htwo} - C_3 \dratdn^{-3/2} \, \meanup{\Hthree } = 
+C_2 \dratdn^{1/2} \, \meandn{\Htwo} - C_3 \dratdn^{-3/2} \, \meandn{\Hthree }
 \end{equation}
-%where $\Delta \mean{H_2} =  \meandn{H_2} - \meanup{H_2}$  indicates the difference between the upstream and downstream values.
-To convert to dimensional, i.e.~experimental, values we first note that
+Both the experiments and simulations show the upstream skewness to be negligible compared to the downstream skewness, allowing the term with $\meanup{\Hthree }$ to be dropped in \eqref{statmatchexp}. With this approximation, \eqref{statmatchexp} yields the relationship
+\begin{equation}
+\label{H3H2ratio}
+\frac{\meandn{\Hthree}} {\meandn{\Htwo} - \meanup{\Htwo}} = \frac{C_2}{C_3} \dratdn^2
+\end{equation}
+
+	Our next task is to convert this formula to physical variables so that it can be tested against experimental data. First, following the definition of $\Hthree$ in Eq.~\eqref{H3H2} and the relationship, $u = \eta/(\pi^{1/2} \etastd)$, a straightforward calculation gives
 \begin{align}
-\mean{\Hthree^+} = \frac{\pi}{3} \mean{u^3} = 
-\frac{1}{3} \pi^{-1/2} \frac{\mean{\eta^3}}{\etastd^3} = \frac{1}{3} \pi^{-1/2} \skw(\eta)
+\label{H3convert}
+\meandn{\Hthree} = \frac{\pi}{3} \meandn{u^3} = 
+\frac{1}{3 \pi^{1/2}} \frac{\meandn{\eta^3}}{ \etastd^3} = 
+\frac{1}{3 \pi^{1/2}} \skwdn(\eta)
 \end{align}
-Second, to convert the downstream surface slope, we note
+This equation simply says that the expected value of $\Hthree$ is directly related to the outgoing skewness.
+Next, we must convert the $\Htwo$-quantities, which involve surface slope. Here, it is important to remember that, since it is the {\em downstream} Hamiltonian that is matched in \eqref{statmatch}, one must use the {\em downstream} characteristic scale $\lengthscale_+$ to convert back into physical variables. Using the definition of $\Htwo$ in Eq.~\eqref{H3H2} and $\lengthscale_+$ in Eq.~\eqref{scales} gives
 \begin{align}
-\pd{u}{\tilde{x}} = \frac{\lamfac \lamdn}{\pi^{3/2} \etastd} \pd{\eta}{\xi}
+\label{H2convert}
+&\meanupdn{\Htwo} = \pi \meanupdn{ u_x^2} = 
+\left( \frac{\lamfac \lamdn}{2 \pi \etastd} \right)^2 \varupdn(\eta_x)
 \end{align}
-where slope with respect to $\xi$ is the same as with respect to dimensional $x$.
-Note: I believe it is important here to use $\lamdn$ in reverting to dimensional variables since we are matching $\Hdn$.
-Hence, we have
-\begin{align}
-&\mean{\Htwo^+} = \pi \mean{ \left( \pd{u}{\tilde{x}} \right)^2} = 
-\left( \frac{\lamfac \lamdn}{\pi \etastd} \right)^2 \var(\eta_x)
-\end{align}
-%
-Then algebra gives
+Inserting \eqref{H3convert} and \eqref{H2convert} into \eqref{H3H2ratio}, and using the definitions of $C_2$ and $C_3$ from \eqref{C3C2}, gives the remarkably explicit formula
 \begin{equation}
-\frac{\meandn{\Hthree}} {\meandn{\Htwo} - \meanup{\Htwo}} = 
-\frac{\pi^{3/2} \, \etastd^2} {3 \lamfac^2 \lamdn^2} 
-\left( \frac{\skwdn(\eta)} { \vardn(\eta_x) - \varup(\eta_x)} \right)
+\frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^3 
+%= \frac{1}{3} \left( \frac{\ddn}{\etastd} \right)^3
 \end{equation}
-Also we have the simplification
-\begin{equation}
-\frac{C_2}{C_3} = \frac{\pi^{3/2} \delup^2}{9 \lamfac^2 \epsup}
-\end{equation}
-Hence, \eqref{H3H2} gives the remarkably explicit formula
-\begin{equation}
-\frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^3 =
-\frac{1}{3} \left( \frac{\ddn}{\etastd} \right)^3
-\end{equation}
+This formula links the skewness of the outgoing wave field to the change in the variance of surface slope. In particular, it predicts that their ratio to scale as the {\em inverse cube of wave amplitude} and the {\em cube of the depth ratio}, as seen on the right-hand-side of the equation. It is a rather unexpected relationship, as it would be difficult to anticipate that the displacement skewness and slope variance, among all possibilities, are so intimately related.
+ 
+
+
+
+
+
+\vsp{3}
 In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
 % Note: previously I had D^2 on the RHS. The power of 3 comes from using lamdn consistently in the nondimensionalization.
 
