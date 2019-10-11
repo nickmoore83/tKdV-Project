@@ -100,6 +100,7 @@
 \newcommand{\transf}{\mathcal{F}}
 \newcommand{\Nsamp}{N_s}
 \newcommand{\sumsamp}{\sum_{i=1}^{\Nsamp}}
+\newcommand{\traveldist}{\ell}
 
 % Experiments
 \newcommand{\omavg}{\omega_0}
@@ -250,6 +251,7 @@ Depth ratio			& $\dratdn = \ddn/\dup$		& 0.18--0.42	& 0.24
 % Theory
 %----------------------------------------------------------%
 \section{Theoretical framework}
+\label{theory}
 
 We now introduce the theoretical framework that will be used to understand and quantify the experimental observations. This framework is based on a Galerkin truncation of the variable-depth Korteweg–de Vries (KdV) equation. The KdV equation is a commonly excepted model for describing the propagation of unidirectional, shallow-water waves, and it accounts for weak nonlinearity and weak dispersion over long timescales and large spatial scales. We will perform Galerkin truncation of this system at wavenumber $\Lambda$ to obtain a finite-dimensional dynamical system that exhibits weak turbulence. We outline the Hamiltonian structure of both the continuous KdV and the truncated system. This structure is exploited to obtain invariant measures of the underlying dynamics and, ultimately, to rationalize the experimental findings on anomalous wave statistics triggered by an ADC.
 
@@ -599,18 +601,18 @@ Comparison of displacement histograms from experiment and theory. Upon calibrati
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	The comparison between theory and experiment in Fig.~\ref{uhist} is striking. As seen in the figure, both the experiments and theory show a transition from a nearly symmetric upstream distribution, to a highly skewed distribution downstream. The TKdV theory not only captures this transition, but also recovers the shape of the resulting downstream distribution in remarkable detail. Nearly every feature that can be compared --- the decay rate of the tail, the position and value of the peak, the rapid cutoff for negative $u$ --- matches surprisingly well. This comparison offers compelling visual evidence for: (a) the predictive power of the TKdV framework, and (b) the successful calibration of the incoming inverse temperature.
+	The comparison between experiments and theory in Fig.~\ref{uhist} is striking. As seen in the figure, both the experiments and theory show a transition from a nearly symmetric upstream distribution, to a highly skewed distribution downstream. The TKdV theory not only captures this transition, but also recovers the shape of the resulting downstream distribution in remarkable detail. Nearly every feature that can be compared --- the decay rate of the tail, the position and value of the peak, the rapid cutoff for negative $u$ --- matches surprisingly well. This comparison offers compelling visual evidence for: (a) the predictive power of the TKdV framework, and (b) the successful calibration of the incoming inverse temperature.
 
 % Remarkable, spectacular, splendid, stupendous, striking, amazing, exquisite
 % Compelling, convincing
 
-	Next, we aim to make the same comparison for the slope of the free surface. We note that the derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$.  
-We therefore convert the theoretical calculated slope values back to physical slope via
+	Next, we aim to make the same comparison for free-surface slopes. We note that the derivative, $\partial \eta / \partial x$, is already a dimensionless quantity with a simple physical interpretation, namely the slope of the free surface, whereas the interpretation of $\partial u/\partial \tilde{x}$ is tied to the characteristic values $\ampscale$ and $\lengthscale$.  
+We therefore convert the theoretical calculated slopes values back to physical slopes via
 \begin{equation}
 \pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
 %\frac{\ampscale \lamfac}{\lengthscale} \pd{\uupdn}{\tilde{x}}
 \end{equation}
-So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode,  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
+So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode ($k = 1$),  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -625,7 +627,7 @@ Comparison of slope histograms. The TKdV simulations show similar slope distribu
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the jump in kurtosis, while not as extreme as that measured in experiments, is quite significant in the theory. These elevated levels of kurtosis give the distributions the look of being stretched in the tails and pointy near the centers (especially in the experiments).
+	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the theoretically predicted jump in kurtosis, while not as extreme as that measured in experiments, is quite significant. These elevated levels of kurtosis give the distributions the look of being stretched in the tails and pointy near the centers (especially in the experiments).
 
 	Distinct differences in the shapes of the downstream slope distributions, however, are visible. While the theoretical distributions remain symmetric, the experimental distributions skew towards negative slope. As mentioned earlier, this skewness is consistent with a right-moving wave of steep leading surface (i.e.~negative slope), which is a phenomenon apparently not captured by the TKdV simulations.
 Finally, it should be commented that the experimental measurements of slope involve numerical differentiation of the free surface extracted from optical images, which naturally introduces error. Furthermore, high-order statistics, such as kurtosis, can be very sensitive to noise and measurement error. Hence, the experimental statistics of slope, while highly valuable, should be regarded with some level of caution. 
@@ -638,7 +640,7 @@ Finally, it should be commented that the experimental measurements of slope invo
 
 	As a complement to the above statistical comparison, we now examine the wave dynamics of a few individual trajectories from the TKdV simulations. Figure \ref{trajectories} shows example upstream and downstream solution trajectories from the same TKdV simulations that were used to produce the histograms in Figs.~\ref{uhist}--\ref{slopehist}. The dimensionless displacement, $u$, is represented by color in the domain $(x,t) \in [-\pi,\pi] \times [-10,10]$, where the ADC is encountered at $t=0$. 
 	
-	Visual differences between the upstream and downstream dynamics are apparent in Fig.~\ref{trajectories}. The upstream trajectory shows several waves of modest amplitude all propagating leftward. Here, the magnitude of the positive and negative displacements are comparable. This is in stark contrast to the downstream dynamics, which feature fewer waves of larger amplitude propagating in either direction. In particular, one large wave is seen to propagate from the lower-left corner of the figure to the upper right. A bias towards positive surface displacement is visually apparent in these downstream dynamics.
+	Visual differences between the upstream and downstream dynamics are apparent in Fig.~\ref{trajectories}. The upstream trajectory shows several waves of modest amplitude all propagating leftward. Here, the magnitude of the positive and negative displacements are comparable. This is in stark contrast to the downstream dynamics, which feature fewer waves of larger amplitude propagating in either direction. In particular, one large wave is seen to propagate from the lower-left corner of the figure to the upper right. A bias towards positive surface displacement is visually apparent in these downstream dynamics, without even viewing the histograms.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -657,16 +659,13 @@ These observations can be rationalized with some simple analysis of the structur
 % Further details, see page 6 of Majda Qi, J Stat Phys.
 %$C_3 = 0.20$ and $C_2 = 0.024$.
 
-Downstream of the ADC, however, $\drat = 0.24$, which significantly amplifies nonlinearity while suppressing dispersion in Eq.~\ref{TKdV} and allows waves to propagate in either direction. In particular, the dispersionless limit of KdV is the Burgers-Hopf equation, in which the nonlinear advection is proportional in both amplitude and direction to the value of $u$. Hence, positive displacements would be expected to move rightwards, as is seen in Fig.~\ref{trajectories}(b).
+	Downstream of the ADC, however, $\drat = 0.24$, which significantly amplifies nonlinearity while suppressing dispersion, thereby allowing waves to propagate in either direction. In particular, the dispersionless limit of KdV is the Burgers-Hopf equation, in which the nonlinear advection is proportional in both amplitude and direction to the value of $u$. Hence, positive displacements would be expected to move rightwards, as is seen in Fig.~\ref{trajectories}(b).
 
-%We remind the reader that the KdV framework tracks the long-time evolution of waves in the reference frame moving with the linear speed $c = \sqrt{g \depth}$.
+	We remind the reader that the KdV framework tracks the long-time evolution waves in a reference frame moving with the characteristic speed $c = \sqrt{g \depth}$ from linear theory. Hence, the above discussion of left-or-right going waves cannot be interpreted in the context of the experiments, which take a fixed reference frame, without an appropriate Galilean transformation. Hence, in the laboratory frame, all waves indeed propagate unidirectionally, from left to right, with a speed that is near $c$. The directions and speeds calculated by the TKdV framework simply determines how much the actually speed of waves deviates from $c$. 
+	
+	Finally, Fig.~\ref{trajectories} sheds some light on the timescales required for wave evolution in the TKdV framework. It appears that the normalized time of $t=10$ is roughly the correct timescale to observe substantial wave dynamics. More precisely, both the left-going waves in Fig.~\ref{trajectories}(a) and the right-going waves in Fig.~\ref{trajectories}(b) require a dimensionless time of about $t=7$ to traverse the entire periodic domain. For the representative experiments, the characteristic timescale, $\timescale$, is 2.8~sec upstream and 5.7~sec downstream. Hence, a dimensionless time of $t=7$ corresponds to roughly 20~sec and 110~sec upstream and downstream respectively. Given the wave speeds ($c = $ 110 cm/s upstream and 54 cm/s downstream), these timescales can be converted to a distance traveled by the waves. In fact, a simple calculation using the definitions in Section \ref{theory}, gives the distance traveled as $\traveldist = \lamfac g/(2 \pi \freqp^2)$. Notice the depth dependence has serendipitously canceled. Hence, the distance traveled by the waves over the dimensionless time of $t=7$ is the same value, 310 cm, both upstream and downstream. This distance is roughly half the 6 m length of the wave tank.
 
-% Timescale of 10 is about right to see waves propagate through the entire periodic domain. This however would be a very long experimental time scale. So what gives? We answer that question with skewness and kurtosis plots which evolve over a much shorter timescale.
- 
- 
-\vsp{5}
-
-Next stuff
+	These estimates raise an important question: if a distance of roughly 3 meters is required for significant wave evolution under the KdV framework, how is it that the experiments exhibit substantial changes in wave statistics a short distance, roughly 15 cm, downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of skewness (left) and kurtosis (right) of surface displacement computed by the TKdV deterministic simulations. The bold black curve shows the ensemble mean, while the skewness and kurtosis of 100 individual trajectories are shown by the faint gray curves. Importantly, the skewness and kurtosis evolve over a much shorter timescale than the aforementioned $t=7$ required for waves to cross the entire domain. More precisely, skewness and kurtosis saturate to their asymptotic value after a dimensionless time of roughly $t = 1$, corresponding 
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
