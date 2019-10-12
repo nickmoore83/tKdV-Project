@@ -442,7 +442,6 @@ The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
 Thus, the dynamics of interest are confined to the unit hypersphere of $\En = 1$ in $\CC^{\Lambda}$.
-%
 In summary, the TKdV system possesses three important invariants: momentum, energy, and hamiltonian. The untruncated KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}, but their truncated counterparts are not generally invariants of TKdV.
 
 
@@ -451,17 +450,24 @@ In summary, the TKdV system possesses three important invariants: momentum, ener
 %----------------------------------------------------------------------------%
 \subsection{Mixed microcanonical-canonical Gibbs ensemble}
 
-In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced by Abramov et al.~for the Burgers-Hopf system \cite{abramov2003}. Specifically, this ensemble is microcanonical in energy and canonical in the Hamiltonian. By fixing the energy and hence confining to the compact set of the unit hypersphere, this construction avoids the divergence at infinity that would occur for a simple canonical ensemble. 
-%
-It thus yields a normalizable distribution. This framework applies equally well to the truncated or untruncated system and hence we will not distinguish between the two.
-
-The Hamiltonian on either side of the ADC, $\Ham^{\pm}$, generates a corresponding mixed ensemble, or Gibbs measure given by 
+	In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced by Abramov et al.~for the Burgers-Hopf system \cite{abramov2003}. Specifically, this ensemble is microcanonical in energy and canonical in the Hamiltonian. The reason to introduce this ensemble is the sign indefiniteness of the cubic term $\Hthree$ in the Hamiltonian, which would cause a simple canonical distribution to diverge at infinity. The mixed ensemble, however, fixes the energy and hence confines dynamics to the compact set of the unit hypersphere $\En = 1$. Since the Hamiltonian is a continuous, its value is bounded on the unit hypersphere, and thus the mixed ensemble produces a normalizable distribution. This construction applies equally well to the truncated or untruncated KdV system and hence we will not distinguish between the two. We note that other possible constructions may be applicable too \cite{kleeman2014nonequilibrium}.
+	
+	On either side of the ADC, the mixed ensemble, or {\em Gibbs measure}, follows directly from the corresponding Hamiltonian via
 \begin{align}
 \label{Gibbs}
-\Gupdn = Z_{\thupdn}^{-1} \exp(-\thupdn \Hupdn) \delta(\En - 1)
+\Gupdn = Z_{\thupdn}^{-1} \, \exp(-\thupdn \Hupdn) \delta(\En - 1)
 \end{align}
-% Note: The PNAS paper uses C_theta^{1}. The Majda, Qi Stat Phys paper uses C_theta sometimes and C_theta^{-1} in other places (page 11). So I'll just pick the one I like better.
-Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (the partition function) that depends on $\theta$. Each measure $\Gupdn$ induces a corresponding ensemble average $\mean{}_{\pm}$. Throughout this paper we use a bracket for ensemble average and overbar for a time average; i.e.~for any quantity $Q$,
+Here $\theta = \thupdn$ is the inverse temperature, which will take a different value on either side of the ADC, and $Z_{\theta}$ a constant that depends on $\theta$. Each measure $\Gupdn$ induces a corresponding ensemble average, denoted $\mean{}_{\pm}$. 
+
+% NOTES
+% 1) The PNAS paper uses C_theta^{1}. The Majda, Qi Stat Phys paper uses C_theta sometimes and C_theta^{-1} in other places (page 11). So I'll just pick the one I like better.
+% 2) Could comment that other possible ensembles exist \cite{kleeman2014nonequilibrium}.
+
+%-------------------- COMMENTED OUT ------------------------%
+% Definitions of ensemble and time averages.
+% It seems that I did not need to use this notation so lets kill it.
+\begin{comment}
+Throughout this paper we use a bracket for ensemble average and overbar for a time average; i.e.~for any quantity $Q$,
 \begin{align}
 &\mean{Q} = \int_{\Omega}  Q \, d \Gibbs
 &&\mbox{\em Ensemble average} \\
@@ -469,6 +475,8 @@ Here $\theta = \thupdn$ is the inverse temperature and $Z_{\theta}$ a constant (
 &&\mbox{\em Time average}
 \end{align}
 Note that if $\theta = 0$, then the Gibbs measure is a {\em uniform} measure on the unit hypersphere in $\CC^{\Lambda}$, which we will denote as either $\Gz$ or simply $d\mu$.
+\end{comment}
+%----------------------------------------------------------------------------%
 
 
 
