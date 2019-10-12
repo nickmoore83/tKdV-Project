@@ -485,7 +485,7 @@ Note that if $\theta = 0$, then the Gibbs measure is a {\em uniform} measure on 
 %----------------------------------------------------------------------------%
 \subsection{Matching at the ADC}
 
-	Recall that the abrupt depth change is met by traveling waves at time $T_{ADC} = 0$, set to zero for convenience. The KdV equations describe wave dynamics over {\em long} timescales, $t \gg \timescale$, capturing weakly nonlinear and weakly dispersive effects. Meanwhile, evolution over shorter timescales is simply described by linear theory. The event of a wave crossing the ADC is precisely such a short-time event, and so we will employ matching conditions at the ADC that result from linear theory. 
+	Recall that the abrupt depth change is met by traveling waves at dimensionless time $T_{ADC} = 0$, set to zero for convenience. The KdV equations describe wave dynamics over {\em long} timescales, physically $t \gg \timescale$, capturing weakly nonlinear and weakly dispersive effects. Meanwhile, evolution over shorter timescales is simply described by linear theory. The event of a wave crossing the ADC is precisely such a short-time event, and so we will employ matching conditions at the ADC that result from linear theory. 
 
 	More specifically, we assume continuity of the surface displacement, $\eta$, at the ADC \nick{(cite)}. Since the temporal fluctuations of $\eta$ match, waves crossing the ADC must rapidly adjust in wavelength so as to attain the same frequency in two different depths --- a well-understood phenomenon \nick{(cite)}. Of course, since the normalized domain $x \in [-\pi,\pi]$ is scaled on the characteristic wavelength, there is no change in the dimensionless wave-field $u(x,t)$, giving the condition
 \begin{equation}
@@ -496,22 +496,17 @@ u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+},
 \end{equation}	
 We call \eqref{detmatch} the deterministic matching condition to contrast with its statistical counterpart introduced below. This matching condition is employed in the deterministic simulations of the TKdV dynamical system \eqref{TKdV}. We note that in the alternate formulation mentioned earlier, it is the product $\depth^{1/4} \eta$ that would match at the ADC \cite{johnson1997modern}.
 
-	Now, from the perspective of statistical mechanics, consider the communication between the statistical ensembles, $\Gupdn$, upstream and downstream of the ADC. These two systems are in contact at the ADC, and so the upstream state $\Gup$ can be regarded as a thermal reservoir that influences the downstream state $\Gdn$. In fact, the above deterministic  condition directly leads to a simple description for the link. The quantity of interest is the outgoing Hamiltonian $\Hdn$, since its value at $t=0^{-}$ is set by the upstream dynamics, and then this particular value is conserved thereafter in the downstream dynamics. Since $u$ matches at the ADC, so must $\Hdn$, and, in fact, this matching holds for every individual trajectory. Recall that $\Hdn(t)$ is not conserved in the upstream dynamics and so its value varies for $t < 0$. However, appealing to weak Ergodicity of the system, the ensemble mean $\meanup{\Hdn(t)}$ is expected to be independent of time. In particular, the value $\meanup{\Hdn \vert_{t=0^{-}} }$ is the same as the bare ensemble mean $\meanup{\Hdn}$. Afterwards, the particular value $\Hdn \vert_{t=0^{-}}$ is conserved in the downstream dynamics, on a trajectory-by-trajectory basis and for all time. Thus, the downstream measure $\Gdn$ must recover the ensemble mean $\meanup{\Hdn \vert_{t=0^{-}} }$, which gives the statistical matching condition
+	Now, from the perspective of statistical mechanics, consider the communication between the statistical ensembles, $\Gupdn$, upstream and downstream of the ADC. These two systems are in contact at the ADC, and so the upstream state $\Gup$ can be regarded as a thermal reservoir that influences the downstream state $\Gdn$. In fact, the above deterministic  condition directly leads to a simple description for the link. The quantity of interest is the outgoing Hamiltonian $\Hdn$, since its value just upstream of the ADC, $t=0^{-}$, is set by the upstream dynamics, and then this particular value is conserved thereafter in the downstream dynamics. Since $u$ matches at the ADC, so must $\Hdn$, and, in fact, this matching holds for every individual trajectory. Recall that $\Hdn(t)$ is not conserved in the upstream dynamics and so its value varies for $t < 0$. However, appealing to weak Ergodicity, the ensemble mean $\meanup{\Hdn(t)}$ is expected to be independent of time. In particular, the value $\meanup{\Hdn \vert_{t=0^{-}} }$ is the same as the bare ensemble mean $\meanup{\Hdn}$. Afterwards, the particular value $\Hdn \vert_{t=0^{-}}$ is conserved in the downstream dynamics, on a trajectory-by-trajectory basis and for all $t>0$. Thus, the downstream measure $\Gdn$ must recover the same ensemble mean $\meanup{\Hdn \vert_{t=0^{-}} } = \meanup{\Hdn}$, producing the simple condition
 \begin{align}
 \label{statmatch}
 \meanup{\Hdn} = \meandn{\Hdn}
 \qquad \mbox{\em Statistical matching condition}
 \end{align}
 
-
-\vsp{5}
-
-
-
-\vsp{5}
-	The statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by matching statistics at the ADC. In this way, \eqref{statmatch} implies the functional dependence
+	This statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by the matching condition \eqref{statmatch}, giving the functional dependence
 \begin{equation}
 \thdn = \transf \left( \thup \right)
+\qquad \mbox{\em Transfer function}
 \end{equation}
 The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
 
