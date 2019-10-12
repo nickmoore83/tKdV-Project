@@ -77,8 +77,8 @@ end
 
 
 ## RUN STUFF
-@time( uniform_sample(16, 2*10^8, false) )
-@time( uniform_sample(16, 5*10^8, false) )
+@time( uniform_sample(16, 2*10^5, false) )
+#@time( uniform_sample(16, 5*10^8, false) )
 
 #uniform_sample(12, 2*10^7, false)
 #uniform_sample(20, 2*10^7, false)

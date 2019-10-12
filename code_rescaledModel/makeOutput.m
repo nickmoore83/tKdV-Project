@@ -2,8 +2,7 @@ function makeOutput(filename)
     % Load the output file.
     load([filename,'.mat']);
     % Basic parameters.
-    JJ = size(uarray,1); 
-    assert(JJ == 2*Lambda);
+    assert(JJ == size(uarray,1));
     assert(MC == size(uarray,2));
     Ntout = size(uarray,3);
     % Flatten the array of u into a single list.

@@ -1,5 +1,5 @@
 function [uarray,duarray] = SolverKdV_SymplecticM4a_MC(...
-    C2,C3,Drat,Lambda,MC,theta,gibd,fi,dt,nout,tfin)  
+    C2,C3,Drat,JJ,MC,theta,gibd,fi,dt,nout,tfin)  
 
 % This script solves the rescaled KdV equation in a periodic domain
 % using pseudo-spectral & symplectic M4a integrator
@@ -7,7 +7,7 @@ function [uarray,duarray] = SolverKdV_SymplecticM4a_MC(...
 % Input
 % C2 and C3: Constants in Hamiltonian.
 % Drat: Depth ratio; reference Drat = 0.24.
-% Lambda: Number of modes; reference Lambda = 16.
+% JJ: Number of grid points; reference JJ = 32.
 % MC: The number of trajectories; reference MC = 1E4.
 % theta: The inverse temperature; range 10-20.
 % gibd: The Gibbs distribution to sample the initial state.
@@ -17,7 +17,6 @@ function [uarray,duarray] = SolverKdV_SymplecticM4a_MC(...
 % tfin: The stopping time of the simulation; reference tfin = 10.
 
 % Set simulation parameters
-JJ = 2*Lambda;          % Number of grid points.
 Nt = round(tfin/dt);    % Number of time steps.
 MM = round(Nt/nout);    % Save output every MM steps.
 um = 0.;                % zero momentum
