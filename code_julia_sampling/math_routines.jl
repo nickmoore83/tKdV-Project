@@ -99,25 +99,39 @@ function getuhat(rvar::Array{Float64}, nn::Int)
 	uhat = rvar[:,1,nn]+im*rvar[:,2,nn]
 	return uhat/sqrt(energy(uhat))
 end
-#= Sample from a uniform distribution on the hypershpere E=1. =#
-function uniform_sample(nmodes::Int, nsamples::Int, savemicro::Bool)
-	rvar = randn(nmodes,2,nsamples)
-	H2vec, H3vec = [zeros(Float64,nsamples) for nn=1:2]
+#= Sample a single sweep from a uniform distribution on the hypershpere E=1. =#
+function sample_one_sweep(nmodes::Int, nsamp::Int)
+	rvar = randn(nmodes,2,nsamp)
+	H2vec, H3vec = [zeros(Float64,nsamp) for nn=1:2]
 	## Later parralelize this step. #@parallel
 	# Compute H3 and H2 for each sample in a parallel for loop.
-	for nn=1:nsamples
+	for nn = 1:nsamp
 		uhat = getuhat(rvar,nn)
 		H2vec[nn] = ham2(uhat); H3vec[nn] = ham3(uhat)
-		if mod(nn, 10^4) == 0
-			println("Uniform sampling ", 
-				round(100*nn/nsamples,sigdigits=3), "% completed.")
-		end
 	end
-	savemicro ? rsave = Float32.(rvar) : rsave = []
-	savefile = string("rand-", string(nmodes), "-", string(nsamples), ".jld")
-	save(savefile, "rr", RandList(rsave,H2vec,H3vec),
-		"nmodes", nmodes, "nsamples", nsamples)
-	return
+	rlist = RandList(Float32.(rvar), H2vec, H3vec)
+	return rlist
+end
+#= Sample several sweeps from a uniform distribution on the hypershpere E=1.
+Using several sweeps manages the memory better. =#
+function uniform_sample(nmodes::Int, nsweeps::Int, savemicro::Bool)
+	samp_per = 10^5
+	totsamp = nsweeps*samp_per
+	H2vec, H3vec = [zeros(Float64,totsamp) for nn=1:2]
+	for nn = 1:nsweeps
+		rlist = sample_one_sweep(nmodes, samp_per)
+		indrange = (nn-1)*samp_per+1 : nn*samp_per
+		H2vec[indrange] = rlist.H2
+		H3vec[indrange] = rlist.H3
+		println("Sweep ",nn,", ",sig(100*nn/nsweeps,3),"% completed.")
+	end
+	savefile = string("rand-", string(nmodes), "-", string(nsweeps), ".jld")
+	save(savefile, "rr", RandList([],H2vec,H3vec),
+		"nmodes", nmodes, "nsweeps", nsweeps, "totsamp", totsamp)
+
+	## NOTE: savemicro not yet addressed at all.
+	# OLD RELEVANT CODE SNIPPET:
+	#savemicro ? rsave = Float32.(rvar) : rsave = []
 end
 #---------------------------------------#
 
