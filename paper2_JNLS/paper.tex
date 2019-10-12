@@ -401,15 +401,15 @@ where again $\Ham = \Hup$ if $t<0$, and $\Ham = \Hdn$ if $t>0$ and $\{\}$ is the
 
 We now introduce the truncated KdV (TKdV) system, which is the main focus of this study. Consider the Fourier series of the state variable
 \begin{align}
-&u(x,t) = \sum_{k=-\infty}^{\infty} \uhat_k e^{i k x} \, , \\
+&u(x,t) = \sum_{k=-\infty}^{\infty} \uhat_k(t) \, e^{i k x} \, , \\
 \label{uhat}
-&\uhat_k = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x) e^{-i k x} \dx
+&\uhat_k(t) = \frac{1}{2 \pi} \int_{-\pi}^{\pi} u(x,t) \, e^{-i k x} \dx
 \end{align}
 Since $u$ is real valued, $\uhat_{-k} = \uhat_{k}^*$, and since momentum vanishes $\uhat_0 = 0$.
 Next, consider the Galerkin truncation at wave number $\Lambda$
 \begin{align}
 \uL(x,t) = \Proj u =
-\sum_{\abs{k} \le \Lambda} \uhat_k e^{i k x} \, , \qquad
+\sum_{\abs{k} \le \Lambda} \uhat_k(t) \, e^{i k x} \, , \qquad
 \end{align}
 where $\Proj$ is a projection operator and \eqref{uhat} still holds. Projecting the KdV equation \eqref{dimlessKdV} onto the finite dimensional space gives the truncated KdV equation (TKdV)
 \begin{align}
@@ -450,14 +450,14 @@ In summary, the TKdV system possesses three important invariants: momentum, ener
 %----------------------------------------------------------------------------%
 \subsection{Mixed microcanonical-canonical Gibbs ensemble}
 
-	In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced by Abramov et al.~for the Burgers-Hopf system \cite{abramov2003}. Specifically, this ensemble is microcanonical in energy and canonical in the Hamiltonian. The reason to introduce this ensemble is the sign indefiniteness of the cubic term $\Hthree$ in the Hamiltonian, which would cause a simple canonical distribution to diverge at infinity. The mixed ensemble, however, fixes the energy and hence confines dynamics to the compact set of the unit hypersphere $\En = 1$. Since the Hamiltonian is a continuous, its value is bounded on the unit hypersphere, and thus the mixed ensemble produces a normalizable distribution. This construction applies equally well to the truncated or untruncated KdV system and hence we will not distinguish between the two. We note that other possible constructions may be applicable too \cite{kleeman2014nonequilibrium}.
+	In examining statistical mechanics of this Hamiltonian system, we will appeal to the idea of a {\em mixed microcanonical-canonical} Gibbs ensemble, as originally introduced by Abramov et al.~for the Burgers-Hopf system \cite{abramov2003}. Specifically, this ensemble is microcanonical in energy and canonical in the Hamiltonian. The reason this ensemble is needed is the sign indefiniteness of the cubic term $\Hthree$ in the Hamiltonian, which would cause a simple canonical distribution to diverge at infinity. The mixed ensemble, however, fixes the energy and hence confines dynamics to the compact set of the unit hypersphere $\En = 1$. Since the Hamiltonian is continuous, its value is bounded on the unit hypersphere, and thus the mixed ensemble produces a normalizable distribution. This construction applies equally well to the truncated or untruncated KdV system and hence we will not distinguish between the two. We note that other possible constructions may be applicable too \cite{kleeman2014nonequilibrium}.
 	
 	On either side of the ADC, the mixed ensemble, or {\em Gibbs measure}, follows directly from the corresponding Hamiltonian via
 \begin{align}
 \label{Gibbs}
 \Gupdn = Z_{\thupdn}^{-1} \, \exp(-\thupdn \Hupdn) \delta(\En - 1)
 \end{align}
-Here $\theta = \thupdn$ is the inverse temperature, which will take a different value on either side of the ADC, and $Z_{\theta}$ a constant that depends on $\theta$. Each measure $\Gupdn$ induces a corresponding ensemble average, denoted $\mean{}_{\pm}$. 
+Here $\theta = \thupdn$ is the inverse temperature, which will take a different value on either side of the ADC, and $Z_{\theta}$ a constant that depends on $\theta$. Each measure $\Gupdn$ induces a corresponding ensemble average, denoted $\mean{\cdot}_{\pm}$. 
 
 % NOTES
 % 1) The PNAS paper uses C_theta^{1}. The Majda, Qi Stat Phys paper uses C_theta sometimes and C_theta^{-1} in other places (page 11). So I'll just pick the one I like better.
@@ -483,27 +483,30 @@ Note that if $\theta = 0$, then the Gibbs measure is a {\em uniform} measure on 
 %----------------------------------------------------------------------------%
 % Matching
 %----------------------------------------------------------------------------%
-\subsection{Matching conditions and the transfer function}
+\subsection{Matching at the ADC}
 
-	Recall that the abrupt depth change is met by traveling waves at some time $t = T_{ADC}$, and for simplicity we set $T_{ADC} = 0$. The KdV equations govern the evolution and nonlinear dispersion of waves over long timescales, $t \gg \delta^{-2}$. Meanwhile, wave evolution over shorter timescales, $t \ll \delta^{-2}$, is much simpler in that it is simply noninteracting traveling waves with uniform wave speed $c = \sqrt{g \depth}$ (i.e. no nonlinearity and no dispersion). Hence, a short instant after waves pass over the ADC, the waveform does not yet have time to alter significantly, which gives the (deterministic) matching condition
-\begin{align}
-u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+},
+	Recall that the abrupt depth change is met by traveling waves at time $T_{ADC} = 0$, set to zero for convenience. The KdV equations describe wave dynamics over {\em long} timescales, $t \gg \timescale$, capturing weakly nonlinear and weakly dispersive effects. Meanwhile, evolution over shorter timescales is simply described by linear theory. The event of a wave crossing the ADC is precisely such a short-time event, and so we will employ matching conditions at the ADC that result from linear theory. 
+
+	More specifically, we assume continuity of the surface displacement, $\eta$, at the ADC \nick{(cite)}. Since the temporal fluctuations of $\eta$ match, waves crossing the ADC must rapidly adjust in wavelength so as to attain the same frequency in two different depths --- a well-understood phenomenon \nick{(cite)}. Of course, since the normalized domain $x \in [-\pi,\pi]$ is scaled on the characteristic wavelength, there is no change in the dimensionless wave-field $u(x,t)$, giving the condition
+\begin{equation}
+\label{detmatch}
+u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+}, 
+%\quad \mbox{for } -\pi \le x \le \pi,
 \qquad \mbox{\em Deterministic matching condition}
-\end{align}
-holding for $x \in [-\pi, \pi]$. This matching condition is used for the dynamical system \eqref{TKdV}.
-%or in Johnson's formulation, it is $\depth^{1/4} \eta$ that matches.
+\end{equation}	
+We call \eqref{detmatch} the deterministic matching condition to contrast with its statistical counterpart introduced below. This matching condition is employed in the deterministic simulations of the TKdV dynamical system \eqref{TKdV}. We note that in the alternate formulation mentioned earlier, it is the product $\depth^{1/4} \eta$ that would match at the ADC \cite{johnson1997modern}.
 
-	Since $u$ matches for every single trajectory, it must also match in the statistical sense. Moreover, the downstream Hamiltonian $\Hdn$ is a functional of $u$ and hence must also match. This gives the {\em statistical matching condition}
+	Now, from the perspective of statistical mechanics, consider the communication between the statistical ensembles, $\Gupdn$, upstream and downstream of the ADC. These two systems are in contact at the ADC, and so the upstream state $\Gup$ can be regarded as a thermal reservoir that influences the downstream state $\Gdn$. In fact, the above deterministic  condition directly leads to a simple description for the link. The quantity of interest is the outgoing Hamiltonian $\Hdn$, since its value at $t=0^{-}$ is set by the upstream dynamics, and then this particular value is conserved thereafter in the downstream dynamics. Since $u$ matches at the ADC, so must $\Hdn$, and, in fact, this matching holds for every individual trajectory. Recall that $\Hdn(t)$ is not conserved in the upstream dynamics and so its value varies for $t < 0$. However, appealing to weak Ergodicity of the system, the ensemble mean $\meanup{\Hdn(t)}$ is expected to be independent of time. In particular, the value $\meanup{\Hdn \vert_{t=0^{-}} }$ is the same as the bare ensemble mean $\meanup{\Hdn}$. Afterwards, the particular value $\Hdn \vert_{t=0^{-}}$ is conserved in the downstream dynamics, on a trajectory-by-trajectory basis and for all time. Thus, the downstream measure $\Gdn$ must recover the ensemble mean $\meanup{\Hdn \vert_{t=0^{-}} }$, which gives the statistical matching condition
 \begin{align}
 \label{statmatch}
 \meanup{\Hdn} = \meandn{\Hdn}
 \qquad \mbox{\em Statistical matching condition}
 \end{align}
-Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field.
 
-\todo[inline]{Here: Explain intuitive justification for matching condition}
 
-\nick{The downstream Hamiltonian is not conserved upstream and will vary dynamically in upstream wavefield. Once the wavefield crosses the ADC, whatever value $\Hdn$ happens to be is locked in for the rest of the time (is conserved thereafter). Hence, the downstream hamiltonian must match at the ADC on a trajectory by trajectory basis. Therefore, it must match statistically.}
+\vsp{5}
+
+
 
 \vsp{5}
 	The statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by matching statistics at the ADC. In this way, \eqref{statmatch} implies the functional dependence
@@ -511,6 +514,12 @@ Once $\Hdn$ downstream is determined, it is conserved in the outgoing wave field
 \thdn = \transf \left( \thup \right)
 \end{equation}
 The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
+
+% NOTES
+%Further, since the regime is shallow, short-time dispersive effects are minimal, meaning that all waves travel at nearly the same speed $c = \sqrt{g \depth}$, independent of wavelength.
+
+
+
 
 
 %----------------------------------------------------------------------------%
