@@ -19,6 +19,7 @@ Instructions\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulnone - In transfun(), change lamfac to be a function input.\
 - Have to manage the memory better in transfun(). I could read the values of hup and hdn as single precision numbers.\
+- I should probably save the H2 and H3 lists as Float32 in sampling.\
 - In the long run, the better strategy is to sample from a better prior, or to do some basic AR because transfun has to deal with enormously long lists and the vast majority of those are wasted in the mean because their weight is nearly zero.\
 \
 \
