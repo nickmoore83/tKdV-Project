@@ -496,7 +496,7 @@ u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+},
 \end{equation}	
 We call \eqref{detmatch} the deterministic matching condition to contrast with its statistical counterpart introduced below. This matching condition is employed in the deterministic simulations of the TKdV dynamical system \eqref{TKdV}. We note that in the alternate formulation mentioned earlier, it is the product $\depth^{1/4} \eta$ that would match at the ADC \cite{johnson1997modern}.
 
-	Now, from the perspective of statistical mechanics, consider the communication between the statistical ensembles, $\Gupdn$, upstream and downstream of the ADC. These two systems are in contact at the ADC, and so the upstream state $\Gup$ can be regarded as a thermal reservoir that influences the downstream state $\Gdn$. In fact, the above deterministic  condition directly leads to a simple description for the link. The quantity of interest is the outgoing Hamiltonian $\Hdn$, since its value just upstream of the ADC, $t=0^{-}$, is set by the upstream dynamics, and then this particular value is conserved thereafter in the downstream dynamics. Since $u$ matches at the ADC, so must $\Hdn$, and, in fact, this matching holds for every individual trajectory. Recall that $\Hdn(t)$ is not conserved in the upstream dynamics and so its value varies for $t < 0$. However, appealing to weak Ergodicity, the ensemble mean $\meanup{\Hdn(t)}$ is expected to be independent of time. In particular, the value $\meanup{\Hdn \vert_{t=0^{-}} }$ is the same as the bare ensemble mean $\meanup{\Hdn}$. Afterwards, the particular value $\Hdn \vert_{t=0^{-}}$ is conserved in the downstream dynamics, on a trajectory-by-trajectory basis and for all $t>0$. Thus, the downstream measure $\Gdn$ must recover the same ensemble mean $\meanup{\Hdn \vert_{t=0^{-}} } = \meanup{\Hdn}$, producing the simple condition
+	Now, from the perspective of statistical mechanics, consider the communication between the statistical ensembles, $\Gupdn$, upstream and downstream of the ADC. These two systems are in contact at the ADC, and so the upstream state $\Gup$ can be regarded as a thermal reservoir that influences the downstream state $\Gdn$. In fact, the above deterministic  condition directly leads to a simple description for the link. The quantity of interest is the outgoing Hamiltonian $\Hdn$, since its value just upstream of the ADC, $t=0^{-}$, is set by the incoming dynamics, and then this particular value is conserved thereafter in the outgoing dynamics. Since $u$ matches at the ADC, so must $\Hdn$, and, in fact, this matching holds for every individual trajectory. Recall that $\Hdn(t)$ is not conserved in the upstream dynamics and so its value varies for $t < 0$. However, appealing to weak Ergodicity, the ensemble mean $\meanup{\Hdn(t)}$ is expected to be independent of time. In particular, the value $\meanup{\Hdn \vert_{t=0^{-}} }$ is the same as the bare ensemble mean $\meanup{\Hdn}$. Afterwards, the particular value $\Hdn \vert_{t=0^{-}}$ is conserved in the downstream dynamics, on a trajectory-by-trajectory basis and for all $t>0$. Thus, the downstream measure $\Gdn$ must recover the same ensemble mean $\meanup{\Hdn \vert_{t=0^{-}} } = \meanup{\Hdn}$, producing the simple condition
 \begin{align}
 \label{statmatch}
 \meanup{\Hdn} = \meandn{\Hdn}
@@ -670,7 +670,7 @@ Finally, it should be commented that the experimental measurements of slope invo
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
-\includegraphics[width = 0.99 \linewidth]{Figs/trajectories.pdf}
+\includegraphics[width = 0.9 \linewidth]{Figs/trajectories.pdf}
 \caption{
 Sample upstream and downstream solution trajectories from the same ensemble TKdV simulations featured in Figs.~\ref{uhist} and \ref{slopehist}. The upstream solutions exhibit only leftward propagating waves and a high degree of regularity, while the downstream solutions exhibit both left and rightward moving waves along with more intermittency.
 }
@@ -720,7 +720,7 @@ This condition can be written more explicitly as
 C_2 \dratdn^{1/2} \, \meanup{\Htwo} - C_3 \dratdn^{-3/2} \, \meanup{\Hthree } = 
 C_2 \dratdn^{1/2} \, \meandn{\Htwo} - C_3 \dratdn^{-3/2} \, \meandn{\Hthree }
 \end{equation}
-Both the experiments and simulations show the upstream skewness to be negligible compared to the downstream skewness, allowing the term with $\meanup{\Hthree }$ to be dropped in \eqref{statmatchexp}. With this approximation, \eqref{statmatchexp} yields the relationship
+Both the experiments and simulations show the upstream skewness to be negligible compared to its downstream counterpart, allowing the term with $\meanup{\Hthree }$ to be dropped in \eqref{statmatchexp}. With this approximation, \eqref{statmatchexp} yields the relationship
 \begin{equation}
 \label{H3H2ratio}
 \frac{\meandn{\Hthree}} {\meandn{\Htwo} - \meanup{\Htwo}} = \frac{C_2}{C_3} \dratdn^2
@@ -733,7 +733,7 @@ Both the experiments and simulations show the upstream skewness to be negligible
 \frac{1}{3 \pi^{1/2}} \frac{\meandn{\eta^3}}{ \etastd^3} = 
 \frac{1}{3 \pi^{1/2}} \skwdn(\eta)
 \end{align}
-This equation simply says that the expected value of $\Hthree$ is directly related to the outgoing skewness.
+This equation expresses a directly relationship between the expected value of $\Hthree$ and the outgoing skewness of surface displacement.
 Next, we must convert the $\Htwo$-quantities, which involve surface slope. Here, it is important to remember that, since it is the {\em downstream} Hamiltonian that is matched in \eqref{statmatch}, one must use the {\em downstream} characteristic scale $\lengthscale_+$ to convert back into physical variables. Using the definition of $\Htwo$ in Eq.~\eqref{H3H2} and $\lengthscale_+$ in Eq.~\eqref{scales} gives
 \begin{align}
 \label{H2convert}
@@ -742,33 +742,31 @@ Next, we must convert the $\Htwo$-quantities, which involve surface slope. Here,
 \end{align}
 Inserting \eqref{H3convert} and \eqref{H2convert} into \eqref{H3H2ratio}, and using the definitions of $C_2$ and $C_3$ from \eqref{C3C2}, gives the remarkably explicit formula
 \begin{equation}
+\label{SkewPred}
 \frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^3 
 %= \frac{1}{3} \left( \frac{\ddn}{\etastd} \right)^3
 \end{equation}
-This formula links the skewness of the outgoing wave field to the change in the variance of surface slope. In particular, it predicts that their ratio to scale as the {\em inverse cube of wave amplitude} and the {\em cube of the depth ratio}, as seen on the right-hand-side of the equation. It is a rather unexpected relationship, as it would be difficult to anticipate that the displacement skewness and slope variance, among all possibilities, are so intimately related.
+This formula links the skewness of the outgoing wave field to the change in the variance of surface slope. In particular, it predicts that their ratio to scale as the {\em inverse cube of wave amplitude}, $\epsup^{-3}$, and the {\em cube of the depth ratio}, $\dratdn^3$. It is a rather unexpected relationship, as it would have been difficult to anticipate that the displacement skewness and slope variance, among all possibly variable combinations, are so intimately related.
  
-
-
-
-
-
-\vsp{3}
-In particular, the ratio on the left, which can be measured in the experiments, is predicted to scale as the inverse cube of the wave amplitude and as the square of the depth ratio.
-% Note: previously I had D^2 on the RHS. The power of 3 comes from using lamdn consistently in the nondimensionalization.
-
-% Figure
+ % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 \begin{figure}%[!ht]
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/SkewRat.pdf}
 \caption{
-Relationship predicted by the theory and confirmed by experiments.
+Experimental confirmation of the explicit formula for outgoing skewness \eqref{SkewPred}.
+(a)--(b) Spatial variation of $\skw(\eta)$ and $\var(\eta_x)$ for several different amplitudes. The maximum of $\skw(\eta)$ and the minimum of $\var(\eta_x)$ each occur at a location that is insensitive to amplitude, $x = $15 cm (blue) and -9 cm respectively (green), which are chosen as the representative locations to evaluate \eqref{SkewPred}.
+(c) Measurements of the ratio $\skw(\eta) / \Delta \var(\eta_x)$ from 15 different experiments plotted against the dimensionless wave amplitude $\epsup$. For sufficiently large amplitude, the measurements fit closely with the -3 power law predicted by \eqref{SkewPred}.
 }
-\label{AAA}
+\label{SkewRat}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  %New experimental measurements guided by theory
+ 
+	Fortunately, it is a relationship that can be tested directly against our experimental measurements, specifically the type of data that was presented in Fig.~\ref{ExpSpatialStats}. The the prediction draws our attention to the spatial variation of displacement skewness, which we replot for convenience in Fig.~\ref{SkewRat}(a), and the variance of surface slope, shown in Fig.~\ref{SkewRat}(b). For the representative downstream values, $\skwdn(\eta)$ and $\vardn(\eta_x)$, we select the location of the skewness peak, $x=15$ cm downstream of the ADC. We must also select an upstream location for $\varup(\eta_x)$. Fig.~\ref{SkewRat}(b) suggests that an asymptotic value may be reached far upstream of the ADC, but the data does not extend that far. On the other hand, there appears to be a well-defined minimum in $\varup(\eta_x)$ that occurs at the same position for all driving amplitudes. We thus select this minimum position, $x = -9$ cm upstream of the ADC to measure $\varup(\eta_x)$.
+
+
 
 
 
