@@ -6,9 +6,9 @@ include("math_routines.jl")
 include("io_routines.jl")
 
 function transfun(randfile::AbstractString)
-	rr, nmodes, nsamples = load(randfile, "rr", "nmodes", "nsamples")
+	rr, nmodes, totsamp = load(randfile, "rr", "nmodes", "totsamp")
 	println(nmodes)
-	println(nsamples)
+	println(totsamp)
 
 	# Parameters
 	eps0 = 0.017
