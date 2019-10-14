@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
 {\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
@@ -7,20 +7,33 @@
 
 \f0\fs28 \cf0 \ul \ulc0 \
 Instructions\
-\ulnone \'95 uniform_sample(nmodes, nsamples) samples from the uniform distribution and produces the output file \'93randlist.jld\'94. Here nmodes = Lambda is specified by lamfac = N is not specified.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone \'95 uniform_sample(nmodes, nsamples) samples from the uniform distribution and produces the output file \'93randlist.jld\'94. Here nmodes = Lambda is specified by lamfac = N is not specified.\
 \
 \'95 transfun(\'93rand-8-2e6\'94) computes the transfer function and makes plots of F and the skewness. It produces the output file \'93thvars.jld\'94. Here N is set inside the code.\ul \
 \
 \ulnone \'95 output_text(\'93thvars-16-8.jld\'94) converts the julia file to a text file for DataTank to read.\
 \
-\ul Results\
-\ulnone \'95 I am running some tests with Lambda = 4, 8, 16, 32 and N set to either Lambda/2 or N fixed as Lambda increases. The trends from Lambda = 8 to 16 look very reasonable, with the transfer function and skewness change very little as long as N = Lambda/2. But the results from Lamda = 32 look pretty different. My suspicion is that the statistics are under-resolved, so now I am trying Lambda = 4.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul To Do\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone - In transfun(), change lamfac to be a function input.\
+- Have to manage the memory better in transfun(). I could read the values of hup and hdn as single precision numbers.\
+- In the long run, the better strategy is to sample from a better prior, or to do some basic AR because transfun has to deal with enormously long lists and the vast majority of those are wasted in the mean because their weight is nearly zero.\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Results\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone \'95 I am running some tests with Lambda = 4, 8, 16, 32 and N set to either Lambda/2 or N fixed as Lambda increases. The trends from Lambda = 8 to 16 look very reasonable, with the transfer function and skewness change very little as long as N = Lambda/2. But the results from Lamda = 32 look pretty different. My suspicion is that the statistics are under-resolved, so now I am trying Lambda = 4.\
 \'95 I quantitatively compared my Julia computation of the transfer function versus results from the Matlab DNS. While the two give results in the same ballpark, there are slight discrepancies. For example, in the case Lambda=16, N=8, to obtain a downstream skewness of 0.83, my Julia code suggests I need thup = 17, but for this value the Matlab DNS gives a skewness of about 0.65-0.7. The discrepancy could be at least two things: \
 1) Under-sampling in the Julia algorithm, since I would require more samples than MCMC.\
 2) My computation of H3, in particular did I upsample enough?\
 \
-\ul Tests\
-\ulnone \'95 I am testing the Julia transfer code with Lambda = 16, N = 8.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Tests\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone \'95 I am testing the Julia transfer code with Lambda = 16, N = 8.\
 - A sample size of 2*10^7 gives thup = 17.0, thdn = 14.6, skewdn = 0.818 (run a)\
 - The same exact parameters but a different random list gives thup = 17.0, thdn = 13.9, skewdn = 0.828 (run b)\
 - Increasing the sample size to 10^7 gives thup = 17.0, thdn = 13.8, skewdn = 0.799\ul \
@@ -28,25 +41,33 @@ Instructions\
 \ulnone - Changing Lambda to 15 and using 10^7 samples gives thup = 17.0, thdn = 12.0, skewdn = 0.794. So changing Lambda does not significantly change skewdn.\ul \
 \ulnone - Changing Lambda to 14 gives thup = 17.0, thdn = 12.\'e53, skewdn = 0.743. So decreasing Lambda decreases the skewness, which is the correct direction to agree with Matlab DNS.\
 \
-\ul Saved Data\
-\ulnone Data 1 Oct 8 uses nsamples = 2e6\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Saved Data\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Data 1 Oct 8 uses nsamples = 2e6\
 Data 2 Oct 8 uses nsamples = 2e7, and somehow makes uglier plots.\
 \
 \
-\ul Sep 16, 2019\
-\ulnone I looked back at my sampling codes and they are too complicated for me to understand, so I am rewriting them. I need to write them to fit the new framework, i.e. the new non-dimensionalization I introduced for the JNLS paper.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Sep 16, 2019\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone I looked back at my sampling codes and they are too complicated for me to understand, so I am rewriting them. I need to write them to fit the new framework, i.e. the new non-dimensionalization I introduced for the JNLS paper.\
 \
-\ul Things done\ulnone \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Things done\ulnone \
 - 9/16: I modified the function getham() to fit the new framework.\ul \
-\ulnone - 9/16: I corrected a bug in ham3 (changed length(uhat) to length(uu) ).\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone - 9/16: I corrected a bug in ham3 (changed length(uhat) to length(uu) ).\
 - 9/16: I verified that my sampling code and Di\'92s Matlab DNS give the roughly same statistical results for the same input; e.g. they give roughly the same outgoing theta, outgoing skewness, skewness ratio, etc. However, upon closer inspection there are slight differences.\ul \
 \ulnone \
 - 10/8: I modified uniform_sample so that saving the microstate is optional. I want it to be optional because that eats up the most memory and it is often not necessary. Also, if the microstate is saved, I save it in single precision Float32 to save space.\
 \
 \
 \
-\ul Little things\
-\ulnone - meanham() is not specific to the mean of a hamiltonian. The same code could compute the mean of any quantity.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Little things\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone - meanham() is not specific to the mean of a hamiltonian. The same code could compute the mean of any quantity.\
 - I compute C2 and C3 with a function, then put them into the ConstantList with another function, but this could be done in the same routine maybe.\
 - Is npoints() only used inside irealfft()? If so, maybe it does not need to be its own function.\
 - Similar, is getuhat() only used inside uniform_sample?\ul \
