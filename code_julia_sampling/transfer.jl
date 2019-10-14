@@ -6,7 +6,7 @@ include("math_routines.jl")
 include("io_routines.jl")
 
 function transfun(randfile::AbstractString, lamfac::Int)
-	rr, nmodes = load(randfile, "rr", "nmodes")
+	rr, nmodes, nsweeps = load(randfile, "rr", "nmodes", "nsweeps")
 	# Parameters
 	eps0 = 0.017
 	del0 = 0.23
@@ -36,9 +36,10 @@ function transfun(randfile::AbstractString, lamfac::Int)
 		println("Upstream skewness = ", sig(skup[nn],3))
 		println("Downstream skewness = ", sig(skdn[nn],3), "\n")
 	end
-	savefile = string("thvars-", string(nmodes), "-", string(lamfac), ".jld")
-	save(savefile, "thup", thup, "thdn", thdn, 
-		"skup", skup, "skdn", skdn, "nmodes", nmodes, "lamfac", lamfac)
+	savefile = string("thvars-", string(nmodes), "z-", 
+		string(lamfac), "-", string(nsweeps), ".jld")
+	save(savefile, "thup", thup, "thdn", thdn, "skup", skup, "skdn", skdn, 
+		"nmodes", nmodes, "lamfac", lamfac, "nsweeps", nsweeps)
 end
 
 function plotstuff(datafile::AbstractString)
@@ -63,19 +64,11 @@ end
 
 function output_text(datafile::AbstractString)
 	thup,thdn,skup,skdn = load(datafile, "thup", "thdn", "skup", "skdn")
-	nmodes,lamfac = load(datafile, "nmodes", "lamfac")
+	nmodes,lamfac,nsweeps = load(datafile, "nmodes", "lamfac", "nsweeps")
 	nthvals = length(thup)
 	ratio = skdn./skup
 	outdata = [nmodes; lamfac; nthvals; thup; thdn; skup; skdn]
-	outfile = string(datafile,".txt")
+	outfile = string("transf-", string(nmodes), "z-", 
+		string(lamfac), "-", string(nsweeps), ".txt")
 	writedata(outdata, outfile)
 end
-
-
-## RUN STUFF
-#@time( uniform_sample(16, 2, false) )
-
-#@time( transfun("rand-16z-1000.jld", 8) )
-
-#output_text("thvars-16z-8-1000.jld")
-

@@ -1,5 +1,10 @@
 ## RUN STUFF
-#@time( uniform_sample(16, 2, false) )
+include("transfer.jl")
+
+
+
+
+@time( uniform_sample(16, 2) )
 
 #@time( transfun("rand-16z-1000.jld", 8) )
 

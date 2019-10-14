@@ -91,6 +91,12 @@ end
 function meanham(ham, hamgibbs, theta)
 	return dot(exp.(-theta*hamgibbs), ham) / sum(exp.(-theta*hamgibbs))
 end
+#= Compute the skewness of the displacement, u or eta. =#
+function skewu(H3, hamgibbs, theta)
+	meanH3 =  dot(exp.(-theta*hamgibbs), H3) / sum(exp.(-theta*hamgibbs))
+	skewu = 3*pi^(1/2)*meanH3
+	return skewu
+end
 #---------------------------------------#
 
 #---------- Sampling Routines ----------#
@@ -100,15 +106,15 @@ function getuhat(rvar::Array{Float64}, nn::Int)
 	return uhat/sqrt(energy(uhat))
 end
 #= Sample a single sweep from a uniform distribution on the hypershpere E=1. =#
-function sample_one_sweep(nmodes::Int, nsamp::Int)
+function sample_one_sweep(nmodes::Int, nsamp::Int, zerolast::Bool)
 	rvar = randn(nmodes,2,nsamp)
-
 	# Zero out the last mode as is done in Matlab DNS.
-	rvar[nmodes,:,:] *= 0.
-
+	if zerolast
+		rvar[nmodes,:,:] *= 0.
+	end
+	# Compute H3 and H2 for each sample in a parallel for loop.
 	H2vec, H3vec = [zeros(Float64,nsamp) for nn=1:2]
 	## Later parralelize this step. #@parallel
-	# Compute H3 and H2 for each sample in a parallel for loop.
 	for nn = 1:nsamp
 		uhat = getuhat(rvar,nn)
 		H2vec[nn] = ham2(uhat); H3vec[nn] = ham3(uhat)
@@ -117,38 +123,27 @@ function sample_one_sweep(nmodes::Int, nsamp::Int)
 	return rlist
 end
 #= Sample several sweeps from a uniform distribution on the hypershpere E=1.
-Using several sweeps manages the memory better. =#
-function uniform_sample(nmodes::Int, nsweeps::Int, savemicro::Bool)
+Uses several sweeps manages the memory better. 
+Note: zerolast zeroes the last mode as is done in the Matlab DNS. 
+Note: savemicro not yet addressed at all. =#
+function uniform_sample(nmodes::Int, nsweeps::Int, 
+		zerolast::Bool=true, savemicro::Bool=false)
 	samp_per = 10^5
 	totsamp = nsweeps*samp_per
 	H2vec, H3vec = [zeros(Float32,totsamp) for nn=1:2]
 	for nn = 1:nsweeps
-		rlist = sample_one_sweep(nmodes, samp_per)
+		rlist = sample_one_sweep(nmodes, samp_per, zerolast)
 		indrange = (nn-1)*samp_per+1 : nn*samp_per
 		H2vec[indrange] = Float32.(rlist.H2)
 		H3vec[indrange] = Float32.(rlist.H3)
 		println("Sweep ",nn,", ",sig(100*nn/nsweeps,3),"% completed.")
 	end
-	savefile = string("rand-", string(nmodes), "z-", string(nsweeps), ".jld")
+	zerolast ? zstr = "z" : zstr = ""
+	savefile = string("rand-",string(nmodes),zstr,"-",string(nsweeps),".jld")
 	save(savefile, "rr", RandList([],H2vec,H3vec),
 		"nmodes", nmodes, "nsweeps", nsweeps, "totsamp", totsamp)
 
-	## NOTE: savemicro not yet addressed at all.
-	# OLD RELEVANT CODE SNIPPET:
+	# OLD RELEVANT CODE SNIPPET FOR SAVEMICRO:
 	#savemicro ? rsave = Float32.(rvar) : rsave = []
 end
 #---------------------------------------#
-
-
-
-
-#---------- New ----------#
-#= Compute the skewness of the displacement, u or eta.
-Note: the skewness of u (dimless) is the same as the skewness of eta (dimensional) =#
-function skewu(H3, hamgibbs, theta)
-	meanH3 =  dot(exp.(-theta*hamgibbs), H3) / sum(exp.(-theta*hamgibbs))
-	skewu = 3*pi^(1/2)*meanH3
-	return skewu
-end
-
-
