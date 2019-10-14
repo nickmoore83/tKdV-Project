@@ -23,7 +23,7 @@ function transfun(randfile::AbstractString, lamfac::Int)
 	nth = length(thup)
 	thdn = zeros(nth); skup = zeros(nth); skdn = zeros(nth)
 	guess = thup[1]
-	for nn = 1:2
+	for nn = 1:nth
 		meandiff(thdn) = meanham(hdn, hdn, thdn) - meanham(hdn, hup, thup[nn])
 		thdn[nn] = find_zero(meandiff, guess, Order1())
 		guess = thdn[nn]
