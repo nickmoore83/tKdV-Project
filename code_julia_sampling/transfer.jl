@@ -77,14 +77,10 @@ end
 
 
 ## RUN STUFF
-@time( uniform_sample(16, 2, false) )
+#@time( uniform_sample(16, 2, false) )
 
 
-#transfun("rand-16-2e7.jld")
-#transfun("rand-12-2e7.jld")
-#transfun("rand-20-2e7.jld")
+#transfun("rand-15-2000.jld")
 
-#output_text("thvars-16-8-2e7.jld")
-#output_text("thvars-12-6-2e7.jld")
-#output_text("thvars-20-10-2e7.jld")
+#output_text("thvars-15-8-2000.jld")
 
