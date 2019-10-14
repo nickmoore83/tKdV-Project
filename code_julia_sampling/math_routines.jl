@@ -104,7 +104,7 @@ function sample_one_sweep(nmodes::Int, nsamp::Int)
 	rvar = randn(nmodes,2,nsamp)
 
 	# Zero out the last mode as is done in Matlab DNS.
-	rvar[nmodes,:,:] = 0.
+	rvar[nmodes,:,:] *= 0.
 
 	H2vec, H3vec = [zeros(Float64,nsamp) for nn=1:2]
 	## Later parralelize this step. #@parallel
@@ -129,7 +129,7 @@ function uniform_sample(nmodes::Int, nsweeps::Int, savemicro::Bool)
 		H3vec[indrange] = Float32.(rlist.H3)
 		println("Sweep ",nn,", ",sig(100*nn/nsweeps,3),"% completed.")
 	end
-	savefile = string("rand-", string(nmodes), "-", string(nsweeps), ".jld")
+	savefile = string("rand-", string(nmodes), "z-", string(nsweeps), ".jld")
 	save(savefile, "rr", RandList([],H2vec,H3vec),
 		"nmodes", nmodes, "nsweeps", nsweeps, "totsamp", totsamp)
 
