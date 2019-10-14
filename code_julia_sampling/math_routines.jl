@@ -102,6 +102,10 @@ end
 #= Sample a single sweep from a uniform distribution on the hypershpere E=1. =#
 function sample_one_sweep(nmodes::Int, nsamp::Int)
 	rvar = randn(nmodes,2,nsamp)
+
+	# Zero out the last mode as is done in Matlab DNS.
+	rvar[nmodes,:,:] = 0.
+
 	H2vec, H3vec = [zeros(Float64,nsamp) for nn=1:2]
 	## Later parralelize this step. #@parallel
 	# Compute H3 and H2 for each sample in a parallel for loop.
