@@ -10,9 +10,5 @@ include("transfer.jl")
 
 
 # RUNS
-#@time( transfun("rand-8z-1000.jld", 4) )
-
  @time( transfun("rand-12z-1000.jld", 8) )
  @time( transfun("rand-12z-1000.jld", 6) )
-
- 
