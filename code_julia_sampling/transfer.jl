@@ -23,9 +23,8 @@ function transfun(randfile::AbstractString, lamfac::Int)
 	nth = length(thup)
 	thdn = zeros(nth); skup = zeros(nth); skdn = zeros(nth)
 	guess = thup[1]
-	meandiffupdn(thdn,thup) = meanham(hdn,hdn,thdn) - meanham(hdn,hup,thup)
 	for nn = 1:2
-		meandiff(thdn) = meandiffupdn(thdn,thup[nn])
+		meandiff(thdn) = meanham(hdn, hdn, thdn) - meanham(hdn, hup, thup[nn])
 		thdn[nn] = find_zero(meandiff, guess, Order1())
 		guess = thdn[nn]
 		nn>1 ? guess = 2*thdn[nn] - thdn[nn-1] : 0.	# Linear extrapolation

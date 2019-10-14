@@ -117,12 +117,12 @@ Using several sweeps manages the memory better. =#
 function uniform_sample(nmodes::Int, nsweeps::Int, savemicro::Bool)
 	samp_per = 10^5
 	totsamp = nsweeps*samp_per
-	H2vec, H3vec = [zeros(Float64,totsamp) for nn=1:2]
+	H2vec, H3vec = [zeros(Float32,totsamp) for nn=1:2]
 	for nn = 1:nsweeps
 		rlist = sample_one_sweep(nmodes, samp_per)
 		indrange = (nn-1)*samp_per+1 : nn*samp_per
-		H2vec[indrange] = rlist.H2
-		H3vec[indrange] = rlist.H3
+		H2vec[indrange] = Float32.(rlist.H2)
+		H3vec[indrange] = Float32.(rlist.H3)
 		println("Sweep ",nn,", ",sig(100*nn/nsweeps,3),"% completed.")
 	end
 	savefile = string("rand-", string(nmodes), "-", string(nsweeps), ".jld")
