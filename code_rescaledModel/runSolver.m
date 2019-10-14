@@ -5,7 +5,7 @@ epsi0 = 0.017;  % amplitude-to-depth ratio
 del0 = 0.23;    % depth-to-wavelength ratio
 Drat = 0.24;    % depth ratio.
 % Simulation parameters
-JJ = 32;    % Reference 16
+JJ = 32;        % Reference 32
 Nw = 8;         % Reference 8 or JJ/4.
 MC = 1E4;       % Reference 1E3 or 5E3 for tfin=10.
 % time step parameters
