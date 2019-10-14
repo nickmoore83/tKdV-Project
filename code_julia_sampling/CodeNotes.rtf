@@ -8,11 +8,11 @@
 \f0\fs28 \cf0 \ul \ulc0 \
 Instructions\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone \'95 uniform_sample(nmodes, nsamples) samples from the uniform distribution and produces the output file \'93randlist.jld\'94. Here nmodes = Lambda is specified by lamfac = N is not specified.\
+\cf0 \ulnone \'95 uniform_sample(nmodes, nsweeps) samples from the uniform distribution and produces the output.jld file rand. Here nmodes = Lambda is specified but lamfac = N is not specified. The number of samples per sweep is 1e5.\
 \
-\'95 transfun(\'93rand-8-2e6\'94, lamfac) computes the transfer function and makes plots of F and the skewness. It produces the output file \'93thvars.jld\'94.\ul \
+\'95 transfun(\'93rand-16-20\'94, lamfac) computes the transfer function and makes plots of F and the skewness. It produces the output.jld file thvars.\ul \
 \
-\ulnone \'95 output_text(\'93thvars-16-8.jld\'94) converts the julia file to a text file for DataTank to read.\
+\ulnone \'95 output_text(\'93thvars-16-8-20.jld\'94) converts the julia file to a text file for DataTank to read.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul Notes\
