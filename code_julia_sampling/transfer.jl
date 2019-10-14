@@ -75,7 +75,7 @@ end
 ## RUN STUFF
 #@time( uniform_sample(16, 2, false) )
 
-#transfun("rand-15-2000.jld", 8)
+#@time( transfun("rand-15-2000.jld", 8) )
 
 #output_text("thvars-15-8-2000.jld")
 
