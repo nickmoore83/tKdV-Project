@@ -8,3 +8,6 @@ include("transfer.jl")
 #@time( transfun("rand-16z-2.jld", 8) )
 #output_text("thvars-16z-8-2.jld")
 
+
+# RUNS
+#@time( transfun("rand-8z-1000.jld", 4) )
