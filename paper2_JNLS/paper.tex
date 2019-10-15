@@ -383,23 +383,27 @@ where $\drat = \dratupdn$ changes value across the ADC. More explicitly, substit
 &\Hup = C_2 \, \Htwo - C_3 \, \Hthree 						&& \text{for } t<0 \\
 &\Hdn = C_2 \dratdn^{1/2} \, \Htwo - C_3 \dratdn^{-3/2} \, \Hthree	&& \text{for } t>0
 \end{align}
-Here, we have chosen the sign of Lax \cite{lax1975periodic}. More recent work of Bajars et al.~\cite{bajars2013weakly} and Majda et al.~\cite{majda2019} use a different convention, in which both the signs of $\sympJ$ and $\Ham$ are opposite. Clearly, these sign differences cancel in \eqref{HamStruct} and thus the two conventions are completely equivalent. With their sign convention, Majda et al.~found that a {\em negative} inverse temperature is required to accurately describe the experimental observations \cite{majda2019}. We have  chosen the convention above so that a {\em positive} inverse temperature may be used, allowing our theory to fit into the most standard form of statistical mechanics.
+Here, we have chosen the sign convention of Lax \cite{lax1975periodic}. More recent work of Bajars et al.~\cite{bajars2013weakly} and Majda et al.~\cite{majda2019} use a different convention, in which both the signs of $\sympJ$ and $\Ham$ are opposite. Clearly, these sign differences cancel in \eqref{HamStruct} and thus the two conventions are completely equivalent. Using the second convention, Majda et al.~found that a {\em negative} inverse temperature is required to accurately describe the experimental observations \cite{majda2019}. We have  chosen the convention above so that a {\em positive} inverse temperature may be used, allowing our theory to fit into the most standard form of statistical mechanics.
 
 % Notes for myself on the sign change: Abramov CPAM 2003, Bajars Nonlinearity 2013, and our 2019 PNAS paper all use J = -d/dx with the opposite sign in the Hamiltonian. However, I was able to easily find several references online that use J = d/dx, so there is nothing wrong with it. The exact criteria that J has to satisfy are listed in the CPAM 2003 paper, and J = d/dx satisfies all these criteria just as well as J = -d/dx does.
 
-We introduce two important invariants of KdV, the momentum and the energy
+We introduce two important invariants of KdV, namely the momentum and the energy
 \begin{align}
 \label{MomEn}
 \Mo[u] \equiv \int_{-\pi}^{\pi} u \dx \, = 0 , \qquad
 \En[u] \equiv \frac{1}{2} \int_{-\pi}^{\pi} u^2 \dx = 1
 \end{align}
-As indicated above, the momentum of $u$ vanishes since it is measured as displacement from equilibrium. Second, by the scale chosen for $\ampscale$ in \eqref{scales}, the energy has been normalized to unity.
+As indicated above, the momentum of $u$ vanishes since it is measured as displacement from equilibrium. Second, due to the choice of $\ampscale$ in \eqref{scales}, the energy has been normalized to unity.
 
+
+% UNUSED POISSON BRACKET STUFF
+\begin{comment}
 The evolution of any functional $\mathcal{F}[u]$ is given by 
 \begin{align}
 \partial_t \mathcal{F} = \{ \mathcal{F}, \Ham \} = \int_{-\pi}^{\pi} \vard{\mathcal{F}}{u} \sympJ \vard{\Ham}{u} \dx
 \end{align}
 where again $\Ham = \Hup$ if $t<0$, and $\Ham = \Hdn$ if $t>0$ and $\{\}$ is the Poisson bracket induced by $\sympJ$.
+\end{comment}
 
 
 
@@ -431,14 +435,14 @@ C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2}
 \end{align}
 Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants $C_3$ and $C_2$ are the same as before and have been repeated here for convenience. 
 
-Briefly, consider the parameter $\lamfac$, the number of characteristic wavelengths in the physical domain. We require $\lamfac \le \Lambda$, so that the mode $\uhat_{\lamfac}$, corresponding to the characteristic wavelength $\lam$ in the experiments, is resolved in the truncated dynamical system. If $\lamfac = \Lambda$, then $\lam$ corresponds to the smallest resolved wavelength. In contrast, if $\lamfac$ is chosen as an intermediate value, e.g.~$\lamfac = \Lambda/2$ or $\Lambda/4$, then the truncated system \eqref{TKdV} resolves scales that are both bigger and smaller than the characteristic value $\lam$.
+Briefly, consider the parameter $\lamfac$, the number of characteristic wavelengths in the physical domain. We require $1 \le \lamfac \le \Lambda$, so that the mode $\uhat_{\lamfac}$, corresponding to the characteristic wavelength $\lam$ in the experiments, is resolved in the truncated dynamical system. If $\lamfac = \Lambda$, then $\lam$ corresponds to the smallest resolved wavelength. If instead $\lamfac$ is chosen as an intermediate value between 1 and $\Lambda$, then the truncated system will resolve scales that are both bigger and smaller than the characteristic value $\lam$.
 
 Remarkably, the TKdV system \eqref{TKdV} retains nearly the same Hamiltonian structure described in Section \ref{HamiltonianSection}, with the only modification being the inclusion of the projection operator \cite{bajars2013weakly, majda2019}. The piecewise defined Hamiltonian for TKdV is given by
 \begin{equation}
 \label{TruncHamiltonian}
 \HLupdn = C_2 \dratupdn^{1/2} \, \Htwo[\uL] - C_3 \dratupdn^{-3/2} \, \Hthree[\uL]
 \end{equation}
-where $\Hthree$ and $\Htwo$ the defined exactly as before \eqref{H3H2}, but now are simply applied to the projected variable $\uL = \Proj u$.
+where $\Hthree$ and $\Htwo$ are defined exactly as before \eqref{H3H2}, but now are simply applied to the projected variable $\uL = \Proj u$.
 Then TKdV \eqref{TKdV} can be expressed as
 \begin{align}
 \partial_t {\uL} = \partial_x \Proj \, \vard{\HLupdn}{\uL}
@@ -451,8 +455,8 @@ The momentum and energy defined in \eqref{MomEn} remain invariants of TKdV, with
 \En[\uL] = 2 \pi \sum_{k=1}^{\Lambda} \abs{\uhat_k}^2 = 1
 \end{equation}
 % The above agrees with the first line on top of p. 4 in Majda and Qi J Stat Phys 2019.
-Thus, the dynamics of interest are confined to the unit hypersphere of $\En = 1$ in $\CC^{\Lambda}$.
-In summary, the TKdV system possesses three important invariants: momentum, energy, and hamiltonian. The untruncated KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}, but their truncated counterparts are not generally invariants of TKdV.
+Thus, the dynamics of interest are confined to the unit hypersphere, $\En = 1$ in $\CC^{\Lambda}$.
+In summary, the TKdV system possesses three important invariants: momentum, energy, and Hamiltonian. The untruncated KdV system possesses an infinite sequence of additional invariants \cite{lax1975periodic, whitham2011linear}, but their truncated counterparts are not generally invariants of TKdV.
 
 
 %----------------------------------------------------------------------------%
@@ -495,7 +499,7 @@ Note that if $\theta = 0$, then the Gibbs measure is a {\em uniform} measure on 
 %----------------------------------------------------------------------------%
 \subsection{Matching at the ADC}
 
-	Recall that the abrupt depth change is met by traveling waves at dimensionless time $T_{ADC} = 0$, set to zero for convenience. The KdV equations describe wave dynamics over {\em long} timescales, physically $t \gg \timescale$, capturing weakly nonlinear and weakly dispersive effects. Meanwhile, evolution over shorter timescales is simply described by linear theory. The event of a wave crossing the ADC is precisely such a short-time event, and so we will employ matching conditions at the ADC that result from linear theory. 
+	Recall that the abrupt depth change is met by traveling waves at dimensionless time $T_{ADC} = 0$, set to zero for convenience. The KdV equations describe wave dynamics over {\em long} timescales, physically $t \gg \timescale$, capturing weakly nonlinear and weakly dispersive effects. Meanwhile, evolution over shorter timescales is simply described by linear theory. The event of a wave crossing the ADC is precisely such a short-time event, and so we will employ the same matching conditions at the ADC that would result from linear theory. 
 
 	More specifically, we assume continuity of the surface displacement, $\eta$, at the ADC \nick{(cite)}. Since the temporal fluctuations of $\eta$ match, waves crossing the ADC must rapidly adjust in wavelength so as to attain the same frequency in two different depths --- a well-understood phenomenon \nick{(cite)}. Of course, since the normalized domain $x \in [-\pi,\pi]$ is scaled on the characteristic wavelength, there is no change in the dimensionless wave-field $u(x,t)$, giving the condition
 \begin{equation}
@@ -513,7 +517,7 @@ We call \eqref{detmatch} the deterministic matching condition to contrast with i
 \qquad \mbox{\em Statistical matching condition}
 \end{align}
 
-	This statistical matching condition imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by the matching condition \eqref{statmatch}, giving the functional dependence
+	This statistical matching condition, originally derived by Majda et al., imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by the matching condition \eqref{statmatch}, giving the functional dependence
 \begin{equation}
 \thdn = \transf \left( \thup \right)
 \qquad \mbox{\em Transfer function}
@@ -558,7 +562,7 @@ where we have used the identity for the Gauss-like sum
 	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence with respect to $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
 Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discussed in that section would be valid. In particular, if $\lamfac = \Lambda$, then the characteristic wavelength in experiments corresponds to the smallest resolved wavelength in the dynamical system. It is perhaps more sensible to choose $\lamfac$ to be an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. As default, we will choose $\lamfac = \Lambda/2$, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
 
-	We note that the experiments discussed here preceded the development of the theory, and hence had no intent of mimicking a Gibbs measure in the wave forcing. We expect that if this forcing were designed to mimic the Gibbs measure, in particular the spectral decay, then it would be more straightforward to assign a value to the model parameter $\lamfac$. We, however, leave that task for future research due to the significant cost of performing an entirely new set of experiments compared to the relative ease and great value in re-analyzing existing experimental measurements in light of the new theoretical developments.
+	We note that the experiments discussed here preceded the development of the theory, and hence had no intent of mimicking a Gibbs measure in the wave forcing. We expect that if the experimental forcing were designed to mimic the Gibbs measure, in particular the spectral decay, then it would be more straightforward to assign a value to the model parameter $\lamfac$. We, however, leave that task for future research due to the significant cost of performing an entirely new set of experiments compared to the relative ease and great value in re-analyzing existing experimental measurements in light of the new theoretical developments.
 
 %----------------------------------------------------------------------------%
 % Numerical methods
@@ -608,7 +612,7 @@ Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and c
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$ for the case $(\Lambda, \lamfac) = (16, 8)$. In line with experimental observations, the incoming skewness is small, while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness range of 0.6-0.9 seen for the larger amplitudes in Fig.~\ref{ExpSpatialStats}(b), requires selecting $\thup$ in the range 10--20 (?).
+	Next, Fig.~\ref{transfig}(b) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$ for the case $(\Lambda, \lamfac) = (16, 8)$. In line with experimental observations, the incoming skewness is small, while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness range of 0.6-0.9 seen for the larger amplitudes in Fig.~\ref{ExpSpatialStats}(b), requires selecting $\thup$ in the range 10--25.
 
 %----------------------------------------------------------------------------%
 % Comparison of distributions
@@ -646,7 +650,7 @@ We therefore convert the theoretical calculated slopes values back to physical s
 \pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
 %\frac{\ampscale \lamfac}{\lengthscale} \pd{\uupdn}{\tilde{x}}
 \end{equation}
-So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode ($k = 1$),  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
+So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode of $k = 1$,  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -661,7 +665,7 @@ Comparison of slope histograms. The TKdV simulations show similar slope distribu
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the theoretically predicted jump in kurtosis, while not as extreme as that measured in experiments, is quite significant. These elevated levels of kurtosis give the distributions the look of being stretched in the tails and pointy near the centers (especially in the experiments).
+	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the theoretically predicted jump in kurtosis, while not as extreme as that measured in experiments, is quite significant. These elevated levels of kurtosis are associated with the distinct appearance of the distribution, having flat tails and somewhat sharp centers.
 
 	Distinct differences in the shapes of the downstream slope distributions, however, are visible. While the theoretical distributions remain symmetric, the experimental distributions skew towards negative slope. As mentioned earlier, this skewness is consistent with a right-moving wave of steep leading surface (i.e.~negative slope), which is a phenomenon apparently not captured by the TKdV simulations.
 Finally, it should be commented that the experimental measurements of slope involve numerical differentiation of the free surface extracted from optical images, which naturally introduces error. Furthermore, high-order statistics, such as kurtosis, can be very sensitive to noise and measurement error. Hence, the experimental statistics of slope, while highly valuable, should be regarded with some level of caution. 
@@ -674,7 +678,7 @@ Finally, it should be commented that the experimental measurements of slope invo
 
 	As a complement to the above statistical comparison, we now examine the wave dynamics of a few individual trajectories from the TKdV simulations. Figure \ref{trajectories} shows example upstream and downstream solution trajectories from the same TKdV simulations that were used to produce the histograms in Figs.~\ref{uhist}--\ref{slopehist}. The dimensionless displacement, $u$, is represented by color in the domain $(x,t) \in [-\pi,\pi] \times [-10,10]$, where the ADC is encountered at $t=0$. 
 	
-	Visual differences between the upstream and downstream dynamics are apparent in Fig.~\ref{trajectories}. The upstream trajectory shows several waves of modest amplitude all propagating leftward. Here, the magnitude of the positive and negative displacements are comparable. This is in stark contrast to the downstream dynamics, which feature fewer waves of larger amplitude propagating in either direction. In particular, one large wave is seen to propagate from the lower-left corner of the figure to the upper right. A bias towards positive surface displacement is visually apparent in these downstream dynamics, without even viewing the histograms.
+	Visual differences between the upstream and downstream dynamics are apparent in Fig.~\ref{trajectories}. The upstream trajectory shows several waves of modest amplitude all propagating leftward. Here, the magnitude of the positive and negative displacements are comparable. This is in stark contrast to the downstream dynamics, which feature fewer waves of larger amplitude propagating in either direction. In particular, one large wave is seen to propagate from the lower-left corner of the figure to the upper right. A bias towards positive surface displacement is apparent in these downstream dynamics, without even viewing the histograms.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -695,9 +699,9 @@ These observations can be rationalized with some simple analysis of the structur
 
 	Downstream of the ADC, however, $\drat = 0.24$, which significantly amplifies nonlinearity while suppressing dispersion, thereby allowing waves to propagate in either direction. In particular, the dispersionless limit of KdV is the Burgers-Hopf equation, in which the nonlinear advection is proportional in both amplitude and direction to the value of $u$. Hence, positive displacements would be expected to move rightwards, as is seen in Fig.~\ref{trajectories}(b).
 
-	We remind the reader that the KdV framework tracks the long-time evolution waves in a reference frame moving with the characteristic speed $c = \sqrt{g \depth}$ from linear theory. Hence, the above discussion of left-or-right going waves cannot be interpreted in the context of the experiments, which take a fixed reference frame, without an appropriate Galilean transformation. Hence, in the laboratory frame, all waves indeed propagate unidirectionally, from left to right, with a speed that is near $c$. The directions and speeds calculated by the TKdV framework simply determines how much the actually speed of waves deviates from $c$. 
+	We remind the reader that the KdV framework tracks the long-time evolution of waves in a reference frame moving with the characteristic speed $c = \sqrt{g \depth}$ from linear theory. Hence, the above discussion of left-or-right going waves cannot be interpreted in the context of the experiments, which take a fixed reference frame, without an appropriate Galilean transformation. Hence, in the laboratory frame, all waves indeed propagate unidirectionally, from left to right, with a speed that is near $c$. The directions and speeds calculated by the TKdV framework simply determines how much the true wave speed deviates from $c$. 
 	
-	Finally, Fig.~\ref{trajectories} sheds some light on the timescales required for wave evolution in the TKdV framework. It appears that the normalized time of $t=10$ is roughly the correct timescale to observe substantial wave dynamics. More precisely, both the left-going waves in Fig.~\ref{trajectories}(a) and the right-going waves in Fig.~\ref{trajectories}(b) require a dimensionless time of about $t=7$ to traverse the entire periodic domain. For the representative experiments, the characteristic timescale, $\timescale$, is 2.8~sec upstream and 5.7~sec downstream. Hence, a dimensionless time of $t=7$ corresponds to roughly 20~sec and 40~sec upstream and downstream respectively. Given the wave speeds ($c = $ 110 cm/s upstream and 54 cm/s downstream), these timescales can be converted to distances traveled by the waves. In fact, a simple calculation using the definitions in Section \ref{theory} gives the distance traveled as $7 \lamfac g/(2 \pi \freqp^2)$. Notice the depth dependence has serendipitously canceled. Hence, the distance traveled by the waves over a dimensionless time of $t=7$ is the same value upstream and downstream,  roughly 22 meters. Note that this distance is significantly greater than the 6-meter length of the experimental wave tank.
+	Finally, Fig.~\ref{trajectories} sheds some light on the timescales required for wave evolution in the TKdV framework. It appears that the normalized time of $t=10$ is roughly the correct timescale to observe substantial wave dynamics. More precisely, both the left-going waves in Fig.~\ref{trajectories}(a) and the right-going waves in Fig.~\ref{trajectories}(b) require a dimensionless time of about $t=7$ to traverse the entire periodic domain. For the representative experiments, the characteristic timescale, $\timescale$, is 2.8~sec upstream and 5.7~sec downstream. Hence, a dimensionless time of $t=7$ corresponds to roughly 20~sec and 40~sec upstream and downstream respectively. Given the wave speeds ($c = $ 110 cm/s upstream and 54 cm/s downstream), these timescales can be converted to distances traveled by the waves. In fact, a simple calculation using the definitions in Section \ref{theory} gives the distance traveled as $7 \lamfac g/(2 \pi \freqp^2)$, which, due to a serendipitous cancellation, is independent of depth. Hence, the distance traveled by the waves over a dimensionless time of $t=7$ is the same value upstream and downstream,  roughly 22 meters. Note that this distance is significantly greater than the 6-meter length of the experimental wave tank.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -711,7 +715,7 @@ Dynamic evolution of surface-displacement skewness and kurtosis from the TKdV si
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	These estimates raise an important question: if a distance of 22 meters is required for significant wave evolution under the KdV framework, how is it that the experiments exhibit substantial changes in wave statistics a much shorter distance downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of surface-displacement skewness (left) and kurtosis (right) computed by the same TKdV deterministic simulations as pictured in Fig.~\ref{trajectories}. The bold black curve shows the ensemble mean (ensemble size of 1000), while the skewness and kurtosis of 100 individual trajectories are shown by the faint gray curves to give a sense for the variance involved. Importantly, the skewness and kurtosis evolve on a much shorter timescale than the aforementioned $t=7$. More precisely, skewness and kurtosis have already saturated to their asymptotic by $t = 1$, and reach half of that value by $t = 0.18$. These dimensionless times correspond to travel distances of 310 cm and 56 cm respectively --- much shorter than the previously mentioned 22 meters, and on the same order as the relevant distances in the experiments. Thus, after crossing the ADC, the wave-field rapidly reconfigures itself enough to fundamentally alter the statistical distributions, and this reconfiguration occurs on a much shorter timescale than that required for waves to cross the entire periodic domain.
+	These estimates raise an important question: if a distance of 22 meters is required for significant wave evolution under the KdV framework, how do the experiments exhibit substantial changes in wave statistics a much shorter distance downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of surface-displacement skewness (left) and kurtosis (right) computed by the same TKdV deterministic simulations as pictured in Fig.~\ref{trajectories}. The bold black curve shows the ensemble mean (ensemble size of 1000), while the faint gray curves show the skewness and kurtosis of 100 individual trajectories to give a sense for the variation involved. Importantly, the skewness and kurtosis evolve on a much shorter timescale than the aforementioned $t=7$. More precisely, skewness and kurtosis have already saturated to their asymptotic value by $t = 1$, and reach half of that value by $t = 0.18$. These dimensionless times correspond to travel distances of 310 cm and 56 cm respectively --- much shorter than the previously mentioned 22 meters, and on the same order as the relevant distances in the experiments. Thus, after crossing the ADC, the wave-field rapidly reconfigures itself enough to fundamentally alter its statistical distributions, and this reconfiguration occurs on a much shorter timescale than that required for waves to cross the entire periodic domain.
 
 
  %----------------------------------------------------------------------------%
@@ -719,7 +723,7 @@ Dynamic evolution of surface-displacement skewness and kurtosis from the TKdV si
 %----------------------------------------------------------------------------%
 \section{Predicted outgoing skewness and experimental confirmation}
 
-This section discusses perhaps the most important single result of the manuscript. In the recent theoretical study, Majda et al.~2019 derived an explicit formula for the outgoing wave-field skewness in terms of the system parameters \cite{majda2019}. More specifically, this formula relates the downstream skewness of surface displacement $\skw(\eta)$ to the change in slope variance $\var(\eta_x)$, in particular how that ratio depends on driving amplitude and depth ratio. Below, we recap the derivation of this formula and then test the prediction against our direct experimental measurements.
+We now discuss in this section arguably the most significant single result of the manuscript. In the recent theoretical study, Majda et al.~2019 derived an explicit formula for the outgoing wave-field skewness in terms of the system parameters \cite{majda2019}. More specifically, this formula relates the downstream skewness of surface displacement $\skw(\eta)$ to the change in slope variance $\var(\eta_x)$. Below, we recap the derivation of this formula and then test the prediction against our direct experimental measurements.
 
 \subsection{Explicit formula for outgoing skewness}
 
