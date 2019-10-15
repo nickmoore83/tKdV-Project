@@ -115,7 +115,7 @@
 %----------------------------------------------%
 \begin{document}
 
-\title{Anomalous waves triggered by abrupt depth changes: experiments and truncated KdV theory}
+\title{Anomalous waves triggered by abrupt depth changes: laboratory experiments and truncated KdV theory}
 
 %experimental measurements and deterministic-statistical truncated KdV theory
 % ORIGINAL: The truncated KdV framework for modeling anomalous waves induced by abrupt depth changes
@@ -150,8 +150,16 @@ A recent series of laboratory \cite{bolles2019} and numerical investigations \ci
 Our particular focus is the laboratory experiments of Bolles et al.~\cite{bolles2019}, who demonstrated the emergence of anomalous statistics from a randomized wave-field encountering an abrupt depth change (ADC). In these experiments, the incoming wave-field is generated with nearly Gaussian statistics, and a plexiglass step placed near the middle of the tank creates the depth change. Upon passing into the shallower region, the wave distribution skews strongly towards positive displacement, with deviation from Gaussian being most pronounced a short distance downstream of the ADC. Inspired by these experimental observations, Majda et al.~\cite{majda2019} developed a theoretical framework that accurately captures several key aspects of the anomalous behavior. The theory is based on deterministic and statistical analysis of the truncated Korteweg–de Vries (TKdV) equations, and uses a combination of computational, statistical, and analytical tools. In subsequent work, Majda and Qi \cite{majdaqi2019} analyzed more severely truncated systems that were shown to exhibit many of the same anomalous properties while enjoying a more tractable, lower-dimensional structure.
 
 The purpose of the present manuscript is to provide a more comprehensive treatment of the {\em combined} experimental and theoretical efforts of Bolles et al~\cite{bolles2019} and Majda et al.~\cite{majda2019, majdaqi2019}. Special emphasis is placed on the synergy between experiment and theory -- a cooperative strategy with a proven record of success \cite{camassa2012stratified, ristroph2012, ganedi2018equilibrium}. 
-%We present an assortment of previously unpublished experimental data, for example on surface slope statistics and autocorrelation, which motivates further examination and refinement of the theory. 
-Novel theoretical predictions have inspired us to perform additional experimental measurements, especially as it pertains to a peculiar relationship between surface-displacement skewness and surface-slope variance that is predicted by the theory. Comparison with the new measurements further confirms the predictive power of the framework developed by Majda et al.~\cite{majda2019}. In addition, we provide a more thorough treatment of the link between experimental and model parameters to facilitate comparison between the two. In particular, we flesh out details of non-dimensionalization, which were only briefly addressed in prior work for the sake of brevity.
+We first provide a more thorough treatment of the link between experimental and model parameters in order to facilitate a detailed comparison between the two. Next, we present new experimental data, most notably on {\em surface slope} statistics, which motivates parallel examination of the theory.  Likewise, novel theoretical predictions have inspired us to perform additional experimental measurements, especially as it pertains to a peculiar relationship between surface-displacement skewness and surface-slope variance that is predicted by the theory. Comparison with the new measurements further confirms the predictive power of the framework developed by Majda et al.~\cite{majda2019}. 
+
+
+% OLD VERSION
+\begin{comment}
+We present an assortment of previously unpublished experimental data, for example on surface slope statistics and autocorrelation, which motivates further examination and refinement of the theory. 
+Novel theoretical predictions have inspired us to perform additional experimental measurements, especially as it pertains to a peculiar relationship between surface-displacement skewness and surface-slope variance that is predicted by the theory. Comparison with the new measurements further confirms the predictive power of the framework developed by Majda et al.~\cite{majda2019}. 
+In addition, we provide a more thorough treatment of the link between experimental and model parameters in order to facilitate a detailed comparison between the two. 
+In particular, we flesh out details of non-dimensionalization, which were only briefly addressed in prior work for the sake of brevity.
+\end{comment}
 
 % NOTES
 % Words: conjunction, combination, close cooperation; elucidate.
@@ -182,8 +190,8 @@ The angular frequencies are evenly spaced $\omega_n = n  \Delta \omega$ with ste
 \begin{center}
 \includegraphics[width = 0.80 \linewidth]{Figs/ExpDiagStats.pdf}
 \caption{
-(a) Experimental schematic. 
-(b)--(c) Surface displacement measured at a representative upstream and downstream locations. (d)--(e) Corresponding histograms. Figure adapted from \cite{bolles2019}.}
+(a) Experimental schematic: randomized waves are generated by a pivoting paddle and propagate over a step in bottom topography.
+(b)--(c) Surface displacement measured at representative locations upstream and downstream of the abrupt depth change (ADC). (d)--(e) Corresponding histograms showing symmetric upstream statistics and highly skewed downstream statistics. Figure adapted from \cite{bolles2019}.}
 \label{ExpDiagStats}
 \end{center}
 \end{figure}
@@ -215,7 +223,7 @@ where $\mean{}$ indicates a mean (here a long-time mean). Hereafter, we will sim
 \begin{figure}%[!ht]
 \begin{center}
 \includegraphics[width = 0.80 \linewidth]{Figs/ExpSpatialStats.pdf}
-\caption{Wave statistics as they vary in space for several experiments of different driving amplitudes (see legend). (a)--(c) Standard deviation, skewness, and kurtosis of the surface displacement $\eta$. (d)--(f) The same for surface slope $\eta_x$. (a) $\etastd$, which sets a scale for wave amplitude, does not vary significantly crossing the ADC. (b)--(c) Skewness and kurtosis of $\eta$, however, show a strong response to the ADC. The surface slope measurements are negatively skewed and also show a large kurtosis downstream of the ADC. }
+\caption{Wave statistics as they vary in space for several experiments of different driving amplitudes (see legend). (a)--(c) Standard deviation, skewness, and kurtosis of the surface displacement $\eta$. (d)--(f) The same for surface slope $\eta_x$. (a) $\etastd$, which sets a scale for wave amplitude, does not vary significantly crossing the ADC. (b)--(c) Skewness and kurtosis of $\eta$, however, show a strong response to the ADC. (d)--(f) The measurements of surface slope, $\eta_x$, are negatively skewed and also exhibit large kurtosis downstream of the ADC. }
 \label{ExpSpatialStats}
 \end{center}
 \end{figure}
@@ -541,7 +549,7 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 	The invariant measure exhibits the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ where to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
 To achieve this insensitivity, we will appeal to the uniform measure $\Gz$ and the idea of equipartition of energy \cite{abramov2003}, since these two concepts afford simple scaling estimates.
 
-Recall that $\Ham_{\Lambda}$ is composed of the cubic and quadratic components $\Hthree$ and $\Htwo$. Due to the odd symmetry of $\Hthree$, it is easy to see that $\meanz{\Hthree} = 0$. The quadratic component, however, requires closer inspection. Due to Parseval's identity, $\Htwo$ is given by
+Recall that $\Ham_{\Lambda}$ is composed of the cubic and quadratic components $\Hthree$ and $\Htwo$. Due to the odd symmetry of $\Hthree$, it is easy to see that $\meanz{\Hthree} = 0$. The quadratic component, however, requires closer inspection. Due to Parseval's identity, $\Htwo$ can be written as
 \begin{equation}
 \Htwo = \frac{1}{2} \int_{-\pi}^{\pi} u_x^2 \dx = 2 \pi \sum_{k=1}^{\Lambda} k^2 \abs{\uhat_k}^2
 \end{equation}
@@ -552,14 +560,14 @@ Due to the constraint $\En[\uL] = 1$, the equipartioned microstate is given by
 Then the expected value of $\Htwo$ under the uniform measure is
 \begin{equation}
 \label{HtwoExpect}
-\mean{\Htwo}_0 = 2 \pi \sum_{k=1}^{\Lambda} \abs{k}^ 2 \mean{\abs{\uhat_k}^2}_0 \sim \frac{1}{3} \Lambda^2
+\mean{\Htwo}_0 = 2 \pi \sum_{k=1}^{\Lambda} {k}^ 2 \mean{\abs{\uhat_k}^2}_0 \sim \frac{1}{3} \Lambda^2
 \end{equation}
 where we have used the identity for the Gauss-like sum
 \begin{equation}
-\sum_{k=1}^{n} \abs{k}^ 2 = \frac{1}{6} n(n+1)(2n+1) \approx n^3/3
+\sum_{k=1}^{n} {k}^ 2 = \frac{1}{6} n(n+1)(2n+1) \approx \frac{1}{3} n^3
 \end{equation}
 
-	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears to be problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence with respect to $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
+	Importantly, \eqref{HtwoExpect} shows that the expected value of $\Htwo$ grows like $\Lambda^2$, which appears problematic for obtaining independence as $\Lambda \to \infty$. However, $\Htwo$ enters $\Ham$ in product with the coefficient $C_2$, which itself scales as $C_2 \sim \lamfac^{-2}$. Hence, obtaining the desired asymptotic independence with respect to $\Lambda$ simply requires that $\lamfac$ grow proportionally to $\Lambda$, as was already argued on physical grounds in Section \ref{tKdVSec}. 
 Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discussed in that section would be valid. In particular, if $\lamfac = \Lambda$, then the characteristic wavelength in experiments corresponds to the smallest resolved wavelength in the dynamical system. It is perhaps more sensible to choose $\lamfac$ to be an intermediate value between 1 and $\Lambda$, so that some scales both larger than and smaller than the characteristic wavelength $\lam$ are resolved. As default, we will choose $\lamfac = \Lambda/2$, so that on a log-scale, the characteristic wavelength lies directly in the middle of the resolved wavelengths. 
 
 	We note that the experiments discussed here preceded the development of the theory, and hence had no intent of mimicking a Gibbs measure in the wave forcing. We expect that if the experimental forcing were designed to mimic the Gibbs measure, in particular the spectral decay, then it would be more straightforward to assign a value to the model parameter $\lamfac$. We, however, leave that task for future research due to the significant cost of performing an entirely new set of experiments compared to the relative ease and great value in re-analyzing existing experimental measurements in light of the new theoretical developments.
@@ -650,7 +658,7 @@ We therefore convert the theoretical calculated slopes values back to physical s
 \pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
 %\frac{\ampscale \lamfac}{\lengthscale} \pd{\uupdn}{\tilde{x}}
 \end{equation}
-So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode of $k = 1$,  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
+So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode, $k = 1$,  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -665,16 +673,16 @@ Comparison of slope histograms. The TKdV simulations show similar slope distribu
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the theoretically predicted jump in kurtosis, while not as extreme as that measured in experiments, is quite significant. These elevated levels of kurtosis are associated with the distinct appearance of the distribution, having flat tails and somewhat sharp centers.
-
-	Distinct differences in the shapes of the downstream slope distributions, however, are visible. While the theoretical distributions remain symmetric, the experimental distributions skew towards negative slope. As mentioned earlier, this skewness is consistent with a right-moving wave of steep leading surface (i.e.~negative slope), which is a phenomenon apparently not captured by the TKdV simulations.
+	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the theoretically predicted jump in kurtosis, while not as extreme as that measured in experiments, is quite significant. These elevated levels of kurtosis are associated with the distinct appearance of the distributions, most notably the flat tails that appear in both the experimental and theoretical distributions, and also the pointy center that is most pronounced in the experiments.
+	
+	Distinct differences in the shapes of the downstream distributions, however, are also visible. While the theoretical distributions remain symmetric, the experimental distributions skew towards negative slope. As mentioned earlier, this skewness is consistent with a right-moving wave of steep leading surface (i.e.~negative slope), which is a phenomenon apparently not captured by the TKdV simulations.
 Finally, it should be commented that the experimental measurements of slope involve numerical differentiation of the free surface extracted from optical images, which naturally introduces error. Furthermore, high-order statistics, such as kurtosis, can be very sensitive to noise and measurement error. Hence, the experimental statistics of slope, while highly valuable, should be regarded with some level of caution. 
 
 
 %----------------------------------------------------------------------------%
 % Wave dynamics
 %----------------------------------------------------------------------------%
-\subsection{Wave dynamics}
+\subsection{Wave dynamics and analysis of time scales}
 
 	As a complement to the above statistical comparison, we now examine the wave dynamics of a few individual trajectories from the TKdV simulations. Figure \ref{trajectories} shows example upstream and downstream solution trajectories from the same TKdV simulations that were used to produce the histograms in Figs.~\ref{uhist}--\ref{slopehist}. The dimensionless displacement, $u$, is represented by color in the domain $(x,t) \in [-\pi,\pi] \times [-10,10]$, where the ADC is encountered at $t=0$. 
 	
@@ -693,14 +701,14 @@ Sample upstream and downstream solution trajectories from the same ensemble TKdV
 \end{figure}
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
 
-These observations can be rationalized with some simple analysis of the structure of TKdV. Upstream of the ADC, since $\drat = 1$, the nonlinear effects are relatively weak and the dynamics are dominated by dispersion. Linearizing Eq.~\eqref{TKdV} and introducing the ansatz $u_k = e^{i(kx - \omega_k t)}$ produces the dispersion relation for angular frequency $\omega_k = -C_2 k^3$, or for phase velocity $c_k = \omega_k/k = -C_2 k^2$ \cite{majdaqi2019}. In particular, the phase velocity is strictly negative, implying that waves can only propagate leftwards, as is consistent with Fig.~\ref{trajectories}(a).
+These observations can be rationalized with some simple analysis of the structure of TKdV. Upstream of the ADC, since $\drat = 1$, the nonlinear effects are relatively weak and the dynamics are dominated by dispersion. Linearizing \eqref{TKdV} and introducing the ansatz $u_k = e^{i(kx - \omega_k t)}$ produces the dispersion relation for angular frequency $\omega_k = -C_2 k^3$, or for phase velocity $c_k = \omega_k/k = -C_2 k^2$ \cite{majdaqi2019}. In particular, the phase velocity is strictly negative, implying that waves can only propagate leftwards, as is consistent with Fig.~\ref{trajectories}(a).
 % Further details, see page 6 of Majda Qi, J Stat Phys.
 %$C_3 = 0.20$ and $C_2 = 0.024$.
 
 	Downstream of the ADC, however, $\drat = 0.24$, which significantly amplifies nonlinearity while suppressing dispersion, thereby allowing waves to propagate in either direction. In particular, the dispersionless limit of KdV is the Burgers-Hopf equation, in which the nonlinear advection is proportional in both amplitude and direction to the value of $u$. Hence, positive displacements would be expected to move rightwards, as is seen in Fig.~\ref{trajectories}(b).
 
-	We remind the reader that the KdV framework tracks the long-time evolution of waves in a reference frame moving with the characteristic speed $c = \sqrt{g \depth}$ from linear theory. Hence, the above discussion of left-or-right going waves cannot be interpreted in the context of the experiments, which take a fixed reference frame, without an appropriate Galilean transformation. Hence, in the laboratory frame, all waves indeed propagate unidirectionally, from left to right, with a speed that is near $c$. The directions and speeds calculated by the TKdV framework simply determines how much the true wave speed deviates from $c$. 
-	
+	We remind the reader that the KdV framework tracks the long-time evolution of waves in a reference frame moving with the characteristic speed $c = \sqrt{g \depth}$ from linear theory. Hence, the above discussion of left-or-right going waves cannot be interpreted in the context of the experiments without an appropriate Galilean transformation. Hence, in the laboratory frame, all waves indeed propagate unidirectionally, from left to right, with a speed near $c$. The directions and speeds calculated by the TKdV framework simply quantify the deviation of the true wave speed from $c$.
+		
 	Finally, Fig.~\ref{trajectories} sheds some light on the timescales required for wave evolution in the TKdV framework. It appears that the normalized time of $t=10$ is roughly the correct timescale to observe substantial wave dynamics. More precisely, both the left-going waves in Fig.~\ref{trajectories}(a) and the right-going waves in Fig.~\ref{trajectories}(b) require a dimensionless time of about $t=7$ to traverse the entire periodic domain. For the representative experiments, the characteristic timescale, $\timescale$, is 2.8~sec upstream and 5.7~sec downstream. Hence, a dimensionless time of $t=7$ corresponds to roughly 20~sec and 40~sec upstream and downstream respectively. Given the wave speeds ($c = $ 110 cm/s upstream and 54 cm/s downstream), these timescales can be converted to distances traveled by the waves. In fact, a simple calculation using the definitions in Section \ref{theory} gives the distance traveled as $7 \lamfac g/(2 \pi \freqp^2)$, which, due to a serendipitous cancellation, is independent of depth. Hence, the distance traveled by the waves over a dimensionless time of $t=7$ is the same value upstream and downstream,  roughly 22 meters. Note that this distance is significantly greater than the 6-meter length of the experimental wave tank.
 
 % Figure
@@ -715,17 +723,15 @@ Dynamic evolution of surface-displacement skewness and kurtosis from the TKdV si
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	These estimates raise an important question: if a distance of 22 meters is required for significant wave evolution under the KdV framework, how do the experiments exhibit substantial changes in wave statistics a much shorter distance downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of surface-displacement skewness (left) and kurtosis (right) computed by the same TKdV deterministic simulations as pictured in Fig.~\ref{trajectories}. The bold black curve shows the ensemble mean (ensemble size of 1000), while the faint gray curves show the skewness and kurtosis of 100 individual trajectories to give a sense for the variation involved. Importantly, the skewness and kurtosis evolve on a much shorter timescale than the aforementioned $t=7$. More precisely, skewness and kurtosis have already saturated to their asymptotic value by $t = 1$, and reach half of that value by $t = 0.18$. These dimensionless times correspond to travel distances of 310 cm and 56 cm respectively --- much shorter than the previously mentioned 22 meters, and on the same order as the relevant distances in the experiments. Thus, after crossing the ADC, the wave-field rapidly reconfigures itself enough to fundamentally alter its statistical distributions, and this reconfiguration occurs on a much shorter timescale than that required for waves to cross the entire periodic domain.
+	These estimates raise an important question: if a distance of 22 meters is required for significant wave evolution under the KdV framework, how do the experiments exhibit substantial changes in wave statistics a much shorter distance downstream of the ADC? The results shown in Fig.~\ref{skew-kurt} help resolve this question. This figure shows the evolution of surface-displacement skewness (left) and kurtosis (right) computed by the same deterministic TKdV simulations as pictured in Fig.~\ref{trajectories}. The bold black curve shows the ensemble mean (ensemble size of 1000), while the faint gray curves show the skewness and kurtosis of 100 individual trajectories to give a sense for the variation involved. Importantly, the skewness and kurtosis evolve on a much shorter timescale than the aforementioned $t=7$. More precisely, skewness and kurtosis have already saturated to their asymptotic value by $t = 1$, and reach half of that value by $t = 0.18$. These dimensionless times correspond to travel distances of 310 cm and 56 cm respectively --- much shorter than the previously mentioned 22 meters, and on the same order as the relevant distances in the experiments. Thus, after crossing the ADC, the wave-field rapidly reconfigures itself enough to fundamentally alter its statistical distributions. The timescale for this reconfiguration is much shorter than the time required for waves to cross the entire periodic domain.
 
 
  %----------------------------------------------------------------------------%
 % Skewness Ratio 
 %----------------------------------------------------------------------------%
-\subsection{Predicted outgoing skewness and experimental confirmation}
+\subsection{Explicit formula for outgoing skewness and experimental confirmation}
 
-This section discusses arguably the most novel single result of the manuscript. In the recent theoretical study, Majda et al.~2019 derived an explicit formula for the outgoing wave-field skewness in terms of the system parameters \cite{majda2019}. More specifically, this formula relates the downstream skewness of surface displacement $\skw(\eta)$ to the change in slope variance $\var(\eta_x)$. Below, we recap the derivation of this formula and then test the prediction against new, direct experimental measurements.
-
-%\subsection{Explicit formula for outgoing skewness}
+We now discuss arguably the most novel single result of the manuscript. In the recent theoretical study, Majda et al.~2019 derived an explicit formula for the outgoing wave-field skewness in terms of the system parameters \cite{majda2019}. More specifically, this formula relates the downstream skewness of surface displacement $\skw(\eta)$ to the change in slope variance $\var(\eta_x)$. Here, we recap the derivation of this formula and then test the prediction against new, direct experimental measurements.
 
 The explicit formula for outgoing skewness arises directly from the statistical matching condition \eqref{statmatch}, which states that the downstream Hamiltonian must match in expected value at the ADC, i.e.~with respect to the incoming and outgoing Gibbs measures.
 This condition can be written more explicitly as
@@ -740,7 +746,7 @@ Both the experiments and simulations show the upstream skewness to be negligible
 \frac{\meandn{\Hthree}} {\meandn{\Htwo} - \meanup{\Htwo}} = \frac{C_2}{C_3} \dratdn^2
 \end{equation}
 
-	Our next task is to convert this formula to physical variables so that it can be tested against experimental data. First, following the definition of $\Hthree$ in Eq.~\eqref{H3H2} and the definition, $u = \eta/(\pi^{1/2} \etastd)$, a straightforward calculation gives
+	Our next task is to convert this formula to physical variables so that it can be tested against experimental data. First, following the definition of $\Hthree$ in \eqref{H3H2} and the definition, $u = \eta/(\pi^{1/2} \etastd)$, a straightforward calculation gives
 \begin{align}
 \label{H3convert}
 \meandn{\Hthree} = \frac{\pi}{3} \meandn{u^3} = 
@@ -748,7 +754,7 @@ Both the experiments and simulations show the upstream skewness to be negligible
 \frac{1}{3 \pi^{1/2}} \skwdn(\eta)
 \end{align}
 This equation expresses a direct relationship between the expected value of $\Hthree$ and the outgoing skewness of surface displacement. Next, we must convert the $\Htwo$-quantities, which involve surface slope. 
-Using the definition of $\Htwo$ in Eq.~\eqref{H3H2} and $\lengthscale_+$ in Eq.~\eqref{scales} gives
+Using the definition of $\Htwo$ in \eqref{H3H2} and $\lengthscale_+$ in \eqref{scales} gives
 \begin{align}
 \label{H2convert}
 &\meanupdn{\Htwo} = \pi \meanupdn{ u_x^2} = 
@@ -780,11 +786,9 @@ Experimental confirmation of the explicit formula for outgoing skewness \eqref{S
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  %New experimental measurements guided by theory
  
-	Fortunately, it is a relationship that can be tested directly against the experimental measurements, specifically the type of data that was presented in Fig.~\ref{ExpSpatialStats}. The the prediction draws focus to the spatial variation of displacement skewness, which we replot for convenience in Fig.~\ref{SkewRat}(a), and the variance of surface slope, shown in Fig.~\ref{SkewRat}(b). To test \eqref{SkewPred}, we must select a representative downstream position to evaluate $\skwdn(\eta)$ and $\vardn(\eta_x)$, and a representative upstream position for $\varup(\eta_x)$. In short, we select the same representative locations as were used to evaluate the histograms in Figs.~\ref{ExpDiagStats}, \ref{uhist}, and \ref{slopehist}, namely $x = 15$ cm downstream and $x = -9$ cm upstream. These positions are indicated by the blue and green vertical dashed lines in Fig.~\ref{SkewRat}(a)--(b). Recall that $x = 15$ cm corresponds to the peak of the downstream skewness and kurtosis. Meanwhile, we see in Fig.~\ref{SkewRat}(b) that $x = -9$ cm corresponds to a slight dip in $\var(\eta_x)$.
+	Fortunately, it is a relationship that can be tested directly against the experimental measurements, specifically the type of data that was presented in Fig.~\ref{ExpSpatialStats}. Formula \eqref{SkewPred} draws focus to the spatial variation of displacement skewness, which we replot for convenience in Fig.~\ref{SkewRat}(a), and the variance of surface slope, shown in Fig.~\ref{SkewRat}(b). To test \eqref{SkewPred}, we must select a representative downstream position to evaluate $\skwdn(\eta)$ and $\vardn(\eta_x)$, and a representative upstream position for $\varup(\eta_x)$. In short, we select the same representative locations  used to evaluate the histograms in Figs.~\ref{ExpDiagStats}, \ref{uhist}, and \ref{slopehist}, namely $x = 15$ cm downstream and $x = -9$ cm upstream. These positions are indicated by the blue and green vertical dashed lines in Fig.~\ref{SkewRat}(a)--(b). Recall that $x = 15$ cm corresponds to the peak of the downstream skewness and kurtosis. Meanwhile, we see in Fig.~\ref{SkewRat}(b) that $x = -9$ cm corresponds to a slight dip in $\var(\eta_x)$.
 
-	With these locations selected, we evaluate the ratio $\skw(\eta) / \Delta \var(\eta_x)$ for each experiment and plot the result against dimensionless wave amplitude, $\epsup = \etastd / \dup$ on a log-log scale in Fig.~\ref{SkewRat}(c). While the data shows significant variation for small amplitudes, it shows a well defined decreasing trend at larger amplitudes. In particular, the red dashed line shows the power-law $\epsup^{-3}$ predicted by \eqref{SkewPred}, which captures the experimental trend remarkably well.
-
-
+	With these locations selected, we evaluate the ratio $\skw(\eta) / \Delta \var(\eta_x)$ for each experiment and plot the result against dimensionless wave amplitude, $\epsup = \etastd / \dup$ on a log-log scale in Fig.~\ref{SkewRat}(c). While the data shows significant variation at small amplitudes, it shows a well defined decreasing trend at larger amplitudes. In particular, the red dashed line shows the power-law $\epsup^{-3}$ predicted by \eqref{SkewPred}, which captures the experimental trend remarkably well.
 
 
 
@@ -794,6 +798,13 @@ Experimental confirmation of the explicit formula for outgoing skewness \eqref{S
 %----------------------------------------------------------------------------%
 \section{Concluding remarks}
 
+	This manuscript extends the parallel experimental and modeling efforts of Bolles et al.~\cite{bolles2019} and Majda et al.~\cite{majda2019} concerning the emergence of anomalous wave statistics from abrupt changes in bottom topography. The theoretical framework is based on deterministic and statistical analysis of the TKdV system, with exploitation of the Hamiltonian structure and the associated invariant Gibbs measures. The theory depends crucially on matching the incoming and outgoing invariant measures at the abrupt depth change, so as to link the outgoing dynamics to the incoming ones. Throughout, we have emphasized the synergy between the experiments and theory, with experimental data informing theoretical advancements and model predictions motivating new experimental measurements.
+	
+	Careful calibration of the inverse temperature against the experimental data allowed for a detailed comparison between experimental and theoretically predicted wave statistics. The outgoing distributions of surface displacement predicted by the TKdV framework capture in remarkable detail the experimental measurements. We have extended this statistical analysis to surface slope, a line of inquiry motivated by the importance of $\Htwo$, the slope standard deviation, in the theory. The comparison of slope statistics shows intriguing similarities, while also some quantitative differences in the shape and skewness of the outgoing distributions.
+	
+	Finally, Majda et al.~\cite{majda2019} derived an explicit formula for the skewness of the outgoing wave field, which we have tested against direct experimental measurements. Specifically, the formula predicts how the ratio of displacement skewness to slope variance, $\skw(\eta) / \Delta \var(\eta_x)$, depends on wave amplitude. The experimental measurements conclusively confirm the inverse-cube dependence on wave amplitude, thus highlighting the predictive power of the TKdV statistical mechanics framework.
+	
+	We note that since the ratio, $\skw(\eta) / \Delta \var(\eta_x)$, exhibits such a clear dependence on input parameters, it could prove a useful diagnostic for anomalous wave observations in the ocean. In particular, this quantity seems to provide a signature for anomalous waves that are triggered by abrupt depth changes. Examination of this ratio in field data is an exciting avenue for future research.
 
 
 \section*{Acknowledgements}
