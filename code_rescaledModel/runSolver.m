@@ -1,17 +1,17 @@
 clear all; close all;
 
 % Model parameters from experiments
-epsi0 = 0.017;  % amplitude-to-depth ratio
-del0 = 0.23;    % depth-to-wavelength ratio
-Drat = 0.24;    % depth ratio.
+epsi0 = 0.020;  % amplitude-to-depth ratio, reference 0.017.
+del0 = 0.23;    % depth-to-wavelength ratio, reference 0.23.
+Drat = 0.24;    % depth ratio, reference 0.24.
 % Simulation parameters
 JJ = 32;        % Reference 32
 Nw = 8;         % Reference 8 or JJ/4.
-MC = 1E4;       % Reference 1E3 or 5E3 for tfin=10.
+MC = 1E2;       % Reference 1E3 or 5E3 for tfin=10.
 % time step parameters
 dt = 5E-4;  % Reference 5E-4
-nout = 100; % Reference 100
-tfin = 10;  % Reference 10
+nout = 20; % Reference 100
+tfin = 1;  % Reference 10
 
 % Choose upstream or downstream
 gibup = true;
