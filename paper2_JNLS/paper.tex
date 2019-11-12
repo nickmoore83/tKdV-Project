@@ -545,7 +545,7 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 %----------------------------------------------------------------------------%
 \subsection{Scaling analysis to link inverse temperature to experiments}
 
-	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that the value of $\theta$ does not depend sensitively on the truncation index, as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\theta$ to be asymptotically independent of $\Lambda$.
+	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that the value of $\theta$ does not depend sensitively on the truncation index as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\theta$ to be asymptotically independent of $\Lambda$.
 	
 	The invariant measure exhibits the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ were to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
 To achieve this insensitivity, we will appeal to the uniform measure $\Gz$ and the idea of equipartition of energy \cite{abramov2003}, since these two concepts afford simple scaling estimates.
@@ -578,26 +578,21 @@ Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discu
 %----------------------------------------------------------------------------%
 \subsection{Deterministic simulations of TKdV}
 
-\nick{Include a short description of the numerical method for simulation TKdV: a symplectic integrator.}
-Two approaches can be applied to predict the statistics in the
-downstream wave disturbance, which can be used to confirm each other in
-the numerical results. The equilibrium statistical mechanics
-is an easy way to confirm the matching condition and get the equilibrium
-distribution in far-field long-time limit. On the other hand, the
-direct simulations of the dynamical model can offer estimates about
-the transient statistics before the far-field equilibrium state is
-reached. 
+%Two approaches can be applied to predict the statistics in the downstream wave disturbance, which can be used to confirm each other in the numerical results. The equilibrium statistical mechanics is an easy way to confirm the matching condition and get the equilibrium distribution in far-field long-time limit.  On the other hand, the direct simulations of the dynamical model can offer estimates about the transient statistics before the far-field equilibrium state is reached. 
 
-Here we describe the direct numerical method used for the simulation of the TKdV equation.
+We now detail the method for direct numerical simulation of the TKdV dynamical system \eqref{TKdV}. In particular, the conservation of energy and Hamiltonian plays a central role in the emergent statistical features of the system. Hence, it is important to conserve these quantities numerically and so we use a so-called symplectic scheme.
 
 
-\subsubsection*{Conservation of energy and Hamiltonian form the symplectic scheme}
 
-The conservation property plays a central role in the statistical
-matching and the final equilibrium measure.  For running the direct numerical simulations of the TKdV equations,
-a proper symplectic integrator is necessary to guarantee the conservation
-of the Hamiltonian and energy in time, otherwise the non-symplectic
-schemes will introduce large numerical dissipations. 
+%In particular, to properly conserve the energy and Hamiltonian over long-time horizon simulations, it is necessary to use a symplectic integrator
+
+\vsp{5}
+
+
+
+%\subsubsection*{Conservation of energy and Hamiltonian form the symplectic scheme}
+
+The conservation property plays a central role in the statistical matching and the final equilibrium measure.  For running the direct numerical simulations of the TKdV equations, a proper symplectic integrator is necessary to guarantee the conservation of the Hamiltonian and energy in time, otherwise the non-symplectic schemes will introduce large numerical dissipations.  
 Symplecticness of Hamiltonian PDEs refers to the conservation of oriented areas in the phase space. In the numerical schemes for long time integration, we wish that the discretized system still maintains the Hamiltonian (symplectic) structure. Then the conservation properties of the major quantities can be better guaranteed in the long evolution time to compute model statistics. The symplectic numerical integrators discretize the Hamiltonian and the Poisson structures separated and then form the resulting scheme for conserving the Hamiltonian.
 
 In the numerical discretization, first we split the Hamiltonian into separated linear and nonlinear dynamics. A pseudo-spectral scheme is used for spatial discretization. Proper de-aliasing methods should be used to calculate the nonlinear term $u^{2}$ in the equation. Here the standard 2/3-rule is applied to calculate the quadratic term in physical domain and extend the spectral modes by adding additional zeros in the tails. That is, we explicitly calculate the spectral mode of the square term by 
