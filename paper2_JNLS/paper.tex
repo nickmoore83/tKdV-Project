@@ -579,6 +579,77 @@ Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discu
 \subsection{Deterministic simulations of TKdV}
 
 \nick{Include a short description of the numerical method for simulation TKdV: a symplectic integrator.}
+Two approaches can be applied to predict the statistics in the
+downstream wave disturbance, which can be used to confirm each other in
+the numerical results. The equilibrium statistical mechanics
+is an easy way to confirm the matching condition and get the equilibrium
+distribution in far-field long-time limit. On the other hand, the
+direct simulations of the dynamical model can offer estimates about
+the transient statistics before the far-field equilibrium state is
+reached. 
+
+Here we describe the direct numerical method used for the simulation of the TKdV equation.
+
+
+\subsubsection*{Conservation of energy and Hamiltonian form the symplectic scheme}
+
+The conservation property plays a central role in the statistical
+matching and the final equilibrium measure.  For running the direct numerical simulations of the TKdV equations,
+a proper symplectic integrator is necessary to guarantee the conservation
+of the Hamiltonian and energy in time, otherwise the non-symplectic
+schemes will introduce large numerical dissipations. 
+Symplecticness of Hamiltonian PDEs refers to the conservation of oriented areas in the phase space. In the numerical schemes for long time integration, we wish that the discretized system still maintains the Hamiltonian (symplectic) structure. Then the conservation properties of the major quantities can be better guaranteed in the long evolution time to compute model statistics. The symplectic numerical integrators discretize the Hamiltonian and the Poisson structures separated and then form the resulting scheme for conserving the Hamiltonian.
+
+In the numerical discretization, first we split the Hamiltonian into separated linear and nonlinear dynamics. A pseudo-spectral scheme is used for spatial discretization. Proper de-aliasing methods should be used to calculate the nonlinear term $u^{2}$ in the equation. Here the standard 2/3-rule is applied to calculate the quadratic term in physical domain and extend the spectral modes by adding additional zeros in the tails. That is, we explicitly calculate the spectral mode of the square term by 
+\[
+\widehat{\left(u^{2}\right)}_{k}=\mathcal{F}\left[U^{2}\right],\quad U=\mathcal{F}^{-1}\left[\left\{ \hat{u}_{k}\mid_{\left|k\right|\leq\frac{\Lambda}{2}},0\mid_{\frac{\Lambda}{2}<\left|k\right|\leq\frac{3}{2}\Lambda}\right\} \right],
+\]
+where $\mathcal{F}$ represents the operator for Fourier transform.
+Therefore the ODE system after spatial discretization can be written for the spectral vector $\mathbf{u}=\left\{ \hat{u}_{k}\right\} _{k=0}^{\Lambda}$ and $\mathbf{F}=\left\{ F_{k}\right\}$
+\[
+\dot{\hat{u}}_{k}=F_{k}\left(u\right)=C_{2}\mathcal{D}^{1/2}ik^{3}\hat{u}_{k}-\frac{1}{2}C_{3}\mathcal{D}^{-3/2}ik\widehat{\left(u^{2}\right)}_{k}.
+\]
+Different scales are mixed due to the nonlinear term $u^{2}$. The linear term including third derivative might become stiff when the total wavenumbers become large.
+
+The symplectic scheme
+used here for the time integration of the TKdV equation is the 4th-order midpoint method \cite{mclachlan1993symplectic}.
+Let $\mathbf{u}^{n}$ be the solution at time $t_{n}$ and $\mathbf{u}^{n+1}$
+be the solution at next time step $t_{n+1}=t_{n}+\Delta t$, and $\mathbf{F}$ the
+discretized operator for the spectral modes. The midpoint method has
+two intermediate stages and the auxiliary vectors $\mathbf{y}_{1},\mathbf{y}_{2}$ so that
+\[
+\begin{aligned}\mathbf{y}_{1}-\mathbf{u}^{n} & =w_{1}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{y}_{1}+\mathbf{u}^{n}\right]\right),\\
+\mathbf{y}_{2}-\mathbf{y}_{1} & =w_{2}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{y}_{2}+\mathbf{y}_{1}\right]\right),\\
+\mathbf{u}^{n+1}-\mathbf{y}_{2} & =w_{3}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{u}^{n+1}+\mathbf{y}_{2}\right]\right),
+\end{aligned}
+\]
+with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$,
+$w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. Then the PDFs can be counted
+from the solution $u_{\Lambda}\left(t\right)$, and the statistical
+expectations can be calculated by averaging along the trajectory
+\[
+\left\langle F\left(u_{\Lambda}\right)\right\rangle _{\mu}=\frac{1}{T}\int_{t_{0}}^{t_{0}+T}F\left(u_{\Lambda}\left(t\right)\right)dt,
+\]
+given ergodicity in the solution with $u_{\Lambda}\left(t_{0}\right)$
+already reaching the stationary state.
+
+For the symplectic schemes, implicit iteration method is required to get the accurate solution. For any implicit problem of the form
+\[
+\mathbf{z}-\mathbf{u}^{n}=\tau\mathbf{F\left(z\right)}=\tau\mathbf{Lz}+\tau\mathbf{N\left(z\right)},
+\]
+we split the operators into a linear and nonlinear components and only treat the nonlinear part on the right hand side for the previous stage in the iteration. Then we have the iterative scheme for the solution of implicit problem 
+\[
+\left(1-\tau\mathbf{L}\right)\mathbf{z}^{\left[l+1\right]}=\mathbf{u}^{n}+\tau\mathbf{N}\left(\mathbf{z}^{\left[l\right]}\right).
+\]
+The linear operator $\mathbf{L}$ is the diagonal differential operator, thus it is easy to invert in these schemes. The termination criteria is determined by
+\[
+\left\Vert \mathbf{z}^{\left[l+1\right]}-\mathbf{z}^{\left[l\right]}\right\Vert <\delta\;\mathrm{and}\;\left\Vert \mathbf{z}^{\left[l+1\right]}-\mathbf{z}^{\left[l\right]}\right\Vert \geq\left\Vert \mathbf{z}^{\left[l\right]}-\mathbf{z}^{\left[l-1\right]}\right\Vert .
+\]
+It is found that the iteration tolerance can be set as $\delta=1\times10^{-10}$.
+Finally, the starting guess for the iterations can be found by quadratic extrapolation for the previous three stages $\left(t_{u},\mathbf{u}^{n}\right), \left(t_{u}-\tau,\mathbf{u}^{n-1}\right), \left(t_{u}-2\tau,\mathbf{u}^{n-2}\right)$. Therefore we can find the extrapolated value at $t=t_{n}+\beta\tau$ by
+\[ \mathbf{u}^{n+\beta}=\mathbf{Q}\left(t_{n}+\beta\tau\right)=\left[\frac{1}{2}\beta\left(\beta+3\right)+1\right]\mathbf{u}^{n}-\beta\left(\beta+2\right)\mathbf{u}^{n-1}+\frac{1}{2}\beta\left(\beta+1\right)\mathbf{u}^{n-2}.
+\]
+
 
 \subsection{Sampling from the Gibbs measures}
 
