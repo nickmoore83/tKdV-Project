@@ -31,6 +31,7 @@
 \newcommand{\eps}{\varepsilon}
 \newcommand{\dx}{\, dx}
 \newcommand{\CC}{{\mathbb{C}}}
+
 % Basic physical parameters and scales
 \newcommand{\freqp}{f_p}
 \newcommand{\etastd}{\eta_{\text std}}
@@ -47,6 +48,10 @@
 \newcommand{\drat}{\mathcal{D}}
 \newcommand{\dratdn}{\drat_+}
 \newcommand{\dratupdn}{\drat_{\pm}}
+% Other experimental stuff
+\newcommand{\omavg}{\omega_0}
+\newcommand{\omsig}{\sigma_{\omega}}
+\newcommand{\Dphi}{\Delta \phi}
 % Statistical quantities
 \newcommand{\En}{\mathcal{E}}
 \newcommand{\Mo}{\mathcal{M}}
@@ -58,6 +63,7 @@
 \newcommand{\varupdn}{\var_{\pm}}
 \newcommand{\kurt}{\text{kurt}}
 \newcommand{\std}{\text{std}}
+
 % Dimensionless parameters
 \newcommand{\ampscale}{\mathcal{A}}
 \newcommand{\lengthscale}{\mathcal{L}}
@@ -96,17 +102,16 @@
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
 \newcommand{\Gz}{\Gibbs_0}
 \newcommand{\meanz}[1]{\mean{#1}_0}
-% Stuff
+% Misc stuff
 \newcommand{\tavg}[1]{\overline{#1}}
 \newcommand{\transf}{\mathcal{F}}
 \newcommand{\Nsamp}{N_s}
 \newcommand{\sumsamp}{\sum_{i=1}^{\Nsamp}}
 \newcommand{\traveldist}{\ell}
 \newcommand{\Ftrans}{\mathcal{F}}
-% Experiments
-\newcommand{\omavg}{\omega_0}
-\newcommand{\omsig}{\sigma_{\omega}}
-\newcommand{\Dphi}{\Delta \phi}
+\newcommand{\RHS}{F}
+\newcommand{\RHSh}{\hat{\RHS}}
+\newcommand{\usqdah}{ (\widehat{u_{da}^2}) }
 
 %----------------------------------------------------------------------------%
 
@@ -437,10 +442,9 @@ Next, consider the Galerkin truncation at wave number $\Lambda$
 where $\Proj$ is a projection operator and \eqref{uhat} still holds. Projecting the KdV equation \eqref{dimlessKdV} onto the finite dimensional space gives the truncated KdV equation (TKdV)
 \begin{align}
 \label{TKdV}
-&\pd{\uL}{t} +  \frac{1}{2} C_3 \drat^{-3/2} \,\Proj (\uL)^2 + C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = 0
+&\pd{\uL}{t} +  \frac{1}{2} C_3 \drat^{-3/2} \, \pd{}{x} \Proj (\uL)^2 + C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = 0
 \qquad \text{for } x \in [-\pi,\pi] \\
-&C_3 = \frac{3}{2} \pi^{1/2} \epsup \delup^{-1} \, , \quad
-C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2}
+&C_3 = \frac{3}{2} \pi^{1/2} \epsup \delup^{-1} \, , \quad C_2 = \frac{2 \pi^2 \delup}{3 \lamfac^2}
 \end{align}
 Note the additional projection operator in front of the quadratic term $\uL^2$, which removes the aliased modes of wavenumber larger than $\Lambda$. The constants $C_3$ and $C_2$ are the same as before and have been repeated here for convenience. 
 
@@ -533,12 +537,6 @@ We call \eqref{detmatch} the deterministic matching condition to contrast with i
 \end{equation}
 The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
 
-% NOTES
-%Further, since the regime is shallow, short-time dispersive effects are minimal, meaning that all waves travel at nearly the same speed $c = \sqrt{g \depth}$, independent of wavelength.
-
-
-
-
 
 %----------------------------------------------------------------------------%
 % Scaling
@@ -582,31 +580,35 @@ Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discu
 
 We now detail the method for direct numerical simulation of the TKdV dynamical system \eqref{TKdV}. In particular, since the conservation of energy and Hamiltonian plays a central role in the emergent statistical features of the system, it is important for the numerical scheme to conserve these quantities over long time horizons. We therefore employ a symplectic integrator, which, by preserving oriented areas in phase space, conserves the energy and Hamiltonian exactly.
 
-	The numerical discretization first separates the Hamiltonian into linear and nonlinear components. Then a pseudo-spectral scheme is used for spatial discretization, with de-aliasing applied to the nonlinear term $u^2$
+Rearranging the TKdV system \eqref{TKdV} gives
+\begin{align}
+\label{TKdV2}
+&\pd{\uL}{t} = -  \frac{1}{2} C_3 \drat^{-3/2} \, \pd{}{x} \Proj (\uL)^2 - C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = \RHS
+%\qquad \text{for } x \in [-\pi,\pi]
+\end{align}	
+where we have represented the right-hand side by $\RHS$.
+Our numerical scheme first separates the Hamiltonian into linear and nonlinear components. Then a pseudo-spectral scheme is used for spatial discretization with de-aliasing applied to the nonlinear term $\Proj (\uL)^2$ according to the standard 2/3-rule. That is, we first pad $\uhat_k$ with zeros for $\Lambda < \abs{k} \le 3 \Lambda$ \nick{3 or 3/2???}, transform to physical space and square to obtain $\uL^2$ on a fine grid, then transform back to spectral space and truncate to obtain the Fourier coefficients of $\Proj (\uL)^2$
+For simplicity, we denote these Fourier coefficients $\usqdah_k$. That is,
+\begin{equation}
+\Proj (\uL)^2 = \sum_{\abs{k} \le \Lambda} \usqdah_k e^{i k x}
+\end{equation}
+
+
 
 
 \vsp{5}
 
-\begin{align}
-\label{TKdV2}
-&\pd{\uL}{t} = F = 
--  \frac{1}{2} C_3 \drat^{-3/2} \,\Proj (\uL)^2 - C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = 0 \qquad \text{for } x \in [-\pi,\pi]
-\end{align}
+
 
 
 %The symplectic numerical integrators discretize the Hamiltonian and the Poisson structures separated and then form the resulting scheme for conserving the Hamiltonian.
 %In the numerical discretization, first we split the Hamiltonian into separated linear and nonlinear dynamics. 
 
-A pseudo-spectral scheme is used for spatial discretization. Proper de-aliasing methods should be used to calculate the nonlinear term $u^{2}$ in the equation. Here the standard 2/3-rule is applied to calculate the quadratic term in physical domain and extend the spectral modes by adding additional zeros in the tails. That is, we explicitly calculate the spectral mode of the square term by 
-\[
-\widehat{\left(u^{2}\right)}_{k} = \Ftrans \left[U^{2}\right],\quad U 
-= \Ftrans^{-1} \left[\left\{ \hat{u}_{k}\mid_{\left|k\right|\leq\frac{\Lambda}{2}},0\mid_{\frac{\Lambda}{2}<\left|k\right|\leq\frac{3}{2}\Lambda}\right\} \right],
-\]
-where $\Ftrans$ represents the operator for Fourier transform.
-Therefore the ODE system after spatial discretization can be written for the spectral vector $\mathbf{u}=\left\{ \hat{u}_{k}\right\} _{k=0}^{\Lambda}$ and $\mathbf{F}=\left\{ F_{k}\right\}$
-\[
-\dot{\hat{u}}_{k}=F_{k}\left(u\right)=C_{2}\mathcal{D}^{1/2}ik^{3}\hat{u}_{k}-\frac{1}{2}C_{3}\mathcal{D}^{-3/2}ik\widehat{\left(u^{2}\right)}_{k}.
-\]
+
+Therefore the ODE system after spatial discretization can be written for the spectral vector $\mathbf{u}=\left\{ \hat{u}_{k}\right\}_{k=0}^{\Lambda}$ and $\mathbf{F}=\left\{ \RHSh_{k} \right\}_{k=0}^{\Lambda}$
+\begin{equation}
+\dot{\hat{u}}_{k} = \RHSh_k \left[u\right] = C_{2}\mathcal{D}^{1/2}ik^{3}\hat{u}_{k}-\frac{1}{2}C_{3}\mathcal{D}^{-3/2}ik\widehat{\left(u^{2}\right)}_{k}.
+\end{equation}
 Different scales are mixed due to the nonlinear term $u^{2}$. The linear term including third derivative might become stiff when the total wavenumbers become large.
 
 The symplectic scheme
@@ -615,38 +617,38 @@ Let $\mathbf{u}^{n}$ be the solution at time $t_{n}$ and $\mathbf{u}^{n+1}$
 be the solution at next time step $t_{n+1}=t_{n}+\Delta t$, and $\mathbf{F}$ the
 discretized operator for the spectral modes. The midpoint method has
 two intermediate stages and the auxiliary vectors $\mathbf{y}_{1},\mathbf{y}_{2}$ so that
-\[
-\begin{aligned}\mathbf{y}_{1}-\mathbf{u}^{n} & =w_{1}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{y}_{1}+\mathbf{u}^{n}\right]\right),\\
-\mathbf{y}_{2}-\mathbf{y}_{1} & =w_{2}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{y}_{2}+\mathbf{y}_{1}\right]\right),\\
-\mathbf{u}^{n+1}-\mathbf{y}_{2} & =w_{3}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{u}^{n+1}+\mathbf{y}_{2}\right]\right),
-\end{aligned}
-\]
+\begin{align}
+&\mathbf{y}_{1}-\mathbf{u}^{n} = w_{1}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{y}_{1}+\mathbf{u}^{n}\right]\right),\\
+&\mathbf{y}_{2}-\mathbf{y}_{1} = w_{2}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{y}_{2}+\mathbf{y}_{1}\right]\right),\\
+&\mathbf{u}^{n+1}-\mathbf{y}_{2} = w_{3}\Delta t\mathbf{F}\left(\frac{1}{2}\left[\mathbf{u}^{n+1}+\mathbf{y}_{2}\right]\right),
+\end{align}
 with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$,
 $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. Then the PDFs can be counted
 from the solution $u_{\Lambda}\left(t\right)$, and the statistical
 expectations can be calculated by averaging along the trajectory
-\[
+\begin{equation}
 \left\langle F\left(u_{\Lambda}\right)\right\rangle _{\mu}=\frac{1}{T}\int_{t_{0}}^{t_{0}+T}F\left(u_{\Lambda}\left(t\right)\right)dt,
-\]
+\end{equation}
 given ergodicity in the solution with $u_{\Lambda}\left(t_{0}\right)$
 already reaching the stationary state.
 
 For the symplectic schemes, implicit iteration method is required to get the accurate solution. For any implicit problem of the form
-\[
+\begin{equation}
 \mathbf{z}-\mathbf{u}^{n}=\tau\mathbf{F\left(z\right)}=\tau\mathbf{Lz}+\tau\mathbf{N\left(z\right)},
-\]
+\end{equation}
 we split the operators into a linear and nonlinear components and only treat the nonlinear part on the right hand side for the previous stage in the iteration. Then we have the iterative scheme for the solution of implicit problem 
-\[
+\begin{equation}
 \left(1-\tau\mathbf{L}\right)\mathbf{z}^{\left[l+1\right]}=\mathbf{u}^{n}+\tau\mathbf{N}\left(\mathbf{z}^{\left[l\right]}\right).
-\]
+\end{equation}
 The linear operator $\mathbf{L}$ is the diagonal differential operator, thus it is easy to invert in these schemes. The termination criteria is determined by
-\[
+\begin{equation}
 \left\Vert \mathbf{z}^{\left[l+1\right]}-\mathbf{z}^{\left[l\right]}\right\Vert <\delta\;\mathrm{and}\;\left\Vert \mathbf{z}^{\left[l+1\right]}-\mathbf{z}^{\left[l\right]}\right\Vert \geq\left\Vert \mathbf{z}^{\left[l\right]}-\mathbf{z}^{\left[l-1\right]}\right\Vert .
-\]
+\end{equation}
 It is found that the iteration tolerance can be set as $\delta=1\times10^{-10}$.
 Finally, the starting guess for the iterations can be found by quadratic extrapolation for the previous three stages $\left(t_{u},\mathbf{u}^{n}\right), \left(t_{u}-\tau,\mathbf{u}^{n-1}\right), \left(t_{u}-2\tau,\mathbf{u}^{n-2}\right)$. Therefore we can find the extrapolated value at $t=t_{n}+\beta\tau$ by
-\[ \mathbf{u}^{n+\beta}=\mathbf{Q}\left(t_{n}+\beta\tau\right)=\left[\frac{1}{2}\beta\left(\beta+3\right)+1\right]\mathbf{u}^{n}-\beta\left(\beta+2\right)\mathbf{u}^{n-1}+\frac{1}{2}\beta\left(\beta+1\right)\mathbf{u}^{n-2}.
-\]
+\begin{equation}
+\mathbf{u}^{n+\beta}=\mathbf{Q}\left(t_{n}+\beta\tau\right)=\left[\frac{1}{2}\beta\left(\beta+3\right)+1\right]\mathbf{u}^{n}-\beta\left(\beta+2\right)\mathbf{u}^{n-1}+\frac{1}{2}\beta\left(\beta+1\right)\mathbf{u}^{n-2}.
+\end{equation}
 
 
 \subsection{Sampling from the Gibbs measures}
