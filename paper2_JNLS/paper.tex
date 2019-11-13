@@ -624,12 +624,14 @@ $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$.
 
 \nick{We should simply comment that we use MHMC to initialize the direct simulations.}
 
+
 \vsp{5}
 
-\todo[inline]{Di, I do not understand this paragraph. Is the $F$ meant to be the same $F$ as above, i.e.~the right-hand-side of the TKdV equation \eqref{TKdV2}? Or is $F$ some arbitrary function of the state variable that we want to compute the expectation of?}
-Then the PDFs can be counted from the solution $\uL(t)$, and the statistical expectations can be calculated by averaging along the trajectory
+\todo[inline]{Di, I do not understand this paragraph. Is the $F$ meant to be the same $F$ as above, i.e.~the right-hand-side of the TKdV equation \eqref{TKdV2}? Or is $F$ some arbitrary function of the state variable that we want to compute the expectation of? 
+$F$ should be some arbitrary function for the expectation.}
+Then the PDFs can be counted from the solution $\uL(t)$, and the statistical expectation of any functional $f$ can be calculated by averaging along the trajectory
 \begin{equation}
-\left\langle F \left(u_{\Lambda}\right)\right\rangle _{\mu}=\frac{1}{T}\int_{t_{0}}^{t_{0}+T} F \left(u_{\Lambda}\left(t\right)\right)dt,
+\left\langle f \left(u_{\Lambda}\right)\right\rangle _{\mu}=\frac{1}{T}\int_{t_{0}}^{t_{0}+T} f \left(u_{\Lambda}\left(t\right)\right)dt,
 \end{equation}
 given ergodicity in the solution with $\uL(t_0)$ already reaching the stationary state.
 
