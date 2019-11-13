@@ -537,6 +537,15 @@ We call \eqref{detmatch} the deterministic matching condition to contrast with i
 \end{equation}
 The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
 
+\nick{Edit this}
+To compute the transfer function, we use a weighted random sampling strategy, with samples drawn from the uniform distribution ($d\mu$ or $\Gz$, which notation?) and the weight provided by the Gibbs form \eqref{Gibbs}.
+\begin{equation}
+\mean{Q} = \frac{\int Q \exp\left(-\theta \Ham \right) d\mu}{ \int \exp\left(-\theta \Ham \right) d\mu}
+\approx \frac{\sumsamp Q_i \exp(-\theta \Ham_i)} {\sumsamp \exp(-\theta \Ham_i)}
+\end{equation}
+For computing the transfer function, this simple, weighted averaging approach is preferable to more sophisticated MCMC because it allows you to collect a large number of samples once, and then simply change the weights for different $\theta$. MCMC would require to completely restart the sampling for each individual $\theta$.
+
+
 
 %----------------------------------------------------------------------------%
 % Scaling
@@ -613,6 +622,8 @@ For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplec
 with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$,
 $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. 
 
+\nick{We should simply comment that we use MHMC to initialize the direct simulations.}
+
 \vsp{5}
 
 \todo[inline]{Di, I do not understand this paragraph. Is the $F$ meant to be the same $F$ as above, i.e.~the right-hand-side of the TKdV equation \eqref{TKdV2}? Or is $F$ some arbitrary function of the state variable that we want to compute the expectation of?}
@@ -646,15 +657,6 @@ Finally, the starting guess for the iterations can be found by quadratic extrapo
 
 
 %The symplectic numerical integrators discretize the Hamiltonian and the Poisson structures separated and then form the resulting scheme for conserving the Hamiltonian.
-
-\subsection{Sampling from the Gibbs measures}
-
-\nick{Include a short description of the sampling method}
-
-\begin{equation}
-\mean{Q} = \frac{\int Q \exp\left(-\theta \Ham \right) d\mu}{ \int \exp\left(-\theta \Ham \right) d\mu}
-\approx \frac{\sumsamp Q_i \exp(-\theta \Ham_i)} {\sumsamp \exp(-\theta \Ham_i)}
-\end{equation}
 
 
 %----------------------------------------------------------------------------%
