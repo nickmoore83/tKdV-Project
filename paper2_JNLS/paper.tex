@@ -74,7 +74,7 @@
 \newcommand{\Hupdn}{\Ham^{\pm}}
 \newcommand{\Hthree}{\Ham_{3}}
 \newcommand{\Htwo}{\Ham_{2}}
-%\newcommand{\Fcnl}{\mathcal{F}}
+\newcommand{\Fcnl}{\mathcal{F}}
 % Truncated stuff
 \newcommand{\Proj}{\mathcal{P}_{\Lambda}}
 \newcommand{\uL}{u_{\Lambda}}
@@ -102,7 +102,7 @@
 \newcommand{\Nsamp}{N_s}
 \newcommand{\sumsamp}{\sum_{i=1}^{\Nsamp}}
 \newcommand{\traveldist}{\ell}
-
+\newcommand{\Ftrans}{\mathcal{F}}
 % Experiments
 \newcommand{\omavg}{\omega_0}
 \newcommand{\omsig}{\sigma_{\omega}}
@@ -407,9 +407,9 @@ As indicated above, the momentum of $u$ vanishes since it is measured as displac
 
 % UNUSED POISSON BRACKET STUFF
 \begin{comment}
-The evolution of any functional $\mathcal{F}[u]$ is given by 
+The evolution of any functional $\Fcnl[u]$ is given by 
 \begin{align}
-\partial_t \mathcal{F} = \{ \mathcal{F}, \Ham \} = \int_{-\pi}^{\pi} \vard{\mathcal{F}}{u} \sympJ \vard{\Ham}{u} \dx
+\partial_t \Fcnl  = \{ \Fcnl, \Ham \} = \int_{-\pi}^{\pi} \vard{\Fcnl}{u} \sympJ \vard{\Ham}{u} \dx
 \end{align}
 where again $\Ham = \Hup$ if $t<0$, and $\Ham = \Hdn$ if $t>0$ and $\{\}$ is the Poisson bracket induced by $\sympJ$.
 \end{comment}
@@ -580,26 +580,29 @@ Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discu
 
 %Two approaches can be applied to predict the statistics in the downstream wave disturbance, which can be used to confirm each other in the numerical results. The equilibrium statistical mechanics is an easy way to confirm the matching condition and get the equilibrium distribution in far-field long-time limit.  On the other hand, the direct simulations of the dynamical model can offer estimates about the transient statistics before the far-field equilibrium state is reached. 
 
-We now detail the method for direct numerical simulation of the TKdV dynamical system \eqref{TKdV}. In particular, the conservation of energy and Hamiltonian plays a central role in the emergent statistical features of the system. Hence, it is important to conserve these quantities numerically and so we use a so-called symplectic scheme.
+We now detail the method for direct numerical simulation of the TKdV dynamical system \eqref{TKdV}. In particular, since the conservation of energy and Hamiltonian plays a central role in the emergent statistical features of the system, it is important for the numerical scheme to conserve these quantities over long time horizons. We therefore employ a symplectic integrator, which, by preserving oriented areas in phase space, conserves the energy and Hamiltonian exactly.
 
+	The numerical discretization first separates the Hamiltonian into linear and nonlinear components. Then a pseudo-spectral scheme is used for spatial discretization, with de-aliasing applied to the nonlinear term $u^2$
 
-
-%In particular, to properly conserve the energy and Hamiltonian over long-time horizon simulations, it is necessary to use a symplectic integrator
 
 \vsp{5}
 
+\begin{align}
+\label{TKdV2}
+&\pd{\uL}{t} = F = 
+-  \frac{1}{2} C_3 \drat^{-3/2} \,\Proj (\uL)^2 - C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = 0 \qquad \text{for } x \in [-\pi,\pi]
+\end{align}
 
 
-%\subsubsection*{Conservation of energy and Hamiltonian form the symplectic scheme}
+%The symplectic numerical integrators discretize the Hamiltonian and the Poisson structures separated and then form the resulting scheme for conserving the Hamiltonian.
+%In the numerical discretization, first we split the Hamiltonian into separated linear and nonlinear dynamics. 
 
-The conservation property plays a central role in the statistical matching and the final equilibrium measure.  For running the direct numerical simulations of the TKdV equations, a proper symplectic integrator is necessary to guarantee the conservation of the Hamiltonian and energy in time, otherwise the non-symplectic schemes will introduce large numerical dissipations.  
-Symplecticness of Hamiltonian PDEs refers to the conservation of oriented areas in the phase space. In the numerical schemes for long time integration, we wish that the discretized system still maintains the Hamiltonian (symplectic) structure. Then the conservation properties of the major quantities can be better guaranteed in the long evolution time to compute model statistics. The symplectic numerical integrators discretize the Hamiltonian and the Poisson structures separated and then form the resulting scheme for conserving the Hamiltonian.
-
-In the numerical discretization, first we split the Hamiltonian into separated linear and nonlinear dynamics. A pseudo-spectral scheme is used for spatial discretization. Proper de-aliasing methods should be used to calculate the nonlinear term $u^{2}$ in the equation. Here the standard 2/3-rule is applied to calculate the quadratic term in physical domain and extend the spectral modes by adding additional zeros in the tails. That is, we explicitly calculate the spectral mode of the square term by 
+A pseudo-spectral scheme is used for spatial discretization. Proper de-aliasing methods should be used to calculate the nonlinear term $u^{2}$ in the equation. Here the standard 2/3-rule is applied to calculate the quadratic term in physical domain and extend the spectral modes by adding additional zeros in the tails. That is, we explicitly calculate the spectral mode of the square term by 
 \[
-\widehat{\left(u^{2}\right)}_{k}=\mathcal{F}\left[U^{2}\right],\quad U=\mathcal{F}^{-1}\left[\left\{ \hat{u}_{k}\mid_{\left|k\right|\leq\frac{\Lambda}{2}},0\mid_{\frac{\Lambda}{2}<\left|k\right|\leq\frac{3}{2}\Lambda}\right\} \right],
+\widehat{\left(u^{2}\right)}_{k} = \Ftrans \left[U^{2}\right],\quad U 
+= \Ftrans^{-1} \left[\left\{ \hat{u}_{k}\mid_{\left|k\right|\leq\frac{\Lambda}{2}},0\mid_{\frac{\Lambda}{2}<\left|k\right|\leq\frac{3}{2}\Lambda}\right\} \right],
 \]
-where $\mathcal{F}$ represents the operator for Fourier transform.
+where $\Ftrans$ represents the operator for Fourier transform.
 Therefore the ODE system after spatial discretization can be written for the spectral vector $\mathbf{u}=\left\{ \hat{u}_{k}\right\} _{k=0}^{\Lambda}$ and $\mathbf{F}=\left\{ F_{k}\right\}$
 \[
 \dot{\hat{u}}_{k}=F_{k}\left(u\right)=C_{2}\mathcal{D}^{1/2}ik^{3}\hat{u}_{k}-\frac{1}{2}C_{3}\mathcal{D}^{-3/2}ik\widehat{\left(u^{2}\right)}_{k}.
