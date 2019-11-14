@@ -558,6 +558,46 @@ Recall that we consider $\thup$ as given, so that $\mean{\Hdn}_{\thup}$ is a con
 
 For simply computing the transfer function, this weighted-sampling approach offers significant advantages over more sophisticated methods, such as such Markov Chain Monte Carlo (MCMC), in its ability to reuse the same samples of $\uhvec$ for several different values of $\thdn$. That is, we sample $\uhvec$ from the uniform distribution and compute the list of Hamiltonian values only once, then simply vary $\thdn$ in \eqref{rooteq} with the secant method until the root is found. An MCMC method, on the other hand, would require the sampling to restart from scratch for each value of $\thdn$, since the random steps in MCMC depend directly on the target distribution \eqref{Gibbs}. We will however, use an MCMC method to initialize direct numerical simulations of TKdV due to the superior efficiency for a specific, given value of $\theta$.
 
+%----------------------------------------------------------------------------%
+% Deterministic simulations of TKdV
+%----------------------------------------------------------------------------%
+\subsection{Deterministic simulations of TKdV}
+
+We now detail the method for direct numerical simulation of the TKdV dynamical system \eqref{TKdV}. In particular, since the conservation of energy and Hamiltonian plays a central role in the emergent statistical features of the system, it is important for the numerical scheme to conserve these quantities over long time horizons. We therefore employ a symplectic integrator, which, by preserving oriented areas in phase space, conserves the energy and Hamiltonian exactly.
+
+Rearranging the TKdV system \eqref{TKdV} gives
+\begin{align}
+\label{TKdV2}
+&\pd{\uL}{t} = -  \frac{1}{2} C_3 \drat^{-3/2} \, \pd{}{x} \Proj (\uL)^2 - C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = \RHS[\uL]
+%\qquad \text{for } x \in [-\pi,\pi]
+\end{align}	
+where we have represented the right-hand side by the operator $\RHS[\uL]$. We employ a pseudo-spectral discretization of \eqref{TKdV2}, with de-aliasing applied to the quadratic nonlinear term $\Proj (\uL)^2$ according to the standard 2/3-rule. That is, we first pad $\uhat_k$ with zeros for $\Lambda < \abs{k} \le 3\Lambda/2$, transform to physical space and square to obtain $\uL^2$ on a fine grid, then transform back to spectral space and truncate to obtain the Fourier coefficients of $\Proj (\uL)^2$
+For simplicity, we denote these Fourier coefficients $\usqdah_k$,
+\begin{equation}
+\Proj (\uL)^2 = \sum_{\abs{k} \le \Lambda} \usqdah_k e^{i k x}
+\end{equation}
+With this discretization, \eqref{TKdV2} can be recast in spectral space as a nonlinear ODE system
+\begin{equation}
+\label{TKdVDisc}
+\td{}{t} \uhat_k =  -\frac{1}{2} C_3 \drat^{-3/2} \, ik \usqdah_k + C_2 \drat^{1/2} \, ik^{3} \uhat_k = \RHSh_k
+\end{equation}
+The quadratic nonlinearity present in this system, $\usqdah_k$, mixes the modes during evolution. We note the third-order linear term may become stiff for large $\Lambda$.
+
+For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplectic scheme \cite{mclachlan1993symplectic}. We introduce the spectral vectors $\uhvec = \left\{ \uhat_{k}\right\}_{k=0}^{\Lambda}$ and $\RHSvec = \left\{ \RHSh_{k} \right\}_{k=0}^{\Lambda}$, and let $\uhvec^n$ denote the solution at time $t_n$. The midpoint method has two intermediate stages and the auxiliary vectors $\mathbf{y}_{1},\mathbf{y}_{2}$:
+\begin{align}
+\label{SympStep1}
+&\mathbf{y}_{1} - \uhvec^n = w_{1}\Delta t \, \RHSvec
+\left[ \frac{1}{2}  \left(\mathbf{y}_{1} + \uhvec^n \right) \right] ,\\
+&\mathbf{y}_{2}-\mathbf{y}_{1} = w_{2}\Delta t \, \RHSvec
+\left[ \frac{1}{2} \left(\mathbf{y}_{2} + \mathbf{y}_{1}\right) \right] ,\\
+\label{SympStep3}
+&\uhvec^{n+1}-\mathbf{y}_{2} = w_{3}\Delta t \, \RHSvec
+\left[ \frac{1}{2} \left( \uhvec^{n+1} + \mathbf{y}_{2}\right) \right] ,
+\end{align}
+with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$, $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. The semi-implicit nature of \eqref{SympStep1}--\eqref{SympStep3} combined with the nonlinearity in $\RHSvec$ requires iteration. We split $\RHSvec$ into linear and nonlinear components, with the linear component being easily inverted since it is diagonal in spectral space. At each step of \eqref{SympStep1}--\eqref{SympStep3}, we perform Picard iteration on the nonlinear component until convergence is achieved with a tolerance of $\delta = 1\times10^{-10}$. The starting guess for the iterations is determined by quadratic extrapolation from the previous three stages.
+
+	For the initial conditions, $\uhvec^0$, of the direct numerical simulation we sample from the upstream Gibbs ensemble $\Gup$ in \eqref{Gibbs} with a prescribed inverse temperature $\thup$. We achieve this sampling via a Metropolis-Hasting Monte-Carlo algorithm as detailed in \cite{majda2019}. 
+
 
 %----------------------------------------------------------------------------%
 % Scaling
@@ -592,52 +632,7 @@ Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discu
 
 	We note that the experiments discussed here preceded the development of the theory, and hence had no intent of mimicking a Gibbs measure in the wave forcing. We expect that if the experimental forcing were designed to mimic the Gibbs measure, in particular the spectral decay, then it would be more straightforward to assign a value to the model parameter $\lamfac$. We, however, leave that task for future research due to the significant cost of performing an entirely new set of experiments compared to the relative ease and great value in re-analyzing existing experimental measurements in light of the new theoretical developments.
 
-%----------------------------------------------------------------------------%
-% Numerical methods
-%----------------------------------------------------------------------------%
-\subsection{Deterministic simulations of TKdV}
-
-%Two approaches can be applied to predict the statistics in the downstream wave disturbance, which can be used to confirm each other in the numerical results. The equilibrium statistical mechanics is an easy way to confirm the matching condition and get the equilibrium distribution in far-field long-time limit.  On the other hand, the direct simulations of the dynamical model can offer estimates about the transient statistics before the far-field equilibrium state is reached. 
-
-We now detail the method for direct numerical simulation of the TKdV dynamical system \eqref{TKdV}. In particular, since the conservation of energy and Hamiltonian plays a central role in the emergent statistical features of the system, it is important for the numerical scheme to conserve these quantities over long time horizons. We therefore employ a symplectic integrator, which, by preserving oriented areas in phase space, conserves the energy and Hamiltonian exactly.
-
-Rearranging the TKdV system \eqref{TKdV} gives
-\begin{align}
-\label{TKdV2}
-&\pd{\uL}{t} = -  \frac{1}{2} C_3 \drat^{-3/2} \, \pd{}{x} \Proj (\uL)^2 - C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = \RHS[\uL]
-%\qquad \text{for } x \in [-\pi,\pi]
-\end{align}	
-where we have represented the right-hand side by the operator $\RHS[\uL]$.
-Our numerical scheme first separates the Hamiltonian into linear and nonlinear components. Then a pseudo-spectral scheme is used for spatial discretization with de-aliasing applied to the nonlinear term $\Proj (\uL)^2$ according to the standard 2/3-rule. That is, we first pad $\uhat_k$ with zeros for $\Lambda < \abs{k} \le 3\Lambda/2$, transform to physical space and square to obtain $\uL^2$ on a fine grid, then transform back to spectral space and truncate to obtain the Fourier coefficients of $\Proj (\uL)^2$
-For simplicity, we denote these Fourier coefficients $\usqdah_k$. That is,
-\begin{equation}
-\Proj (\uL)^2 = \sum_{\abs{k} \le \Lambda} \usqdah_k e^{i k x}
-\end{equation}
-With this spectral discretization, the ODE system \eqref{TKdV2} can be written as
-\begin{equation}
-\label{TKdVDisc}
-\td{}{t} \uhat_k =  -\frac{1}{2} C_3 \drat^{-3/2} \, ik \usqdah_k + C_2 \drat^{1/2} \, ik^{3} \uhat_k = \RHSh_k
-\end{equation}
-Due to the nonlinearity, this system mixes scales during evolution. We note the third-order linear term may become stiff for large $\Lambda$.
-
-
-For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplectic scheme \cite{mclachlan1993symplectic}. We introduce the spectral vectors $\uhvec = \left\{ \uhat_{k}\right\}_{k=0}^{\Lambda}$ and $\RHSvec = \left\{ \RHSh_{k} \right\}_{k=0}^{\Lambda}$, and let $\uhvec^n$ denote the solution at time $t_n$. The midpoint method has two intermediate stages and the auxiliary vectors $\mathbf{y}_{1},\mathbf{y}_{2}$:
-\begin{align}
-\label{SympStep1}
-&\mathbf{y}_{1}-\mathbf{u}^{n} = w_{1}\Delta t \, \RHSvec
-\left[ \frac{1}{2} \left(\mathbf{y}_{1}+\mathbf{u}^{n}\right) \right] ,\\
-&\mathbf{y}_{2}-\mathbf{y}_{1} = w_{2}\Delta t \, \RHSvec
-\left[ \frac{1}{2} \left(\mathbf{y}_{2}+\mathbf{y}_{1}\right) \right] ,\\
-\label{SympStep3}
-&\mathbf{u}^{n+1}-\mathbf{y}_{2} = w_{3}\Delta t \, \RHSvec
-\left[ \frac{1}{2} \left(\mathbf{u}^{n+1}+\mathbf{y}_{2}\right) \right] ,
-\end{align}
-with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$, $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. The semi-implicit nature of \eqref{SympStep1}--\eqref{SympStep3} combined with the nonlinearity of $\RHSvec$ requires iteration. We split $\RHSvec$ into linear and nonlinear components, with the linear component being easily inverted since it is diagonal in spectral space. At each step of \eqref{SympStep1}--\eqref{SympStep3}, we perform Picard iteration on the nonlinear component until convergence is achieved with a tolerance of $\delta = 1\times10^{-10}$. The starting guess for the iterations is determined by quadratic extrapolation from the previous three stages.
-
-\vsp{5}
-
-\nick{We should simply comment that we use MHMC to initialize the direct simulations.}
-
+	
 
 %----------------------------------------------------------------------------%
 % Results
