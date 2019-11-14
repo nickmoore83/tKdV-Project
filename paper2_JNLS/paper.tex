@@ -102,16 +102,23 @@
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
 \newcommand{\Gz}{\Gibbs_0}
 \newcommand{\meanz}[1]{\mean{#1}_0}
-% Misc stuff
+
+% Sampling and averaging
 \newcommand{\tavg}[1]{\overline{#1}}
 \newcommand{\transf}{\mathcal{F}}
 \newcommand{\Nsamp}{N_s}
 \newcommand{\sumsamp}{\sum_{i=1}^{\Nsamp}}
-\newcommand{\traveldist}{\ell}
-\newcommand{\Ftrans}{\mathcal{F}}
+\newcommand{\Fth}{W}
 \newcommand{\RHS}{F}
 \newcommand{\RHSh}{\hat{\RHS}}
+\newcommand{\uhvec}{\mathbf{u}}
+\newcommand{\RHSvec}{\mathbf{F}}
 \newcommand{\usqdah}{\hat{v}} %{ (\widehat{u_{da}^2}) }
+
+
+% Scaling analysis
+\newcommand{\traveldist}{\ell}
+
 
 %----------------------------------------------------------------------------%
 
@@ -537,14 +544,19 @@ We call \eqref{detmatch} the deterministic matching condition to contrast with i
 \end{equation}
 The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
 
-\nick{Edit this}
-To compute the transfer function, we use a weighted random sampling strategy, with samples drawn from the uniform distribution ($d\mu$ or $\Gz$, which notation?) and the weight provided by the Gibbs form \eqref{Gibbs}.
+	To compute the transfer function, we use a weighted random-sampling strategy. That is, we first sample the Fourier coefficients $\uhvec = \left\{ \uhat_{k}\right\}_{k=0}^{\Lambda}$ from a uniform distribution on the unit hypersphere $\En = 1$. The uniform sampling is achieved by first sampling from a isotropic Gaussian distribution and then normalizing to project onto the hypersphere \cite{abramov2003}. These samples are then weighted by the appropriate Gibbs measure \eqref{Gibbs} to compute the expectations needed in the statistical matching condition \eqref{statmatch}. That is, for an arbitrary quantity $Q$, the ensemble expectation corresponding to Hamiltonian $\Ham$ and inverse temperature $\theta$ is numerically approximated as
 \begin{equation}
-\mean{Q} = \frac{\int Q \exp\left(-\theta \Ham \right) d\mu}{ \int \exp\left(-\theta \Ham \right) d\mu}
-\approx \frac{\sumsamp Q_i \exp(-\theta \Ham_i)} {\sumsamp \exp(-\theta \Ham_i)}
+\label{weightmean}
+\mean{Q}_{\theta} = \frac{\sumsamp Q_i \exp(-\theta \Ham_i)} {\sumsamp \exp(-\theta \Ham_i)}
 \end{equation}
-For computing the transfer function, this simple, weighted averaging approach is preferable to more sophisticated MCMC because it allows you to collect a large number of samples once, and then simply change the weights for different $\theta$. MCMC would require to completely restart the sampling for each individual $\theta$.
+where $\Nsamp$ is the number of samples. Then, enforcing the statistical matching condition \eqref{statmatch} becomes a root-finding problem for the function
+\begin{equation}
+\label{rooteq}
+\Fth(\thdn) =  \mean{\Hdn}_{\thdn} - \mean{\Hdn}_{\thup} = 0
+\end{equation}
+Recall that we consider $\thup$ as given, so that $\mean{\Hdn}_{\thup}$ is a constant that can be computed straightaway from \eqref{weightmean}. We then use the secant method with respect to the variable $\thdn$ to find a root of $\Fth(\thdn)$ to the desired tolerance.
 
+For simply computing the transfer function, this weighted-sampling approach offers significant advantages over more sophisticated methods, such as such Markov Chain Monte Carlo (MCMC), in its ability to reuse the same samples of $\uhvec$ for several different values of $\thdn$. That is, we sample $\uhvec$ from the uniform distribution and compute the list of Hamiltonian values only once, then simply vary $\thdn$ in \eqref{rooteq} with the secant method until the root is found. An MCMC method, on the other hand, would require the sampling to restart from scratch for each value of $\thdn$, since the random steps in MCMC depend directly on the target distribution \eqref{Gibbs}. We will however, use an MCMC method to initialize direct numerical simulations of TKdV due to the superior efficiency for a specific, given value of $\theta$.
 
 
 %----------------------------------------------------------------------------%
@@ -609,56 +621,22 @@ With this spectral discretization, the ODE system \eqref{TKdV2} can be written a
 Due to the nonlinearity, this system mixes scales during evolution. We note the third-order linear term may become stiff for large $\Lambda$.
 
 
-For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplectic scheme \cite{mclachlan1993symplectic}. We introduce the spectral vectors $\mathbf{u}=\left\{ \hat{u}_{k}\right\}_{k=0}^{\Lambda}$ and $\mathbf{F}=\left\{ \RHSh_{k} \right\}_{k=0}^{\Lambda}$, and let $\mathbf{u}^{n}$ denote the solution at time $t_{n}$. The midpoint method has two intermediate stages and the auxiliary vectors $\mathbf{y}_{1},\mathbf{y}_{2}$:
+For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplectic scheme \cite{mclachlan1993symplectic}. We introduce the spectral vectors $\uhvec = \left\{ \uhat_{k}\right\}_{k=0}^{\Lambda}$ and $\RHSvec = \left\{ \RHSh_{k} \right\}_{k=0}^{\Lambda}$, and let $\uhvec^n$ denote the solution at time $t_n$. The midpoint method has two intermediate stages and the auxiliary vectors $\mathbf{y}_{1},\mathbf{y}_{2}$:
 \begin{align}
-\label{SympSteps}
-&\mathbf{y}_{1}-\mathbf{u}^{n} = w_{1}\Delta t \, \mathbf{F}
+\label{SympStep1}
+&\mathbf{y}_{1}-\mathbf{u}^{n} = w_{1}\Delta t \, \RHSvec
 \left[ \frac{1}{2} \left(\mathbf{y}_{1}+\mathbf{u}^{n}\right) \right] ,\\
-&\mathbf{y}_{2}-\mathbf{y}_{1} = w_{2}\Delta t \, \mathbf{F}
+&\mathbf{y}_{2}-\mathbf{y}_{1} = w_{2}\Delta t \, \RHSvec
 \left[ \frac{1}{2} \left(\mathbf{y}_{2}+\mathbf{y}_{1}\right) \right] ,\\
-&\mathbf{u}^{n+1}-\mathbf{y}_{2} = w_{3}\Delta t \, \mathbf{F}
+\label{SympStep3}
+&\mathbf{u}^{n+1}-\mathbf{y}_{2} = w_{3}\Delta t \, \RHSvec
 \left[ \frac{1}{2} \left(\mathbf{u}^{n+1}+\mathbf{y}_{2}\right) \right] ,
 \end{align}
-with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$,
-$w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. 
-
-\nick{We should simply comment that we use MHMC to initialize the direct simulations.}
-
+with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$, $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. The semi-implicit nature of \eqref{SympStep1}--\eqref{SympStep3} combined with the nonlinearity of $\RHSvec$ requires iteration. We split $\RHSvec$ into linear and nonlinear components, with the linear component being easily inverted since it is diagonal in spectral space. At each step of \eqref{SympStep1}--\eqref{SympStep3}, we perform Picard iteration on the nonlinear component until convergence is achieved with a tolerance of $\delta = 1\times10^{-10}$. The starting guess for the iterations is determined by quadratic extrapolation from the previous three stages.
 
 \vsp{5}
 
-\todo[inline]{Di, I do not understand this paragraph. Is the $F$ meant to be the same $F$ as above, i.e.~the right-hand-side of the TKdV equation \eqref{TKdV2}? Or is $F$ some arbitrary function of the state variable that we want to compute the expectation of? 
-$F$ should be some arbitrary function for the expectation.}
-Then the PDFs can be counted from the solution $\uL(t)$, and the statistical expectation of any functional $f$ can be calculated by averaging along the trajectory
-\begin{equation}
-\left\langle f \left(u_{\Lambda}\right)\right\rangle _{\mu}=\frac{1}{T}\int_{t_{0}}^{t_{0}+T} f \left(u_{\Lambda}\left(t\right)\right)dt,
-\end{equation}
-given ergodicity in the solution with $\uL(t_0)$ already reaching the stationary state.
-
-\todo[inline]{I am also a little confused about the paragraphs below. Eq.~\eqref{iterate} is not the same form of Eq.~(43)--(45) because in those equations it is not simply $\mathbf{z}$ inside $\mathbf{F}$, but instead an average of $\mathbf{z}$ and the previous value. Am I simply misinterpreting?}
-\todo[inline]{Also, this is simply Picard iteration, correct? Perhaps we could simply say in words that we perform Picard iteration so that we don't have to worry about getting the equations correct in detail. What's your opinion?}
-
-For the symplectic schemes, implicit iteration method is required to get the accurate solution. For any implicit problem of the form
-\begin{equation}
-\label{iterate}
-\mathbf{z}-\mathbf{u}^{n}=\tau \mathbf{F \left(z\right)} = \tau\mathbf{Lz}+\tau\mathbf{N\left(z\right)},
-\end{equation}
-we split the operators into a linear and nonlinear components and only treat the nonlinear part on the right hand side for the previous stage in the iteration. Then we have the iterative scheme for the solution of implicit problem 
-\begin{equation}
-\left(1-\tau\mathbf{L}\right)\mathbf{z}^{\left[l+1\right]} = \mathbf{u}^{n}+\tau\mathbf{N}\left(\mathbf{z}^{\left[l\right]}\right).
-\end{equation}
-The linear operator $\mathbf{L}$ is the diagonal differential operator, thus it is easy to invert in these schemes. The termination criteria is determined by
-\begin{equation}
-\left\Vert \mathbf{z}^{\left[l+1\right]}-\mathbf{z}^{\left[l\right]}\right\Vert <\delta\;\mathrm{and}\;\left\Vert \mathbf{z}^{\left[l+1\right]}-\mathbf{z}^{\left[l\right]}\right\Vert \geq\left\Vert \mathbf{z}^{\left[l\right]}-\mathbf{z}^{\left[l-1\right]}\right\Vert .
-\end{equation}
-It is found that the iteration tolerance can be set as $\delta=1\times10^{-10}$.
-Finally, the starting guess for the iterations can be found by quadratic extrapolation for the previous three stages $\left(t_{u},\mathbf{u}^{n}\right), \left(t_{u}-\tau,\mathbf{u}^{n-1}\right), \left(t_{u}-2\tau,\mathbf{u}^{n-2}\right)$. Therefore we can find the extrapolated value at $t=t_{n}+\beta\tau$ by
-\begin{equation}
-\mathbf{u}^{n+\beta}=\mathbf{Q}\left(t_{n}+\beta\tau\right)=\left[\frac{1}{2}\beta\left(\beta+3\right)+1\right]\mathbf{u}^{n}-\beta\left(\beta+2\right)\mathbf{u}^{n-1}+\frac{1}{2}\beta\left(\beta+1\right)\mathbf{u}^{n-2}.
-\end{equation}
-
-
-%The symplectic numerical integrators discretize the Hamiltonian and the Poisson structures separated and then form the resulting scheme for conserving the Hamiltonian.
+\nick{We should simply comment that we use MHMC to initialize the direct simulations.}
 
 
 %----------------------------------------------------------------------------%
