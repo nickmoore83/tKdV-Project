@@ -506,14 +506,14 @@ Note that if $\theta = 0$, then the Gibbs measure is a {\em uniform} measure on 
 
 	Recall that the abrupt depth change is met by traveling waves at dimensionless time $T_{ADC} = 0$, set to zero for convenience. The KdV equations describe wave dynamics over {\em long} timescales, physically $t \gg \timescale$, capturing weakly nonlinear and weakly dispersive effects. Meanwhile, evolution over shorter timescales is simply described by linear theory. The event of a wave crossing the ADC is precisely such a short-time event, and so we will employ the same matching conditions at the ADC that would result from linear theory. 
 
-	More specifically, we assume continuity of the surface displacement, $\eta$, at the ADC \nick{(cite)}. Since the temporal fluctuations of $\eta$ match, waves crossing the ADC must rapidly adjust in wavelength so as to attain the same frequency in two different depths --- a well-understood phenomenon \nick{(cite)}. Of course, since the normalized domain $x \in [-\pi,\pi]$ is scaled on the characteristic wavelength, there is no change in the dimensionless wave-field $u(x,t)$, giving the condition
+	More specifically, we assume continuity of the surface displacement, $\eta$, across the ADC \cite{whitham2011linear, rey1992propagation}. Since the propagation speed $c$ changes with depth, waves crossing the ADC must rapidly adjust in wavelength in order to match the oscillation frequency just upstream of the ADC \cite{whitham2011linear, rey1992propagation}. The normalized domain $x \in [-\pi,\pi]$ is scaled on the characteristic wavelength and so there is no change in the dimensionless wave-field $u(x,t)$, giving the condition
 \begin{equation}
 \label{detmatch}
 u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+}, 
 %\quad \mbox{for } -\pi \le x \le \pi,
 \qquad \mbox{\em Deterministic matching condition}
 \end{equation}	
-We call \eqref{detmatch} the deterministic matching condition to contrast with its statistical counterpart introduced below. This matching condition is employed in the deterministic simulations of the TKdV dynamical system \eqref{TKdV}. We note that in the alternate formulation mentioned earlier, it is the product $\depth^{1/4} \eta$ that would match at the ADC \cite{johnson1997modern}.
+We call \eqref{detmatch} the deterministic matching condition to contrast with its statistical counterpart introduced below. This matching condition is employed in the deterministic simulations of TKdV \eqref{TKdV}. We note that in the alternate formulation mentioned earlier, it is the product $\depth^{1/4} \eta$ that would match at the ADC \cite{johnson1997modern}.
 
 	Now, from the perspective of statistical mechanics, consider the communication between the statistical ensembles, $\Gupdn$, upstream and downstream of the ADC. These two systems are in contact at the ADC, and so the upstream state with distribution $\Gup$ can be regarded as a thermal reservoir that influences the downstream distribution $\Gdn$. In fact, the above deterministic  condition directly leads to a simple description for the link. The quantity of interest is the outgoing Hamiltonian $\Hdn$, since its value just upstream of the ADC, $t=0^{-}$, is set by the incoming dynamics, and then this particular value is conserved thereafter in the outgoing dynamics. Since $u$ matches at the ADC, so must $\Hdn$, and, in fact, this matching holds for every individual trajectory. Recall that $\Hdn(t)$ is not conserved in the upstream dynamics and so its value varies for $t < 0$. However, appealing to weak Ergodicity, the ensemble mean $\meanup{\Hdn(t)}$ is expected to be independent of time. In particular, the value $\meanup{\Hdn \vert_{t=0^{-}} }$ is the same as the bare ensemble mean $\meanup{\Hdn}$. Afterwards, the particular value $\Hdn \vert_{t=0^{-}}$ is conserved in the downstream dynamics, on a trajectory-by-trajectory basis and for all $t>0$. Thus, the downstream measure $\Gdn$ must recover the same ensemble mean $\meanup{\Hdn \vert_{t=0^{-}} } = \meanup{\Hdn}$, producing the simple condition
 \begin{align}
@@ -522,7 +522,7 @@ We call \eqref{detmatch} the deterministic matching condition to contrast with i
 \qquad \mbox{\em Statistical matching condition}
 \end{align}
 
-	This statistical matching condition, originally derived by \maetal \cite{majda2019}, imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a free parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by the matching condition \eqref{statmatch}, giving the functional dependence
+	This statistical matching condition, originally derived by \maetal \cite{majda2019}, imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by the matching condition \eqref{statmatch}, giving the functional dependence
 \begin{equation}
 \thdn = \transf \left( \thup \right)
 \qquad \mbox{\em Transfer function}
@@ -541,7 +541,7 @@ where $\Nsamp$ is the number of samples. Then, enforcing the statistical matchin
 \end{equation}
 Recall that we consider $\thup$ as given, so that $\mean{\Hdn}_{\thup}$ is a constant that can be computed straightaway from \eqref{weightmean}. We then use the secant method with respect to the variable $\thdn$ to find a root of $\Fth(\thdn)$ to the desired tolerance.
 
-For simply computing the transfer function, this weighted-sampling approach offers significant advantages over more sophisticated methods, such as such Markov Chain Monte Carlo (MCMC), in its ability to reuse the same samples of $\uhvec$ for several different values of $\thdn$. That is, we sample $\uhvec$ from the uniform distribution and compute the list of Hamiltonian values only once, then simply vary $\thdn$ in \eqref{rooteq} with the secant method until the root is found. An MCMC method, on the other hand, would require the sampling to restart from scratch for each value of $\thdn$, since the random steps in MCMC depend directly on the target distribution \eqref{Gibbs}. We will however, use an MCMC method to initialize direct numerical simulations of TKdV due to the superior efficiency for a specific, given value of $\theta$.
+For simply computing the transfer function, this weighted-sampling approach offers significant advantages over more sophisticated methods, such as such Markov Chain Monte Carlo (MCMC), in its ability to reuse the same samples of $\uhvec$ for several different values of $\thdn$. That is, we sample $\uhvec$ from the uniform distribution and compute the list of Hamiltonian values only once, then simply vary $\thdn$ in \eqref{rooteq} with the secant method until the root is found. An MCMC method, on the other hand, would require the sampling to restart from scratch for each value of $\thdn$, since the random steps in MCMC depend directly on the target distribution \eqref{Gibbs}. We will however, use MCMC to initialize direct numerical simulations of TKdV due to the superior efficiency for a single, given value of $\theta$.
 
 %----------------------------------------------------------------------------%
 % Deterministic simulations of TKdV
@@ -566,7 +566,7 @@ With this discretization, \eqref{TKdV2} can be recast in spectral space as a non
 \label{TKdVDisc}
 \td{}{t} \uhat_k =  -\frac{1}{2} C_3 \drat^{-3/2} \, ik \usqdah_k + C_2 \drat^{1/2} \, ik^{3} \uhat_k = \RHSh_k
 \end{equation}
-The quadratic nonlinearity present in this system, $\usqdah_k$, mixes the modes during evolution. We note the third-order linear term may become stiff for large $\Lambda$.
+The quadratic nonlinearity represented by $\usqdah_k$ mixes the modes during evolution. We note the third-order linear term may become stiff for large $\Lambda$.
 
 For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplectic scheme \cite{mclachlan1993symplectic}. We introduce the spectral vectors $\uhvec = \left\{ \uhat_{k}\right\}_{k=0}^{\Lambda}$ and $\RHSvec = \left\{ \RHSh_{k} \right\}_{k=0}^{\Lambda}$, and let $\uhvec^n$ denote the solution at time $t_n$. The midpoint method has two intermediate stages and the auxiliary vectors $\mathbf{y}_{1},\mathbf{y}_{2}$:
 \begin{align}
@@ -581,7 +581,7 @@ For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplec
 \end{align}
 with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$, $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. The semi-implicit nature of \eqref{SympStep1}--\eqref{SympStep3} combined with the nonlinearity in $\RHSvec$ requires iteration. We split $\RHSvec$ into linear and nonlinear components, with the linear component being easily inverted since it is diagonal in spectral space. At each step of \eqref{SympStep1}--\eqref{SympStep3}, we perform Picard iteration on the nonlinear component until convergence is achieved with a tolerance of $\delta = 1\times10^{-10}$. The starting guess for the iterations is determined by quadratic extrapolation from the previous three stages.
 
-	For the initial conditions, $\uhvec^0$, of the direct numerical simulation we sample from the upstream Gibbs ensemble $\Gup$ in \eqref{Gibbs} with a prescribed inverse temperature $\thup$. We achieve this sampling via a Metropolis-Hasting Monte-Carlo algorithm as detailed in \cite{majda2019}. 
+	For the initial conditions, $\uhvec^0$, of the direct numerical simulation we sample from the upstream Gibbs ensemble $\Gup$ \eqref{Gibbs} with a prescribed inverse temperature $\thup$. We achieve this sampling via a Metropolis-Hasting Monte-Carlo algorithm as detailed in \cite{majda2019}. 
 
 
 %----------------------------------------------------------------------------%
