@@ -94,9 +94,10 @@
 \newcommand{\Gup}{\Gibbs^{-}}
 \newcommand{\Gdn}{\Gibbs^{+}}
 \newcommand{\Gupdn}{\Gibbs^{\pm}}
-\newcommand{\thup}{\theta^{-}}
-\newcommand{\thdn}{\theta^{+}}
-\newcommand{\thupdn}{\theta^{\pm}}
+\newcommand{\invtemp}{\beta}
+\newcommand{\itup}{\invtemp^{-}}
+\newcommand{\itdn}{\invtemp^{+}}
+\newcommand{\itupdn}{\invtemp^{\pm}}
 \newcommand{\meanup}[1]{\mean{#1}_{-}}
 \newcommand{\meandn}[1]{\mean{#1}_{+}}
 \newcommand{\meanupdn}[1]{\mean{#1}_{\pm}}
@@ -475,11 +476,11 @@ In summary, the TKdV system possesses three important invariants: momentum, ener
 	On either side of the ADC, the mixed ensemble, or {\em Gibbs measure}, follows directly from the corresponding Hamiltonian via
 \begin{align}
 \label{Gibbs}
-\Gupdn = Z_{\thupdn}^{-1} \, \exp(-\thupdn \Hupdn) \delta(\En - 1)
+\Gupdn = Z_{\itupdn}^{-1} \, \exp(-\itupdn \Hupdn) \delta(\En - 1)
 \end{align}
-Here $\theta = \thupdn$ is the inverse temperature, which will take a different value on either side of the ADC, and $Z_{\theta}$ a constant that depends on $\theta$. Each measure $\Gupdn$ induces a corresponding ensemble average, denoted $\mean{\cdot}_{\pm}$. 
+Here $\invtemp = \itupdn$ is the inverse temperature, which will take a different value on either side of the ADC, and $Z_{\invtemp}$ a constant that depends on $\invtemp$. Each measure $\Gupdn$ induces a corresponding ensemble average, denoted $\mean{\cdot}_{\pm}$. 
 
-	We note that, in the current formulation, a positive inverse temperature $\theta > 0$ produces physically realistic statistics with a decaying energy spectrum, as is consistent with experiments \cite{majda2019, bajars2013weakly}. Negative inverse temperature produces a physically unrealistic spectrum that has more energy at smaller scales. Hence, we will hereafter focus on the physically realistic case of $\theta > 0$.
+	We note that, in the current formulation, a positive inverse temperature $\invtemp > 0$ produces physically realistic statistics with a decaying energy spectrum, as is consistent with experiments \cite{majda2019, bajars2013weakly}. Negative inverse temperature produces a physically unrealistic spectrum that has more energy at smaller scales. Hence, we will hereafter focus on the physically realistic case of $\invtemp > 0$.
 
 
 
@@ -494,7 +495,7 @@ Throughout this paper we use a bracket for ensemble average and overbar for a ti
 &\tavg{Q} = \frac{1}{T_2-T_1} \int_{T_1}^{T_2} Q \, dt	 
 &&\mbox{\em Time average}
 \end{align}
-Note that if $\theta = 0$, then the Gibbs measure is a {\em uniform} measure on the unit hypersphere in $\CC^{\Lambda}$, which we will denote as either $\Gz$ or simply $d\mu$.
+Note that if $\invtemp = 0$, then the Gibbs measure is a {\em uniform} measure on the unit hypersphere in $\CC^{\Lambda}$, which we will denote as either $\Gz$ or simply $d\mu$.
 \end{comment}
 %----------------------------------------------------------------------------%
 
@@ -523,9 +524,9 @@ We call \eqref{detmatch} the deterministic matching condition to contrast with i
 \qquad \mbox{\em Statistical matching condition}
 \end{align}
 
-	This statistical matching condition, originally derived by \maetal \cite{majda2019}, imposes a relationship between the two inverse temperatures $\thup$ and $\thdn$. In particular, we view $\thup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\thup$ as a parameter that can be varied to study various possible system states, the downstream $\thdn$ is determined directly by the matching condition \eqref{statmatch}, giving the functional dependence
+	This statistical matching condition, originally derived by \maetal \cite{majda2019}, imposes a relationship between the two inverse temperatures $\itup$ and $\itdn$. In particular, we view $\itup$ as given by the random-state of the incoming wave field. Thus, while we will treat $\itup$ as a parameter that can be varied to study various possible system states, the downstream $\itdn$ is determined directly by the matching condition \eqref{statmatch}, giving the functional dependence
 \begin{equation}
-\thdn = \transf \left( \thup \right)
+\itdn = \transf \left( \itup \right)
 \qquad \mbox{\em Transfer function}
 \end{equation}
 The {\em transfer function} $\transf$ will be a key link needed to relate the theory to experiments.
@@ -535,19 +536,19 @@ The {\em transfer function} $\transf$ will be a key link needed to relate the th
 %----------------------------------------------------------------------------%
 \subsection{Numerical computation of the transfer function}
 
-	To compute the transfer function, we use a weighted random-sampling strategy. That is, we first sample the Fourier coefficients $\uhvec = \left\{ \uhat_{k}\right\}_{k=0}^{\Lambda}$ from a uniform distribution on the unit hypersphere $\En = 1$. The uniform sampling is achieved by first sampling from an isotropic Gaussian distribution and then normalizing to project onto the hypersphere \cite{abramov2003}. These samples are then weighted by the appropriate Gibbs measure \eqref{Gibbs} to compute the expectations needed in the statistical matching condition \eqref{statmatch}. That is, for an arbitrary quantity $Q$, the ensemble expectation corresponding to Hamiltonian $\Ham$ and inverse temperature $\theta$ is numerically approximated as
+	To compute the transfer function, we use a weighted random-sampling strategy. That is, we first sample the Fourier coefficients $\uhvec = \left\{ \uhat_{k}\right\}_{k=0}^{\Lambda}$ from a uniform distribution on the unit hypersphere $\En = 1$. The uniform sampling is achieved by first sampling from an isotropic Gaussian distribution and then normalizing to project onto the hypersphere \cite{abramov2003}. These samples are then weighted by the appropriate Gibbs measure \eqref{Gibbs} to compute the expectations needed in the statistical matching condition \eqref{statmatch}. That is, for an arbitrary quantity $Q$, the ensemble expectation corresponding to Hamiltonian $\Ham$ and inverse temperature $\invtemp$ is numerically approximated as
 \begin{equation}
 \label{weightmean}
-\mean{Q}_{\theta} = \frac{\sumsamp Q_i \exp(-\theta \Ham_i)} {\sumsamp \exp(-\theta \Ham_i)}
+\mean{Q}_{\invtemp} = \frac{\sumsamp Q_i \exp(-\invtemp \Ham_i)} {\sumsamp \exp(-\invtemp \Ham_i)}
 \end{equation}
 where $\Nsamp$ is the number of samples. Then, enforcing the statistical matching condition \eqref{statmatch} becomes a root-finding problem for the function
 \begin{equation}
 \label{rooteq}
-\Fth(\thdn) =  \mean{\Hdn}_{\thdn} - \mean{\Hdn}_{\thup} = 0
+\Fth(\itdn) =  \mean{\Hdn}_{\itdn} - \mean{\Hdn}_{\itup} = 0
 \end{equation}
-Recall that we consider $\thup$ as given, so that $\mean{\Hdn}_{\thup}$ is a constant that can be computed straightaway from \eqref{weightmean}. We then use the secant method with respect to the variable $\thdn$ to find a root of $\Fth(\thdn)$ to the desired tolerance.
+Recall that we consider $\itup$ as given, so that $\mean{\Hdn}_{\itup}$ is a constant that can be computed straightaway from \eqref{weightmean}. We then use the secant method with respect to the variable $\itdn$ to find a root of $\Fth(\itdn)$ to the desired tolerance.
 
-For simply computing the transfer function, this weighted-sampling approach offers significant advantages over more sophisticated methods, such as such Markov Chain Monte Carlo (MCMC), in its ability to reuse the same samples of $\uhvec$ for several different values of $\thdn$. That is, we sample $\uhvec$ from the uniform distribution and compute the list of Hamiltonian values only once, then simply vary $\thdn$ in \eqref{rooteq} with the secant method until the root is found. An MCMC method, on the other hand, would require the sampling to restart from scratch for each value of $\thdn$, since the random steps in MCMC depend directly on the target distribution \eqref{Gibbs}. We will however, use MCMC to initialize direct numerical simulations of TKdV due to the superior efficiency for a single, given value of $\theta$.
+For simply computing the transfer function, this weighted-sampling approach offers significant advantages over more sophisticated methods, such as such Markov Chain Monte Carlo (MCMC), in its ability to reuse the same samples of $\uhvec$ for several different values of $\itdn$. That is, we sample $\uhvec$ from the uniform distribution and compute the list of Hamiltonian values only once, then simply vary $\itdn$ in \eqref{rooteq} with the secant method until the root is found. An MCMC method, on the other hand, would require the sampling to restart from scratch for each value of $\itdn$, since the random steps in MCMC depend directly on the target distribution \eqref{Gibbs}. We will however, use MCMC to initialize direct numerical simulations of TKdV due to the superior efficiency for a single, given value of $\invtemp$.
 
 %----------------------------------------------------------------------------%
 % Deterministic simulations of TKdV
@@ -587,7 +588,7 @@ For time integration of \eqref{TKdVDisc}, we employ a 4th-order midpoint symplec
 \end{align}
 with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$, $w_{2}=1-2w_{1}$, and $w_{3}=w_{1}$. The semi-implicit nature of \eqref{SympStep1}--\eqref{SympStep3} combined with the nonlinearity in $\RHSvec$ requires iteration. We split $\RHSvec$ into linear and nonlinear components, with the linear component being easily inverted since it is diagonal in spectral space. At each step of \eqref{SympStep1}--\eqref{SympStep3}, we perform Picard iteration on the nonlinear component until convergence is achieved with a tolerance of $\delta = 1\times10^{-10}$. The starting guess for the iterations is determined by quadratic extrapolation from the previous three stages.
 
-	For the initial conditions, $\uhvec^0$, of the direct numerical simulation we sample from the upstream Gibbs ensemble $\Gup$ \eqref{Gibbs} with a prescribed inverse temperature $\thup$. We achieve this sampling via a Metropolis-Hasting Monte-Carlo algorithm as detailed in \cite{majda2019}. 
+	For the initial conditions, $\uhvec^0$, of the direct numerical simulation we sample from the upstream Gibbs ensemble $\Gup$ \eqref{Gibbs} with a prescribed inverse temperature $\itup$. We achieve this sampling via a Metropolis-Hasting Monte-Carlo algorithm as detailed in \cite{majda2019}. 
 
 
 %----------------------------------------------------------------------------%
@@ -595,9 +596,9 @@ with the time increments $w_{1}=\left(2+2^{1/3}+2^{-1/3}\right)/3$, $w_{2}=1-2w_
 %----------------------------------------------------------------------------%
 \subsection{Scaling analysis to link inverse temperature to experiments}
 
-	Since the inverse temperature, $\theta$, is a key modeling parameter, it would be highly desirable to normalize the system such that the value of $\theta$ does not depend sensitively on the truncation index as $\Lambda$ grows large. That way, $\theta$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\theta$ to be asymptotically independent of $\Lambda$.
+	Since the inverse temperature, $\invtemp$, is a key modeling parameter, it would be highly desirable to normalize the system such that the value of $\invtemp$ does not depend sensitively on the truncation index as $\Lambda$ grows large. That way, $\invtemp$ can be interpreted as a real physical parameter that can be linked to the experiments and whose value does not depend sensitively on where one chooses to truncate the system. The one modeling parameter that is left to be set is $\lamfac$, which represents the number of characteristic wavelengths in the periodic domain. In what follows, we will determine reasonable constraints on $\lamfac$ that allow $\invtemp$ to be asymptotically independent of $\Lambda$.
 	
-	The invariant measure exhibits the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\theta_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ were to depend sensitively on $\Lambda$ in expectation, then $\theta_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
+	The invariant measure exhibits the proportionality $ \Gibbs_{\Lambda} \propto \exp(-\invtemp_{\Lambda} \Ham_{\Lambda})$, where we have made explicit the dependence of all quantities on $\Lambda$. In particular, if $\Ham_{\Lambda}$ were to depend sensitively on $\Lambda$ in expectation, then $\invtemp_{\Lambda}$ would need to compensate in order to produce the same invariant measure. Hence, it would be desirable to scale the system in such a way that $\Ham_{\Lambda}$ does not depend sensitively on $\Lambda$, at least in expectation. 
 To achieve this insensitivity, we will appeal to the uniform measure $\Gz$ and the idea of equipartition of energy \cite{abramov2003}, since these two concepts afford simple scaling estimates.
 
 Recall that $\Ham_{\Lambda}$ is composed of the cubic and quadratic components $\Hthree$ and $\Htwo$. Due to the odd symmetry of $\Hthree$, it is easy to see that $\meanz{\Hthree} = 0$ with respect to the uniform measure $\Gz$. The quadratic component, however, requires closer inspection. Due to Parseval's identity, $\Htwo$ can be written as
@@ -639,8 +640,8 @@ With the experimental setup described and the theory outlined, we now present re
 %----------------------------------------------------------------------------%
 \subsection{Calibration of the inverse temperature}
 
-At this point, all parameters appearing in the theoretical model have been linked directly to experimental parameters with the exception of the inverse temperature of the incoming flow, $\thup$.
-Our strategy is to use the outgoing skewness as the main diagnostic to determine a realistic range for $\thup$. That is, for an input $\thup$, the downstream inverse temperature $\thdn$ is determined by \eqref{statmatch}, which ultimately sets the skewness of the outgoing wave-field.
+At this point, all parameters appearing in the theoretical model have been linked directly to experimental parameters with the exception of the inverse temperature of the incoming flow, $\itup$.
+Our strategy is to use the outgoing skewness as the main diagnostic to determine a realistic range for $\itup$. That is, for an input $\itup$, the downstream inverse temperature $\itdn$ is determined by \eqref{statmatch}, which ultimately sets the skewness of the outgoing wave-field.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -648,16 +649,16 @@ Our strategy is to use the outgoing skewness as the main diagnostic to determine
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/transfig.pdf}
 \caption{
-Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and calibration of the inverse temperature. (a)--(b) The transfer function for three values of $\Lambda$ with either (a) $\lamfac = 8$ fixed or (b) $\lamfac = \Lambda/2$ scaled. Scaling $\lamfac$ with $\Lambda$ mitigates the sensitivity to $\Lambda$. (c) The incoming and outgoing skewness versus $\thup$ implied by the matching condition. In line with experiments, the skewness is enhanced significantly in the outgoing wave field.
+Analysis of the transfer function, $\itdn = \transf \left( \itup \right)$, and calibration of the inverse temperature. (a)--(b) The transfer function for three values of $\Lambda$ with either (a) $\lamfac = 8$ fixed or (b) $\lamfac = \Lambda/2$ scaled. Scaling $\lamfac$ with $\Lambda$ mitigates the sensitivity to $\Lambda$. (c) The incoming and outgoing skewness versus $\itup$ implied by the matching condition. In line with experiments, the skewness is enhanced significantly in the outgoing wave field.
 }
 \label{transfig}
 \end{center}
 \end{figure}
  %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
  
-	Figures \ref{transfig}(a)-(b) show the transfer function $\thdn = \transf(\thup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $0 \le \thup \le 25$. Figure \ref{transfig}(a) shows the cases $\Lambda = $ 12, 16, and 20 with $\lamfac = 8$ fixed in each. In this figure, the transfer function changes significantly with $\Lambda$. Figure~\ref{transfig}(b) shows the same but with the scaling $\lamfac = \Lambda/2$ that was argued in the previous section. In this figure, the three curves come much closer to one another. Thus scaling $\lamfac$ appropriately greatly mitigates the sensitivity of the transfer function to $\Lambda$, though it does not completely remove the dependence.
+	Figures \ref{transfig}(a)-(b) show the transfer function $\itdn = \transf(\itup)$ that results from the statistical matching condition \eqref{statmatch}, for an incoming inverse temperature in the range $0 \le \itup \le 25$. Figure \ref{transfig}(a) shows the cases $\Lambda = $ 12, 16, and 20 with $\lamfac = 8$ fixed in each. In this figure, the transfer function changes significantly with $\Lambda$. Figure~\ref{transfig}(b) shows the same but with the scaling $\lamfac = \Lambda/2$ that was argued in the previous section. In this figure, the three curves come much closer to one another. Thus scaling $\lamfac$ appropriately greatly mitigates the sensitivity of the transfer function to $\Lambda$, though it does not completely remove the dependence.
  
-	Next, Fig.~\ref{transfig}(c) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\thup$ for the case $(\Lambda, \lamfac) = (16, 8)$. In line with experimental observations, the incoming skewness is small, while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness range of 0.6-0.9 seen for the larger amplitudes in Fig.~\ref{ExpSpatialStats}(b), requires selecting $\thup$ in the range 10--25.
+	Next, Fig.~\ref{transfig}(c) shows the skewness of the incoming (green) and outgoing (blue) wave fields, as they depend on the incoming inverse temperature $\itup$ for the case $(\Lambda, \lamfac) = (16, 8)$. In line with experimental observations, the incoming skewness is small, while the outgoing wave skewness is much higher. Specifically, to capture the experimentally observed peak skewness range of 0.6-0.9 seen for the larger amplitudes in Fig.~\ref{ExpSpatialStats}(b), requires selecting $\itup$ in the range 10--25.
 
 %----------------------------------------------------------------------------%
 % Comparison of distributions
@@ -665,7 +666,7 @@ Analysis of the transfer function, $\thdn = \transf \left( \thup \right)$, and c
 \subsection{Statistical comparison between theory and experiments}
 
 	We now aim to compare the wave statistics measured in experiments against those that emerge from the TKdV theory. Throughout, we will focus on the representative set of experiments detailed in Table \ref{paramtable}, in which the peak downstream skewness was measured to be 0.83. 
-With $(\Lambda, \lamfac) = (16, 8)$ fixed, Fig.~\ref{transfig}(c) indicates $\thup = 20$ as a reasonable value to attain the desired skewness. We thus run the deterministic TKdV simulations with these model parameters and with $\epsup$, $\delup$, and $\dratdn$ set to the representative values in Table \ref{paramtable}. We run the simulations to a sufficiently long dimensionless time of $t_{f} = 10$, with $dt = 5 \times 10^{-4}$, and with $10^3$ trajectories sampled from the upstream Gibbs measure $\Gup$.
+With $(\Lambda, \lamfac) = (16, 8)$ fixed, Fig.~\ref{transfig}(c) indicates $\itup = 20$ as a reasonable value to attain the desired skewness. We thus run the deterministic TKdV simulations with these model parameters and with $\epsup$, $\delup$, and $\dratdn$ set to the representative values in Table \ref{paramtable}. We run the simulations to a sufficiently long dimensionless time of $t_{f} = 10$, with $dt = 5 \times 10^{-4}$, and with $10^3$ trajectories sampled from the upstream Gibbs measure $\Gup$.
 
 % Figure
 %^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%
@@ -673,7 +674,7 @@ With $(\Lambda, \lamfac) = (16, 8)$ fixed, Fig.~\ref{transfig}(c) indicates $\th
 \begin{center}
 \includegraphics[width = 0.99 \linewidth]{Figs/uhist.pdf}
 \caption{ 
-Comparison of displacement histograms from experiment and theory. Upon calibrating the inverse temperature $\thup$, the TKdV simulations recover the experimentally measured distributions in remarkable detail. In particular, they exhibit the transition from a nearly symmetric distribution upstream to a highly skewed distribution downstream.
+Comparison of displacement histograms from experiment and theory. Upon calibrating the inverse temperature $\itup$, the TKdV simulations recover the experimentally measured distributions in remarkable detail. In particular, they exhibit the transition from a nearly symmetric distribution upstream to a highly skewed distribution downstream.
 }
 \label{uhist}
 \end{center}
@@ -767,6 +768,9 @@ Dynamic evolution of surface-displacement skewness and kurtosis from the TKdV si
 \subsection{Explicit formula for outgoing skewness and experimental confirmation}
 
 We now discuss arguably the most novel single result of the manuscript. In the recent theoretical study, \maetal derived an explicit formula for the outgoing wave-field skewness in terms of the system parameters \cite{majda2019}. More specifically, this formula relates the downstream skewness of surface displacement, $\skw(\eta)$, to the change in slope variance, $\var(\eta_x)$. Here, we recap the derivation of this formula and then test the prediction against new, direct experimental measurements.
+
+\todo[inline]{Need to cite \cite{onorato2016origin} as recommended by ref 1 and maybe \cite{onorato2016twenty} which was not recommended by a referee, but is more specific to KdV}
+
 
 The explicit formula for outgoing skewness arises directly from the statistical matching condition \eqref{statmatch}, which states that the downstream Hamiltonian must match in expected value at the ADC, i.e.~with respect to the incoming and outgoing Gibbs measures.
 This condition can be written more explicitly as
