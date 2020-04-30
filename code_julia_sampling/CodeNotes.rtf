@@ -8,11 +8,17 @@
 \f0\fs28 \cf0 \ul \ulc0 \
 Instructions\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone \'95 uniform_sample(nmodes, nsweeps) samples from the uniform distribution and produces the output file rand.jld. Here nmodes = Lambda is specified but lamfac = N is not specified. The number of samples per sweep is 1e5.\
+\cf0 \ulnone \'95 The routine uniform_sample(nmodes, nsweeps) samples from the uniform distribution and produces the output file rand.jld, which contains a list of H2 and H3 values (as well as some parameters). Here nmodes = Lambda is specified but lamfac = N is not specified. The number of samples per sweep is 1e5.\
 \
-\'95 transfun(\'93rand-16-20\'94, lamfac) computes the transfer function and makes plots of F and the skewness. It produces the output file thvars.jld\ul \
+\'95 The routine transfun(\'93rand-16-20\'94, lamfac) computes the transfer function and produces the output file thvars.jld, which contains the upstream and downstream theta values and the skewness upstream and downstream (as well as some parameters).\ul \
 \
-\ulnone \'95 output_text(\'93thvars-16-8-20.jld\'94) converts the julia file to a text file for DataTank to read.\
+\ulnone \'95 The routine output_text(\'93thvars-16-8-20.jld\'94) converts the julia file to a text file for DataTank to read.\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Timing\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Sampling with Lambda = 16 and nsweeps = 100 requires 2.6 minutes of cpu time. In the paper I used nsweeps = 1000, which by extrapolation would require about 26 minutes.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul Notes\

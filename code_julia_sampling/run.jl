@@ -9,5 +9,5 @@ include("routines.jl")
 
 
 # RUNS
-uniform_sample(16, 2)
+uniform_sample(16, 100)
 #transfun("rand-12z-1000.jld", 8)
