@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+
+
+\usepackage{fullpage}
+\usepackage{graphicx,amsmath,amsfonts,amssymb,stmaryrd}
+\usepackage{color}
+\newcommand{\comment}[1]{{\color{blue} #1}}
+
+%----------------------------- CUSTOM COMMANDS -----------------------------%
+
+% Basic editing
+\newcommand{\tocite}{{\color{blue}(to cite)}}
+\newcommand{\vsp}[1]{\vspace{#1 pc} \noindent}
+\newcommand{\np}{\newpage \noindent}
+\newcommand{\HERE}[1]{ \vsp{#1} {\color{blue} HERE} }
+% Mathy stuff
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\omavg}{\omega_0}
+\newcommand{\omsig}{\sigma_{\omega}}
+\newcommand{\dth}{\Delta \theta}
+\newcommand{\dom}{\Delta \omega}
+\newcommand{\etag}{\eta_{\gamma}}
+\newcommand{\etastd}{\eta_{\text{std}}}
+\newcommand{\mean}[1]{\left< #1\right>}
+
+% Upstream and downstream notation (not used)
+\newcommand{\hm}{h^-}
+\newcommand{\hp}{h^+}
+\newcommand{\lamm}{\lambda^-}
+\newcommand{\lamp}{\lambda^+}
+\newcommand{\km}{k^-}
+\newcommand{\kp}{k^+}
+\newcommand{\khm}{(kh)^-}
+\newcommand{\khp}{(kh)^+}
+
+
+%----------------------------- DOCUMENT -----------------------------%
+\begin{document}
+
+\section*{Referee 1}
+
+\noindent
+\comment{The paper deals with the statistics of the 1D evolution of a surface-gravity-wave field in shallow water, encountering an abrupt depth reduction. The authors perform experimental investigations carried out in a water tank and in parallel they develop a theory based on the statistical mechanics of the Korteveg de Vries equation, used to interpret the experimental results. The two aspects, experimental and theoretical, have been considered before, in References [5] and [25], but here they are put together in an expanded and synergetic way that makes the manuscript clear and interesting. Moreover, although many of the results have been presented before, the analysis of the experimental data of surface slope is new. This is performed in light of the recently derived relationship linking the ratio between displacement skewness and variations of slope variance to the nonlinearity in the system. The agreement of the experimental and theoretical scalings of the ratio is remarkable over a wide range of amplitudes, providing compelling evidence that the theory proposed captures the fundamental, leading-order aspects of the phenomenon.
+}
+\begin{itemize}
+\item We thank the referee for these positive remarks.
+\end{itemize}
+
+\noindent
+\comment{
+1. Equilibrium statistical mechanics, i.e. ultimately the use of the canonical ensemble, is indeed a powerful tool. Though, too often the relaxation conditions required for the machinery to apply are overlooked. Here, the 1D KdV equation is an integrable system, whose trajectories are constrained by an infinite number of conserved quantities and whose highly nonlinear regime is governed by coherent structures such as solitons. The description of these structures is out of reach for the Gibbs measure – see the recent rise of an entire subject, namely integrable turbulence, to describe the statistics of integrable systems such as KdV or NLS. I do believe that some weak ergodicity, especially for the statistics of physical-space variables, may justify a sort of relaxation to the Gibbs measure before the ADC is encountered, but all of this deserves being discussed, and should at least be given careful consideration. Consider for instance the most linear cases in the paper: at the wave maker the measure in Fourier space is the one induced by equation (1). Since the modes do not interact (linear limit), the measure at the ADC will also be the one with the spectrum of eq. (1); i.e., relaxation to the Gibbs measure does not take place (simply because the necessary randomizing interactions are absent in the system), in which case the canonical ensemble is justified if and only if the initial condition at the wave maker is itself distributed according to the Gibbs measure. This fact should be discussed and may explain why the theory does not match the experimental points for low amplitudes in figure (8.c).}
+
+\begin{itemize}
+\item The referee is correct that equilibrium statistical mechanics and the canonical ensemble is used here, not because it is rigorously justified, but as an effective theory that explains the data.
+It is true that the 1D KdV equation is an integrable system whose trajectories are constrained by an infinite number of conserved quantities. However, the {\em truncated} system does not possess these constraints (and pointed out in the original text).
+%\begin{quotation}
+%\end{quotation}
+\item a
+\end{itemize}
+
+\noindent
+\comment{}
+
+\begin{itemize}
+\item
+\end{itemize}
+
+
+
+\end{document}
