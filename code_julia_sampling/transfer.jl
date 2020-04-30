@@ -3,9 +3,9 @@ For given upstream theta, enforce the matching condition to
 compute the downstream theta.=#
 
 include("math_routines.jl")
-include("io_routines.jl")
 
 function transfun(randfile::AbstractString, lamfac::Int)
+	randfile = string(data_folder(), randfile)
 	rr, nmodes, nsweeps = load(randfile, "rr", "nmodes", "nsweeps")
 	# Parameters
 	eps0 = 0.017
@@ -36,7 +36,7 @@ function transfun(randfile::AbstractString, lamfac::Int)
 		println("Upstream skewness = ", sig(skup[nn],3))
 		println("Downstream skewness = ", sig(skdn[nn],3), "\n")
 	end
-	savefile = string("thvars-", string(nmodes), "z-", 
+	savefile = string(data_folder(), "thvars-", string(nmodes), "z-", 
 		string(lamfac), "-", string(nsweeps), ".jld")
 	save(savefile, "thup", thup, "thdn", thdn, "skup", skup, "skdn", skdn, 
 		"nmodes", nmodes, "lamfac", lamfac, "nsweeps", nsweeps)
@@ -63,12 +63,13 @@ function plotstuff(datafile::AbstractString)
 end
 
 function output_text(datafile::AbstractString)
+	datafile = string(data_folder(), datafile)
 	thup,thdn,skup,skdn = load(datafile, "thup", "thdn", "skup", "skdn")
 	nmodes,lamfac,nsweeps = load(datafile, "nmodes", "lamfac", "nsweeps")
 	nthvals = length(thup)
 	ratio = skdn./skup
 	outdata = [nmodes; lamfac; nthvals; thup; thdn; skup; skdn]
-	outfile = string("transf-", string(nmodes), "z-", 
+	outfile = string(data_folder(), "transf-", string(nmodes), "z-", 
 		string(lamfac), "-", string(nsweeps), ".txt")
 	writedata(outdata, outfile)
 end

@@ -139,7 +139,7 @@ function uniform_sample(nmodes::Int, nsweeps::Int,
 		println("Sweep ",nn,", ",sig(100*nn/nsweeps,3),"% completed.")
 	end
 	zerolast ? zstr = "z" : zstr = ""
-	savefile = string("rand-",string(nmodes),zstr,"-",string(nsweeps),".jld")
+	savefile = string(data_folder(),"rand-",string(nmodes),zstr,"-",string(nsweeps),".jld")
 	save(savefile, "rr", RandList([],H2vec,H3vec),
 		"nmodes", nmodes, "nsweeps", nsweeps, "totsamp", totsamp)
 
@@ -150,7 +150,9 @@ end
 
 
 
-
+function data_folder()
+	return "./Data/"
+end
 
 function writedata(data::Array, filename::AbstractString)
 	iostream = open(filename, "w")
