@@ -23,11 +23,9 @@ end
 the signal u is real and has zero mean. =#
 
 #= Basic irealfft to go from spectral to physical space. =#
-#= Note: uu has length npoints = 2*nmodes or 2*nmodes + 1. 
-Setting npts = 2*modes seems slightly more accurate in H3test. =#
+#= In physical space, u has to have length 2*nmodes (preferred) or 2*nmodes+1 =#
 function irealfft(uhat::Vector{Complex{Float64}})
-	npoints = 2*length(uhat)
-	uu = irfft([0; uhat], npoints)
+	uu = irfft([0; uhat[:]], 2*length(uhat))
 	return uu*length(uu)
 end
 #= Upsampled version of irealfft. =#
