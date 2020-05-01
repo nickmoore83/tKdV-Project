@@ -2,7 +2,7 @@
 {\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww9920\viewh9200\viewkind0
+\margl1440\margr1440\vieww11000\viewh9920\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs28 \cf0 \ul \ulc0 \
@@ -16,15 +16,61 @@ Instructions\
 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Plan\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone To address Ref1 question about convergence of the transfer function for Lambda large, I plan to run a series of samples with Lambda = 16, 32, and maybe 64. I plan to use 500 and 1000 sweeps to get a visual on the convergence with respect to the number of samples. The value of N does not need to be set in the sampling stage, only later on the transfer function stage. I will primarily use N = Lambda/2, but can also experiment with N = 8 fixed as a straw man.\ul \
+\ulnone \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul Timing\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone Sampling with Lambda = 16 and nsweeps = 100 requires 2.6 minutes of cpu time. In the paper I used nsweeps = 1000, which by extrapolation would require about 26 minutes.\
+\cf0 \ulnone \
+Lambda	nsweeps	sampling	transfer	\
+16		10		0.27 mins	0.32 mins\
+16		100		2.8 mins	3.3 mins\
+24		100		*14 mins\
+32		100		2.9 mins\
+64		100		*16 mins\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul Notes\
+\cf0 *Interesting: Lambda = 24 takes much longer than Lambda = 32, which means that the fft routines I am using are very suboptimal. Likely, making a FFTW plan, or else simply computing the transform directly, would be faster for the moderate values of Lambda I am using. Online search suggests the break-even for FFT over direct is about 64.\
+*I don\'92t know why Lambda = 64 takes so much longer than 32.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone - In the long run, the better strategy is to sample from a better prior, or to do some basic AR because transfun has to deal with enormously long lists and the vast majority of those are wasted in the mean because their weight is nearly zero.\
+\cf0 \
+Conclusions\
+1) The cpu time of computing the transfer function is very close to the cpu time of sampling and this relationship seems to scale with nsweeps getting bigger.\
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Lambda	nsweeps	sampling	transfer	\
+16		500		14 mins\
+16		1000		28 mins\
+32		500		15 mins\
+32		1000		34 mins\
+\
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Recoding FFT\ulnone \
+The only code that uses the FFT is ham3.\
+\
+\ul Notes\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone \
+- Potential problem: For say Lambda = 16, it looks like the way I am setting the uhat vector and doing FFTs that I am taking a real fft with length 17, which is not good!\
+\
+\
+- In transfer function, I need to see how many iterations the root solver is taking and think about improving that.\
+\
+- In the long run, the better strategy is to sample from a better prior, or to do some basic AR because transfun has to deal with enormously long lists and the vast majority of those are wasted in the mean because their weight is nearly zero.\
+\
+- Man it would be cool to figure out how to run this sampling algorithm on GPUs. It seems like it would be appropriate since it involves doing the same exact simple arithmetic instructions for multiple data. The only little thing I am worried about is if the GPU is efficient at handling FFT, but I\'92m sure there is a way to do this. Also, I really do need to do some preliminary AR to pare down the data files of stored H2 and H3 values.\
+\
+- I should use FFTW \'91plan\'92, since I am doing transforms of exactly the same size over and over again.\
+References:\
+{\field{\*\fldinst{HYPERLINK "http://www.fftw.org/fftw2_doc/fftw_2.html"}}{\fldrslt http://www.fftw.org/fftw2_doc/fftw_2.html}}\
+{\field{\*\fldinst{HYPERLINK "https://www.reddit.com/r/Julia/comments/5wel0j/fft_speed_vs_matlab/"}}{\fldrslt https://www.reddit.com/r/Julia/comments/5wel0j/fft_speed_vs_matlab/}}\
+{\field{\*\fldinst{HYPERLINK "https://www.juliabloggers.com/tag/fftw/"}}{\fldrslt https://www.juliabloggers.com/tag/fftw/}}\
+{\field{\*\fldinst{HYPERLINK "https://biojulia.net/post/hardware/"}}{\fldrslt https://biojulia.net/post/hardware/}}\
 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0

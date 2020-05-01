@@ -21,13 +21,8 @@ end
 #---------- Real FFT Routines ----------#
 #= Compute the FFT between physical and spectral space assuming
 the signal u is real and has zero mean. =#
-#= Basic realfft to go from uu to uhat. =#
-function realfft(uu::Vector{Float64})
-	uhat = rfft(uu)/length(uu)
-	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6) 
-	return uhat[2:end]
-end
-#= Basic irealfft to go from uhat to uu (no upsampling). =#
+
+#= Basic irealfft to go from spectral to physical space. =#
 #= Note: uu has length npoints = 2*nmodes or 2*nmodes + 1. 
 Setting npts = 2*modes seems slightly more accurate in H3test. =#
 function irealfft(uhat::Vector{Complex{Float64}})
@@ -62,6 +57,19 @@ function ham3(uhat::Vector{Complex{Float64}})
 	uu = ifftup(uhat)
 	return 1/6 * sum(uu.^3) * 2*pi/length(uu)
 end
+
+#= Recursive computation of H3 in spectral space. =#
+function ham3direct(uhat::Vector{Complex{Float64}})
+	if length(uhat) == 2
+		return real( conj(uhat[end]) * uhat[1]^2 )
+	else
+		H3 = ham3direct(uhat[1:end-1])
+		usum = sum( uhat[nn]*uhat[end-nn] for nn=1:lastindex(uhat)-1 )
+		H3 += real( conj(uhat[end]) *  usum)
+		return H3
+	end
+end
+
 #---------- High-level Hamiltonian Routines ----------#
 # Sampled state
 struct RandList
@@ -143,7 +151,8 @@ end
 Note: zerolast zeroes the last mode as is done in the Matlab DNS. =#
 function uniform_sample(nmodes::Int, nsweeps::Int; zerolast::Bool=true)
 	(H2vec, H3vec, totsamp), cputime = @timed( sample_many_sweeps(nmodes, nsweeps, zerolast) )
-	println("CPU time for sampling: ", sig(cputime/60,3), " minutes.")
+	println("\nCompleted sampling with nmodes = ", nmodes, ", nsweeps = ", nsweeps)
+	println("CPU time = ", sig(cputime/60,3), " minutes.\n\n")
 	zerolast ? zstr = "z" : zstr = ""
 	savefile = string(data_folder(),"rand-",string(nmodes),zstr,"-",string(nsweeps),".jld")
 	save(savefile, "rr", RandList([],H2vec,H3vec), 
@@ -176,10 +185,11 @@ function transfun(randfile::AbstractString, lamfac::Int)
 	thdn, skup, skdn = [zeros(nth) for idx=1:3]
 	guess = thup[1]
 	# Loop over the theta values to compute the transfer function.
+	cputime = @elapsed(
 	for nn = 1:nth
 		meandiff(thdn) = gibbs_mean(hdn, hdn, thdn) - gibbs_mean(hdn, hup, thup[nn])
 		thdn[nn] = find_zero(meandiff, guess, Order1())
-		println("Iteration ", nn, "; thup = ", thup[nn], "; thdn = ", sig(thdn[nn],3))
+		println("Step ", nn, ": thup = ", thup[nn], ", thdn = ", sig(thdn[nn],3))
 		# Use linear extrapolation to make the next guess.
 		nn>1 ? guess = 2*thdn[nn] - thdn[nn-1] : guess = thdn[nn]
 		# Compute the skewness of eta
@@ -187,11 +197,13 @@ function transfun(randfile::AbstractString, lamfac::Int)
 		skdn[nn] = skewu(rr.H3, hdn, thdn[nn])
 		println("Upstream skewness = ", sig(skup[nn],3))
 		println("Downstream skewness = ", sig(skdn[nn],3), "\n")
-	end
+	end)
+	println("\nCompleted sampling with nmodes = ", nmodes, ", nsweeps = ", nsweeps, " lamfac = ", lamfac)
+	println("CPU time = ", sig(cputime/60,3), " minutes.\n\n")	
 	savefile = string(data_folder(), "thvars-", string(nmodes), "z-", 
 		string(lamfac), "-", string(nsweeps), ".jld")
 	save(savefile, "thup", thup, "thdn", thdn, "skup", skup, "skdn", skdn, 
-		"nmodes", nmodes, "lamfac", lamfac, "nsweeps", nsweeps)
+		"nmodes", nmodes, "lamfac", lamfac, "nsweeps", nsweeps, "cputime", cputime)
 end
 
 function output_text(datafile::AbstractString)
