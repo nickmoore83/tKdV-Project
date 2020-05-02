@@ -21,9 +21,14 @@ end
 #---------- Real FFT Routines ----------#
 #= Compute the FFT between physical and spectral space assuming
 the signal u is real and has zero mean. =#
-
+#= Basic realfft to go from physical to spectral space. 
+This routine is only used in the benchmark. =#
+function realfft(uu::Vector{Float64})
+	uhat = rfft(uu)/length(uu)
+	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6) 
+	return uhat[2:end]
+end
 #= Basic irealfft to go from spectral to physical space. =#
-#= In physical space, u has to have length 2*nmodes (preferred) or 2*nmodes+1 =#
 function irealfft(uhat::Vector{Complex{Float64}})
 	uu = irfft([0; uhat[:]], 2*length(uhat))
 	return uu*length(uu)
