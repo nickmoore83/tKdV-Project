@@ -22,88 +22,57 @@ sig(var, sigdig::Int) = round(var,sigdigits=sigdig)
 npts(nmodes::Int) = 2*nmodes
 npts(uhat::Vector{ComplexF64}) = npts(length(uhat))
 # Transform from physical to spectral space; only used in a benchmark.
+# Need to negate odd components, I believe due to interval [-pi, pi]
 function realfft(uu::Vector{Float64})
 	uhat = rfft(uu)/length(uu)
 	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6) 
-	return uhat[2:end]
+	uhat = uhat[2:end]
+	uhat .*= (-1).^(1:length(uhat))
+	return uhat
 end
 # Transform from spectral to physical space; used in ham3.
 function irealfft(uhat::Vector{ComplexF64})
 	uu = irfft([0; uhat[:]], npts(uhat)) 
 	return uu*length(uu)
 end
-#= Upsampled version of irealfft. =#
+# Upsampled version of irealfft.
 function ifftup(uhat::Vector{ComplexF64})
 	return irealfft([uhat; zeros(length(uhat)) ])
 end
 #---------------------------------------#
 
-#---------- Hamiltonian Routines: Low-level ----------#
-#= Compute the energy, E = 1/2 int u^2 dx. =#
+#---------- Basic Hamiltonian Routines ----------#
+# Compute the energy, E = 1/2 int u^2 dx.
 energy(uhat::Vector{ComplexF64}) = 2*pi*norm(uhat)^2
 # Compute H2 = 1/2 int u_x^2 dx
-ham2(uhat::Vector{ComplexF64}) = energy(im*[1:length(uhat)].*uhat)
-#= Compute H3 using FFT to physical space, H3 = 1/6 int u^3 dx. =#
-function ham3(uhat::Vector{ComplexF64})
+ham2(uhat::Vector{ComplexF64}) = energy(im*(1:length(uhat)).*uhat)
+# Compute H3 using FFT to physical space, H3 = 1/6 int u^3 dx.
+function ham3fft(uhat::Vector{ComplexF64})
 	uu = ifftup(uhat)
 	return 1/6 * sum(uu.^3) * 2*pi/length(uu)
 end
-#= Recursive computation of H3 in spectral space. =#
-function ham3direct(uhat::Vector{ComplexF64})
+# Recursive computation of H3 in spectral space.
+function ham3rec(uhat::Vector{ComplexF64})
 	# If only one mode, then H3 is zero.
 	length(uhat) == 1 && return 0.0
 	# Otherwise use recursion.
-	H3 = ham3direct(uhat[1:end-1])
+	H3 = ham3rec(uhat[1:end-1])
 	usum = sum( uhat[nn]*uhat[end-nn] for nn=1:lastindex(uhat)-1 )
 	H3 += real( conj(uhat[end]) *  usum)
 	return H3
 end
-#---------- Hamiltonian Routines: High-level ----------#
-# Sampled state
-struct RandList
-	rvar::Array; H2::Vector; H3::Vector; 
-end
-# List of constants
-struct ConstantList
-	C2::Float64; C3::Float64; D0::Float64
-end
-#= Compute the constanst C2 and C3. =#
-function C2C3(eps0::Float64, del0::Float64, lamfac::Int)
-	C2 = (2/3) * pi^2 * del0/lamfac^2
-	C3 = 1.5 * sqrt(pi) * eps0/del0
-	return C2,C3
-end
-#= Compute the Hamiltonian. H3 and H2 are real and can be numbers or vectors. =#
-function hamiltonian(H2, H3, C2::Float64, C3::Float64, D0::Float64)
-	return C2*D0^(1/2)*H2 - C3*D0^(-3/2)*H3
-end
-#= Compute the upstream Hamiltonian.=#
-function hamup(rr::RandList, cc::ConstantList)
-	return hamiltonian(rr.H2, rr.H3, cc.C2, cc.C3, 1.)
-end
-#= Compute the downstream Hamiltonian.=#
-function hamdn(rr::RandList, cc::ConstantList)
-	return hamiltonian(rr.H2, rr.H3, cc.C2, cc.C3, cc.D0)
-end
-#= Mean of ham under Gibbs measure hamgibbs. =#
-function gibbs_mean(quantity, hamgibbs, theta::Float64)
-	return dot(exp.(-theta*hamgibbs), quantity) / sum(exp.(-theta*hamgibbs))
-end
-#= Compute the skewness of the displacement, u or eta. =#
-function skewu(H3, hamgibbs, theta::Float64)
-	meanH3 =  gibbs_mean(H3, hamgibbs, theta)
-	skewu = 3*pi^(1/2)*meanH3
-	return skewu
-end
-#---------------------------------------#
+# Choose which algorithm to use for H3.
+ham3(uhat::Vector{ComplexF64}) = ham3rec(uhat) 
 
 #---------- Sampling Routines ----------#
-#= Get uhat from the array of random values. =#
+# Sampled state
+struct RandList; rvar::Array; H2::Vector; H3::Vector; end
+# Get uhat from the array of random values.
 function getuhat(rvar::Array{Float64}, nn::Int)
 	uhat = rvar[:,1,nn] + im*rvar[:,2,nn]
 	return uhat/sqrt(energy(uhat))
 end
-#= Sample a single sweep from a uniform distribution on the hypershpere E=1. =#
+# Sample a single sweep from a uniform distribution on the hypershpere E=1.
 function sample_one_sweep(nmodes::Int, nsamp::Int, zerolast::Bool)
 	rvar = randn(nmodes,2,nsamp)
 	# Zero out the last mode as is done in Matlab DNS.
@@ -121,7 +90,7 @@ function sample_one_sweep(nmodes::Int, nsamp::Int, zerolast::Bool)
 	rlist = RandList(Float32.(rvar), H2vec, H3vec)
 	return rlist
 end
-#= Sample several sweeps for better memory usage. =#
+# Sample several sweeps for better memory usage.
 function sample_many_sweeps(nmodes::Int, nsweeps::Int, zerolast::Bool)
 	samp_per = 10^5
 	totsamp = nsweeps*samp_per
@@ -150,9 +119,35 @@ end
 #savemicro ? rsave = Float32.(rvar) : rsave = []
 #---------------------------------------#
 
+
+#---------- Highl-level Hamiltonian Routines ----------#
+# List of constants
+struct ConstList; C2::Float64; C3::Float64; D0::Float64; end
+#= Compute the constanst C2 and C3. =#
+function C2C3(eps0::Float64, del0::Float64, lamfac::Int)
+	C2 = (2/3) * pi^2 * del0/lamfac^2
+	C3 = 1.5 * sqrt(pi) * eps0/del0
+	return C2,C3
+end
+# Compute the Hamiltonian. H3 and H2 are real and can be numbers or vectors.
+hamiltonian(H2, H3, C2, C3, D0) = C2*D0^(1/2)*H2 - C3*D0^(-3/2)*H3
+# Compute the upstream and downstream Hamiltonians.
+hamup(rr::RandList, cc::ConstList) = hamiltonian(rr.H2, rr.H3, cc.C2, cc.C3, 1.)
+hamdn(rr::RandList, cc::ConstList) = hamiltonian(rr.H2, rr.H3, cc.C2, cc.C3, cc.D0)
+# Mean of ham under Gibbs measure hamgibbs.
+function gibbs_mean(quantity, hamgibbs, beta::Float64)
+	return dot(exp.(-beta*hamgibbs), quantity) / sum(exp.(-beta*hamgibbs))
+end
+# Compute the skewness of the displacement, u or eta.
+function skewu(H3, hamgibbs, beta::Float64)
+	return 3*pi^(1/2)*gibbs_mean(H3, hamgibbs, beta)
+end
+#---------------------------------------#
+
+
 #---------- Highest-level Routines ----------#
 #= Calculate the transfer function:
-Given an upstream theta, enforce the matching condition to compute the downstream theta.=#
+Given an upstream beta, enforce the matching condition to compute the downstream beta.=#
 function transfun(randfile::AbstractString, lamfac::Int)
 	# Set Parameters.
 	thup = 0.: 0.5 : 30.
@@ -162,9 +157,9 @@ function transfun(randfile::AbstractString, lamfac::Int)
 	# Load data.
 	randfile = string(data_folder(), randfile)
 	rr, nmodes, nsweeps = load(randfile, "rr", "nmodes", "nsweeps")
-	# Set Constants.
+	# Set Consts.
 	C2,C3 = C2C3(eps0,del0,lamfac)
-	cc = ConstantList(C2,C3,D0)
+	cc = ConstList(C2,C3,D0)
 	# Compute the list of Hamiltonians using precomputed H2 and H3.
 	hdn = Float32.(hamdn(rr,cc))
 	hup = Float32.(hamup(rr,cc))
@@ -172,7 +167,7 @@ function transfun(randfile::AbstractString, lamfac::Int)
 	nth = length(thup)
 	thdn, skup, skdn = [zeros(nth) for idx=1:3]
 	guess = thup[1]
-	# Loop over the theta values to compute the transfer function.
+	# Loop over the beta values to compute the transfer function.
 	cputime = @elapsed(
 	for nn = 1:nth
 		meandiff(thdn) = gibbs_mean(hdn, hdn, thdn) - gibbs_mean(hdn, hup, thup[nn])
@@ -194,6 +189,7 @@ function transfun(randfile::AbstractString, lamfac::Int)
 		"nmodes", nmodes, "lamfac", lamfac, "nsweeps", nsweeps, "cputime", cputime)
 end
 
+# Output the data to a text file.
 function output_text(datafile::AbstractString)
 	datafile = string(data_folder(), datafile)
 	thup,thdn,skup,skdn = load(datafile, "thup", "thdn", "skup", "skdn")

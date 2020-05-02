@@ -10,7 +10,12 @@
 \b\fs40 \ulnone To do
 \b0\fs28 \
 \
+- Also run another sanity test for real fft where I just use sin and cosine\
+- Do sanity tests for irfft too.\
+\
 - I need to test the accuracy of ham3 versus ham3direct.\
+- Run tests with exact solution 1 and 2, and then with random uhat vector comparing the two h3 routines.\
+\
 \
 - I should do a breakeven test of H3 with fft versus direct.\
 \
@@ -83,10 +88,19 @@ The direct computation of H3 is faster by about a factor of six!!!\
 \b0\fs28 \ul \
 \
 Real FFT nuances\ulnone \
-- To use real FFT between physical uu and spectral uhat, the relationship len(uhat) = div(len(uu), 2) + 1 must be satisfied. Note that in using irfft, the length of uu cannot be inferred from uhat because it can be either 2*len(uhat)-1 or 2*len(uhat)-2. Reference: {\field{\*\fldinst{HYPERLINK "https://juliamath.github.io/AbstractFFTs.jl/stable/api/"}}{\fldrslt https://juliamath.github.io/AbstractFFTs.jl/stable/api/}}\
+\'95 To use real FFT between physical uu and spectral uhat, the relationship must be satisfied:\
+len(uhat) = div(len(uu), 2) + 1\
+Note that in using irfft, the length of uu cannot be inferred from uhat because it can be either 2*len(uhat)-1 or 2*len(uhat)-2. Reference: {\field{\*\fldinst{HYPERLINK "https://juliamath.github.io/AbstractFFTs.jl/stable/api/"}}{\fldrslt https://juliamath.github.io/AbstractFFTs.jl/stable/api/}}\
 \
-- In my application, we take the irfft of vector [0; uhat] where uhat has length nmodes. We have to do this to include the zero-mode which is set to zero. Thus, the length of uu npoints is either npoints = 2*nmodes or 2*nmodes+1. In my tests, npoints = 2*nmodes seems to be highly preferred. It is much faster (by a factor of at least two) and maybe slightly more accurate according to the benchmarks.\
+\'95 In my application, we take the irfft of vector [0; uhat] where uhat has length nmodes. We have to do this to include the zero-mode which is set to zero. Thus, the length of uu npoints is either npoints = 2*nmodes or 2*nmodes+1.\
 \
+\'95\'95\'95 I have discovered that npoints = 2*nmodes+1 is needed to accurately compute the largest mode in both realfft and irealfft (see tests.jl). However, if upsampling is used, then npoints = 2*nmodes is accurate (and it does not work for 2*nmodes+1)\
+Thus, my choices are:\
+1) Keep the largest mode arbitrary and use 2*nmodes+1.\
+2) Zero the largest mode (as is done in Matlab DNS) and use 2*nmodes for greater efficiency.\
+3) Only use the recursive computation of H3 and don\'92t worry about any of this.\
+\
+- Side note: In my tests, npoints = 2*nmodes seems to be much faster, by a factor of at least two.\
 - At some point, I was worried because the above implies that I am calling irfft with vectors of highly non-composite length. For example, if nmodes=16, then the vector [0; uhat] has length 17 and thus, after upsampling, I am calling irfft with vectors of length (33, 64). The 33 worried me. So I ran some tests where I slightly varied the lengths of the vectors by zeroing the last mode or not and by setting npoints to the two different values allowed. I ran tests calling irfft with vectors of length (32, 63), (32, 62), and (33, 65). The original implementation of (33, 64) was by far the fastest to execute by a factor of more than two. Thus, I believe I was already using the real FFT with vectors of the correct length.\
 \
 \ul Recoding FFT\ulnone \
