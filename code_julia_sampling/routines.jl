@@ -1,3 +1,7 @@
+#= All routines assume that the signal uu is real and has zero mean.
+Therefore the Fourier transform, uhat, only requires k=1,...,nmodes. 
+The negative modes are complex conjugates and the k=0 mode vanishes.=#
+
 #---------- Basic Stuff ----------#
 using Distributions
 using Roots
@@ -7,73 +11,54 @@ using FFTW
 using JLD
 using Plots
 using LaTeXStrings
+# Set the data folder.
+data_folder() = "./Data"
+# Round to a set number of significant digits
+sig(var, sigdig::Int) = round(var,sigdigits=sigdig)
 #---------------------------------#
 
-# Set the data folder.
-function data_folder()
-	return "./Data/"
-end
-# Round to a set number of significant digits
-function sig(var, sigdig)
-	return round(var,sigdigits=sigdig)
-end
-
 #---------- Real FFT Routines ----------#
-#= Compute the FFT between physical and spectral space assuming
-the signal u is real and has zero mean. =#
-#= Basic realfft to go from physical to spectral space. 
-This routine is only used in the benchmark. =#
+# Set the npts = 2*nmodes.
+npts(nmodes::Int) = 2*nmodes
+npts(uhat::Vector{ComplexF64}) = npts(length(uhat))
+# Transform from physical to spectral space; only used in a benchmark.
 function realfft(uu::Vector{Float64})
 	uhat = rfft(uu)/length(uu)
 	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6) 
 	return uhat[2:end]
 end
-#= Basic irealfft to go from spectral to physical space. =#
-function irealfft(uhat::Vector{Complex{Float64}})
-	uu = irfft([0; uhat[:]], 2*length(uhat))
+# Transform from spectral to physical space; used in ham3.
+function irealfft(uhat::Vector{ComplexF64})
+	uu = irfft([0; uhat[:]], npts(uhat)) 
 	return uu*length(uu)
 end
 #= Upsampled version of irealfft. =#
-function ifftup(uhat::Vector{Complex{Float64}})
-	uhat = [uhat; zeros(eltype(uhat), length(uhat))]
-	return irealfft(uhat)
+function ifftup(uhat::Vector{ComplexF64})
+	return irealfft([uhat; zeros(length(uhat)) ])
 end
 #---------------------------------------#
 
-#---------- Hamiltonian Routines ----------#
-#= In all routines, the physical signal is assumed to be real with zero momentum. 
-Therefore, the Fourier transform only requires k=1,...,nmodes. 
-The negative modes are given by the complex conjugates (CC), and the k=0 mode vanishes. =#
-#---------- Low-level Hamiltonian Routines ----------#
+#---------- Hamiltonian Routines: Low-level ----------#
 #= Compute the energy, E = 1/2 int u^2 dx. =#
-function energy(uhat::Vector{Complex{Float64}})
-	return 2*pi*norm(uhat)^2
-end
+energy(uhat::Vector{ComplexF64}) = 2*pi*norm(uhat)^2
 # Compute H2 = 1/2 int u_x^2 dx
-function ham2(uhat::Vector{Complex{Float64}})
-	kvec = 1:length(uhat)
-	uxhat = im*kvec.*uhat
-	return energy(uxhat)
-end
+ham2(uhat::Vector{ComplexF64}) = energy(im*[1:length(uhat)].*uhat)
 #= Compute H3 using FFT to physical space, H3 = 1/6 int u^3 dx. =#
-function ham3(uhat::Vector{Complex{Float64}})
+function ham3(uhat::Vector{ComplexF64})
 	uu = ifftup(uhat)
 	return 1/6 * sum(uu.^3) * 2*pi/length(uu)
 end
-
 #= Recursive computation of H3 in spectral space. =#
-function ham3direct(uhat::Vector{Complex{Float64}})
-	if length(uhat) == 2
-		return real( conj(uhat[end]) * uhat[1]^2 )
-	else
-		H3 = ham3direct(uhat[1:end-1])
-		usum = sum( uhat[nn]*uhat[end-nn] for nn=1:lastindex(uhat)-1 )
-		H3 += real( conj(uhat[end]) *  usum)
-		return H3
-	end
+function ham3direct(uhat::Vector{ComplexF64})
+	# If only one mode, then H3 is zero.
+	length(uhat) == 1 && return 0.0
+	# Otherwise use recursion.
+	H3 = ham3direct(uhat[1:end-1])
+	usum = sum( uhat[nn]*uhat[end-nn] for nn=1:lastindex(uhat)-1 )
+	H3 += real( conj(uhat[end]) *  usum)
+	return H3
 end
-
-#---------- High-level Hamiltonian Routines ----------#
+#---------- Hamiltonian Routines: High-level ----------#
 # Sampled state
 struct RandList
 	rvar::Array; H2::Vector; H3::Vector; 
@@ -201,7 +186,7 @@ function transfun(randfile::AbstractString, lamfac::Int)
 		println("Upstream skewness = ", sig(skup[nn],3))
 		println("Downstream skewness = ", sig(skdn[nn],3), "\n")
 	end)
-	println("\nCompleted sampling with nmodes = ", nmodes, ", nsweeps = ", nsweeps, " lamfac = ", lamfac)
+	println("\nCompleted transfer with nmodes = ", nmodes, ", nsweeps = ", nsweeps, " lamfac = ", lamfac)
 	println("CPU time = ", sig(cputime/60,3), " minutes.\n\n")	
 	savefile = string(data_folder(), "thvars-", string(nmodes), "z-", 
 		string(lamfac), "-", string(nsweeps), ".jld")

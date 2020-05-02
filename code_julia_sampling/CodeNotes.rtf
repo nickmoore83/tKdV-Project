@@ -58,19 +58,20 @@ Lambda	nsweeps	sampling	transfer	\
 \cf0 Original version of code using FFT (no FFT plan)\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 Lambda	nsweeps	sampling	transfer	\
-16		500		14 mins\
-16		1000		28 mins\
-32		500		15 mins\
-32		1000		34 mins\
+16		500		14 mins	26 mins\
+16		1000		28 mins	54 mins\
+32		500		15 mins	26 mins\
+32		1000		34 mins	51 mins\
 \
 Conclusions:\
-The cpu time of computing the transfer function is very close to the cpu time of sampling and this relationship seems to scale with nsweeps getting bigger.\
+The cpu time of computing the transfer function is a bit more than the cpu time of sampling (not quite double).\
+Question: Why is transfer not faster for 32 compared to 16?\
 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul H3 with FFT vs direct\ulnone \
 Comparing the sampling with the original FFT with no plan versus direct computation of H3\
-Lambda	nsweeps	bad FFT	direct H3\
+Lambda	nsweeps	FFT		direct H3\
 16		10		0.27 mins	0.046 mins\
 The direct computation of H3 is faster by about a factor of six!!!\
 \
