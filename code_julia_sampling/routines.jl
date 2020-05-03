@@ -18,28 +18,37 @@ sig(var, sigdig::Int) = round(var,sigdigits=sigdig)
 #---------------------------------#
 
 #---------- Real FFT Routines ----------#
-# Set the npts = 2*nmodes.
-npts(nmodes::Int) = 2*nmodes
-npts(uhat::Vector{ComplexF64}) = npts(length(uhat))
-# Transform from physical to spectral space; only used in a benchmark.
-# Need to negate odd components, I believe due to interval [-pi, pi]
-function realfft(uu::Vector{Float64})
+# Note: Optimally, the length of uhat and uu should be a power of 2.
+# Note on symint: to use the symmetric interval [-pi,pi], odd modes must be negated.
+# Transform from physical to spectral space; only used in benchmark of H3.
+function realfft(uu::Vector{Float64}, symint::Bool=true)
 	uhat = rfft(uu)/length(uu)
-	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6) 
+	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6)
+	uhat[end] *= 0.5
 	uhat = uhat[2:end]
-	uhat .*= (-1).^(1:length(uhat))
+	if(symint) uhat[1:2:end] .*= -1 end
 	return uhat
 end
-# Transform from spectral to physical space; used in ham3.
-function irealfft(uhat::Vector{ComplexF64})
-	uu = irfft([0; uhat[:]], npts(uhat)) 
+# Transform from spectral to physical space; used in ham3fft.
+# Note: uh must be created to prevent input uhat from being destroyed.
+function irealfft(uhat::Vector{ComplexF64}, symint::Bool=true)
+	uh = [0; uhat[1:end-1]; 2*uhat[end]]
+	if(symint) uh[2:2:end] .*= -1 end
+	uu = irfft(uh, 2*length(uhat))	# Note: irfft destroys input uh.
 	return uu*length(uu)
 end
 # Upsampled version of irealfft.
-function ifftup(uhat::Vector{ComplexF64})
-	return irealfft([uhat; zeros(length(uhat)) ])
+function ifftup(uhat::Vector{ComplexF64}, symint::Bool=true) 
+	return irealfft([uhat; zeros(length(uhat))], symint)
 end
 #---------------------------------------#
+
+
+
+
+
+
+
 
 #---------- Basic Hamiltonian Routines ----------#
 # Compute the energy, E = 1/2 int u^2 dx.

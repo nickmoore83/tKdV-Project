@@ -86,7 +86,21 @@ The direct computation of H3 is faster by about a factor of six!!!\
 
 \b\fs40 FFT Notes
 \b0\fs28 \ul \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone \
 \
+Observations:\
+- The proper way to use FFT is npts = 2*nmodes. I know this because degree of freedom count\
+- irealfft works whether the last mode is real or not; realfft only computes the last mode correctly if it is real (because of the extra degree of freedom)\
+\
+- Real FFT is very confusing very several reasons. \
+One is that irealfft destroys the input.\
+Another is my uncertainty with the recommended sizes (even though I think I figured it out).\
+Another is the thing about the last mode needing to be real in certain cases.\
+I still haven\'92t even started to do the plan thing.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \
 Real FFT nuances\ulnone \
 \'95 To use real FFT between physical uu and spectral uhat, the relationship must be satisfied:\
 len(uhat) = div(len(uu), 2) + 1\
