@@ -38,8 +38,11 @@ function irealfft(uhat::Vector{ComplexF64}, symint::Bool=true)
 	return uu*length(uu)
 end
 # Upsampled version of irealfft.
-function ifftup(uhat::Vector{ComplexF64}, symint::Bool=true) 
-	return irealfft([uhat; zeros(length(uhat))], symint)
+function ifftup(uhat::Vector{ComplexF64}, symint::Bool=true)
+	# Can adjust to padlen to length(uhat), or 1/2*len, or 1/2*len + 1
+	#padlen = div(length(uhat),2)+1
+	padlen = length(uhat)
+	return irealfft([uhat; zeros(padlen)], symint)
 end
 #---------------------------------------#
 

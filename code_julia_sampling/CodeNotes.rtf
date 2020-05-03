@@ -10,15 +10,8 @@
 \b\fs40 \ulnone To do
 \b0\fs28 \
 \
-- Test accuracy of ham3direct\
 - Test speed of ham3direct; breakeven test with ham3fft.\
-\
-- Run tests with exact solution 1 and 2 for the hamiltonian.\
-- Then run test with with random uhat vector comparing the results of the two ham3 routines.\
-\
-\
-\
-\
+Also, test the speed for all different values of nmodes, not just powers of 2.\
 \
 \
 - In transfer function, I need to see how many iterations the root solver is taking and think about improving that.\ul \
@@ -44,49 +37,25 @@ Little things\
 \ulnone \'95 The routine output_text(\'93thvars-16-8-20.jld\'94) converts the julia file to a text file for DataTank to read.\
 \
 \
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\b\fs40 \cf0 Timing
-\b0\fs28 \ul \ulc0 \
+\b\fs40 \cf0 H3 Computation: recursive or FFT
+\b0\fs28 \ul \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulnone \
-Original version of code using FFT (no FFT plan)\
-Lambda	nsweeps	sampling	transfer	\
-16		100		2.8 mins	3.3 mins\
-24		100		*14 mins\
-32		100		2.9 mins\
-64		100		*16 mins\
-\
-*Interesting: Lambda = 24 takes much longer than Lambda = 32, which means that the fft routines I am using are very suboptimal. Likely, making a FFTW plan, or else simply computing the transform directly, would be faster for the moderate values of Lambda I am using. Online search suggests the break-even for FFT over direct is about 64.\
-*I don\'92t know why Lambda = 64 takes so much longer than 32.\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Original version of code using FFT (no FFT plan)\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Lambda	nsweeps	sampling	transfer	\
-16		500		14 mins	26 mins\
-16		1000		28 mins	54 mins\
-32		500		15 mins	26 mins\
-32		1000		34 mins	51 mins\
-\
-Conclusions:\
-The cpu time of computing the transfer function is a bit more than the cpu time of sampling (not quite double).\
-Question: Why is transfer not faster for 32 compared to 16?\
+I tested the accuracy of computing H3 using the recursive formula versus the FFT. In short, both methods give highly accurate results. Further notes are as follows.\
+\'95 I tested against an exact solution for H3 for the case of nmodes = 1 (actually 2 slightly different exact solutions that are complementary). Both ham3rec and ham3fft give results that are accurate to machine precision. Neither is any more accurate than the other.\
+\'95 I then tested ham3rec and ham3fft against one another. The exact solution above is helpful, but only for 2 modes, hence limited. Thus, I simply sampled a vector of complex random values for uhat and compared the results of ham3rec and ham3fft. They gave consistent results to machine accuracy.\
+\'95 Interestingly, I do not even need to make the largest mode real for the two methods to give exactly the same result for H3.\
+\'95 If I remove the upsampling, ham3rec and ham3fft give very different results, as would be expected. The relative error that is often larger than 1. \
+\'95 If I change the upsampling to 3/2, they give somewhat different results, with a relative error that is usually much smaller than 1 but not negligible.\
+\'95 Interestingly, if I change the upsampling to 3/2*len + 1, then I get exact results again! \
+\'95 Also, if I kill the largest mode and upsample with 3/2*len, I get exact results! That might be an argument for killing the last mode. Nah, an FFT with double the length is just as fast as with 3/2 the length I believe.\
 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul H3 with FFT vs direct\ulnone \
-Comparing the sampling with the original FFT with no plan versus direct computation of H3\
-Lambda	nsweeps	FFT		direct H3\
-16		10		0.27 mins	0.046 mins\
-The direct computation of H3 is faster by about a factor of six!!!\
-\
-\
-\
-\
 
-\b\fs40 FFT Notes
+\b\fs40 \cf0 FFT Notes
 \b0\fs28 \ul \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulnone \
@@ -131,6 +100,44 @@ Note that in using irfft, the length of uu cannot be inferred from uhat because 
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://www.juliabloggers.com/tag/fftw/"}}{\fldrslt \cf0 https://www.juliabloggers.com/tag/fftw/}}\
 {\field{\*\fldinst{HYPERLINK "https://biojulia.net/post/hardware/"}}{\fldrslt https://biojulia.net/post/hardware/}}\
+\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b\fs40 \cf0 Timing
+\b0\fs28 \ul \ulc0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone \
+Original version of code using FFT (no FFT plan)\
+Lambda	nsweeps	sampling	transfer	\
+16		100		2.8 mins	3.3 mins\
+24		100		*14 mins\
+32		100		2.9 mins\
+64		100		*16 mins\
+\
+*Interesting: Lambda = 24 takes much longer than Lambda = 32, which means that the fft routines I am using are very suboptimal. Likely, making a FFTW plan, or else simply computing the transform directly, would be faster for the moderate values of Lambda I am using. Online search suggests the break-even for FFT over direct is about 64.\
+*I don\'92t know why Lambda = 64 takes so much longer than 32.\
+\
+Original version of code using FFT (no FFT plan)\
+Lambda	nsweeps	sampling	transfer	\
+16		500		14 mins	26 mins\
+16		1000		28 mins	54 mins\
+32		500		15 mins	26 mins\
+32		1000		34 mins	51 mins\
+\
+Conclusions:\
+The cpu time of computing the transfer function is a bit more than the cpu time of sampling (not quite double).\
+Question: Why is transfer not faster for 32 compared to 16?\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul H3 with FFT vs direct\ulnone \
+Comparing the sampling with the original FFT with no plan versus direct computation of H3\
+Lambda	nsweeps	FFT		direct H3\
+16		10		0.27 mins	0.046 mins\
+The direct computation of H3 is faster by about a factor of six!!!\
+\
 \
 \
 \

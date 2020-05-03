@@ -104,7 +104,7 @@ function ham_ex2(nmodes::Int, alpha::Float64, th1::Float64, th2::Float64)
 end
 #= Test the computation of H2 and H3 using both exact solutions above. 
 All tests PASSED! Keep the code around. =#
-function test_ham(nmodes::Int; method::Int=2)	
+function test_ham(nmodes::Int; method::Int=3)	
 	# random coefficients.
 	aa = randn()
 	x0, th1, th2 = 2*pi*rand(3)
@@ -112,24 +112,40 @@ function test_ham(nmodes::Int; method::Int=2)
 	# Compute the exact H2 and H3 using method_1 or method_2
 	if method == 1
 		uhat, h2ex,h3ex = ham_ex1(nmodes, aa, x0)
-	elseif method ==2
+	elseif method == 2
 		uhat, h2ex, h3ex = ham_ex2(nmodes, alpha, th1, th2)
+	# Or simply compute the numerical numerical valures of H3 and compare.
+	elseif method == 3
+		uhat = randn(ComplexF64, nmodes)
+		#uhat[end] = randn(Float64)	
+		# The above line is not needed to get agreement between h3fft and h3rec!!!
 	else return end
 	# Compute the numerical H2 and H3 and the relative errors.
 	h2num = ham2(uhat)
 	h3fft = ham3fft(uhat)
 	h3rec = ham3rec(uhat)
-	# H2 error
-	println("\nH2 test")
-	println("h2num = ", sig(h2num,3))
-	println("h2ex = ", sig(h2ex,3))
-	println("Rel error = ", rel_err(h2num, h2ex))
-	# H3 error
-	println("\nH3 test")
-	println("h3fft = ", sig(h3fft,3))
-	println("h3rec = ", sig(h3rec,3))
-	println("h3ex = ", sig(h3ex,3))
-	println("Rel error fft = ", rel_err(h3fft, h3ex))
-	println("Rel error rec = ", rel_err(h3rec, h3ex))
+	if method in (1,2)
+		# H2 error
+		println("\nH2 test")
+		println("h2num = ", sig(h2num,3))
+		println("h2ex = ", sig(h2ex,3))
+		println("Rel error = ", rel_err(h2num, h2ex))
+		# H3 error
+		println("\nH3 test")
+		println("h3fft = ", sig(h3fft,3))
+		println("h3rec = ", sig(h3rec,3))
+		println("h3ex = ", sig(h3ex,3))
+		println("Rel error fft = ", rel_err(h3fft, h3ex))
+		println("Rel error rec = ", rel_err(h3rec, h3ex))
+	elseif method == 3
+		# H3 difference
+		println("\nH3 test")
+		println("h3fft = ", sig(h3fft,3))
+		println("h3rec = ", sig(h3rec,3))
+		println("Rel diff = ", rel_err(h3fft, h3rec))
+	end
 end
-test_ham(16; method=2)
+test_ham(16; method=3)
+
+# Test the speed of h3fft versus h3rec
+
