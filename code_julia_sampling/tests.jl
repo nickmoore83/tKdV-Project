@@ -147,5 +147,21 @@ function test_ham(nmodes::Int; method::Int=3)
 end
 test_ham(16; method=3)
 
-# Test the speed of h3fft versus h3rec
 
+
+# Test the speed of h3fft versus h3rec
+function test_ham3speed(nmodes::Int)
+	uhat = randn(ComplexF64, nmodes, ncalls)
+	tm_fft = @elapsed(
+		for nn = 1:ncalls
+			h3fft = ham3fft(uhat[:,nn])
+			println("h3fft = ", sig(h3fft,3))
+		end)
+	tm_rec = @elapsed(
+		for nn = 1:ncalls
+			h3rec = ham3rec(uhat[:,nn])
+			println("h3rec = ", sig(h3rec,3))
+		end)
+	println("Rel error: ", rel_err(h3fft, h3rec)
+end
+test_ham3spee(8)
