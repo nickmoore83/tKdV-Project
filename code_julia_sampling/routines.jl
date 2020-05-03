@@ -43,13 +43,6 @@ function ifftup(uhat::Vector{ComplexF64}, symint::Bool=true)
 end
 #---------------------------------------#
 
-
-
-
-
-
-
-
 #---------- Basic Hamiltonian Routines ----------#
 # Compute the energy, E = 1/2 int u^2 dx.
 energy(uhat::Vector{ComplexF64}) = 2*pi*norm(uhat)^2
@@ -67,11 +60,12 @@ function ham3rec(uhat::Vector{ComplexF64})
 	# Otherwise use recursion.
 	H3 = ham3rec(uhat[1:end-1])
 	usum = sum( uhat[nn]*uhat[end-nn] for nn=1:lastindex(uhat)-1 )
-	H3 += real( conj(uhat[end]) *  usum)
+	H3 += 2*pi*real( conj(uhat[end]) *  usum)
 	return H3
 end
 # Choose which algorithm to use for H3.
 ham3(uhat::Vector{ComplexF64}) = ham3rec(uhat) 
+#---------------------------------------#
 
 #---------- Sampling Routines ----------#
 # Sampled state
@@ -152,7 +146,6 @@ function skewu(H3, hamgibbs, beta::Float64)
 	return 3*pi^(1/2)*gibbs_mean(H3, hamgibbs, beta)
 end
 #---------------------------------------#
-
 
 #---------- Highest-level Routines ----------#
 #= Calculate the transfer function:

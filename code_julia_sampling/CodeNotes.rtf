@@ -10,19 +10,21 @@
 \b\fs40 \ulnone To do
 \b0\fs28 \
 \
-- Also run another sanity test for real fft where I just use sin and cosine\
-- Do sanity tests for irfft too.\
+- Test accuracy of ham3direct\
+- Test speed of ham3direct; breakeven test with ham3fft.\
 \
-- I need to test the accuracy of ham3 versus ham3direct.\
-- Run tests with exact solution 1 and 2, and then with random uhat vector comparing the two h3 routines.\
+- Run tests with exact solution 1 and 2 for the hamiltonian.\
+- Then run test with with random uhat vector comparing the results of the two ham3 routines.\
 \
 \
-- I should do a breakeven test of H3 with fft versus direct.\
+\
+\
+\
 \
 - In transfer function, I need to see how many iterations the root solver is taking and think about improving that.\ul \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone To address Ref1 question about convergence of the transfer function for Lambda large, I plan to run a series of samples with Lambda = 16, 32, and maybe 64. I plan to use 500 and 1000 sweeps to get a visual on the convergence with respect to the number of samples. The value of N does not need to be set in the sampling stage, only later on the transfer function stage. I will primarily use N = Lambda/2, but can also experiment with N = 8 fixed as a straw man.\ul \
+\cf0 \ulnone Original plan: To address Ref1 question about convergence of the transfer function for Lambda large, I plan to run a series of samples with Lambda = 16, 32, and maybe 64. I plan to use 500 and 1000 sweeps to get a visual on the convergence with respect to the number of samples. The value of N does not need to be set in the sampling stage, only later on the transfer function stage. I will primarily use N = Lambda/2, but can also experiment with N = 8 fixed as a straw man.\ul \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulc0 \
 Little things\
@@ -88,45 +90,46 @@ The direct computation of H3 is faster by about a factor of six!!!\
 \b0\fs28 \ul \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulnone \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Notes\ulnone \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \'95 The FFT routines are only really used in the computation of ham3. In particular, irealfft is used there; realfft is not used in any of the main routines, only in the benchmark tests.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Downsides of real FFT\ulnone \
+The real FFT routines just have too many damn complexities for them to be useful and reliable. To list a few of the curiosities I have found:\
+\'95 The relationship between npts and nmodes is not unique. One can have npts = 2*nmodes or 2*nmodes + 1. I believe I have determined that npts = 2*nmodes, with nmodes a power of 2, is the optimal way to use the routines, but of course I still have some uncertainty. I believe npts = 2*nmodes is the proper use by relating it to the regular DFT on a grid (with the number of points a power of 2) and doing a count of the degrees of freedom.\
+\'95 Using rfft (physical to spectral) with npts = 2*nmodes, the largest mode must be real for the computation to be correct. Of course, this behavior makes sense after a little analysis. The imaginary part of the largest mode corresponds to sin which aliases to zero on the grid, hence it cannot be seen by the physical signal. Said differently, rfft always outputs the largest mode as real, which makes sense if you do a count of the degrees of freedom.\
+\'95 In contrast irfft (spectral to physical) with npts = 2*nmodes works regardless of whether the largest mode is real or not. Maybe the performance suffers if the largest mode is not real though??? Just a guess.\
+\'95 The routine irfft destroys the input! WTF?!? Had I not just happened to read that, I would have never figured out a bug I was getting. The routine rfft does not however destroy the input.\
+\'95 I still have not even scratched the surface of making FFT plans. Oh man, that might be tedious.\
 \
-Observations:\
-- The proper way to use FFT is npts = 2*nmodes. I know this because degree of freedom count\
-- irealfft works whether the last mode is real or not; realfft only computes the last mode correctly if it is real (because of the extra degree of freedom)\
-\
-- Real FFT is very confusing very several reasons. \
-One is that irealfft destroys the input.\
-Another is my uncertainty with the recommended sizes (even though I think I figured it out).\
-Another is the thing about the last mode needing to be real in certain cases.\
-I still haven\'92t even started to do the plan thing.\
+\ul Conclusions\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone My best choices are:\
+1) Only use the recursive computation of H3 and do not worry about any of the real FFT crap.\
+2) Zero the largest mode as is done in Matlab DNS so that I am more confident that the real FFT routines are working properly.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul \
-Real FFT nuances\ulnone \
+\cf0 \ul \ulc0 \
+Real FFT notes\ulnone \
 \'95 To use real FFT between physical uu and spectral uhat, the relationship must be satisfied:\
 len(uhat) = div(len(uu), 2) + 1\
 Note that in using irfft, the length of uu cannot be inferred from uhat because it can be either 2*len(uhat)-1 or 2*len(uhat)-2. Reference: {\field{\*\fldinst{HYPERLINK "https://juliamath.github.io/AbstractFFTs.jl/stable/api/"}}{\fldrslt https://juliamath.github.io/AbstractFFTs.jl/stable/api/}}\
 \
-\'95 In my application, we take the irfft of vector [0; uhat] where uhat has length nmodes. We have to do this to include the zero-mode which is set to zero. Thus, the length of uu npoints is either npoints = 2*nmodes or 2*nmodes+1.\
+\'95 In my application, we take the irfft of vector [0; uhat] where uhat has length nmodes. We have to do this to include the zero-mode which is set to zero. Thus, the length of uu npoints is either npoints = 2*nmodes or 2*nmodes+1. I belive that npoints = 2*nmodes is the optimal way to use the real FFT routines (see above). Also, in my tests, npoints = 2*nmodes seems to be much faster, by a factor of at least two.\
 \
-\'95\'95\'95 I have discovered that npoints = 2*nmodes+1 is needed to accurately compute the largest mode in both realfft and irealfft (see tests.jl). However, if upsampling is used, then npoints = 2*nmodes is accurate (and it does not work for 2*nmodes+1)\
-Thus, my choices are:\
-1) Keep the largest mode arbitrary and use 2*nmodes+1.\
-2) Zero the largest mode (as is done in Matlab DNS) and use 2*nmodes for greater efficiency.\
-3) Only use the recursive computation of H3 and don\'92t worry about any of this.\
+-Side note: At some point, I was worried because the above implies that I am calling irfft with vectors of highly non-composite length. For example, if nmodes=16, then the vector [0; uhat] has length 17 and thus, after upsampling, I am calling irfft with vectors of length (33, 64). The 33 worried me. So I ran some tests where I slightly varied the lengths of the vectors by zeroing the last mode or not and by setting npoints to the two different values allowed. I ran tests calling irfft with vectors of length (32, 63), (32, 62), and (33, 65). The original implementation of (33, 64) was by far the fastest to execute by a factor of more than two. Thus, I believe I was already using the real FFT with vectors of the correct length.\
 \
-- Side note: In my tests, npoints = 2*nmodes seems to be much faster, by a factor of at least two.\
-- At some point, I was worried because the above implies that I am calling irfft with vectors of highly non-composite length. For example, if nmodes=16, then the vector [0; uhat] has length 17 and thus, after upsampling, I am calling irfft with vectors of length (33, 64). The 33 worried me. So I ran some tests where I slightly varied the lengths of the vectors by zeroing the last mode or not and by setting npoints to the two different values allowed. I ran tests calling irfft with vectors of length (32, 63), (32, 62), and (33, 65). The original implementation of (33, 64) was by far the fastest to execute by a factor of more than two. Thus, I believe I was already using the real FFT with vectors of the correct length.\
-\
-\ul Recoding FFT\ulnone \
-- The only code that uses the fft routines is ham3; it uses irealfft only. The routine realfft is unused except in the benchmark of H3.\
-\
-- I should use FFTW \'91plan\'92, since I am doing transforms of exactly the same size over and over again.\
-References:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \'95 I should use FFTW \'91plan\'92, since I am doing transforms of the same size many times. References:\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "http://www.fftw.org/fftw2_doc/fftw_2.html"}}{\fldrslt \cf0 http://www.fftw.org/fftw2_doc/fftw_2.html}}\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://www.reddit.com/r/Julia/comments/5wel0j/fft_speed_vs_matlab/"}}{\fldrslt \cf0 https://www.reddit.com/r/Julia/comments/5wel0j/fft_speed_vs_matlab/}}\
-{\field{\*\fldinst{HYPERLINK "https://www.juliabloggers.com/tag/fftw/"}}{\fldrslt https://www.juliabloggers.com/tag/fftw/}}\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://www.juliabloggers.com/tag/fftw/"}}{\fldrslt \cf0 https://www.juliabloggers.com/tag/fftw/}}\
 {\field{\*\fldinst{HYPERLINK "https://biojulia.net/post/hardware/"}}{\fldrslt https://biojulia.net/post/hardware/}}\
 \
 \
