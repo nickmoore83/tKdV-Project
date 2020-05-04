@@ -10,13 +10,10 @@
 \b\fs40 \ulnone To do
 \b0\fs28 \
 \
-- Test speed of ham3direct; breakeven test with ham3fft.\
-- Also, test the speed for all different values of nmodes, not just powers of 2.\
 \
 - Also, I could measure the time of various FFT calls: e.g. how it depends on nmodes, whether I use realfft or just basic fft, whether I make a plan or not (if I get that far)\
 \
 \
-- The breakeven for fft and rec is a little higher than 128, but smaller than 256\
 \
 \
 \
@@ -49,6 +46,8 @@ Little things\
 \b0\fs28 \ul \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulnone \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Accuracy\ulnone \
 I tested the accuracy of computing H3 using the recursive formula versus the FFT. In short, both methods give highly accurate results. Further notes are as follows.\
 \'95 I tested against an exact solution for H3 for the case of nmodes = 1 (actually 2 slightly different exact solutions that are complementary). Both ham3rec and ham3fft give results that are accurate to machine precision. Neither is any more accurate than the other.\
 \'95 I then tested ham3rec and ham3fft against one another. The exact solution above is helpful, but only for 2 modes, hence limited. Thus, I simply sampled a vector of complex random values for uhat and compared the results of ham3rec and ham3fft. They gave consistent results to machine accuracy.\
@@ -58,10 +57,17 @@ I tested the accuracy of computing H3 using the recursive formula versus the FFT
 \'95 Interestingly, if I change the upsampling to 3/2*len + 1, then I get exact results again! \
 \'95 Also, if I kill the largest mode and upsample with 3/2*len, I get exact results! That might be an argument for killing the last mode. Nah, an FFT with double the length is just as fast as with 3/2 the length I believe.\
 \
+\ul Speed\ulnone \
+I tested the speed of computing H3 using recursive versus FFT (with no plan)\
+\'95 The recursive is much faster for the Lambda values I have been using for the JNS paper (16 and 32). For Lambda = 16, recursive is about 8 times faster. For Lambda = 32, recursive is about 4 times faster.\
+\'95 The breakeven point is between 128 and 256. For Lambda = 256, FFT is about 2 times faster. For Lambda = 512, FFT is about 6 times faster.\
+\'95 I saved some plots in folder H3SpeedTest-5-4-2020.\
+\'95\'a0The FFT algorithm is really bad if Lambda is not a power of 2.\
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\
+\
 
-\b\fs40 \cf0 FFT Notes
+\b\fs40 FFT Notes
 \b0\fs28 \ul \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulnone \

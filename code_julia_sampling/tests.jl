@@ -175,9 +175,9 @@ end
 # Could also simply measure the time of various FFT calls
 
 function test_ham3speed()
-	ncalls = 10^3
-	#nmodes = 8:1:32
-	nmodes = 2 .^(3:8)
+	ncalls = 10^4
+	#nmodes = 8:1:128
+	nmodes = 2 .^(3:9)
 	tfft, trec = [zeros(Float64, length(nmodes)) for ii=1:2]
 	for (idx,nm) in enumerate(nmodes)
 		tfft[idx], trec[idx] = ham3speed(nm, ncalls)
