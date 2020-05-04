@@ -67,7 +67,7 @@ end
 #---------------------------------------#
 
 
-#---------- HAMILTONIAN TESTS ----------#
+#---------- HAMILTONIAN ACCURACY TESTS ----------#
 #= Compute the exact H2 and H3 for a specific cos^2 function. =#
 function ham_ex1(nmodes::Int, aa::Float64, x0::Float64)
 	# Define the function.
@@ -145,23 +145,53 @@ function test_ham(nmodes::Int; method::Int=3)
 		println("Rel diff = ", rel_err(h3fft, h3rec))
 	end
 end
-test_ham(16; method=3)
+#test_ham(16; method=3)
 
 
-
+#---------- H3 SPEED TESTS ----------#
 # Test the speed of h3fft versus h3rec
-function test_ham3speed(nmodes::Int)
+function ham3speed(nmodes::Int, ncalls::Int)
 	uhat = randn(ComplexF64, nmodes, ncalls)
-	tm_fft = @elapsed(
-		for nn = 1:ncalls
-			h3fft = ham3fft(uhat[:,nn])
-			println("h3fft = ", sig(h3fft,3))
-		end)
-	tm_rec = @elapsed(
-		for nn = 1:ncalls
-			h3rec = ham3rec(uhat[:,nn])
-			println("h3rec = ", sig(h3rec,3))
-		end)
-	println("Rel error: ", rel_err(h3fft, h3rec)
+	# Call each one time just in case the first call is much slower.
+	h3fft = ham3fft(uhat[:,1]) 
+	h3rec = ham3rec(uhat[:,1])
+	# Call each routine many times and measure the time.
+	tm_fft = @elapsed([h3fft = ham3fft(uhat[:,nn]) for nn=1:ncalls])
+	tm_rec = @elapsed([h3rec = ham3rec(uhat[:,nn]) for nn=1:ncalls])
+	#Print computational times
+	println("\nTesting speed for nmodes = ", nmodes)
+	println("Time for fft: ", sig(tm_fft,3), "secs")
+	println("Time for rec: ", sig(tm_rec,3), "secs")
+	println("Rec is faster by factor of ", sig(tm_fft/tm_rec,2))	
+	# Print values of h3 just to make sure things are being computed correctly.
+	#println("\nh3fft = ", sig(h3fft, 3), "; h3rec = ", sig(h3rec,3))
+	#println("Rel err: ", rel_err(h3fft, h3rec))
+	return tm_fft, tm_rec
 end
-test_ham3spee(8)
+#ham3speed(16, 10^4)
+
+# Want to find break-even point for fft and rec
+# Want to see how fft time changes with nmodes not necessarily a power of 2
+# Could also simply measure the time of various FFT calls
+
+function test_ham3speed()
+	ncalls = 10^3
+	#nmodes = 8:1:32
+	nmodes = 2 .^(3:8)
+	tfft, trec = [zeros(Float64, length(nmodes)) for ii=1:2]
+	for (idx,nm) in enumerate(nmodes)
+		tfft[idx], trec[idx] = ham3speed(nm, ncalls)
+	end
+	ratio = tfft./trec
+	# Plot the CPU times for each.
+	p1 = plot(nmodes, tfft, label="fft", markershape=:circle)
+	plot!(p1, nmodes, trec, label="rec", markershape=:circle, legend=:topleft)
+	plot!(xlabel="Lambda", ylabel="CPU time (sec)", xscale=:lin, yscale=:lin)
+	# Plot the ratio of CPU times.
+	p2 = plot(nmodes, ratio, label="ratio", markershape=:circle)
+	plot!(p2, xlabel="Lambda", ylabel="ratio fft/rec", xscale=:lin, yscale=:log)
+	# Display
+	display(p1)
+end
+test_ham3speed()
+

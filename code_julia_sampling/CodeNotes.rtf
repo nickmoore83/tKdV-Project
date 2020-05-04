@@ -11,7 +11,13 @@
 \b0\fs28 \
 \
 - Test speed of ham3direct; breakeven test with ham3fft.\
-Also, test the speed for all different values of nmodes, not just powers of 2.\
+- Also, test the speed for all different values of nmodes, not just powers of 2.\
+\
+- Also, I could measure the time of various FFT calls: e.g. how it depends on nmodes, whether I use realfft or just basic fft, whether I make a plan or not (if I get that far)\
+\
+\
+- The breakeven for fft and rec is a little higher than 128, but smaller than 256\
+\
 \
 \
 - In transfer function, I need to see how many iterations the root solver is taking and think about improving that.\ul \

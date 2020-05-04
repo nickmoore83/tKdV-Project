@@ -12,7 +12,7 @@ using JLD
 using Plots
 using LaTeXStrings
 # Set the data folder.
-data_folder() = "./Data"
+data_folder() = "./Data/"
 # Round to a set number of significant digits
 sig(var, sigdig::Int) = round(var,sigdigits=sigdig)
 #---------------------------------#
