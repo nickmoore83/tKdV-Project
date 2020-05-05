@@ -186,16 +186,17 @@ end
 function test_ham_speed()
 	ncalls = 2*10^3
 	#nmodes = 8:1:128
-	nmodes = [8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256] #382, 512
+	nmodes = [8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256, 382, 512, 768, 1024] #382, 512
 	tfft, trec, th2 = [zeros(Float64, length(nmodes)) for ii=1:3]
 	for (idx,nm) in enumerate(nmodes)
 		tfft[idx], trec[idx], th2[idx] = ham3speed(nm, ncalls)
 	end
 	ratio = trec./tfft
 	# Plot the CPU times for each.
-	p1 = plot(nmodes, trec, label="rec", markershape=:circle)
+	p1 = plot()
+	#plot!(p1, nmodes, trec, label="rec", markershape=:circle)
 	plot!(p1, nmodes, tfft, label="fft", markershape=:circle)
-	plot!(p1, nmodes, th2, label="h2", markershape=:circle)
+	#plot!(p1, nmodes, th2, label="h2", markershape=:circle)
 	plot!(xlabel="Lambda", ylabel="CPU time (sec)")
 	plot!(xscale=:lin, yscale=:lin, legend=:topleft)
 	# Plot the ratio of CPU times.

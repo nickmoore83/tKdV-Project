@@ -23,7 +23,7 @@ padlen(nmodes::Int) = nmodes
 # Make a plan for irfft with zero-padding for upsampling.
 function makeplan(nmodes::Int)
 	uh = zeros(ComplexF64, 1+nmodes+padlen(nmodes))
-	return plan_irfft(uh, 2*(nmodes+padlen(nmodes)))
+	return plan_irfft(uh, 2*(nmodes+padlen(nmodes)), flags=FFTW.ESTIMATE)
 end
 # Transform from spectral to physical space using a plan. Used in ham3fft.
 # Note on symint: to use the symmetric interval [-pi,pi], odd modes must be negated.

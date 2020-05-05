@@ -39,7 +39,7 @@ To do
 The most expensive step in sampling is the computation of H3. There are two practical ways to compute H3: using the FFT (with a plan!) or using the recursive formula (REC). \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul \ulc0 Accuracy of H3\ulnone \
+\cf0 \ul Accuracy of H3\ulnone \
 I have verified that both methods accurately compute H3 through few of tests. The tests are: \
 1) Comparing to an exact solution for H3 and H2 in the case of two modes of arbitrary values. \
 2) Comparing the two computations of H3 for an arbitrary number of modes with random values.\
@@ -47,8 +47,7 @@ Some notes are:\
 \'95 If upsampling is removed from the FFT method, the results are no longer accurate, as would be expected.\
 \'95 I have found that if I change the upsampling to 3/2 and zero out the largest mode, then the FFT results are still accurate. If I keep the largest mode, though, then 3/2 upsampling does not give accurate results, but 3/2 + 1 upsampling does give accurate results. However, none of this really matters because upsampling by a factor of 2 is probably just as efficient as 3/2 (almost certainly more efficient than 3/2 + 1) and in that case I do not have to worry about killing the largest mode.\
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul \ulc0 Speed of H3\ulnone \
+\ul Speed of H3\ulnone \
 After much testing and improvement of the algorithms, these two methods are competitive for moderate Lambda (16 or 32) and the FFT method is superior for Lambda = 64 and great. Some results are:\
 \'95 For Lambda = 16, REC is about 3 times faster.\
 \'95 For Lambda = 32, REC is about 1.5 times faster.\
@@ -180,8 +179,7 @@ I have tested the speed of the sampling algorithm, which has as its most expensi
 \cf0 5.0 mins\cell \lastrow\row
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 The *starred values indicate why it was such a terrible idea to run FFT with no plan.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
+\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul FFT Notes\ulnone \
@@ -192,19 +190,16 @@ I discovered a number of things about the FFT. The lessons are:\
 irfft(uh_0, uh_1, \'85, uh_\{N-1\}, 2*uh_N)\
 - Notice the largest mode u_N is multiplied by 2.\
 - Additionally, the largest mode uh_N should be real for things to be interpreted in a reasonable way. The largest mode is allowed to be complex in the routine irfft, but its imaginary part will make no difference in the output physical signal u. This behavior makes sense with a bit of analysis. The imaginary part of the larges mode corresponds to sin of the Nyquist frequency, which aliases to zero and hence cannot be seen by the physical grid. It also makes sense through a basic count of the degrees of freedom, noting that uh_0 must also be real, since it is the mean of real data.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 - The size of the irfft output is allowed to be either 2*N or 2*N+1, see reference: {\field{\*\fldinst{HYPERLINK "https://juliamath.github.io/AbstractFFTs.jl/stable/api/"}}{\fldrslt https://juliamath.github.io/AbstractFFTs.jl/stable/api/}}. For efficiency, though, you really only want 2*N, which I have verified through tests.\
+- The size of the irfft output is allowed to be either 2*N or 2*N+1, see reference: {\field{\*\fldinst{HYPERLINK "https://juliamath.github.io/AbstractFFTs.jl/stable/api/"}}{\fldrslt https://juliamath.github.io/AbstractFFTs.jl/stable/api/}}. For efficiency, though, you really only want 2*N, which I have verified through tests.\
 - Of course, one can pad with zeros in order to upsample. Once you pad with zeros, there is no need to worry about the idiosyncrasies of the largest mode, since it is zero. I have found it is best to pad with N zeros, i.e. double the number of modes not counting uh_0. One could also apply the 3/2 rule, but I see no advantage to it (see notes above on H3).\
 - By default, the physical interval is [0, 2*pi). To use the symmetric interval [-pi, pi) one can negate all of the odd modes.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 - The routine irfft within FFT destroys its input, uhat!!! One needs to keep this in mind to keep from getting ambushed with weird bugs. The routine rfft, however, does not destroy its input.\
+- The routine irfft within FFT destroys its input, uhat!!! One needs to keep this in mind to keep from getting ambushed with weird bugs. The routine rfft, however, does not destroy its input.\
 \
 \'95 The convention for using the regular FFT is:\
 ifft(uh_0, uh_1, \'85, uh_\{N-1\}, 2*uh_\{N\}, uh_\{-N-1\}, \'85, uh_\{-1\})\
 - Again, notice the factor of 2 for uh_\{N\} and this mode should be real for the physical signal to be real. I have verified that using the regular FFT to perform a real FFT (thereby doubling the length of the vector) is less efficient than the real FFT, as would be expected.\
 -\'a0All questions I ever had about the nuances of FFT are addressed in the test codes. So if I ever get confused again, I can look there.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
+\
 Some good references:\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "http://www.fftw.org/fftw2_doc/fftw_2.html"}}{\fldrslt \cf0 http://www.fftw.org/fftw2_doc/fftw_2.html}}\
@@ -231,7 +226,7 @@ Some good references:\
 \
 MISC\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul \ulc0 \
+\cf0 \ul \
 Little things\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ulnone - I define the data type RandList with ravar, H2, and H3, but I do not actually use rvar in any of the routines, so maybe I have been silly with my definition.\
