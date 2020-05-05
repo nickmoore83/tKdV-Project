@@ -5,6 +5,15 @@ function rel_err(vnum, vex, sigdig::Int=3)
 	relerr = maximum(abs, vnum - vex) / maximum(abs, vex)
 	return sig(relerr,sigdig)
 end
+# Transform from physical to spectral space; only used in benchmark of H3.
+function realfft(uu::Vector{Float64}, symint::Bool=true)
+	uhat = rfft(uu)/length(uu)
+	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6)
+	uhat[end] *= 0.5
+	uhat = uhat[2:end]
+	if(symint) uhat[1:2:end] .*= -1 end
+	return uhat
+end
 
 #---------- REAL FFT TEST ----------#
 # Test the real fft, both forward and backwards. All tests PASSED!
@@ -42,8 +51,9 @@ function test_realfft(nmodes::Int)
 		upex = 2*real( sum( uhex[kk] * exp.(im*kk*xup) for kk = 1:nmodes) )
 	end
 	uhnum = realfft(uuex, symint)
-	uunum = irealfft(uhex, symint)
-	upnum = ifftup(uhex, symint)
+	#uunum = irealfft(uhex, symint)
+	plan = makeplan(nmodes)
+	upnum = irealfft(uhex, plan, symint)
 	# Function to print the coefficients.
 	function printuh(idx)
 		println("idx = ", idx)
@@ -57,8 +67,8 @@ function test_realfft(nmodes::Int)
 	println("Relative error in uhat without last mode: ", rel_err(uhnum[1:end-1],uhex[1:end-1]))
 	println("Relative error in uhat with last mode: ", rel_err(uhnum,uhex))
 	# Inverse FFT
-	println("\nTesting inverse real FFT")
-	println("Relative error in uu: ", rel_err(uunum,uuex))
+	#println("\nTesting inverse real FFT")
+	#println("Relative error in uu: ", rel_err(uunum,uuex))
 	# Upsampled inverse FFT
 	println("\nTesting upsampled inverse real FFT")
 	println("Relative error in uup: ", rel_err(upnum,upex))
@@ -122,8 +132,9 @@ function test_ham(nmodes::Int; method::Int=3)
 	else return end
 	# Compute the numerical H2 and H3 and the relative errors.
 	h2num = ham2(uhat)
-	h3fft = ham3fft(uhat)
 	h3rec = ham3rec(uhat)
+	plan = makeplan(nmodes)
+	h3fft = ham3fft(uhat,plan)
 	if method in (1,2)
 		# H2 error
 		println("\nH2 test")
@@ -149,49 +160,50 @@ end
 
 
 #---------- H3 SPEED TESTS ----------#
-# Test the speed of h3fft versus h3rec
+# Test the speed of h3fft versus h3rec.
 function ham3speed(nmodes::Int, ncalls::Int)
 	uhat = randn(ComplexF64, nmodes, ncalls)
-	# Call each one time just in case the first call is much slower.
-	h3fft = ham3fft(uhat[:,1]) 
-	h3rec = ham3rec(uhat[:,1])
+	# Make a plan for FFT.
+	plan = makeplan(nmodes)
 	# Call each routine many times and measure the time.
-	tm_fft = @elapsed([h3fft = ham3fft(uhat[:,nn]) for nn=1:ncalls])
+	tm_fft = @elapsed([h3fft = ham3fft(uhat[:,nn], plan) for nn=1:ncalls])
 	tm_rec = @elapsed([h3rec = ham3rec(uhat[:,nn]) for nn=1:ncalls])
+	tm_h2 = @elapsed([h2 = ham2(uhat[:,nn]) for nn=1:ncalls])
 	#Print computational times
 	println("\nTesting speed for nmodes = ", nmodes)
+	println("Time for h2: ", sig(tm_h2,3), "secs")
 	println("Time for fft: ", sig(tm_fft,3), "secs")
 	println("Time for rec: ", sig(tm_rec,3), "secs")
-	println("Rec is faster by factor of ", sig(tm_fft/tm_rec,2))	
+	println("FFT is faster by factor of ", sig(tm_rec/tm_fft,2))	
 	# Print values of h3 just to make sure things are being computed correctly.
 	#println("\nh3fft = ", sig(h3fft, 3), "; h3rec = ", sig(h3rec,3))
 	#println("Rel err: ", rel_err(h3fft, h3rec))
-	return tm_fft, tm_rec
+	return tm_fft, tm_rec, tm_h2
 end
-#ham3speed(16, 10^4)
+#ham3speed(64, 10^5)
 
-# Want to find break-even point for fft and rec
-# Want to see how fft time changes with nmodes not necessarily a power of 2
-# Could also simply measure the time of various FFT calls
-
-function test_ham3speed()
-	ncalls = 10^4
+# Test the speed of h3fft versus h3rec for several nmodes.
+function test_ham_speed()
+	ncalls = 2*10^3
 	#nmodes = 8:1:128
-	nmodes = 2 .^(3:9)
-	tfft, trec = [zeros(Float64, length(nmodes)) for ii=1:2]
+	nmodes = [8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256] #382, 512
+	tfft, trec, th2 = [zeros(Float64, length(nmodes)) for ii=1:3]
 	for (idx,nm) in enumerate(nmodes)
-		tfft[idx], trec[idx] = ham3speed(nm, ncalls)
+		tfft[idx], trec[idx], th2[idx] = ham3speed(nm, ncalls)
 	end
-	ratio = tfft./trec
+	ratio = trec./tfft
 	# Plot the CPU times for each.
-	p1 = plot(nmodes, tfft, label="fft", markershape=:circle)
-	plot!(p1, nmodes, trec, label="rec", markershape=:circle, legend=:topleft)
-	plot!(xlabel="Lambda", ylabel="CPU time (sec)", xscale=:lin, yscale=:lin)
+	p1 = plot(nmodes, trec, label="rec", markershape=:circle)
+	plot!(p1, nmodes, tfft, label="fft", markershape=:circle)
+	plot!(p1, nmodes, th2, label="h2", markershape=:circle)
+	plot!(xlabel="Lambda", ylabel="CPU time (sec)")
+	plot!(xscale=:lin, yscale=:lin, legend=:topleft)
 	# Plot the ratio of CPU times.
 	p2 = plot(nmodes, ratio, label="ratio", markershape=:circle)
 	plot!(p2, xlabel="Lambda", ylabel="ratio fft/rec", xscale=:lin, yscale=:log)
 	# Display
 	display(p1)
 end
-test_ham3speed()
+test_ham_speed()
+
 

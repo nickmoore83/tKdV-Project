@@ -1,154 +1,220 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
 {\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11000\viewh9920\viewkind0
+{\colortbl;\red255\green255\blue255;\red191\green191\blue191;}
+{\*\expandedcolortbl;;\csgray\c79525;}
+\margl1440\margr1440\vieww12780\viewh11680\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs28 \cf0 \ul \ulc0 \
+\f0\b\fs40 \cf0 Overall Plan\
 
-\b\fs40 \ulnone To do
 \b0\fs28 \
+I want to make my routines for Gibbs sampling and for computing the transfer function more efficient. Eventually, I want to run these routines on a GPU and really probe the extremes. With this power, I would be able to a number of things.\
+\'95 I could compute for much larger Lambda values. I could see if the transfer function and outgoing skewness collapses to a single curve in the large Lambda limit, and if not, I could figure out how the scaling of parameters needs to be changed accordingly. 
+\b\fs40 \
+
+\b0\fs28 \'95 The transfer function seems to be a perfect problem for a GPU since it involves the same exact simple arithmetical operations on multiple data. It would allow me to learn GPU programming with a good practical application in mind.\
+\'95 Related to the above, I should really do same basic accept-reject obtain a better prior distribution and pare down the amount of data to send to the transfer function. Currently, transfun has to deal with enormously long lists and the vast majority of the values are wasted in the mean because their weight is nearly zero. I could perform AR to sample for the Gibbs distribution with beta = 5 or 10, save the lists of precomputed values, and then perform the averages in the transfer function with different beta values. Be reducing the amount of saved data significantly, I could even save the micro-states. This AR sampling might be compatible with GPU too. Also, something that would interest me is that I could use my bound on the minimum Hamiltonian value (equal to traveling wave in the continuum limit).\
+\'95 With more efficient algorithms, I could answer a number of scientific question. I believe I have already brainstormed several questions with Hui Sun. One that comes to mind is a big parameter study over varying the depth ratio, eps0, delta0, and inverse temperature. In all of our existing work, we have only studied a single depth ratio and a few values of eps0 and delta0. I could look for more interesting phase transitions. I could study multiple depth changes and maybe even the continuum limit.\
+\'95 Maybe I could get a better analytical handle on the transfer function.\
+\
+I have already taken major steps toward making the algorithms more efficient with the implementation of the FFT plan and the implementation of the recursive algorithm for H3.
+\b\fs40 \
 \
 \
-- Also, I could measure the time of various FFT calls: e.g. how it depends on nmodes, whether I use realfft or just basic fft, whether I make a plan or not (if I get that far)\
-\
-\
-\
-\
+To do
+\b0\fs28 \
 \
 - In transfer function, I need to see how many iterations the root solver is taking and think about improving that.\ul \
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone Original plan: To address Ref1 question about convergence of the transfer function for Lambda large, I plan to run a series of samples with Lambda = 16, 32, and maybe 64. I plan to use 500 and 1000 sweeps to get a visual on the convergence with respect to the number of samples. The value of N does not need to be set in the sampling stage, only later on the transfer function stage. I will primarily use N = Lambda/2, but can also experiment with N = 8 fixed as a straw man.\ul \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulc0 \
-Little things\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone - I define the data type RandList with ravar, H2, and H3, but I do not actually use rvar in any of the routines, so maybe I have been silly with my definition.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul \
-\
-
-\b\fs40 \ulnone Instructions for running code
-\b0\fs28 \ul \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone \'95 The routine uniform_sample(nmodes, nsweeps) samples from the uniform distribution and produces the output file rand.jld, which contains a list of H2 and H3 values (as well as some parameters). Here nmodes = Lambda is specified but lamfac = N is not specified. The number of samples per sweep is 1e5.\
-\
-\'95 The routine transfun(\'93rand-16-20\'94, lamfac) computes the transfer function and produces the output file thvars.jld, which contains the upstream and downstream theta values and the skewness upstream and downstream (as well as some parameters).\ul \
-\
-\ulnone \'95 The routine output_text(\'93thvars-16-8-20.jld\'94) converts the julia file to a text file for DataTank to read.\
-\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\b\fs40 \cf0 H3 Computation: recursive or FFT
-\b0\fs28 \ul \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul Accuracy\ulnone \
-I tested the accuracy of computing H3 using the recursive formula versus the FFT. In short, both methods give highly accurate results. Further notes are as follows.\
-\'95 I tested against an exact solution for H3 for the case of nmodes = 1 (actually 2 slightly different exact solutions that are complementary). Both ham3rec and ham3fft give results that are accurate to machine precision. Neither is any more accurate than the other.\
-\'95 I then tested ham3rec and ham3fft against one another. The exact solution above is helpful, but only for 2 modes, hence limited. Thus, I simply sampled a vector of complex random values for uhat and compared the results of ham3rec and ham3fft. They gave consistent results to machine accuracy.\
-\'95 Interestingly, I do not even need to make the largest mode real for the two methods to give exactly the same result for H3.\
-\'95 If I remove the upsampling, ham3rec and ham3fft give very different results, as would be expected. The relative error that is often larger than 1. \
-\'95 If I change the upsampling to 3/2, they give somewhat different results, with a relative error that is usually much smaller than 1 but not negligible.\
-\'95 Interestingly, if I change the upsampling to 3/2*len + 1, then I get exact results again! \
-\'95 Also, if I kill the largest mode and upsample with 3/2*len, I get exact results! That might be an argument for killing the last mode. Nah, an FFT with double the length is just as fast as with 3/2 the length I believe.\
-\
-\ul Speed\ulnone \
-I tested the speed of computing H3 using recursive versus FFT (with no plan)\
-\'95 The recursive is much faster for the Lambda values I have been using for the JNS paper (16 and 32). For Lambda = 16, recursive is about 8 times faster. For Lambda = 32, recursive is about 4 times faster.\
-\'95 The breakeven point is between 128 and 256. For Lambda = 256, FFT is about 2 times faster. For Lambda = 512, FFT is about 6 times faster.\
-\'95 I saved some plots in folder H3SpeedTest-5-4-2020.\
-\'95\'a0The FFT algorithm is really bad if Lambda is not a power of 2.\
-\
-\
-\
-
-\b\fs40 FFT Notes
-\b0\fs28 \ul \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul Notes\ulnone \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \'95 The FFT routines are only really used in the computation of ham3. In particular, irealfft is used there; realfft is not used in any of the main routines, only in the benchmark tests.\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul Downsides of real FFT\ulnone \
-The real FFT routines just have too many damn complexities for them to be useful and reliable. To list a few of the curiosities I have found:\
-\'95 The relationship between npts and nmodes is not unique. One can have npts = 2*nmodes or 2*nmodes + 1. I believe I have determined that npts = 2*nmodes, with nmodes a power of 2, is the optimal way to use the routines, but of course I still have some uncertainty. I believe npts = 2*nmodes is the proper use by relating it to the regular DFT on a grid (with the number of points a power of 2) and doing a count of the degrees of freedom.\
-\'95 Using rfft (physical to spectral) with npts = 2*nmodes, the largest mode must be real for the computation to be correct. Of course, this behavior makes sense after a little analysis. The imaginary part of the largest mode corresponds to sin which aliases to zero on the grid, hence it cannot be seen by the physical signal. Said differently, rfft always outputs the largest mode as real, which makes sense if you do a count of the degrees of freedom.\
-\'95 In contrast irfft (spectral to physical) with npts = 2*nmodes works regardless of whether the largest mode is real or not. Maybe the performance suffers if the largest mode is not real though??? Just a guess.\
-\'95 The routine irfft destroys the input! WTF?!? Had I not just happened to read that, I would have never figured out a bug I was getting. The routine rfft does not however destroy the input.\
-\'95 I still have not even scratched the surface of making FFT plans. Oh man, that might be tedious.\
-\
-\ul Conclusions\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone My best choices are:\
-1) Only use the recursive computation of H3 and do not worry about any of the real FFT crap.\
-2) Zero the largest mode as is done in Matlab DNS so that I am more confident that the real FFT routines are working properly.\
+\ulnone - I still need to decide whether I will make a habit of zeroing the largest mode or not. I don\'92t see a need to do it since in REC it doesn\'92t matter at all and in FFT I upsample anyway.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul \ulc0 \
-Real FFT notes\ulnone \
-\'95 To use real FFT between physical uu and spectral uhat, the relationship must be satisfied:\
-len(uhat) = div(len(uu), 2) + 1\
-Note that in using irfft, the length of uu cannot be inferred from uhat because it can be either 2*len(uhat)-1 or 2*len(uhat)-2. Reference: {\field{\*\fldinst{HYPERLINK "https://juliamath.github.io/AbstractFFTs.jl/stable/api/"}}{\fldrslt https://juliamath.github.io/AbstractFFTs.jl/stable/api/}}\
-\
-\'95 In my application, we take the irfft of vector [0; uhat] where uhat has length nmodes. We have to do this to include the zero-mode which is set to zero. Thus, the length of uu npoints is either npoints = 2*nmodes or 2*nmodes+1. I belive that npoints = 2*nmodes is the optimal way to use the real FFT routines (see above). Also, in my tests, npoints = 2*nmodes seems to be much faster, by a factor of at least two.\
-\
--Side note: At some point, I was worried because the above implies that I am calling irfft with vectors of highly non-composite length. For example, if nmodes=16, then the vector [0; uhat] has length 17 and thus, after upsampling, I am calling irfft with vectors of length (33, 64). The 33 worried me. So I ran some tests where I slightly varied the lengths of the vectors by zeroing the last mode or not and by setting npoints to the two different values allowed. I ran tests calling irfft with vectors of length (32, 63), (32, 62), and (33, 65). The original implementation of (33, 64) was by far the fastest to execute by a factor of more than two. Thus, I believe I was already using the real FFT with vectors of the correct length.\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \'95 I should use FFTW \'91plan\'92, since I am doing transforms of the same size many times. References:\
+
+\b\fs40 \cf0 \ulnone Computation of H3
+\b0\fs28 \
+\
+The most expensive step in sampling is the computation of H3. There are two practical ways to compute H3: using the FFT (with a plan!) or using the recursive formula (REC). \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 Accuracy of H3\ulnone \
+I have verified that both methods accurately compute H3 through few of tests. The tests are: \
+1) Comparing to an exact solution for H3 and H2 in the case of two modes of arbitrary values. \
+2) Comparing the two computations of H3 for an arbitrary number of modes with random values.\
+Some notes are:\
+\'95 If upsampling is removed from the FFT method, the results are no longer accurate, as would be expected.\
+\'95 I have found that if I change the upsampling to 3/2 and zero out the largest mode, then the FFT results are still accurate. If I keep the largest mode, though, then 3/2 upsampling does not give accurate results, but 3/2 + 1 upsampling does give accurate results. However, none of this really matters because upsampling by a factor of 2 is probably just as efficient as 3/2 (almost certainly more efficient than 3/2 + 1) and in that case I do not have to worry about killing the largest mode.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 Speed of H3\ulnone \
+After much testing and improvement of the algorithms, these two methods are competitive for moderate Lambda (16 or 32) and the FFT method is superior for Lambda = 64 and great. Some results are:\
+\'95 For Lambda = 16, REC is about 3 times faster.\
+\'95 For Lambda = 32, REC is about 1.5 times faster.\
+\'95 For Lambda = 64, FFT is about 1.3 times faster.\
+\'95 The break even point is about Lambda = 48.\
+\'95 See the saved plots in folder H3SpeedTest from May 4-5, 2020.\
+\
+\ul Speed of sampling algorithm\ulnone \
+I have tested the speed of the sampling algorithm, which has as its most expensive step the computation of H3. I compared the speed using FFT, REC, and my old sampling algorithm which used FFT with no plan. I also tested the time of the transfer function. The results are as follows.\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx1440
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx7200
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Lambda\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 nsweeps\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 sample FFT\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 sample REC\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 sample OLD\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 transfer\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx1440
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx7200
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 16\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 100\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 1.1 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 0.6 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 2.8 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 3.3 mins\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx1440
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx7200
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 24\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 100\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 1.3 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 0.8 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 *14 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 3.6 mins\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx1440
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx7200
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 32\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 100\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 1.4 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 1.2 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 2.9 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 3.3 mins\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx1440
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx7200
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 48\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 100\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 1.6 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 2.0 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 -\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 3.1 mins\cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx1440
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx2880
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx4320
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx5760
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx7200
+\clvertalc \clshdrawnil \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadl100 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 64\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 100\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 2.0 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 3.0 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 *16 mins\cell 
+\pard\intbl\itap1\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 5.0 mins\cell \lastrow\row
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 The *starred values indicate why it was such a terrible idea to run FFT with no plan.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul FFT Notes\ulnone \
+I discovered a number of things about the FFT. The lessons are:\
+\'95 You need to make a plan! It is easy to do and it massively improves the efficiency. Speed-ups of about 5 are typical, sometimes the speed-up is up to 10.\
+\
+\'95 The convention for using the inverse real FFT is:\
+irfft(uh_0, uh_1, \'85, uh_\{N-1\}, 2*uh_N)\
+- Notice the largest mode u_N is multiplied by 2.\
+- Additionally, the largest mode uh_N should be real for things to be interpreted in a reasonable way. The largest mode is allowed to be complex in the routine irfft, but its imaginary part will make no difference in the output physical signal u. This behavior makes sense with a bit of analysis. The imaginary part of the larges mode corresponds to sin of the Nyquist frequency, which aliases to zero and hence cannot be seen by the physical grid. It also makes sense through a basic count of the degrees of freedom, noting that uh_0 must also be real, since it is the mean of real data.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 - The size of the irfft output is allowed to be either 2*N or 2*N+1, see reference: {\field{\*\fldinst{HYPERLINK "https://juliamath.github.io/AbstractFFTs.jl/stable/api/"}}{\fldrslt https://juliamath.github.io/AbstractFFTs.jl/stable/api/}}. For efficiency, though, you really only want 2*N, which I have verified through tests.\
+- Of course, one can pad with zeros in order to upsample. Once you pad with zeros, there is no need to worry about the idiosyncrasies of the largest mode, since it is zero. I have found it is best to pad with N zeros, i.e. double the number of modes not counting uh_0. One could also apply the 3/2 rule, but I see no advantage to it (see notes above on H3).\
+- By default, the physical interval is [0, 2*pi). To use the symmetric interval [-pi, pi) one can negate all of the odd modes.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 - The routine irfft within FFT destroys its input, uhat!!! One needs to keep this in mind to keep from getting ambushed with weird bugs. The routine rfft, however, does not destroy its input.\
+\
+\'95 The convention for using the regular FFT is:\
+ifft(uh_0, uh_1, \'85, uh_\{N-1\}, 2*uh_\{N\}, uh_\{-N-1\}, \'85, uh_\{-1\})\
+- Again, notice the factor of 2 for uh_\{N\} and this mode should be real for the physical signal to be real. I have verified that using the regular FFT to perform a real FFT (thereby doubling the length of the vector) is less efficient than the real FFT, as would be expected.\
+-\'a0All questions I ever had about the nuances of FFT are addressed in the test codes. So if I ever get confused again, I can look there.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+Some good references:\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "http://www.fftw.org/fftw2_doc/fftw_2.html"}}{\fldrslt \cf0 http://www.fftw.org/fftw2_doc/fftw_2.html}}\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://www.reddit.com/r/Julia/comments/5wel0j/fft_speed_vs_matlab/"}}{\fldrslt \cf0 https://www.reddit.com/r/Julia/comments/5wel0j/fft_speed_vs_matlab/}}\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "https://www.juliabloggers.com/tag/fftw/"}}{\fldrslt \cf0 https://www.juliabloggers.com/tag/fftw/}}\
-{\field{\*\fldinst{HYPERLINK "https://biojulia.net/post/hardware/"}}{\fldrslt https://biojulia.net/post/hardware/}}\
-\
-\
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\b\fs40 \cf0 Timing
-\b0\fs28 \ul \ulc0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone \
-Original version of code using FFT (no FFT plan)\
-Lambda	nsweeps	sampling	transfer	\
-16		100		2.8 mins	3.3 mins\
-24		100		*14 mins\
-32		100		2.9 mins\
-64		100		*16 mins\
+{\field{\*\fldinst{HYPERLINK "https://biojulia.net/post/hardware/"}}{\fldrslt \cf0 https://biojulia.net/post/hardware/}}\
 \
-*Interesting: Lambda = 24 takes much longer than Lambda = 32, which means that the fft routines I am using are very suboptimal. Likely, making a FFTW plan, or else simply computing the transform directly, would be faster for the moderate values of Lambda I am using. Online search suggests the break-even for FFT over direct is about 64.\
-*I don\'92t know why Lambda = 64 takes so much longer than 32.\
-\
-Original version of code using FFT (no FFT plan)\
-Lambda	nsweeps	sampling	transfer	\
-16		500		14 mins	26 mins\
-16		1000		28 mins	54 mins\
-32		500		15 mins	26 mins\
-32		1000		34 mins	51 mins\
-\
-Conclusions:\
-The cpu time of computing the transfer function is a bit more than the cpu time of sampling (not quite double).\
-Question: Why is transfer not faster for 32 compared to 16?\
-\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ul H3 with FFT vs direct\ulnone \
-Comparing the sampling with the original FFT with no plan versus direct computation of H3\
-Lambda	nsweeps	FFT		direct H3\
-16		10		0.27 mins	0.046 mins\
-The direct computation of H3 is faster by about a factor of six!!!\
 \
 \
 \
@@ -156,11 +222,25 @@ The direct computation of H3 is faster by about a factor of six!!!\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\b\fs40 \cf0 Long term\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\b0\fs28 \cf0 \
-- In the long run, the better strategy is to sample from a better prior, or to do some basic AR because transfun has to deal with enormously long lists and the vast majority of those are wasted in the mean because their weight is nearly zero.\
+\b\fs40 \cf0 Instructions for running code
+\b0\fs28 \ul \
+\ulnone \'95 The routine uniform_sample(nmodes, nsweeps) samples from the uniform distribution and produces the output file rand.jld, which contains a list of H2 and H3 values (as well as some parameters). Here nmodes = Lambda is specified but lamfac = N is not specified. The number of samples per sweep is 1e5.\
+\'95 The routine transfun(\'93rand-16-20\'94, lamfac) computes the transfer function and produces the output file thvars.jld, which contains the upstream and downstream theta values and the skewness upstream and downstream (as well as some parameters).\ul \
+\ulnone \'95 The routine output_text(\'93thvars-16-8-20.jld\'94) converts the julia file to a text file for DataTank to read.\
 \
-- Man it would be cool to figure out how to run this sampling algorithm on GPUs. It seems like it would be appropriate since it involves doing the same exact simple arithmetic instructions for multiple data. The only little thing I am worried about is if the GPU is efficient at handling FFT, but I\'92m sure there is a way to do this. Also, I really do need to do some preliminary AR to pare down the data files of stored H2 and H3 values.\
-}
+\
+\
+\
+\
+\
+MISC\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone Original plan: To address Ref1 question about convergence of the transfer function for Lambda large, I plan to run a series of samples with Lambda = 16, 32, and maybe 64. I plan to use 500 and 1000 sweeps to get a visual on the convergence with respect to the number of samples. The value of N does not need to be set in the sampling stage, only later on the transfer function stage. I will primarily use N = Lambda/2, but can also experiment with N = 8 fixed as a straw man.\ul \
+\
+\
+Little things\
+\ulnone - I define the data type RandList with ravar, H2, and H3, but I do not actually use rvar in any of the routines, so maybe I have been silly with my definition.}

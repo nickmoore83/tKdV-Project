@@ -15,34 +15,24 @@ using LaTeXStrings
 data_folder() = "./Data/"
 # Round to a set number of significant digits
 sig(var, sigdig::Int) = round(var,sigdigits=sigdig)
+# Set padlen for upsampling in FFT.
+padlen(nmodes::Int) = nmodes
 #---------------------------------#
 
 #---------- Real FFT Routines ----------#
-# Note: Optimally, the length of uhat and uu should be a power of 2.
+# Make a plan for irfft with zero-padding for upsampling.
+function makeplan(nmodes::Int)
+	uh = zeros(ComplexF64, 1+nmodes+padlen(nmodes))
+	return plan_irfft(uh, 2*(nmodes+padlen(nmodes)))
+end
+# Transform from spectral to physical space using a plan. Used in ham3fft.
 # Note on symint: to use the symmetric interval [-pi,pi], odd modes must be negated.
-# Transform from physical to spectral space; only used in benchmark of H3.
-function realfft(uu::Vector{Float64}, symint::Bool=true)
-	uhat = rfft(uu)/length(uu)
-	@assert(abs(uhat[1])/maximum(abs,uhat) < 1e-6)
-	uhat[end] *= 0.5
-	uhat = uhat[2:end]
-	if(symint) uhat[1:2:end] .*= -1 end
-	return uhat
-end
-# Transform from spectral to physical space; used in ham3fft.
-# Note: uh must be created to prevent input uhat from being destroyed.
-function irealfft(uhat::Vector{ComplexF64}, symint::Bool=true)
-	uh = [0; uhat[1:end-1]; 2*uhat[end]]
+function irealfft(uhat::Vector{ComplexF64}, plan::AbstractFFTs.ScaledPlan, symint::Bool=true)
+	uh = [0; uhat[:]; zeros(padlen(length(uhat)))]
 	if(symint) uh[2:2:end] .*= -1 end
-	uu = irfft(uh, 2*length(uhat))	# Note: irfft destroys input uh.
+	uh[end] *= 2
+	uu = plan * uh
 	return uu*length(uu)
-end
-# Upsampled version of irealfft.
-function ifftup(uhat::Vector{ComplexF64}, symint::Bool=true)
-	# Can adjust to padlen to length(uhat), or 1/2*len, or 1/2*len + 1
-	#padlen = div(length(uhat),2)+1
-	padlen = length(uhat)
-	return irealfft([uhat; zeros(padlen)], symint)
 end
 #---------------------------------------#
 
@@ -52,12 +42,12 @@ energy(uhat::Vector{ComplexF64}) = 2*pi*norm(uhat)^2
 # Compute H2 = 1/2 int u_x^2 dx
 ham2(uhat::Vector{ComplexF64}) = energy(im*(1:length(uhat)).*uhat)
 # Compute H3 using FFT to physical space, H3 = 1/6 int u^3 dx.
-function ham3fft(uhat::Vector{ComplexF64})
-	uu = ifftup(uhat)
+function ham3fft(uhat::Vector{ComplexF64}, plan::AbstractFFTs.ScaledPlan)
+	uu = irealfft(uhat, plan)
 	return 1/6 * sum(uu.^3) * 2*pi/length(uu)
 end
 # Recursive computation of H3 in spectral space.
-function ham3rec(uhat::Vector{ComplexF64})
+function ham3rec(uhat::Vector{ComplexF64}, plan=0)
 	# If only one mode, then H3 is zero.
 	length(uhat) == 1 && return 0.0
 	# Otherwise use recursion.
@@ -67,7 +57,7 @@ function ham3rec(uhat::Vector{ComplexF64})
 	return H3
 end
 # Choose which algorithm to use for H3.
-ham3(uhat::Vector{ComplexF64}) = ham3rec(uhat) 
+ham3(uhat::Vector{ComplexF64}, plan::AbstractFFTs.ScaledPlan) = ham3rec(uhat,plan)
 #---------------------------------------#
 
 #---------- Sampling Routines ----------#
@@ -87,11 +77,12 @@ function sample_one_sweep(nmodes::Int, nsamp::Int, zerolast::Bool)
 	end
 	# Compute H3 and H2 for each sample in a parallel for loop.
 	H2vec, H3vec = [zeros(Float64,nsamp) for nn=1:2]
+	plan = makeplan(nmodes)
 	## Later parralelize this step. #@parallel
 	for nn = 1:nsamp
 		uhat = getuhat(rvar,nn)
 		H2vec[nn] = ham2(uhat)
-		H3vec[nn] = ham3(uhat)
+		H3vec[nn] = ham3(uhat,plan)
 	end
 	rlist = RandList(Float32.(rvar), H2vec, H3vec)
 	return rlist

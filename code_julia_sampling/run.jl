@@ -6,6 +6,13 @@ include("routines.jl")
 #transfun("rand-16z-2.jld", 8)
 #output_text("thvars-16z-8-2.jld")
 
+# RUN SAMPLE
+#uniform_sample(16, 100)
+#uniform_sample(24, 100)
+#uniform_sample(32, 100)
+#uniform_sample(48, 100)
+#uniform_sample(64, 100)
+
 # RUN TRANSFUN
 #transfun("rand-16z-500.jld", 8)
 #transfun("rand-16z-1000.jld", 8)
