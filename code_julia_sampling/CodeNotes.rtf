@@ -9,7 +9,7 @@
 
 \b0\fs28 \
 I want to make my routines for Gibbs sampling and for computing the transfer function more efficient. Eventually, I want to run these routines on a GPU and really probe the extremes. With this power, I would be able to a number of things.\
-\'95 I could compute for much larger Lambda values. I could see if the transfer function and outgoing skewness collapses to a single curve in the large Lambda limit, and if not, I could figure out how the scaling of parameters needs to be changed accordingly. 
+\'95 I could compute for much larger Lambda values. I could see if the transfer function and outgoing skewness collapses to a single curve in the large Lambda limit, and if not, I could figure out how the scaling of parameters needs to be changed accordingly (for example how N depends on Lambda) .
 \b\fs40 \
 
 \b0\fs28 \'95 The transfer function seems to be a perfect problem for a GPU since it involves the same exact simple arithmetical operations on multiple data. It would allow me to learn GPU programming with a good practical application in mind.\
@@ -216,10 +216,6 @@ Some good references:\
 {\field{\*\fldinst{HYPERLINK "https://biojulia.net/post/hardware/"}}{\fldrslt \cf0 https://biojulia.net/post/hardware/}}\
 \
 \
-\
-\
-\
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \b\fs40 \cf0 Instructions for running code
@@ -234,13 +230,9 @@ Some good references:\
 \
 \
 MISC\
-\
-\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul \ulc0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \ulnone Original plan: To address Ref1 question about convergence of the transfer function for Lambda large, I plan to run a series of samples with Lambda = 16, 32, and maybe 64. I plan to use 500 and 1000 sweeps to get a visual on the convergence with respect to the number of samples. The value of N does not need to be set in the sampling stage, only later on the transfer function stage. I will primarily use N = Lambda/2, but can also experiment with N = 8 fixed as a straw man.\ul \
-\
-\
 Little things\
-\ulnone - I define the data type RandList with ravar, H2, and H3, but I do not actually use rvar in any of the routines, so maybe I have been silly with my definition.}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ulnone - I define the data type RandList with ravar, H2, and H3, but I do not actually use rvar in any of the routines, so maybe I have been silly with my definition.\
+}
