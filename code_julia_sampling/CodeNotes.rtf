@@ -200,6 +200,8 @@ ifft(uh_0, uh_1, \'85, uh_\{N-1\}, 2*uh_\{N\}, uh_\{-N-1\}, \'85, uh_\{-1\})\
 - Again, notice the factor of 2 for uh_\{N\} and this mode should be real for the physical signal to be real. I have verified that using the regular FFT to perform a real FFT (thereby doubling the length of the vector) is less efficient than the real FFT, as would be expected.\
 -\'a0All questions I ever had about the nuances of FFT are addressed in the test codes. So if I ever get confused again, I can look there.\
 \
+\'95 In addition, I experienced some with the different methods in plan_irfft by setting flags = FFTW.ESTIMATE, FFTW.MEASURE, or FFTW.PATIENT. I did not see any significant advantage to any of these methods. They all look about the same as far as computational time and there is a lot of random variation from test to test. Thus, I am sticking with FFTW.ESTIMATE since it is the default.\
+\
 Some good references:\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 {\field{\*\fldinst{HYPERLINK "http://www.fftw.org/fftw2_doc/fftw_2.html"}}{\fldrslt \cf0 http://www.fftw.org/fftw2_doc/fftw_2.html}}\
