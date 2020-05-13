@@ -60,7 +60,7 @@ Pg 20 Ln 42: remarkably} \\
 We have replaced the majority of these descriptors with more quantitative ones. In particular:
 \begin{itemize}
 \item The term `spectacular fashion' in the abstract was changed to `convincing evidence'.
-\item The word `modest' on page 18 was replaced with `moderate'. Thanks for pointing this out -- I believe moderate was the word that was originally intended and `modest' was the result of an autocorrect.
+\item The word `modest' on page 18 was replaced with `moderate'. Thanks for pointing this out -- I believe `moderate' was the word that was originally intended and `modest' was the result of an autocorrect.
 \item The word `roughly' (appearing in several places in the original manuscript) was either replaced by `approximately' or else removed.
 \item The phrase `captures the trend remarkably well' on page 20 was changed to `captures the trend closely'.
 \item We have kept `intriguing' on page 17 as we believe it to be an appropriate use of the word.
@@ -69,11 +69,11 @@ We have replaced the majority of these descriptors with more quantitative ones. 
 
 % COMMENT 2
 \noindent
-\comment{On Pg 5 Ln 44, it is said that ``the location of the peak is the same for skewness and kurtosis and appears insensitive to driving amplitude''. Can you elaborate on "appears" to say whether it is or not?}
+\comment{On Pg 5 Ln 44, it is said that ``the location of the peak is the same for skewness and kurtosis and appears insensitive to driving amplitude''. Can you elaborate on ``appears" to say whether it is or not?}
 
 \begin{itemize}
 \item As can bee seen in Fig. 2 (b) and (c), the location of the peak is indeed insensitive to driving amplitude to within experimental error (the level of which can be estimated by the noise in the data). Accordingly, we have replaced `appears insensitive' to simply `is insensitive'.
-We had initially used the word `appears' to encourage the reader to view the figure and see for themselves. However, we now see the referee's point that this word may introduce some uncertainty in the reader's mind and have thus made the change.
+We had initially used the word `appears' to encourage the reader to view the figure and see for themselves. However, we now see the referee's point that this word may introduce some uncertainty in the reader's mind and we have thus made the change.
 \end{itemize}
 
 % COMMENT 3
@@ -81,8 +81,13 @@ We had initially used the word `appears' to encourage the reader to view the fig
 \comment{Section 4.1 refers to Figure 3(b). If you increase $N$, with the transfer function become eventually collapse to one single curve? If so or indeed if not, why choose the $N$ and $\Lambda$ in this range?}
 
 \begin{itemize}
-\item This is a great question.... \\
-Why was this value chosen? One concern is computational time; These are expensive sampling computations, considering that for each value of theta you have to run a sample.
+\item This is a great question and one that we have already devoted some energy to understanding. First, it is unclear whether the transfer function converges to a single curve in the limit $\Lambda \to \infty$ and this is a question currently under investigation (see more below). Second, to briefly explain our choices, we selected the system size $\Lambda$ as a moderate value that is large enough to capture sufficiently rich dynamics and small enough to be computationally tractable. Meanwhile, we chose $N = \Lambda / 2$ so that the dominant forcing frequency $f_p$ sits near the middle of resolved scales (logarithmically) in the model. See sections 3.4 and especially 3.9 in the manuscript for a detailed discussion of the parameter $N$. In particular, Section 3.9 outlines a simple scaling argument that suggests scaling $N$ linearly with $\Lambda$ offsets the sensitivity of the transfer function to $\Lambda$ for asymptotically large $\Lambda$ (it is unclear, however, if this mitigates the sensitivity enough).
+
+\item To add a bit more detail, the parameter $\Lambda$ can be regarded as the dynamic range of the model since it corresponds to the number of resolved modes. In other work, a subset of the authors examined more severely truncated systems -- as small as two interacting modes -- that were shown to qualitatively capture many statistical features of the experiments (see reference 31). Since the goal of the present work is a {\em quantitative} comparison with experiments, we chose a larger dynamic range here. We found $\Lambda = 16$ to yield a sufficiently rich dynamical system that compares well to the experiments, while also being manageable from a computational perspective (considering that each trajectory requires integration with a small time step over a long time horizon and we sample over many trajectories). These points are discussed in various parts of the manuscript.
+	
+\item In  work currently underway, we are developing tailored sampling algorithms that will enable us to compute the transfer function for larger system sizes and address the question of whether the transfer function converges to a single curve, or whether a more sophisticated scaling relationship than that discussed in Section 3.9 is required to obtain system-size insensitivity. We hope to report on these findings soon.
+
+\item Finally, we would like to point out that, since the KdV equation is asymptotically valid only for large spatial scales, there is a certain point past which increasing $\Lambda$ does not improve the physical accuracy of the model. These small scales lie outside the range of validity of long-wave theory and a more accurate physical description would require either direct numerical simulations of the Euler equations or else a model closure that captures the small-scale physics.
 \end{itemize}
 
 % COMMENT 4
@@ -90,7 +95,11 @@ Why was this value chosen? One concern is computational time; These are expensiv
 \comment{For the experiments, images are taken at 60 frames/sec. The numerical differentiation of images of the free surface uses Savitzky-Golay smoothing filters. However, on Pg 18 it is mentioned that there are measurement errors and the differentiation amplifies errors. Can you comment further on this method by, say, looking at how it converges while only looking the images from 20 and 40 frames/sec or by calculating $\eta_x$ by a spectral method from eta? }
 
 \begin{itemize}
-\item
+\item First, the numerical differentiation to extract surface slope, $\eta_x$, is differentiation in space, not time. Hence, the results do not depend on the frame rate that is used; the numerical differentiation is taken for each separate frame, independently of one another. 
+
+Our protocol for numerically differentiating the experimental data admittedly developed with some trial-and-error. I believe this to be typical for the tricky task of numerically differentiating data with a noise -- a task that is well understood to be ill-posed in the strictest mathematical sense, but one that can nonetheless be achieved to a reasonable degree of accuracy with the understanding that the process will never be perfect. Because the problem is ill-posed, a convergence test on the experimental data is not possible to my knowledge. As the resolution increases, the error would decrease to a point, but then dramatically increase as the noise becomes amplified without bound. It is conceivable that a convergence test could be conducted with artificial data in which noise is added in a controlled fashion and the spatial resolution and smoothing parameters are linked to the noise level. Such a test lies outside the scope of the present paper though.
+
+Instead, we can briefly report on our trial-and-error process, including the idea of differentiating spectrally as suggested by the referee. Spectral differentiation was among the first ideas that we tried, but difficulties were encountered. First, it is necessary to choose a spatial domain (perhaps the entire width of the frame, or else some truncated window), but the data will not generally be periodic over this domain. Hence, the spectrum decays slowly, like $k^{-1}$, due to the mismatch of the endpoints, and numerical differentiation effectively multiplies by $k$, thus giving a spectrum that does not decay and hence a signal of $\eta_x$ that is entirely too noisy. This problem can be alleviated by `windowing' the data, that is, forcing it to zero at the endpoints smoothly, but such a process introduces a several decisions and tunable parameters which we found to give more uncertainty than we were comfortable with. We settled on the idea of `smooth differentiation' through Savitzky-Golay filters due to the relatively small number of tunable parameters and the conceptual simplicity. We experimented with varying the order of the polynomial and the width of the smoothing window and found results to be reasonably consistent.
 \end{itemize}
 
 % COMMENT 5
