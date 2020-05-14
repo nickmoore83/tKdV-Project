@@ -62,7 +62,7 @@ We have replaced the majority of these descriptors with more quantitative ones. 
 \item The term `spectacular fashion' in the abstract was changed to `convincing evidence'.
 \item The word `modest' on page 18 was replaced with `moderate'. Thanks for pointing this out -- I believe `moderate' was the word that was originally intended and `modest' was the result of an autocorrect.
 \item The word `roughly' (appearing in several places in the original manuscript) was either replaced by `approximately' or else removed.
-\item The phrase `captures the trend remarkably well' on page 20 was changed to `captures the trend closely'.
+\item The phrase `captures the trend remarkably well' on page 20 was changed to `the data is well predicted by formula (53)'.
 \item We have kept `intriguing' on page 17 as we believe it to be an appropriate use of the word.
 \end{itemize}
 \hphantom \\
@@ -72,8 +72,8 @@ We have replaced the majority of these descriptors with more quantitative ones. 
 \comment{On Pg 5 Ln 44, it is said that ``the location of the peak is the same for skewness and kurtosis and appears insensitive to driving amplitude''. Can you elaborate on ``appears" to say whether it is or not?}
 
 \begin{itemize}
-\item As can bee seen in Fig. 2 (b) and (c), the location of the peak is indeed insensitive to driving amplitude to within experimental error (the level of which can be estimated by the noise in the data). Accordingly, we have replaced `appears insensitive' to simply `is insensitive'.
-We had initially used the word `appears' to encourage the reader to view the figure and see for themselves. However, we now see the referee's point that this word may introduce some uncertainty in the reader's mind and we have thus made the change.
+\item As can bee seen in Fig. 2 (b) and (c), the location of the peak is indeed insensitive to driving amplitude to within experimental error (the level of error can be visually estimated by the noise in the data). Accordingly, we have replaced `appears insensitive' to simply `is insensitive'.
+We had initially used the word `appears' to encourage the reader to view the figure and see for themselves. However, we now see the referee's point that this word may weaken our statement and introduce some uncertainty in the reader's mind.
 \end{itemize}
 
 % COMMENT 3
@@ -81,7 +81,7 @@ We had initially used the word `appears' to encourage the reader to view the fig
 \comment{Section 4.1 refers to Figure 3(b). If you increase $N$, with the transfer function become eventually collapse to one single curve? If so or indeed if not, why choose the $N$ and $\Lambda$ in this range?}
 
 \begin{itemize}
-\item This is a great question and one that we have already devoted some energy to understanding. First, it is unclear whether the transfer function converges to a single curve in the limit $\Lambda \to \infty$ and this is a question currently under investigation (see more below). Second, to briefly explain our choices, we selected the system size $\Lambda$ as a moderate value that is large enough to capture sufficiently rich dynamics and small enough to be computationally tractable. Meanwhile, we chose $N = \Lambda / 2$ so that the dominant forcing frequency $f_p$ sits near the middle of resolved scales (logarithmically) in the model. See sections 3.4 and especially 3.9 in the manuscript for a detailed discussion of the parameter $N$. In particular, Section 3.9 outlines a simple scaling argument that suggests scaling $N$ linearly with $\Lambda$ offsets the sensitivity of the transfer function to $\Lambda$ for asymptotically large $\Lambda$ (it is unclear, however, if this mitigates the sensitivity enough).
+\item This is a great question and one that we have already devoted some energy to understanding. First, it is unclear whether the transfer function converges to a single curve in the limit $\Lambda \to \infty$ and this is a question currently under investigation (see more below). Second, to briefly explain our choices, we selected the system size $\Lambda$ as a moderate value that is large enough to capture sufficiently rich dynamics and small enough to be computationally tractable. Meanwhile, we chose $N = \Lambda / 2$ so that the dominant forcing frequency $f_p$ sits near the middle of resolved scales (logarithmically) in the model. See sections 3.4 and especially 3.9 in the manuscript for a detailed discussion of the parameter $N$. In particular, Section 3.9 outlines a simple scaling argument that suggests scaling $N$ linearly with $\Lambda$ offsets the sensitivity of the transfer function to $\Lambda$ for asymptotically large $\Lambda$ (it is unclear, however, if the sensitivity has been mitigated enough).
 
 \item To add a bit more detail, the parameter $\Lambda$ can be regarded as the dynamic range of the model since it corresponds to the number of resolved modes. In other work, a subset of the authors examined more severely truncated systems -- as small as two interacting modes -- that were shown to qualitatively capture many statistical features of the experiments (see reference 31). Since the goal of the present work is a {\em quantitative} comparison with experiments, we chose a larger dynamic range here. We found $\Lambda = 16$ to yield a sufficiently rich dynamical system that compares well to the experiments, while also being manageable from a computational perspective (considering that each trajectory requires integration with a small time step over a long time horizon and we sample over many trajectories). These points are discussed in various parts of the manuscript.
 	
@@ -113,28 +113,20 @@ Instead, we can briefly report on our trial-and-error process, including the ide
 % COMMENT 6
 \noindent
 \comment{Sharp steps do occur in bathymetry profiles. However, do you think Eq (53) will still apply rather well over other bathymetry profiles such as a transition with a steep finite gradient?}
-
 \begin{itemize}
-\item
+\item This is a good question. Since the wave response depends continuously on bottom topography, one would expect a surface of finite, steep slope to produce behavior similar to what we observe. How steep the surface must be for a reasonable comparison is a more difficult question, but perhaps some insight can be gained through back-of-the-envelope scaling analysis. The relevant length-scale for the wave response is the wavelength. Essentially, waves cannot ``see'' scales that are much smaller. Hence, a bathymetric change that takes place over a horizontal scale much smaller than a wavelength would be nearly indistinguishable from an abrupt depth change. Upon reflection, this line of thought implies that it is not necessarily the slope of the surface that matters most. For example, if the water depth is much smaller than the wavelength, then a mild slope could cause an appreciable change in depth that takes place over a horizontal distance much smaller than the wavelength. To give a concrete (yet somewhat exaggerated) example, suppose depth/wavelength = 1/10 and the bottom slope is 1/5. Then a change of 50\% in the depth occurs over 1/4 of a wavelength. Hence, in this scenario, a mild bottom slope of 1/5 might reasonably be approximated by an abrupt depth change.
 \end{itemize}
 
 % COMMENT 7
 \noindent
 \comment{Minor typos etc.
-Pg 6 Ln 60: is leading-order -> is the leading-order
-Pg 7 Ln 21: change dash to en or em dash as appropriate
-Pg 16 Ln 35: Fig. 3(b) -> Fig. 3(c)
-Pg 24: References [17] and [24] require capitals as they are book titles, and [27] requires a capital H for Hamiltonian}
-
+\\Pg 6 Ln 60: is leading-order $\to$ is the leading-order %Corrected
+\\Pg 7 Ln 21: change dash to en or em dash as appropriate % Corrected
+\\Pg 16 Ln 35: Fig. 3(b) $\to$ Fig. 3(c)%Corrected
+\\Pg 24: References [17] and [24] require capitals as they are book titles, and [27] requires a capital H for Hamiltonian %Corrected
+}
 \begin{itemize}
-\item
+\item We have corrected these typos. Thank you for bringing them to our attention.
 \end{itemize}
 
-% COMMENT 8
-\noindent
-\comment{}
-
-\begin{itemize}
-\item
-\end{itemize}
 \end{document}
