@@ -51,31 +51,47 @@
 1. Equilibrium statistical mechanics, i.e. ultimately the use of the canonical ensemble, is indeed a powerful tool. Though, too often the relaxation conditions required for the machinery to apply are overlooked. Here, the 1D KdV equation is an integrable system, whose trajectories are constrained by an infinite number of conserved quantities and whose highly nonlinear regime is governed by coherent structures such as solitons. The description of these structures is out of reach for the Gibbs measure – see the recent rise of an entire subject, namely integrable turbulence, to describe the statistics of integrable systems such as KdV or NLS. I do believe that some weak ergodicity, especially for the statistics of physical-space variables, may justify a sort of relaxation to the Gibbs measure before the ADC is encountered, but all of this deserves being discussed, and should at least be given careful consideration. Consider for instance the most linear cases in the paper: at the wave maker the measure in Fourier space is the one induced by equation (1). Since the modes do not interact (linear limit), the measure at the ADC will also be the one with the spectrum of eq. (1); i.e., relaxation to the Gibbs measure does not take place (simply because the necessary randomizing interactions are absent in the system), in which case the canonical ensemble is justified if and only if the initial condition at the wave maker is itself distributed according to the Gibbs measure. This fact should be discussed and may explain why the theory does not match the experimental points for low amplitudes in figure (8.c).}
 
 \begin{itemize}
-\item First, thank you for these insightful comments. The referee is correct to point out that a sufficient amount of nonlinear interaction is  required for relaxation to the Gibbs measure, and we agree that this condition not being met is the most likely the explanation for formula (53) not matching the smallest-amplitude data in Fig. 8(c). We have inserted these points in the updated manuscript. In particular, see the passage in Section 3.5 (page 11):
+\item First, thank you for these insightful comments. The referee is correct that a sufficient amount of nonlinear interaction is  required for relaxation to the Gibbs measure. We agree that it is most likely the failure of this condition being met that explains the discrepancy between formula (53) and the smallest-amplitude data in Fig. 8(c). We have inserted these points in the updated manuscript. First, see the passage in Section 3.5 (page 11):
 \begin{quotation}
 We also point out that a sufficient amount of nonlinear mixing is required for relaxation to the above Gibbs measure. In the linearized system, for example, modes propagate without interacting and hence the initial measure induced by the wave generator remains unchanged.
 \end{quotation}
-Also, see the passage describing Fig. 8(c) in Section 4.4 (page 22)
+Second, see the passage describing Fig. 8(c) in Section 4.4 (page 22)
 \begin{quotation}
 The apparently less predictable behavior at small amplitudes can be attributed to the fact that, in order for the system to relax to the Gibbs measure, modes must interact through nonlinearity. For the smallest amplitude experiments, the amount of nonlinearity is apparently too small for  modes to mix sufficiently.
 \end{quotation}
-\item Have we included new references on integrable turbulence???
-%\item The referee is correct that equilibrium statistical mechanics and the canonical ensemble is used here, not because it is rigorously justified, but as an effective theory that explains the data. It is true that the 1D KdV equation is an integrable system whose trajectories are constrained by an infinite number of conserved quantities. However, the {\em truncated} system does not possess these constraints (and pointed out in the original text).
-%\begin{quotation}
-%\end{quotation}
+%
+\item We thank the referee for drawing our attention to the vibrant field of integrable turbulence. We have now included a discussion to compare and contrast our statistical theory with that from integrable turbulence (as well as a few additional references). In particular, please see the new passage at the end of section 3.4
+\begin{quotation}
+We comment on some important differences between the KdV and TKdV dynamical systems. Besides momentum, energy, and Hamiltonian, KdV possesses in infinite sequence of additional invariants. Trajectories of KdV are therefore constrained by an infinite number of conserved quantities, associated with the fact that it is a completely integrable system whose long-time dynamics are dominated by coherent structures known as solitons. The analogues of these additional invari- ants, however, are not generally conserved in the truncated system; the only known invariants of TKdV are the three mentioned already: momentum, energy, and Hamiltonian. Dynamics of TKdV, rather than being dominated by coherent structures, become chaotic in long time and have been numerically observed to satisfy weak ergodicity (though a rigorous mathematical proof awaits) [2]. In this way, the theory developed herein differs from, and could likely complement, recent advances in the field of integrable turbulence [54, 40, 10, 41], where integrability is exploited to uncover certain statistical features. We remind the reader that KdV is asymptotically valid only for large spatial scales and hence truncating the small scales does not alter the order of approximation made. In this sense, KdV and TKdV should be regarded as on equal footing as far as physical realism, provided that sufficiently many modes are considered. Where differences exist in long-time dynamics, it is unclear a priori which model, if either, more closely resembles reality, which underscores the importance of controlled laboratory experiments.
+\end{quotation}
 \end{itemize}
+%\item The referee is correct that equilibrium statistical mechanics and the canonical ensemble is used here, not because it is rigorously justified, but as an effective theory that explains the data.
+
 
 \noindent
 \comment{
 2. The authors may find it useful to compare their equation (53) to
- ``On the origin of heavy-tail statistics in equations of the Nonlinear Schrodinger type'', Onorato et al., Phys. Lett. A, 380, 89 (2016), 
- %where an analogous relationship is derived for NLS. It should be possible to relate the skewness to spectral variations, which may lead to further interesting investigations.
+ ``On the origin of heavy-tail statistics in equations of the Nonlinear Schrodinger type'', Onorato et al., Phys. Lett. A, 380, 89 (2016), where an analogous relationship is derived for NLS. It should be possible to relate the skewness to spectral variations, which may lead to further interesting investigations.
+}
+
+\begin{itemize}
+\item Thank you for bringing this very relevant reference to our attention. We included this reference and, in addition, have found another reference, Onorato \& Suret 2016, which has analysis specific to KdV. We have now included a discussion of these works, including similarities and differences with our analysis. In particular, note that both of these references considered only uniform depth, whereas, since our work considers variable depth, there must be a formula linking the two ---  the statistical matching condition. See the passage at the end of Section 4.4:
+
+\begin{quotation}
+We remark that Eq. (53) bears similarity to a formula derived by Onorato \& Suret [36], in the context of constant-depth KdV, that relates variations in skewness to variations in spectral bandwidth. Indeed, since $\eta_t \approx c \eta_x$ to leading order, the term $\text{var}(\eta_x)$ in Eq. (53) could be interpreted as approximately the spectral bandwidth. We note that an analogous formula has been derived for the nonlinear Schrodinger equation relating kurtosis to bandwidth variations [34]. The present study differs in that it predicts a moment-bandwidth relation for waves propagating over variable depth, where it is the depth change that creates system disequilibrium. A small transition region connects two near-equilibrium systems, i.e. one far upstream and one far downstream. The link between these two equilibrium states is made mathematically precise by the statistical matching condition (34), which is the key ingredient needed to derive Eq. (53). This is in contrast to the simpler situation of waves propagating over constant depth, where spectral variations and the associated moment variations arise from out-of-equilibrium initial conditions [36, 34].
+\end{quotation}
+
+\end{itemize}
+
+\noindent
+\comment{
+3. From the experimental point of view, have the authors considered corrections due to the second-order of the Stokes series? When the nonlinearity is important, the bound-modes impact on the skewness may be non-negligible. Is it possible to filter out such corrections in the experimental signal and then compare with the theory? May this explain why the ADC skewness jump is so much larger in the experiment than in the theory?
 }
 
 \begin{itemize}
 \item
 \end{itemize}
 
-
+%Upon satisfying consideration of the remarks above, I am ready to consider the manuscript suitable for publication in Journal of Nonlinear Science. The manuscript is well written, clear, instructive and original. The methods presented here, for the first time in such a complete and pedagogical way, tackle a problem of fluid mechanics with ideas from dynamical systems and statistical physics. The resulting method is general and of broad applicability in the realm of nonlinear physics.
 
 \end{document}
