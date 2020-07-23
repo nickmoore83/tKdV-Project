@@ -16,7 +16,7 @@
 \newcommand{\vsp}[1]{\vspace{#1 pc} \noindent}
 \newcommand{\np}{\newpage \noindent}
 \newcommand{\nick}[1]{{\color{red} #1}}
-\newcommand{\new}[1]{{\color{blue} #1}}
+\newcommand{\new}[1]{{ #1}}
 % Derivatives
 \newcommand{\pd}[2]    { \frac{\partial #1} {\partial #2} }
 \newcommand{\ppd}[2]  { \frac{\partial^2 #1}{{\partial #2}^2} }
@@ -436,7 +436,7 @@ where $\uhat_k(t) \in \mathbb{C}$. Since $u(x,t)$ is real valued, $\uhat_{-k} = 
 Next, consider the Galerkin truncation at wave number $\Lambda$
 \begin{align}
 \uL(x,t) = \Proj u =
-\sum_{\abs{k} \le \Lambda} \uhat_k(t) \, e^{i k x} \, , \qquad
+\sum_{\abs{k} \le \Lambda} \uhat_k(t) \, e^{i k x} \, ,
 \end{align}
 where $\Proj$ is a projection operator and \eqref{uhat} still holds. Inserting the projected variable, $\uL$, into the KdV equation and applying the projection operator, $\Proj$, again where necessary produces the truncated KdV equation (TKdV)
 \begin{align}
