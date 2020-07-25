@@ -209,7 +209,6 @@ The paddle amplitude in Fig.~\ref{ExpDiagStats} is $\Dphi = 1.38^{\circ}$, and t
 
 In this paper, we only examine statistic of mean-zero quantities, and so, for an arbitrary mean-zero quantity $q$, we have the following definitions
 \begin{align}
-%& \var(q) = \mean{q^2}		&&\mbox{\em variance} \\
 & \std(q) = q_{std}= \sqrt{\mean{q^2}}
 &&\mbox{\em standard deviation} \\
 & \skw(q) = {\mean{q^3}} / {q_{std}^3}	
@@ -243,7 +242,6 @@ To have a simple baseline for comparison against theory, we refer to the data fr
 \caption{Table of parameters}
 \label{paramtable}
 \begin{tabular}{l l l l}
-%\hline \multicolumn{3} { c }{Parameters that are constant in a single experiment} \\
 \hline Description & Notation & Experimental range & `Representative' values \\
 \hline
 Peak forcing frequency	& $f_p$					& 2 Hz 		& 2 Hz \\
@@ -294,7 +292,6 @@ Motivated by the experiments, we consider waves that originate from a region of 
 Most often, we consider waves moving into shallower depth, so that $\dup > \ddn$. Throughout this paper, we use the subscript `$-$' and to represent upstream variables and `$+$' for downstream variables.
 
 In the experiments, the randomized incoming wave-field is generated with a peak forcing frequency of $\freqp = 2$ Hz, which gives rise to the characteristic wavelength of $\lam = c/\freqp = \sqrt{g \depth} / \freqp$. Note that both the characteristic wave speed $c = c_{\pm}$ and wavelength $\lam = \lamupdn$ take different values upstream and downstream of the ADC. We remark that experimental measurements indicate that $\etastd$ is nearly the same on both sides of the ADC. Hence, we will not distinguish between upstream and downstream values of $\etastd$.
-%See Table \ref{paramtable} for a summary of important parameters.
 
  
 %----------------------------------------------------------------------------%
@@ -402,17 +399,6 @@ We introduce two important invariants of KdV, namely the momentum and the energy
 As indicated above, the momentum of $u$ vanishes since it is measured as displacement from equilibrium. Second, due to the choice of $\ampscale$ in \eqref{scales}, the energy has been normalized to unity.
 
 
-% UNUSED POISSON BRACKET STUFF
-\begin{comment}
-The evolution of any functional $\Fcnl[u]$ is given by 
-\begin{align}
-\partial_t \Fcnl  = \{ \Fcnl, \Ham \} = \int_{-\pi}^{\pi} \vard{\Fcnl}{u} \sympJ \vard{\Ham}{u} \dx
-\end{align}
-where again $\Ham = \Hup$ if $t<0$, and $\Ham = \Hdn$ if $t>0$ and $\{\}$ is the Poisson bracket induced by $\sympJ$.
-\end{comment}
-
-
-
 %----------------------------------------------------------------------------%
 % Truncated KdV
 %----------------------------------------------------------------------------%
@@ -495,7 +481,6 @@ Here $\invtemp = \itupdn$ is the inverse temperature, which will take a differen
 \begin{equation}
 \label{detmatch}
 u(x,t) \vert_{t=0^-} = u(x,t) \vert_{t=0^+}, 
-%\quad \mbox{for } -\pi \le x \le \pi,
 \qquad \mbox{\em Deterministic matching condition}
 \end{equation}	
 We call \eqref{detmatch} the deterministic matching condition to contrast with its statistical counterpart introduced below. This matching condition is employed in the deterministic simulations of TKdV \eqref{TKdV}. We note that in the alternate formulation mentioned earlier, it is the product $\depth^{1/4} \eta$ that would match at the ADC \cite{johnson1997modern}.
@@ -544,7 +529,6 @@ Rearranging the TKdV system \eqref{TKdV} gives
 \begin{align}
 \label{TKdV2}
 &\pd{\uL}{t} = -  \frac{1}{2} C_3 \drat^{-3/2} \, \pd{}{x} \Proj (\uL)^2 - C_2 \drat^{1/2} \, \frac{\partial^3 \uL}{\partial x^3} = \RHS[\uL]
-%\qquad \text{for } x \in [-\pi,\pi]
 \end{align}	
 where we have represented the right-hand side by the operator $\RHS[\uL]$. We employ a pseudo-spectral discretization of \eqref{TKdV2}, with de-aliasing applied to the quadratic nonlinear term $\Proj (\uL)^2$ according to the standard 2/3-rule. That is, we first pad $\uhat_k$ with zeros for $\Lambda < \abs{k} \le 3\Lambda/2$, transform to physical space and square to obtain $\uL^2$ on a fine grid, then transform back to spectral space and truncate to obtain the Fourier coefficients of $\Proj (\uL)^2$.
 For simplicity, we denote these Fourier coefficients $\usqdah_k$,
@@ -616,7 +600,6 @@ Thus, any of the choices $\lamfac = \Lambda$, $\Lambda/2$, or $\Lambda/4$, discu
 \label{results}
 
 With the experimental setup described and the theory outlined, we now present results comparing the two. Unless stated otherwise, all parameters used in the theory are taken directly from their experimental values listed in Table \ref{paramtable}. 
-%In particular, we set $\delup = 0.23$ in all tests, and for the `representative' experiments, we set $\dratdn = 0.24$ and $\epsup = 0.017$. 
 
 %----------------------------------------------------------------------------%
 % Calibration of inverse temperature
@@ -672,7 +655,6 @@ Comparison of displacement histograms from experiment and theory. Upon calibrati
 We therefore convert the theoretical calculated slopes values back to physical slopes via
 \begin{equation}
 \pd{\eta}{x} = 2 \pi^{3/2} \frac{\etastd}{\lamupdn} \pd{\uupdn}{\tilde{x}}
-%\frac{\ampscale \lamfac}{\lengthscale} \pd{\uupdn}{\tilde{x}}
 \end{equation}
 So that the peak experimental wavelength $\lam$ (corresponding to $\freqp = 2$ Hz) would be mapped to the dominating TKdV spectral mode, $k = 1$,  this conversion formula has not been corrected with the extra factor of $\lamfac$ present in \eqref{scales}.
  
@@ -691,8 +673,6 @@ Comparison of surface slope histograms. The experiments and TKdV simulations sho
 	Figure \ref{slopehist} shows the distributions of surface slope that result from experiments (top) and theory (bottom). These histograms show intriguing similarities and differences. First, the upstream slope distribution is captured well by the TKdV simulations, both in its nearly symmetric shape and its scale. We note that, while the standard deviation of displacement was input into the TKdV theory, the slope standard deviation was not. Downstream, both the experimental and theoretical slope distributions  spread significantly. Interestingly, in the experiments, it is not the standard deviation that increases significantly upon crossing the depth change ($\std(\eta_x)$ increases from 0.15 to 0.17), but instead the excess kurtosis, which jumps from a value of 0.46 upstream to 3.4 downstream. Likewise, in the TKdV theory, $\std(\eta_x)$ grows from 0.13 upstream to 0.33 downstream, and $\kurt(\eta_x)$ grows from -0.04 to 0.50. Thus, the theoretically predicted jump in kurtosis, though not as extreme as that measured in experiments, is quite significant. These elevated levels of kurtosis are associated with the distinct appearance of the downstream distributions, most notably the long, flat tails that appear in both experiments and theory.
  		
 	Differences in the detailed shapes of these downstream distributions are also visible. First, we point out that the experimental measurements involve numerical differentiation of  surface displacement extracted from optical images, a process that unavoidably amplifies any noise that is present. We must therefore proceed with caution in comparing the experiment and theory, recognizing the possibility that observed discrepancies may be due to these measurement errors. Nonetheless, we notice that the theoretically predicted distributions remain symmetric downstream and the experimental ones skew towards negative slope. As mentioned in Section \ref{experiments}, negative skewness is consistent with a right-moving wave of steep leading surface (i.e.~negative slope). Additionally, the peak of the experimental distribution appears sharper than in the theory.
-
-%Figure \ref{ExpSpatialStats} may offer additional insight on these detailed differences in the shape of the downstream slope distributions. In particular, \ref{ExpSpatialStats}(e)--(f) show the spatial variation of the slope skewness and kurtosis. Note that variations in these statistics are significantly more transient than the corresponding variations in surface displacement; i.e.~the peaks in surface slope statistics arise more rapidly and decay more rapidly. Variations in displacement statistics also decay, but over a longer spatial scale, presumably due to dissipative effects. The TKdV histograms shown in Fig.~\ref{slopehist}, meanwhile, are long-time averages and hence not intended to capture such transient effects. These observations offer the suggestion that slope dynamics experience stronger transients than do surface displacements, leading to greater difficulty in the direct comparison between measurements extracted from a single location (experiments) and long-time averages (theory).
 
 
 %----------------------------------------------------------------------------%
@@ -782,7 +762,6 @@ Inserting \eqref{H3convert} and \eqref{H2convert} into \eqref{H3H2ratio}, and us
 \begin{equation}
 \label{SkewPred}
 \frac{\skwdn(\eta)} {\vardn(\eta_x) - \varup(\eta_x)} = \frac{1}{3} \epsup^{-3} \dratdn^3 
-%= \frac{1}{3} \left( \frac{\ddn}{\etastd} \right)^3
 \end{equation}
 This formula links the skewness of the outgoing wave field to the change in the variance of surface slope. In particular, it predicts their ratio to scale as the {\em inverse cube of wave amplitude}, $\epsup^{-3}$, and the {\em cube of the depth ratio}, $\dratdn^3$. It is a rather unexpected relationship, as it would have been difficult to anticipate that the displacement skewness and slope variance, among all possible variable combinations, are so intimately related.
  
