@@ -1,5 +1,5 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
-{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
+{\rtf1\ansi\ansicpg1252\cocoartf2578
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;\red191\green191\blue191;}
 {\*\expandedcolortbl;;\csgray\c79525;}
 \margl1440\margr1440\vieww12780\viewh11680\viewkind0
@@ -7,22 +7,22 @@
 
 \f0\b\fs40 \cf0 Overall Plan\
 
-\b0\fs28 \
+\f1\b0\fs28 \
 I want to make my routines for Gibbs sampling and for computing the transfer function more efficient. Eventually, I want to run these routines on a GPU and really probe the extremes. With this power, I would be able to a number of things.\
 \'95 I could compute for much larger Lambda values. I could see if the transfer function and outgoing skewness collapses to a single curve in the large Lambda limit, and if not, I could figure out how the scaling of parameters needs to be changed accordingly (for example how N depends on Lambda) .
-\b\fs40 \
+\f0\b\fs40 \
 
-\b0\fs28 \'95 The transfer function seems to be a perfect problem for a GPU since it involves the same exact simple arithmetical operations on multiple data. It would allow me to learn GPU programming with a good practical application in mind.\
+\f1\b0\fs28 \'95 The transfer function seems to be a perfect problem for a GPU since it involves the same exact simple arithmetical operations on multiple data. It would allow me to learn GPU programming with a good practical application in mind.\
 \'95 Related to the above, I should really do same basic accept-reject obtain a better prior distribution and pare down the amount of data to send to the transfer function. Currently, transfun has to deal with enormously long lists and the vast majority of the values are wasted in the mean because their weight is nearly zero. I could perform AR to sample for the Gibbs distribution with beta = 5 or 10, save the lists of precomputed values, and then perform the averages in the transfer function with different beta values. Be reducing the amount of saved data significantly, I could even save the micro-states. This AR sampling might be compatible with GPU too. Also, something that would interest me is that I could use my bound on the minimum Hamiltonian value (equal to traveling wave in the continuum limit).\
 \'95 With more efficient algorithms, I could answer a number of scientific question. I believe I have already brainstormed several questions with Hui Sun. One that comes to mind is a big parameter study over varying the depth ratio, eps0, delta0, and inverse temperature. In all of our existing work, we have only studied a single depth ratio and a few values of eps0 and delta0. I could look for more interesting phase transitions. I could study multiple depth changes and maybe even the continuum limit.\
 \'95 Maybe I could get a better analytical handle on the transfer function.\
 \
 I have already taken major steps toward making the algorithms more efficient with the implementation of the FFT plan and the implementation of the recursive algorithm for H3.
-\b\fs40 \
+\f0\b\fs40 \
 \
 \
 To do
-\b0\fs28 \
+\f1\b0\fs28 \
 \
 - In transfer function, I need to see how many iterations the root solver is taking and think about improving that.\ul \
 \
@@ -33,10 +33,10 @@ To do
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\b\fs40 \cf0 \ulnone Computation of H3
-\b0\fs28 \
+\f0\b\fs40 \cf0 \ulnone Computation of H3
+\f1\b0\fs28 \
 \
-The most expensive step in sampling is the computation of H3. There are two practical ways to compute H3: using the FFT (with a plan!) or using the recursive formula (REC). \
+The most expensive step in sampling is the computation of H3. There are two practical ways to compute H3: using the FFT (with a plan!) or using the recursive formula (REC).\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \ul Accuracy of H3\ulnone \
@@ -215,8 +215,8 @@ Some good references:\
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\b\fs40 \cf0 Instructions for running code
-\b0\fs28 \ul \
+\f0\b\fs40 \cf0 Instructions for running code
+\f1\b0\fs28 \ul \
 \ulnone \'95 The routine uniform_sample(nmodes, nsweeps) samples from the uniform distribution and produces the output file rand.jld, which contains a list of H2 and H3 values (as well as some parameters). Here nmodes = Lambda is specified but lamfac = N is not specified. The number of samples per sweep is 1e5.\
 \'95 The routine transfun(\'93rand-16-20\'94, lamfac) computes the transfer function and produces the output file thvars.jld, which contains the upstream and downstream theta values and the skewness upstream and downstream (as well as some parameters).\ul \
 \ulnone \'95 The routine output_text(\'93thvars-16-8-20.jld\'94) converts the julia file to a text file for DataTank to read.\
